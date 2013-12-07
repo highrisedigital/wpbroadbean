@@ -1,0 +1,41 @@
+.message {
+	text-align: center;
+	background-color: #ffffe0;
+	border-color: #e6db55;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border-width: 1px;
+	border-style: solid;
+	padding: 2%;
+}
+.error {
+	background-color: #ffebe8;
+	border-color: #C00;
+}
+#wpbb_application_form .wpbb_input {
+	clear: both;
+	margin-bottom: 2%;
+}
+#wpbb_application_form .wpbb_input label {
+	display: block;
+	margin-bottom: 1%;
+}
+#wpbb_application_form .wpbb_input .wpbb_text_input {
+	padding: 1%;
+	border: 0;
+	border: 1px solid #dddddd;
+	display: block;
+	width: 100%;
+}
+p.wpbb_description {
+	font-size: 90%;
+	font-style: italic;
+}
+
+#wpbb_application_form label.error {
+	display: none;
+}
+label.require:after {
+	content: " *";
+	color: #C00;
+}
