@@ -40,7 +40,7 @@ function wpbb_change_job_title_text( $title ){
 	}
 	
 	/* return our new text */
-	return $title;
+	return apply_filters( 'wpbb_job_title_post_edit_text', $title );
 }
  
 add_filter( 'enter_title_here', 'wpbb_change_job_title_text' );
@@ -53,7 +53,7 @@ add_filter( 'enter_title_here', 'wpbb_change_job_title_text' );
 function wpbb_add_new_query_var( $wpbb_public_query_vars ) {
     
     /* set a name for our new query var */
-    $wpbb_public_query_vars[] = 'wpac';
+    $wpbb_public_query_vars[] = 'wpbb';
     
     /* return the new name to the query_vars filter */
     return $wpbb_public_query_vars;
@@ -72,7 +72,7 @@ add_filter( 'query_vars', 'wpbb_add_new_query_var' );
 function wpbb_adcourier_inbox_load() {
     
     /* get the query var we named above from the url */
-    $wpbb_bb = get_query_var( 'wpac' );
+    $wpbb_bb = get_query_var( 'wpbb' );
     
     /* check that its value is equal to adcourier */
     if( $wpbb_bb == 'broadbean') {

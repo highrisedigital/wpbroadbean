@@ -8,25 +8,37 @@ function wpbb_register_post_types() {
 	/* register the jobs post type */
 	register_post_type(
 		'wpbb_job',array(
-			'labels' => array(
-				'name' => _x( 'Job', 'post type general name' ),
-				'singular_name' => _x( 'Job', 'post type singular name' ),
-				'add_new' => _x( 'Add New', 'Job' ),
-			    'add_new_item' => __( 'Add New Job' ),
-			    'edit_item' => __( 'Edit Job' ),
-			    'new_item' => __( 'New Job' ),
-			    'view_item' => __( 'View Job' ),
-			    'search_items' => __( 'Search Jobs' ),
-			    'not_found' =>  __( 'No Jobs found' ),
-			    'not_found_in_trash' => __( 'No Jobs found in Trash' ), 
-			    'parent_item_colon' => '',
-			    'menu_name' => 'Jobs'
+			'labels' => apply_filters( 'wpbb_job_post_type_labels',
+				array(
+					'name' => _x( 'Job', 'post type general name' ),
+					'singular_name' => _x( 'Job', 'post type singular name' ),
+					'add_new' => _x( 'Add New', 'Job' ),
+				    'add_new_item' => __( 'Add New Job' ),
+				    'edit_item' => __( 'Edit Job' ),
+				    'new_item' => __( 'New Job' ),
+				    'view_item' => __( 'View Job' ),
+				    'search_items' => __( 'Search Jobs' ),
+				    'not_found' =>  __( 'No Jobs found' ),
+				    'not_found_in_trash' => __( 'No Jobs found in Trash' ), 
+				    'parent_item_colon' => '',
+				    'menu_name' => 'Jobs'
+				)
 			),
 			'public' => true,
 			'menu_position' => 25,
-			'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields' ),
+			'supports' => apply_filters( 'wpb_job_post_type_supports',
+				array(
+					'title',
+					'editor',
+					'excerpt',
+					'custom-fields'
+				)
+			),
 			'query_var' => true,
-			'rewrite' => array( 'slug' => 'jobs', 'with_front' => false ),
+			'rewrite' => array(
+				'slug' => 'jobs',
+				'with_front' => false
+			),
 			'has_archive' => true,
 		)
 	);
@@ -34,27 +46,37 @@ function wpbb_register_post_types() {
 	/* registers the application post type */
 	register_post_type(
 		'wpbb_application',array(
-			'labels' => array(
-				'name' => _x( 'Applications', 'post type general name' ),
-				'singular_name' => _x( 'Application', 'post type singular name' ),
-				'add_new' => _x( 'Add New', 'Application' ),
-			    'add_new_item' => __( 'Add New Application' ),
-			    'edit_item' => __( 'Edit Application' ),
-			    'new_item' => __( 'New Application' ),
-			    'view_item' => __( 'View Application' ),
-			    'search_items' => __( 'Search Applications' ),
-			    'not_found' =>  __( 'No Applications found' ),
-			    'not_found_in_trash' => __( 'No Applications found in Trash' ), 
-			    'parent_item_colon' => '',
-			    'menu_name' => 'Applications'
+			'labels' => apply_filters( 'wpbb_application_post_type_labels',
+				array(
+					'name' => _x( 'Applications', 'post type general name' ),
+					'singular_name' => _x( 'Application', 'post type singular name' ),
+					'add_new' => _x( 'Add New', 'Application' ),
+				    'add_new_item' => __( 'Add New Application' ),
+				    'edit_item' => __( 'Edit Application' ),
+				    'new_item' => __( 'New Application' ),
+				    'view_item' => __( 'View Application' ),
+				    'search_items' => __( 'Search Applications' ),
+				    'not_found' =>  __( 'No Applications found' ),
+				    'not_found_in_trash' => __( 'No Applications found in Trash' ), 
+				    'parent_item_colon' => '',
+				    'menu_name' => 'Applications'
+				)
 			),
 			'public' => false,
 			'show_ui' => true,
 			'exclude_from_search' => true,
 			'menu_position' => 25,
-			'supports' => array( 'title', 'custom-fields' ),
+			'supports' => apply_filters( 'wpb_application_post_type_supports',
+				array(
+					'title',
+					'custom-fields'
+				)
+			),
 			'query_var' => true,
-			'rewrite' => array( 'slug' => 'applications', 'with_front' => false ),
+			'rewrite' => array(
+				'slug' => 'applications',
+				'with_front' => false
+			),
 			'has_archive' => true,
 		)
 	);
@@ -72,92 +94,116 @@ function wpbb_register_taxonomies() {
 	/* register the job type taxonomy */
 	register_taxonomy( 'wpbb_job_type', 'wpbb_job',
 		array(
-			'labels' => array(
-				'name' => _x( 'Job Type', 'taxonomy general name' ),
-				'singular_name' => _x( 'Job Type', 'taxonomy singular name' ),
-				'search_items' =>  __( 'Search Job Types' ),
-				'all_items' => __( 'All Job Types' ),
-				'parent_item' => __( 'Parent Job Type' ),
-				'parent_item_colon' => __( 'Parent Job Type:' ),
-				'edit_item' => __( 'Edit Job Type' ), 
-				'update_item' => __( 'Update Job Type' ),
-				'add_new_item' => __( 'Add New Job Type' ),
-				'new_item_name' => __( 'New Job Type Name' ),
-				'menu_name' => __( 'Job Types' ),
+			'labels' => apply_filters( 'wpbb_job_type_labels',
+				array(
+					'name' => _x( 'Job Type', 'taxonomy general name' ),
+					'singular_name' => _x( 'Job Type', 'taxonomy singular name' ),
+					'search_items' =>  __( 'Search Job Types' ),
+					'all_items' => __( 'All Job Types' ),
+					'parent_item' => __( 'Parent Job Type' ),
+					'parent_item_colon' => __( 'Parent Job Type:' ),
+					'edit_item' => __( 'Edit Job Type' ), 
+					'update_item' => __( 'Update Job Type' ),
+					'add_new_item' => __( 'Add New Job Type' ),
+					'new_item_name' => __( 'New Job Type Name' ),
+					'menu_name' => __( 'Job Types' ),
+				)
 			),
 			'hierarchical' => true,
 			'sort' => true,
-			'args' => array( 'orderby' => 'term_order' ),
-			'rewrite' => array( 'slug' => 'job-type' )
+			'args' => array(
+				'orderby' => 'term_order'
+			),
+			'rewrite' => array(
+				'slug' => 'job-type'
+			)
 		)
 	);
 	
 	/* register the job category taxonomy */
 	register_taxonomy( 'wpbb_job_category', 'wpbb_job',
 		array(
-			'labels' => array(
-				'name' => _x( 'Job Category', 'taxonomy general name' ),
-				'singular_name' => _x( 'Category', 'taxonomy singular name' ),
-				'search_items' =>  __( 'Search Categories' ),
-				'all_items' => __( 'All Categories' ),
-				'parent_item' => __( 'Parent Category' ),
-				'parent_item_colon' => __( 'Parent Category:' ),
-				'edit_item' => __( 'Edit Category' ), 
-				'update_item' => __( 'Update Category' ),
-				'add_new_item' => __( 'Add New Category' ),
-				'new_item_name' => __( 'New Category Name' ),
-				'menu_name' => __( 'Categories' ),
+			'labels' => apply_filters( 'wpbb_job_category_labels',
+				array(
+					'name' => _x( 'Job Category', 'taxonomy general name' ),
+					'singular_name' => _x( 'Category', 'taxonomy singular name' ),
+					'search_items' =>  __( 'Search Categories' ),
+					'all_items' => __( 'All Categories' ),
+					'parent_item' => __( 'Parent Category' ),
+					'parent_item_colon' => __( 'Parent Category:' ),
+					'edit_item' => __( 'Edit Category' ), 
+					'update_item' => __( 'Update Category' ),
+					'add_new_item' => __( 'Add New Category' ),
+					'new_item_name' => __( 'New Category Name' ),
+					'menu_name' => __( 'Categories' ),
+				)
 			),
 			'hierarchical' => true,
 			'sort' => true,
-			'args' => array( 'orderby' => 'term_order' ),
-			'rewrite' => array( 'slug' => 'job-category' )
+			'args' => array(
+				'orderby' => 'term_order'
+			),
+			'rewrite' => array(
+				'slug' => 'job-category'
+			)
 		)
 	);
 	
 	/* register the job location taxonomy */
 	register_taxonomy( 'wpbb_job_location', 'wpbb_job',
 		array(
-			'labels' => array(
-				'name' => _x( 'Job Location', 'taxonomy general name' ),
-				'singular_name' => _x( 'Location', 'taxonomy singular name' ),
-				'search_items' =>  __( 'Search Locations' ),
-				'all_items' => __( 'All Locations' ),
-				'parent_item' => __( 'Parent Location' ),
-				'parent_item_colon' => __( 'Parent Location:' ),
-				'edit_item' => __( 'Edit Location' ), 
-				'update_item' => __( 'Update Location' ),
-				'add_new_item' => __( 'Add New Location' ),
-				'new_item_name' => __( 'New Location Name' ),
-				'menu_name' => __( 'Locations' ),
+			'labels' => apply_filters( 'wpbb_job_location_labels',
+				array(
+					'name' => _x( 'Job Location', 'taxonomy general name' ),
+					'singular_name' => _x( 'Location', 'taxonomy singular name' ),
+					'search_items' =>  __( 'Search Locations' ),
+					'all_items' => __( 'All Locations' ),
+					'parent_item' => __( 'Parent Location' ),
+					'parent_item_colon' => __( 'Parent Location:' ),
+					'edit_item' => __( 'Edit Location' ), 
+					'update_item' => __( 'Update Location' ),
+					'add_new_item' => __( 'Add New Location' ),
+					'new_item_name' => __( 'New Location Name' ),
+					'menu_name' => __( 'Locations' ),
+				)
 			),
 			'hierarchical' => true,
 			'sort' => true,
-			'args' => array( 'orderby' => 'term_order' ),
-			'rewrite' => array( 'slug' => 'job-location' )
+			'args' => array(
+				'orderby' => 'term_order'
+			),
+			'rewrite' => array(
+				'slug' => 'job-location'
+			)
 		)
 	);
 	
 	/* register the job location tag taxonomy */
 	register_taxonomy( 'wpbb_job_location_tag', 'wpbb_job',
 		array(
-			'labels' => array(
-				'name' => _x( 'Job Location Tags', 'taxonomy general name' ),
-				'singular_name' => _x( 'Location Tag', 'taxonomy singular name' ),
-				'search_items' =>  __( 'Search Location Tags' ),
-				'all_items' => __( 'All Location Tags' ),
-				'parent_item' => __( 'Parent Location Tag' ),
-				'parent_item_colon' => __( 'Parent Location Tag:' ),
-				'edit_item' => __( 'Edit Location Tag' ), 
-				'update_item' => __( 'Update Location Tag' ),
-				'add_new_item' => __( 'Add New Location Tag' ),
-				'new_item_name' => __( 'New Location Tag Name' ),
-				'menu_name' => __( 'Location Tags' ),
+			'labels' => apply_filters( 'wpbb_job_location_tag_labels',
+				array(
+					'name' => _x( 'Job Location Tags', 'taxonomy general name' ),
+					'singular_name' => _x( 'Location Tag', 'taxonomy singular name' ),
+					'search_items' =>  __( 'Search Location Tags' ),
+					'all_items' => __( 'All Location Tags' ),
+					'parent_item' => __( 'Parent Location Tag' ),
+					'parent_item_colon' => __( 'Parent Location Tag:' ),
+					'edit_item' => __( 'Edit Location Tag' ), 
+					'update_item' => __( 'Update Location Tag' ),
+					'add_new_item' => __( 'Add New Location Tag' ),
+					'new_item_name' => __( 'New Location Tag Name' ),
+					'menu_name' => __( 'Location Tags' ),
+				)
 			),
 			'hierarchical' => false,
 			'sort' => true,
-			'args' => array( 'orderby' => 'term_order' ),
-			'rewrite' => array( 'slug' => 'job-location-tags' )
+			'args' => array(
+				'orderby' => 'term_order'
+			),
+			'rewrite' => array(
+				'slug' => 'job-location-tags'
+			)
 		)
 	);
 		

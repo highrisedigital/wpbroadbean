@@ -45,9 +45,16 @@ function wpbb_admin_page_content() {
 	<div class="wrap">
 		
 		<?php screen_icon( 'options-general' ); ?>
-		<h2>WP AdCourier Settings</h2>
+		<h2>WP Broadbean Settings</h2>
 		
-		<p>Welcome to the Broadbean (AdCourier) settings page. To find out more about this advert distribution tool please <a href="http://www.broadbean.com/multiposting.html">click here</a>.</p>
+		<?php
+		
+			/* build filterable opening paragraph */
+			$wpbb_admin_paragraph = '<p>Welcome to the Broadbean (AdCourier) settings page. To find out more about this advert distribution tool please <a href="http://www.broadbean.com/multiposting.html">click here</a>.</p>';
+			
+			echo apply_filters( 'wpbb_admin_paragraph', $wpbb_admin_paragraph );
+		
+		?>
 		
 		<form method="post" action="options.php">
 		
