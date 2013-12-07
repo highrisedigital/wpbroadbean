@@ -50,7 +50,7 @@ function wpbb_application_form_shortcode() {
 			$wpbb_posts_args = array(
 				'post_type' => 'wpbb_job',
 				'post_status'=> 'publish',
-				'meta_key' => 'wpbb_job_reference',
+				'meta_key' => '_wpbb_job_reference',
 				'meta_value' => $wpbb_get_job_reference,
 				'relation' => 'AND'
 			);
@@ -183,7 +183,7 @@ function wpbb_application_form_shortcode() {
 			} else {
 				
 				/* echo out an error message */
-				echo '<p class="message error">Oops! No job reference was detected or the job reference is not valid. Please go back to the job you are applying for and click the apply button.</p>';
+				echo apply_filters( 'wpbb_application_error_message', '<p class="message error">Oops! No job reference was detected or the job reference is not valid. Please go back to the job you are applying for and click the apply button.</p>' );
 				
 			} // end check we have job reference query var */
 		
@@ -191,7 +191,8 @@ function wpbb_application_form_shortcode() {
 		} else {
 			
 			/* check that the wp_handle_upload function is loaded */		
-			if ( ! function_exists( 'wp_handle_upload' ) ) require_once( ABSPATH . 'wp-admin/includes/file.php' );
+			if ( ! function_exists( 'wp_handle_upload' ) )
+				require_once( ABSPATH . 'wp-admin/includes/file.php' );
 			
 			/* get the uploaded file information */
 			$pxjn_uploaded_file = $_FILES[ 'wpbb_upload' ];
@@ -257,15 +258,15 @@ function wpbb_application_form_shortcode() {
 			if( $wpbb_application_post_id != 0 ) {
 			
 				/* set the post meta data (custom fields) */
-				add_post_meta( $wpbb_application_post_id, 'wpbb_job_reference', wp_strip_all_tags( $wpbb_posted_job_reference ), true );
-				add_post_meta( $wpbb_application_post_id, 'wpbb_job_reference', wp_strip_all_tags( $wpbb_posted_job_title ), true );
-				add_post_meta( $wpbb_application_post_id, 'wpbb_job_url', wp_strip_all_tags( esc_url( $wpbb_posted_job_url ) ), true );
-				add_post_meta( $wpbb_application_post_id, 'wpbb_applicant_email', wp_strip_all_tags( $wpbb_posted_applicant_email ), true );
-				add_post_meta( $wpbb_application_post_id, 'wpbb_applicant_telno', wp_strip_all_tags( $wpbb_posted_applicant_tel ), true );
+				add_post_meta( $wpbb_application_post_id, '_wpbb_job_reference', wp_strip_all_tags( $wpbb_posted_job_reference ), true );
+				add_post_meta( $wpbb_application_post_id, '_wpbb_job_reference', wp_strip_all_tags( $wpbb_posted_job_title ), true );
+				add_post_meta( $wpbb_application_post_id, '_wpbb_job_url', wp_strip_all_tags( esc_url( $wpbb_posted_job_url ) ), true );
+				add_post_meta( $wpbb_application_post_id, '_wpbb_applicant_email', wp_strip_all_tags( $wpbb_posted_applicant_email ), true );
+				add_post_meta( $wpbb_application_post_id, '_wpbb_applicant_telno', wp_strip_all_tags( $wpbb_posted_applicant_tel ), true );
 				
 				/* add the attachment from the uploaded file */
 				$pxjn_attach_id = wp_insert_attachment( $pxjn_attachment, $pxjn_filetype[ 'file' ], $wpbb_application_post_id );
-				require_once(ABSPATH . 'wp-admin/includes/image.php');
+				require_once( ABSPATH . 'wp-admin/includes/image.php' );
 				$pxjn_attach_data = wp_generate_attachment_metadata( $pxjn_attach_id, $pxjn_filetype[ 'file' ] );
 				wp_update_attachment_metadata( $pxjn_attach_id, $pxjn_attach_data );
 			
@@ -306,12 +307,12 @@ function wpbb_application_form_shortcode() {
 			/* check whether message was sent OK */
 			if( $wpbb_send_email == 1 ) {
 				
-				echo '<p class="message">Your application has been sent successfully.</p>';
+				echo apply_filters( 'wpbb_application_sent_success_message', '<p class="message">Your application has been sent successfully.</p>' );
 			
 			/* error occured in sending email */	
 			} else {
 				
-				echo '<p class="message error">There was a problem sending your application. Please check you have entered a valid email address.</p>';
+				echo apply_filters( 'wpbb_application_send_error_message', '<p class="message error">There was a problem sending your application. Please check you have entered a valid email address.</p>' );
 				
 			} // end check mail sent
 			
@@ -320,7 +321,7 @@ function wpbb_application_form_shortcode() {
 	/* no jon id detected */	
 	} else {
 		
-		echo '<p class="message error">Oops! No job reference was detected.</p>';
+		echo apply_filters( 'wpbb_no_job_reference_message', '<p class="message error">Oops! No job reference was detected.</p>' );
 		
 	} // end if has job id
 	
