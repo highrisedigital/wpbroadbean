@@ -31,7 +31,6 @@ function wpbb_register_post_types() {
 					'title',
 					'editor',
 					'excerpt',
-					'custom-fields'
 				)
 			),
 			'query_var' => true,
@@ -70,7 +69,6 @@ function wpbb_register_post_types() {
 			'supports' => apply_filters( 'wpb_application_post_type_supports',
 				array(
 					'title',
-					'custom-fields'
 				)
 			),
 			'query_var' => true,
