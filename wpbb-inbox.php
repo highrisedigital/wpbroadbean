@@ -39,7 +39,7 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'add' ) {
 	/* create query args to find job posts with the above job reference */
 	$wpbb_job_ref_args = array(
 		'post_type' => 'wpbb_job',
-		'meta_key' => 'wpbb_job_reference',
+		'meta_key' => '_wpbb_job_reference',
 		'meta_value' => $wpbb_job_reference
 	);
 	
@@ -148,41 +148,59 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'add' ) {
 		wp_set_post_terms( $wpbb_job_post_id, wp_strip_all_tags( $wpbb_params[ 'job_location_tags' ] ), 'wpbb_job_location_tag' );
 		
 		/* set the post meta data (custom fields) */
-		add_post_meta( $wpbb_job_post_id, 'wpbb_job_reference', wp_strip_all_tags( $wpbb_params[ 'job_reference' ] ), true );
-		
-		/* add the seo description to work with yoast seo */
-		add_post_meta( $wpbb_job_post_id, '_yoast_wpseo_metadesc', wp_strip_all_tags( wp_trim_words( $wpbb_params[ 'job_description' ], '156', '' ) ), true );
-		
-		/* add the seo title to work with yoast seo */
-		add_post_meta( $wpbb_job_post_id, '_yoast_wpseo_title', wp_strip_all_tags( wp_trim_words( $wpbb_params[ 'job_description' ], '70', '' ) ), true );
+		add_post_meta( $wpbb_job_post_id, '_wpbb_job_reference', wp_strip_all_tags( $wpbb_params[ 'job_reference' ] ), true );
 		
 		/* only set the data if they are sent */
 		if( !empty( $wpbb_params[ 'salary_from' ] ) ) {
-			add_post_meta( $wpbb_job_post_id, 'wpbb_job_salary_from', wp_strip_all_tags( $wpbb_params[ 'salary_from' ] ), true );
+		
+			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary_from', wp_strip_all_tags( $wpbb_params[ 'salary_from' ] ), true );
+			
 		}
+		
 		if( isset( $wpbb_params[ 'salary_to' ] ) ) {
-			add_post_meta( $wpbb_job_post_id, 'wpbb_job_salary_to', wp_strip_all_tags( $wpbb_params[ 'salary_to' ] ), true );
+		
+			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary_to', wp_strip_all_tags( $wpbb_params[ 'salary_to' ] ), true );
+			
 		}
+		
 		if( isset( $wpbb_params[ 'salary_to' ] ) ) {
-			add_post_meta( $wpbb_job_post_id, 'wpbb_job_salary_to', wp_strip_all_tags( $wpbb_params[ 'salary_to' ] ), true );
+		
+			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary_to', wp_strip_all_tags( $wpbb_params[ 'salary_to' ] ), true );
+			
 		}
+		
 		if( isset( $wpbb_params[ 'salary_per' ] ) ) {
-			add_post_meta( $wpbb_job_post_id, 'wpbb_job_salary_per', wp_strip_all_tags( $wpbb_params[ 'salary_per' ] ), true );
+		
+			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary_per', wp_strip_all_tags( $wpbb_params[ 'salary_per' ] ), true );
+			
 		}
+		
 		if( isset( $wpbb_params[ 'salary_currency' ] ) ) {
-			add_post_meta( $wpbb_job_post_id, 'wpbb_job_salary_currency', wp_strip_all_tags( $wpbb_params[ 'salary_currency' ] ), true );
+		
+			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary_currency', wp_strip_all_tags( $wpbb_params[ 'salary_currency' ] ), true );
+			
 		}
 		if( isset( $wpbb_params[ 'job_startdate' ] ) ) {
-			add_post_meta( $wpbb_job_post_id, 'wpbb_job_start_date', wp_strip_all_tags( $wpbb_params[ 'job_startdate' ] ), true );
+		
+			add_post_meta( $wpbb_job_post_id, '_wpbb_job_start_date', wp_strip_all_tags( $wpbb_params[ 'job_startdate' ] ), true );
+			
 		}
+		
 		if( isset( $wpbb_params[ 'job_duration' ] ) ) {
-			add_post_meta( $wpbb_job_post_id, 'wpbb_job_duration', wp_strip_all_tags( $wpbb_params[ 'job_duration' ] ), true );
+		
+			add_post_meta( $wpbb_job_post_id, '_wpbb_job_duration', wp_strip_all_tags( $wpbb_params[ 'job_duration' ] ), true );
+			
 		}
+		
 		if( isset( $wpbb_params[ 'application_email' ] ) ) {
-			add_post_meta( $wpbb_job_post_id, 'wpbb_job_application_email', wp_strip_all_tags( $wpbb_params[ 'application_email' ] ), true );
+		
+			add_post_meta( $wpbb_job_post_id, '_wpbb_job_application_email', wp_strip_all_tags( $wpbb_params[ 'application_email' ] ), true );
+			
 		}
 		if( isset( $wpbb_params[ 'contact_email' ] ) ) {
-			add_post_meta( $wpbb_job_post_id, 'wpbb_job_contact_email', wp_strip_all_tags( $wpbb_params[ 'contact_email' ] ), true );
+		
+			add_post_meta( $wpbb_job_post_id, '_wpbb_job_contact_email', wp_strip_all_tags( $wpbb_params[ 'contact_email' ] ), true );
+			
 		}
 		
 		echo '<p>Success! - This Job has been added and has a post ID of ' . $wpbb_job_post_id . '. The permalink to this job is: ' . get_permalink( $wpbb_job_post_id ) . '</p>';
@@ -196,7 +214,7 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'add' ) {
 	
 }
 
-/* check whether we are adding a post */
+/* check whether we are deleting a post */
 if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'delete' ) {
 	
 	/* get the job reference for this job */
