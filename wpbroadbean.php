@@ -21,29 +21,47 @@ require_once( dirname( __FILE__ ) . '/functions/admin.php' );
 /* load the shortcodes functions */
 require_once( dirname( __FILE__ ) . '/functions/shortcodes.php' );
 
+/* check whether the metabox class already exists */
+if( ! class_exists( 'CMB_Meta_Box' ) ) {
+
+	/* load the metabox framework */
+	require_once( dirname( __FILE__ ) . '/functions/metaboxes/custom-meta-boxes.php' );
+
+}
+
+/* load the metabox functions */
+require_once( dirname( __FILE__ ) . '/functions/metaboxes.php' );
+
 /***************************************************************
-* Function wpbb_change_job_title_text()
+* Function wpbb_change_title_text()
 * Changes the wordpress 'Enter title here' text for the job post
 * type.
 ***************************************************************/
-function wpbb_change_job_title_text( $title ){
+function wpbb_change_title_text( $title ){
      
 	/* get the current screen we are viewing in the admin */
 	$wpbb_screen = get_current_screen();
-	
+
 	/* if the current screen is our job post type */
 	if( 'wpbb_job' == $wpbb_screen->post_type ) {
 		
 		/* set the new text for the title box */
 		$title = 'Job Title';
+	
+	/* if the current screen is our job application post type */
+	} elseif( 'wpbb_application' == $wpbb_screen->post_type ) {
 		
+		/* set the new text for the title box */
+		$title = 'Applicant Name';
+
 	}
 	
 	/* return our new text */
-	return apply_filters( 'wpbb_job_title_post_edit_text', $title );
+	return $title;
+	
 }
  
-add_filter( 'enter_title_here', 'wpbb_change_job_title_text' );
+add_filter( 'enter_title_here', 'wpbb_change_title_text' );
 
 /***************************************************************
 * Function wpbb_add_new_query_var()

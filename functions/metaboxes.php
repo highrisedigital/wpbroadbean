@@ -6,104 +6,120 @@
 function wpbb_metaboxes( $meta_boxes ) {
 	
 	/* sets a prefix for all metaboxes */
-	$prefix = 'wpbb_';
+	$wpbb_prefix = '_wpbb_';
 	
-	/* repeat this for each metabox you require */
 	$meta_boxes[] = array(
-		'id' => 'job-information',
-		'title' => 'Job Information',
-		'pages' => array( 'wpbb_job' ), // post type
-		'context' => 'normal',
-		'priority' => 'high',
-		'show_names' => true, // Show field names on the left
-		'fields' => array(
-			array(
-				'name' => 'Job Reference/ID',
-				'desc' => 'Enter the job reference or ID of this job.',
-				'id' => $prefix . 'job_reference',
-				'type' => 'text'
+        'title' => 'Job Information',
+        'id' => 'wpbb_job_info',
+        'pages' => array( 'wpbb_job' ),
+        'context' => 'normal',
+        'priority' => 'high',
+        'fields' => array(
+        	array(
+				'name' => 'Unique Job Reference/ID',
+				'id'   => $wpbb_prefix . 'job_reference',
+				'desc' => 'Enter the unique job reference/ID.',
+				'type' => 'text',
+				'cols' => 12
 			),
 			array(
 				'name' => 'Salary From',
-				'desc' => 'Enter the lowest amount of salary for this job.',
-				'id'   => $prefix . 'job_salary_from',
-				'type' => 'text_small',
+				'id'   => $wpbb_prefix . 'job_salary_from',
+				'type' => 'text',
+				'cols' => 3
 			),
 			array(
-				'name' => 'Salary To',
-				'desc' => 'Enter the highest amount of salary for this job.',
-				'id'   => $prefix . 'job_salary_to',
-				'type' => 'text_small',
+				'name' => 'Salary From',
+				'id'   => $wpbb_prefix . 'job_salary_from',
+				'type' => 'text',
+				'cols' => 3
 			),
 			array(
-				'name'    => 'Salary Per',
-				'desc'    => 'field description (optional)',
-				'id'      => $prefix . 'job_salary_per',
-				'type'    => 'select',
+				'name' => 'Salary Per',
+				'id'   => $wpbb_prefix . 'job_salary_per',
+				'type' => 'select',
 				'options' => array(
-					array( 'name' => '-- Select Salary Per --', 'value' => '0', ),
-					array( 'name' => 'Hour', 'value' => 'hour', ),
-					array( 'name' => 'Week', 'value' => 'week', ),
-					array( 'name' => 'Month', 'value' => 'month', ),
-					array( 'name' => 'Year', 'value' => 'annum', ),
-				),
+					'zero' => 'Select',
+			        'hour' => 'Hour',
+			        'week' => 'Week',
+			        'month' => 'Month',
+			        'year' => 'Year',
+			    ),
+				'cols' => 3
 			),
 			array(
-				'name'    => 'Salary Currency',
-				'desc'    => 'field description (optional)',
-				'id'      => $prefix . 'job_salary_currency',
-				'type'    => 'select',
+				'name' => 'Salary Currency',
+				'id'   => $wpbb_prefix . 'job_salary_currency',
+				'type' => 'select',
 				'options' => array(
-					array( 'name' => 'GBP', 'value' => 'gbp', ),
-					array( 'name' => 'Euro', 'value' => 'euro', ),
-				),
+					'zero' => 'Select',
+			        'gbp' => 'GBP',
+			        'eur' => 'Euro',
+			    ),
+				'cols' => 3
 			),
 			array(
 				'name' => 'Job Start Date',
-				'desc' => 'State when the job starts.',
-				'id' => $prefix . 'job_start_date',
-				'type' => 'text'
+				'id'   => $wpbb_prefix . 'job_start_date',
+				'type' => 'text',
+				'cols' => 6
 			),
 			array(
 				'name' => 'Job Duration',
-				'desc' => 'Enter the duration of this job e.g. 6 months.',
-				'id' => $prefix . 'job_duration',
-				'type' => 'text'
+				'id'   => $wpbb_prefix . 'job_duration',
+				'type' => 'text',
+				'cols' => 6
 			),
 			array(
 				'name' => 'Application Email',
 				'desc' => 'Enter the Aplitrak email address for this job.',
-				'id' => $prefix . 'job_application_email',
-				'type' => 'text'
+				'id'   => $wpbb_prefix . 'job_application_email',
+				'type' => 'text',
+				'cols' => 6
 			),
 			array(
 				'name' => 'Contact Email',
-				'desc' => 'Enter the internal contact email address for this job.',
-				'id' => $prefix . 'job_contact_email',
-				'type' => 'text'
+				'desc' => 'Enter the internal email address for this job.',
+				'id'   => $wpbb_prefix . 'job_contact_email',
+				'type' => 'text',
+				'cols' => 6
 			),
 			array(
-				'name' => 'Featured Job',
-				'desc' => 'Tick to make this job a featured job.',
-				'id'   => $prefix . 'featured_job',
+				'name' => 'Feature Job',
+				'id'   => $wpbb_prefix . 'featured_job',
+				'desc' => 'Tick to make this a featured job.',
 				'type' => 'checkbox',
+				'cols' => 12
 			),
-		),
-	);
-	
-	/* repeat this for each metabox you require */
-	$meta_boxes[] = array(
-		'id' => 'application-information',
-		'title' => 'Application Information',
-		'pages' => array( 'wpbb_application' ), // post type
-		'context' => 'normal',
-		'priority' => 'high',
-		'show_names' => true, // Show field names on the left
-		'fields' => array(
-			array(
+        )
+    );
+    
+    $meta_boxes[] = array(
+        'title' => 'Application Information',
+        'id' => 'wpbb_application_info',
+        'pages' => array( 'wpbb_application' ),
+        'context' => 'normal',
+        'priority' => 'high',
+        'fields' => array(
+        	array(
 				'name' => 'Job Reference/ID',
 				'desc' => 'This is the job reference or ID for the job applied for.',
 				'id' => $prefix . 'job_reference',
+				'cols' => 4,
+				'type' => 'text'
+			),
+			array(
+				'name' => 'Email Address',
+				'desc' => 'This is the email address of the person applying for this job.',
+				'id' => $prefix . 'applicant_email',
+				'cols' => 4,
+				'type' => 'text'
+			),
+			array(
+				'name' => 'Tel No.',
+				'desc' => 'This is the telephone number of the person applying for this job.',
+				'id' => $prefix . 'applicant_telno',
+				'cols' => 4,
 				'type' => 'text'
 			),
 			array(
@@ -113,27 +129,15 @@ function wpbb_metaboxes( $meta_boxes ) {
 				'type' => 'text'
 			),
 			array(
-				'name' => 'Email Address',
-				'desc' => 'This is the email address of the person applying for this job.',
-				'id' => $prefix . 'applicant_email',
-				'type' => 'text'
-			),
-			array(
-				'name' => 'Tel No.',
-				'desc' => 'This is the telephone number of the person applying for this job.',
-				'id' => $prefix . 'applicant_telno',
-				'type' => 'text'
-			),
-			array(
 				'name' => 'Application Attachment',
 				'desc' => 'Here are the files uploaded with this application.',
 				'id' => $prefix . 'application_uploads',
-				'type' => 'file_list',
+				'type' => 'file',
 			),
-		),
-	);
+        )
+    );
 
 	return $meta_boxes;
 }
 
-add_filter( 'wpac_meta_boxes', 'wpbb_metaboxes' );
+add_filter( 'cmb_meta_boxes', 'wpbb_metaboxes' );
