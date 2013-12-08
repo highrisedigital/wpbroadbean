@@ -10,13 +10,13 @@ License: GPLv2 or later
 */
 
 /* load custom post type & taxonomy functions */
-require_once( dirname( __FILE__ ) . '/functions/posttypes-taxonomies.php' );
+require_once( dirname( __FILE__ ) . '/functions/post-types.php' );
+
+/* load custom taxonomy functions */
+require_once( dirname( __FILE__ ) . '/functions/taxonomies.php' );
 
 /* load the dashboard functions */
 require_once( dirname( __FILE__ ) . '/functions/admin.php' );
-
-/* load the metaboxes template file */
-//require_once( dirname( __FILE__ ) . '/functions/metaboxes.php' );
 
 /* load the shortcodes functions */
 require_once( dirname( __FILE__ ) . '/functions/shortcodes.php' );
@@ -121,3 +121,20 @@ function wpbb_add_styles_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'wpbb_add_styles_scripts' );
+
+/***************************************************************
+* Function wpbb_admin_styles_scripts()
+* Registers and enqueus styles and scripts for the admin
+***************************************************************/
+function wpbb_admin_styles_scripts() {
+			
+	/* register the fancybox styles */
+	wp_register_style( 'wpbb_admin_styles', plugins_url( '/css/admin-style.css', __FILE__ ) );
+			
+	/* enqueue the fancybox css */
+	wp_enqueue_style( 'wpbb_admin_styles' );
+
+	
+}
+
+add_action( 'admin_enqueue_scripts', 'wpbb_admin_styles_scripts' );

@@ -5,17 +5,93 @@
 * type.
 ***************************************************************/
 function wpbb_add_admin_menu() {
-	add_submenu_page(
-		'options-general.php',
-		'WP Adcourier',
-		'WP Adcourier',
-		'manage_options',
-		'wp-adcourier',
-		'wpbb_admin_page_content'
+
+	/* add the main page for SEN info */
+	add_menu_page(
+		'WP Broadbean', // page_title,
+		'WP Broadbean', // menu_title,
+		'edit_posts', // capability,
+		'wp_broadbean_home', // menu_slug,
+		'__return_false', // function,
+		'div', // icon url
+		'90' // position
 	);
+	
+	/* add the sub page for the wpbb_job_type taxonomy */
+	add_submenu_page(
+		'wp_broadbean_home', // parent_slug,
+		'Job Type', // page_title,
+		'Job Type', // menu_title,
+		'edit_others_posts', // capability,
+		'edit-tags.php?taxonomy=wpbb_job_type' // menu_slug
+	);
+	
+	/* add the sub page for the wpbb_job_category taxonomy */
+	add_submenu_page(
+		'wp_broadbean_home', // parent_slug,
+		'Job Category', // page_title,
+		'Job Category', // menu_title,
+		'edit_others_posts', // capability,
+		'edit-tags.php?taxonomy=wpbb_job_category' // menu_slug
+	);
+	
+	/* add the sub page for the wpbb_job_location taxonomy */
+	add_submenu_page(
+		'wp_broadbean_home', // parent_slug,
+		'Job Location', // page_title,
+		'Job Location', // menu_title,
+		'edit_others_posts', // capability,
+		'edit-tags.php?taxonomy=wpbb_job_location' // menu_slug
+	);
+	
+	/* add the sub page for the wpbb_job_location_tag taxonomy */
+	add_submenu_page(
+		'wp_broadbean_home', // parent_slug,
+		'Job Location Tag', // page_title,
+		'Job Location Tag', // menu_title,
+		'edit_others_posts', // capability,
+		'edit-tags.php?taxonomy=wpbb_job_location_tag' // menu_slug
+	);
+	
+	/* add the settings page sub menu item */
+	add_submenu_page(
+		'wp_broadbean_home',
+		'Settings',
+		'Settings',
+		'manage_options',
+		'wp_broadbean_settings',
+		'wpbb_setings_page_content'
+	);
+	
 }
 
 add_action( 'admin_menu', 'wpbb_add_admin_menu' );
+
+/*****************************************************************
+* function wpbb_tax_menu_correction()
+* Sets the correct parent item for the sen custom taxonomies
+*****************************************************************/
+function wpbb_tax_menu_correction( $parent_file ) {
+	
+	global $current_screen;
+	
+	/* get the taxonomy of the current screen */
+	$wpbb_taxonomy = $current_screen->taxonomy;
+	
+	/* if the current screen taxonomy is a SEN taxonomy */
+	if( $wpbb_taxonomy == 'wpbb_job_location_tag' || $wpbb_taxonomy == 'wpbb_job_location' || $wpbb_taxonomy == 'wpbb_job_category' || $wpbb_taxonomy == 'wpbb_job_type') {
+		
+		/* set the parent file slug to the sen main page */
+		$parent_file = 'wp_broadbean_home';
+		
+	}
+	
+	/* return the new parent file */
+	
+	return $parent_file;
+	
+}
+add_action( 'parent_file', 'wpbb_tax_menu_correction' );
 
 /***************************************************************
 * Function wpbb_register_settings()
@@ -38,7 +114,7 @@ add_action( 'admin_init', 'wpbb_register_settings' );
 * Function wpbb_admin_page_content()
 * Builds the content for the admin settings page.
 ***************************************************************/
-function wpbb_admin_page_content() {
+function wpbb_setings_page_content() {
 
 	?>
 	
@@ -48,6 +124,9 @@ function wpbb_admin_page_content() {
 		<h2>WP Broadbean Settings</h2>
 		
 		<?php
+		
+			/* do before settings page action */
+			do_action( 'wpbb_before_settings_page' );
 		
 			/* build filterable opening paragraph */
 			$wpbb_admin_paragraph = '<p>Welcome to the Broadbean (AdCourier) settings page. To find out more about this advert distribution tool please <a href="http://www.broadbean.com/multiposting.html">click here</a>.</p>';
@@ -91,6 +170,9 @@ function wpbb_admin_page_content() {
 		
 	</div><!- // wrap -->
 	
-	<?php	
+	<?php
+	
+	/* do after settings page action */
+	do_action( 'wpbb_after_settings_page' );
 	
 }
