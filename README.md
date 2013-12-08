@@ -1,6 +1,6 @@
 # WP Broadbean
 
-WP Broadbean is a WordPress plugin that is designed to integrate with [Broadbean's Adcourier multi job posting system](http://www.broadbean.com/multiposting.html)Broadbean's Adcourier multi job posting system. If you are a recruitment agency or a company or individual that posts jobs to your site, then taking advantage if this plugin and BroadBean's multi job posting service could mean your jobs are posted to a much wider audience.
+WP Broadbean is a WordPress plugin that is designed to integrate with [Broadbean's Adcourier multi job posting system](http://www.broadbean.com/multiposting.html). If you are a recruitment agency or a company or individual that posts jobs to your site, then taking advantage if this plugin and BroadBean's multi job posting service could mean your jobs are posted to a much wider audience.
 
 ### What does this plugin do?
 
