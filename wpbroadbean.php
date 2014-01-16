@@ -121,9 +121,9 @@ function wpbb_add_styles_scripts() {
 	if( !empty( $post ) ) {
 		
 		/* check if we find our shortcode in the post content */
-		if( stripos( $post->post_content, '[wpbb_applicationform') !== FALSE ) {
+		if( stripos( $post->post_content, '[wpbb_applicationform]') !== FALSE ) {
 		
-		/* register and enqueue the jwuery validate plugin */
+		/* register and enqueue the jquery validate plugin */
 		wp_enqueue_script( 'jquery' );
 		wp_register_script( 'wpbb_jquery_validate' , plugins_url( '/scripts/jquery.validate.js', __FILE__ ), 'jquery' );  
 		wp_register_script( 'wpbb_validate', plugins_url( '/scripts/wpbb_validate.js', __FILE__ ), 'wpbb_jquery_validate' );
