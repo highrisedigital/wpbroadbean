@@ -307,12 +307,12 @@ function wpbb_application_form_shortcode() {
 			/* check whether message was sent OK */
 			if( $wpbb_send_email == 1 ) {
 				
-				echo apply_filters( 'wpbb_application_sent_success_message', '<p class="message">Your application has been sent successfully.</p>' );
+				echo '<p class="success">' . apply_filters( 'wpbb_application_sent_success_message', 'Your application has been sent successfully.' ) . '</p>';
 			
 			/* error occured in sending email */	
 			} else {
 				
-				echo apply_filters( 'wpbb_application_send_error_message', '<p class="message error">There was a problem sending your application. Please check you have entered a valid email address.</p>' );
+				echo '<p class="error">' . apply_filters( 'wpbb_application_send_error_message', 'There was a problem sending your application. Please check you have entered a valid email address.' ) . '</p>';
 				
 			} // end check mail sent
 			
