@@ -151,11 +151,11 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'add' ) {
 		/* set the location tag terms for then newly created job */
 		wp_set_post_terms( $wpbb_job_post_id, wp_strip_all_tags( $wpbb_params[ 'job_location_tags' ] ), 'wpbb_job_location_tag' );
 		
-		/* set the post meta data (custom fields) */
+		/* set the post meta data (custom fields) first for job reference */
 		add_post_meta( $wpbb_job_post_id, '_wpbb_job_reference', wp_strip_all_tags( $wpbb_params[ 'job_reference' ] ), true );
 		
 		/* only set the data if they are sent */
-		if( !empty( $wpbb_params[ 'salary_from' ] ) ) {
+		if( isset( $wpbb_params[ 'salary_from' ] ) ) {
 		
 			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary_from', wp_strip_all_tags( $wpbb_params[ 'salary_from' ] ), true );
 			
@@ -207,12 +207,12 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'add' ) {
 			
 		}
 		
-		echo '<p>Success! - This Job has been added and has a post ID of ' . $wpbb_job_post_id . '. The permalink to this job is: ' . get_permalink( $wpbb_job_post_id ) . '</p>';
+		echo '<p class="success">' . apply_filters( 'wpbb_job_added_success_message', 'Success! - This Job has been added and has a post ID of ' . $wpbb_job_post_id . '. The permalink to this job is: ' . get_permalink( $wpbb_job_post_id ) ) . '</p>';
 	
 	/* no post id exists for the newly created job - an error occured */
 	} else {
 		
-		echo '<p>There was an error, the job was not published.</p>';
+		echo '<p>' . apply_filters( 'wpbb_job_added_failure_message', 'There was an error, the job was not published.' ) . '</p>';
 		
 	} // end if insert post has an id
 	
