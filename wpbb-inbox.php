@@ -14,7 +14,7 @@ $wpbb_password = get_option( 'wpbb_password' );
 * to run testing, you can change the part in the brackets
 * to a url that contains your testing xml
 *******************************************************/
-$wpbb_xml_content = file_get_contents( 'php://input' ); // php://input
+$wpbb_xml_content = file_get_contents( 'http://local.dev/dev/sample.xml' ); // php://input
 
 /* parse the retreived xml file */
 $wpbb_params = json_decode( json_encode( simplexml_load_string( $wpbb_xml_content ) ), 1 );
@@ -125,7 +125,7 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'add' ) {
 	$wpbb_job_post_args = array(
 		'post_type' => 'wpbb_job',
 		'post_title' => wp_strip_all_tags( $wpbb_params[ 'job_title' ] ),
-		'post_content' => $wpbb_params[ 'job_description' ],
+		'post_content' => wp_kses( $wpbb_params[ 'job_description' ], wp_kses_allowed_html( 'post' ) ),
 		'post_status' => 'publish'
 	);
 	
