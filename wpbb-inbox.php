@@ -9,7 +9,11 @@
 $wpbb_username = get_option( 'wpbb_username' );
 $wpbb_password = get_option( 'wpbb_password' );
 
-/* get the contents of the feed provided by adcourier */
+/******************************************************
+* get the contents of the feed provided by adcourier
+* to run testing, you can change the part in the brackets
+* to a url that contains your testing xml
+*******************************************************/
 $wpbb_xml_content = file_get_contents( 'php://input' ); // php://input
 
 /* parse the retreived xml file */
