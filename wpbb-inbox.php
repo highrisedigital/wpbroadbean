@@ -14,7 +14,7 @@ $wpbb_password = get_option( 'wpbb_password' );
 * to run testing, you can change the part in the brackets
 * to a url that contains your testing xml
 *******************************************************/
-$wpbb_xml_content = file_get_contents( 'http://local.dev/dev/sample.xml' ); // php://input
+$wpbb_xml_content = file_get_contents( 'http://local.dev/jobtest.xml' ); // php://input
 
 /* parse the retreived xml file */
 $wpbb_params = json_decode( json_encode( simplexml_load_string( $wpbb_xml_content ) ), 1 );
@@ -22,11 +22,9 @@ $wpbb_params = json_decode( json_encode( simplexml_load_string( $wpbb_xml_conten
 /* check username and password match the stored informaiton */
 if( wp_strip_all_tags( $wpbb_params[ 'username' ] ) != $wpbb_username || wp_strip_all_tags( $wpbb_params[ 'password' ] != $wpbb_password ) ) {
 	
-	/* username and/or password are not correct, show an error message */
-	echo '<p>Sorry username and/or password are not valid</p>';
+	/* username and/or password are not correct, show an error message and stop file loading any further */
+	wp_die( __( 'Sorry username and/or password are not valid.' ) );
 	
-	/* stop file loading any further */
-	die();
 
 } // if end username/password authenticate
 
@@ -53,11 +51,8 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'add' ) {
 	/* check whether we have any job returned with the submitted reference */
 	if( $wpbb_job_ref_posts->have_posts() ) {
 		
-		/* output an error message, as a job with this job reference already exists */
-		echo '<p class="error">Oops, this job was not added, as a job with this jobs job reference already exists.</p>';
-		
-		/* stop any further loading */
-		die();
+		/* output an error message, as a job with this job reference already exists and stop any further loading */
+		wp_die( __( 'Oops, this job was not added, as a job with this jobs job reference already exists.' ) );
 		
 	}
 
@@ -155,70 +150,45 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'add' ) {
 		add_post_meta( $wpbb_job_post_id, '_wpbb_job_reference', wp_strip_all_tags( $wpbb_params[ 'job_reference' ] ), true );
 		
 		/* only set the data if they are sent */
-		if( isset( $wpbb_params[ 'salary_from' ] ) ) {
-		
+		if( isset( $wpbb_params[ 'salary_from' ] ) )
 			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary_from', wp_strip_all_tags( $wpbb_params[ 'salary_from' ] ), true );
-			
-		}
 		
-		if( isset( $wpbb_params[ 'salary_to' ] ) ) {
-		
+		if( isset( $wpbb_params[ 'salary_to' ] ) )
 			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary_to', wp_strip_all_tags( $wpbb_params[ 'salary_to' ] ), true );
-			
-		}
 		
-		if( isset( $wpbb_params[ 'salary_to' ] ) ) {
-		
+		if( isset( $wpbb_params[ 'salary_to' ] ) )
 			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary_to', wp_strip_all_tags( $wpbb_params[ 'salary_to' ] ), true );
-			
-		}
 		
-		if( isset( $wpbb_params[ 'salary_per' ] ) ) {
-		
+		if( isset( $wpbb_params[ 'salary_per' ] ) )
 			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary_per', wp_strip_all_tags( $wpbb_params[ 'salary_per' ] ), true );
-			
-		}
 		
-		if( isset( $wpbb_params[ 'salary_currency' ] ) ) {
-		
+		if( isset( $wpbb_params[ 'salary_currency' ] ) )
 			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary_currency', wp_strip_all_tags( $wpbb_params[ 'salary_currency' ] ), true );
-			
-		}
-		if( isset( $wpbb_params[ 'job_startdate' ] ) ) {
 		
+		if( isset( $wpbb_params[ 'job_startdate' ] ) )
 			add_post_meta( $wpbb_job_post_id, '_wpbb_job_start_date', wp_strip_all_tags( $wpbb_params[ 'job_startdate' ] ), true );
-			
-		}
 		
-		if( isset( $wpbb_params[ 'job_duration' ] ) ) {
-		
+		if( isset( $wpbb_params[ 'job_duration' ] ) )
 			add_post_meta( $wpbb_job_post_id, '_wpbb_job_duration', wp_strip_all_tags( $wpbb_params[ 'job_duration' ] ), true );
 			
-		}
-		
-		if( isset( $wpbb_params[ 'application_email' ] ) ) {
-		
-			add_post_meta( $wpbb_job_post_id, '_wpbb_job_application_email', wp_strip_all_tags( $wpbb_params[ 'application_email' ] ), true );
-			
-		}
-		if( isset( $wpbb_params[ 'contact_email' ] ) ) {
-		
+		if( isset( $wpbb_params[ 'application_email' ] ) )
+			add_post_meta( $wpbb_job_post_id, '_wpbb_job_broadbean_application_email', wp_strip_all_tags( $wpbb_params[ 'application_email' ] ), true );
+
+		if( isset( $wpbb_params[ 'contact_email' ] ) )
 			add_post_meta( $wpbb_job_post_id, '_wpbb_job_contact_email', wp_strip_all_tags( $wpbb_params[ 'contact_email' ] ), true );
 			
-		}
-		
 		echo '<p class="success">' . apply_filters( 'wpbb_job_added_success_message', 'Success! - This Job has been added and has a post ID of ' . $wpbb_job_post_id . '. The permalink to this job is: ' . get_permalink( $wpbb_job_post_id ) ) . '</p>';
 	
 	/* no post id exists for the newly created job - an error occured */
 	} else {
 		
-		echo '<p>' . apply_filters( 'wpbb_job_added_failure_message', 'There was an error, the job was not published.' ) . '</p>';
+		echo '<p class="error">' . apply_filters( 'wpbb_job_added_failure_message', 'There was an error, the job was not published.' ) . '</p>';
 		
 	} // end if insert post has an id
 	
 }
 
-/* check whether we are deleting a post */
+/* check whether we are deleting a job */
 if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'delete' ) {
 	
 	/* get the job reference for this job */
@@ -227,7 +197,7 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'delete' ) {
 	/* setup args to get posts with this job reference */
 	$wpbb_posts_args = array(
 		'post_type' => 'wpbb_job',
-		'meta_key' => 'wpbb_job_reference',
+		'meta_key' => '_wpbb_job_reference',
 		'meta_value' => $wpbb_job_reference
 	);
 	

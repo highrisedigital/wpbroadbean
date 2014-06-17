@@ -6,7 +6,7 @@
 ***************************************************************/
 function wpbb_add_admin_menu() {
 
-	/* add the main page for SEN info */
+	/* add the main page for wpbroadbean info */
 	add_menu_page(
 		'WP Broadbean', // page_title,
 		'WP Broadbean', // menu_title,
@@ -21,7 +21,7 @@ function wpbb_add_admin_menu() {
 	add_submenu_page(
 		'wp_broadbean_home', // parent_slug,
 		'Job Type', // page_title,
-		'Job Type', // menu_title,
+		'Type', // menu_title,
 		'edit_others_posts', // capability,
 		'edit-tags.php?taxonomy=wpbb_job_type' // menu_slug
 	);
@@ -30,7 +30,7 @@ function wpbb_add_admin_menu() {
 	add_submenu_page(
 		'wp_broadbean_home', // parent_slug,
 		'Job Category', // page_title,
-		'Job Category', // menu_title,
+		'Categories', // menu_title,
 		'edit_others_posts', // capability,
 		'edit-tags.php?taxonomy=wpbb_job_category' // menu_slug
 	);
@@ -39,7 +39,7 @@ function wpbb_add_admin_menu() {
 	add_submenu_page(
 		'wp_broadbean_home', // parent_slug,
 		'Job Location', // page_title,
-		'Job Location', // menu_title,
+		'Locations', // menu_title,
 		'edit_others_posts', // capability,
 		'edit-tags.php?taxonomy=wpbb_job_location' // menu_slug
 	);
@@ -48,7 +48,7 @@ function wpbb_add_admin_menu() {
 	add_submenu_page(
 		'wp_broadbean_home', // parent_slug,
 		'Job Location Tag', // page_title,
-		'Job Location Tag', // menu_title,
+		'Location Tags', // menu_title,
 		'edit_others_posts', // capability,
 		'edit-tags.php?taxonomy=wpbb_job_location_tag' // menu_slug
 	);
@@ -98,17 +98,22 @@ add_action( 'parent_file', 'wpbb_tax_menu_correction' );
 * Register the settings for this plugin. Just a username and a
 * password for authenticating.
 ***************************************************************/
-function wpbb_register_settings() {
+function wpbb_register_default_settings() {
+
+	/* build array of setttings to register */
+	$wpbb_registered_settings = apply_filters( 'wpbb_registered_settings', array() );
 	
-	/* register a setting for the username */
-	register_setting( 'wpbb_settings', 'wpbb_username' );
-	
-	/* register a setting for the password */
-	register_setting( 'wpbb_settings', 'wpbb_password' );
-	
+	/* loop through registered settings array */
+	foreach( $wpbb_registered_settings as $wpbb_registered_setting ) {
+		
+		/* register a setting for the username */
+		register_setting( 'wpbb_settings', $wpbb_registered_setting );
+		
+	}
+		
 }
 
-add_action( 'admin_init', 'wpbb_register_settings' );
+add_action( 'admin_init', 'wpbb_register_default_settings' );
 
 /***************************************************************
 * Function wpbb_admin_page_content()
@@ -143,6 +148,16 @@ function wpbb_setings_page_content() {
 			';
 			
 			echo apply_filters( 'wpbb_admin_paragraph', $wpbb_admin_paragraph );
+			
+			$testing = array(
+				'label' => 'Choose a Page',
+				'name' => 'apply_page',
+				'options' => wpbb_page_dropdown_array(),
+				'type' => 'select'
+			);
+			
+			/* setup an array of settings */
+			$wpbb_settings = apply_filters( 'wpbb_settings_output', array() );
 		
 		?>
 		
@@ -153,22 +168,78 @@ function wpbb_setings_page_content() {
 			<table class="form-table">
 			
 				<tbody>
-					<tr valign="top">
-						<th scope="row">
-							<label for="wpbb_username">Username</label>
-						</th>
-						<td>
-							<input type="text" name="wpbb_username" id="wpbb_username" value="<?php echo get_option( 'wpbb_username' ) ?>">
-						</td>
-					</tr>
-					<tr valign="top">
-						<th scope="row">
-							<label for="wpbb_password">Password</label>
-						</th>
-						<td>
-							<input type="text" name="wpbb_password" id="wpbb_password" value="<?php echo get_option( 'wpbb_password' ) ?>">
-						</td>
-					</tr>
+				
+					<?php
+					
+						/* loop through the settings array */
+						foreach( $wpbb_settings as $wpbb_setting ) {
+							
+							?>
+							
+							<tr valign="top">
+								<th scope="row">
+									<label for="wpbb_username"><?php echo $wpbb_setting[ 'label' ]; ?></label>
+								</th>
+								<td>
+									<?php
+										switch( $wpbb_setting[ 'type' ] ) {
+										    										    
+										    /* if the setting is a select input */
+										    case 'select' :
+										        
+										        ?>
+										    	<select name="<?php echo $wpbb_setting[ 'name' ]; ?>" id="<?php echo $wpbb_setting[ 'name' ]; ?>">
+										    	
+										    	<?php
+
+										    	/* get the setting options */
+										    	$wpbb_setting_options = $wpbb_setting[ 'options' ];
+
+										        /* loop through each option */
+										        foreach( $wpbb_setting_options as $wpbb_setting_option ) {
+
+											        ?>
+											        <option value="<?php echo esc_attr( $wpbb_setting_option[ 'value' ] ); ?>" <?php selected( get_option( $wpbb_setting[ 'name' ] ), $wpbb_setting_option[ 'value' ] ); ?>><?php echo $wpbb_setting_option[ 'name' ]; ?></option>
+													<?php
+
+										        }
+
+										        ?>
+										    	</select>
+										        <?php
+										        if( $wpbb_setting[ 'description' ] != '' ) {
+													?>
+													<p class="description"><?php echo $wpbb_setting[ 'description' ]; ?></p>
+													<?php
+												}
+										        
+										        /* break out of the switch statement */
+										        break;
+										        
+										    default :
+										       
+										       ?>
+												<input type="text" name="<?php echo $wpbb_setting[ 'name' ]; ?>" id="<?php echo $wpbb_setting[ 'name' ]; ?>" class="regular-text" value="<?php echo get_option( $wpbb_setting[ 'name' ] ) ?>" />
+												<?php
+												if( $wpbb_setting[ 'description' ] != '' ) {
+													?>
+													<p class="description"><?php echo $wpbb_setting[ 'description' ]; ?></p>
+													<?php
+												}
+												
+										} // end switch statement
+										
+									?>
+									
+								</td>
+
+							</tr>
+							
+							<?php
+						}
+					
+					?>
+					
 				</tbody>
 				
 			</table>
@@ -187,3 +258,117 @@ function wpbb_setings_page_content() {
 	do_action( 'wpbb_after_settings_page' );
 	
 }
+
+/***************************************************************
+* Function wpbb_change_title_text()
+* Changes the wordpress 'Enter title here' text for the job post
+* type.
+***************************************************************/
+function wpbb_change_title_text( $title ){
+     
+	/* get the current screen we are viewing in the admin */
+	$wpbb_screen = get_current_screen();
+
+	/* if the current screen is our job post type */
+	if( 'wpbb_job' == $wpbb_screen->post_type ) {
+		
+		/* set the new text for the title box */
+		$title = 'Job Title';
+	
+	/* if the current screen is our job application post type */
+	} elseif( 'wpbb_application' == $wpbb_screen->post_type ) {
+		
+		/* set the new text for the title box */
+		$title = 'Applicant Name';
+
+	}
+	
+	/* return our new text */
+	return $title;
+	
+}
+ 
+add_filter( 'enter_title_here', 'wpbb_change_title_text' );
+
+/***************************************************************
+* Function wpbb_job_post_editor_content()
+* Pre-fills the post editor on jobs with instructional text.
+***************************************************************/
+function wpbb_job_post_editor_content( $content ) {
+	
+	/* get current post type */
+	//$wpbb_current_post_type = wpbb_get_current_post_type();
+	
+	/* check we are on the job post type */
+	if( 'wpbb_job' != wpbb_get_current_post_type() )
+		return;
+	
+	$content = "Replace this text with the long description of the job.";
+
+	return $content;
+}
+
+add_filter( 'default_content', 'wpbb_job_post_editor_content' );
+
+/***************************************************************
+* Function wpbb_get_current_admin_post_type()
+* Returns the post type of a post in the admin.
+***************************************************************/
+function wpbb_get_current_admin_post_type() {
+  
+  global $post, $typenow, $current_screen;
+	
+  /* we have a post so we can just get the post type from that */
+  if ( $post && $post->post_type )
+    return $post->post_type;
+    
+  /* check the global $typenow - set in admin.php */
+  elseif( $typenow )
+    return $typenow;
+    
+  /* check the global $current_screen object - set in sceen.php */
+  elseif( $current_screen && $current_screen->post_type )
+    return $current_screen->post_type;
+  
+  /* lastly check the post_type querystring */
+  elseif( isset( $_REQUEST[ 'post_type' ] ) )
+    return sanitize_key( $_REQUEST[ 'post_type' ] );
+	
+  /* we do not know the post type! */
+  return null;
+  
+}
+
+/***************************************************************
+* Function wpbb_job_short_description_meta_box()
+* Change html output of the excerpt box, removing the paragraph
+* of instruction text.
+***************************************************************/
+function wpbb_job_short_description_meta_box($post) {
+	
+	?>
+	<label class="screen-reader-text" for="excerpt"><?php _e('Excerpt') ?></label>
+	<textarea rows="1" cols="40" name="excerpt" id="excerpt"><?php echo $post->post_excerpt; // textarea_escaped ?></textarea>
+	<?php
+	
+}
+
+/***************************************************************
+* Function wpbb_excerpt_box_title()
+* Change title of the excerpt metabox to short description.
+***************************************************************/
+function wpbb_excerpt_box_title() {
+	
+	/* check this is a job post */
+	if( 'wpbb_job' != wpbb_get_current_admin_post_type() )
+		return;
+		
+	/* remove the excerpt metabox */
+	remove_meta_box( 'postexcerpt', 'my_custom_post_type', 'side' );
+	
+	/* add the metabox back with a different title */
+	add_meta_box( 'postexcerpt', __( 'Short Description' ), 'wpbb_job_short_description_meta_box', 'wpbb_job', 'normal', 'high' );
+	
+}
+
+add_action( 'do_meta_boxes',  'wpbb_excerpt_box_title', 99 );

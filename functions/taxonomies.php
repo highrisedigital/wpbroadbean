@@ -10,7 +10,7 @@ function wpbb_register_taxonomies() {
 		array(
 			'labels' => apply_filters( 'wpbb_job_type_labels',
 				array(
-					'name' => _x( 'Job Type', 'taxonomy general name' ),
+					'name' => _x( 'Types', 'taxonomy general name' ),
 					'singular_name' => _x( 'Job Type', 'taxonomy singular name' ),
 					'search_items' =>  __( 'Search Job Types' ),
 					'all_items' => __( 'All Job Types' ),
@@ -20,7 +20,7 @@ function wpbb_register_taxonomies() {
 					'update_item' => __( 'Update Job Type' ),
 					'add_new_item' => __( 'Add New Job Type' ),
 					'new_item_name' => __( 'New Job Type Name' ),
-					'menu_name' => __( 'Job Types' ),
+					'menu_name' => __( 'Types' ),
 				)
 			),
 			'hierarchical' => true,
@@ -30,7 +30,8 @@ function wpbb_register_taxonomies() {
 			),
 			'rewrite' => array(
 				'slug' => 'job-type'
-			)
+			),
+			'show_admin_column' => true,
 		)
 	);
 	
@@ -39,7 +40,7 @@ function wpbb_register_taxonomies() {
 		array(
 			'labels' => apply_filters( 'wpbb_job_category_labels',
 				array(
-					'name' => _x( 'Job Category', 'taxonomy general name' ),
+					'name' => _x( 'Categories', 'taxonomy general name' ),
 					'singular_name' => _x( 'Category', 'taxonomy singular name' ),
 					'search_items' =>  __( 'Search Categories' ),
 					'all_items' => __( 'All Categories' ),
@@ -59,7 +60,8 @@ function wpbb_register_taxonomies() {
 			),
 			'rewrite' => array(
 				'slug' => 'job-category'
-			)
+			),
+			'show_admin_column' => true,
 		)
 	);
 	
@@ -68,7 +70,7 @@ function wpbb_register_taxonomies() {
 		array(
 			'labels' => apply_filters( 'wpbb_job_location_labels',
 				array(
-					'name' => _x( 'Job Location', 'taxonomy general name' ),
+					'name' => _x( 'Locations', 'taxonomy general name' ),
 					'singular_name' => _x( 'Location', 'taxonomy singular name' ),
 					'search_items' =>  __( 'Search Locations' ),
 					'all_items' => __( 'All Locations' ),
@@ -88,7 +90,8 @@ function wpbb_register_taxonomies() {
 			),
 			'rewrite' => array(
 				'slug' => 'job-location'
-			)
+			),
+			'show_admin_column' => true,
 		)
 	);
 	
@@ -97,7 +100,7 @@ function wpbb_register_taxonomies() {
 		array(
 			'labels' => apply_filters( 'wpbb_job_location_tag_labels',
 				array(
-					'name' => _x( 'Job Location Tags', 'taxonomy general name' ),
+					'name' => _x( 'Location Tags', 'taxonomy general name' ),
 					'singular_name' => _x( 'Location Tag', 'taxonomy singular name' ),
 					'search_items' =>  __( 'Search Location Tags' ),
 					'all_items' => __( 'All Location Tags' ),
@@ -117,7 +120,8 @@ function wpbb_register_taxonomies() {
 			),
 			'rewrite' => array(
 				'slug' => 'job-location-tags'
-			)
+			),
+			'show_admin_column' => false,
 		)
 	);
 		

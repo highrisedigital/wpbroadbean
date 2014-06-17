@@ -9,17 +9,15 @@ Author URI: http://markwilkinson.me
 License: GPLv2 or later
 */
 
-/* load custom post type & taxonomy functions */
+/* load required files & functions */
 require_once( dirname( __FILE__ ) . '/functions/post-types.php' );
-
-/* load custom taxonomy functions */
+//require_once( dirname( __FILE__ ) . '/functions/post-type-help.php' );
 require_once( dirname( __FILE__ ) . '/functions/taxonomies.php' );
-
-/* load the dashboard functions */
 require_once( dirname( __FILE__ ) . '/functions/admin.php' );
-
-/* load the shortcodes functions */
+require_once( dirname( __FILE__ ) . '/functions/email-functions.php' );
 require_once( dirname( __FILE__ ) . '/functions/shortcodes.php' );
+require_once( dirname( __FILE__ ) . '/functions/template-tags.php' );
+require_once( dirname( __FILE__ ) . '/functions/settings.php' );
 
 /* check whether the metabox class already exists */
 if( ! class_exists( 'CMB_Meta_Box' ) ) {
@@ -31,37 +29,6 @@ if( ! class_exists( 'CMB_Meta_Box' ) ) {
 
 /* load the metabox functions */
 require_once( dirname( __FILE__ ) . '/functions/metaboxes.php' );
-
-/***************************************************************
-* Function wpbb_change_title_text()
-* Changes the wordpress 'Enter title here' text for the job post
-* type.
-***************************************************************/
-function wpbb_change_title_text( $title ){
-     
-	/* get the current screen we are viewing in the admin */
-	$wpbb_screen = get_current_screen();
-
-	/* if the current screen is our job post type */
-	if( 'wpbb_job' == $wpbb_screen->post_type ) {
-		
-		/* set the new text for the title box */
-		$title = 'Job Title';
-	
-	/* if the current screen is our job application post type */
-	} elseif( 'wpbb_application' == $wpbb_screen->post_type ) {
-		
-		/* set the new text for the title box */
-		$title = 'Applicant Name';
-
-	}
-	
-	/* return our new text */
-	return $title;
-	
-}
- 
-add_filter( 'enter_title_here', 'wpbb_change_title_text' );
 
 /***************************************************************
 * Function wpbb_add_new_query_var()
@@ -156,3 +123,21 @@ function wpbb_admin_styles_scripts() {
 }
 
 add_action( 'admin_enqueue_scripts', 'wpbb_admin_styles_scripts' );
+
+/***************************************************************
+* Function wpbb_apply_button()
+* Outputs the apply now button after the loop on job single posts
+***************************************************************/
+function wpbb_apply_button() {
+	
+	/* check this is a single job post */
+	if( ! is_singular( 'wpbb_job' ) )
+		return;
+	
+	?>
+    <p class="apply-button"><a href="<?php echo wpbb_get_apply_url( $post->ID ); ?>">Apply Now</a></p>
+    <?php
+	
+}
+
+add_filter( 'loop_end', 'wpbb_apply_button' );

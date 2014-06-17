@@ -10,7 +10,7 @@ function wpbb_register_post_types() {
 		'wpbb_job',array(
 			'labels' => apply_filters( 'wpbb_job_post_type_labels',
 				array(
-					'name' => _x( 'Job', 'post type general name' ),
+					'name' => _x( 'Jobs', 'post type general name' ),
 					'singular_name' => _x( 'Job', 'post type singular name' ),
 					'add_new' => _x( 'Add New', 'Job' ),
 				    'add_new_item' => __( 'Add New Job' ),

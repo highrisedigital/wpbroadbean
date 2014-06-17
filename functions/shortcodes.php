@@ -1,29 +1,4 @@
 <?php
-/*
-* this file create the shortcode for the application form.
-*/
-
-/****************************************************************
-* Function wpbb_generate_email_content()
-* Creates the content of an email by adding the HTML tags at the
-* begining and the end of the body etc with the content in the
-* middle.
-* @param post content to put in email
-* @return complete HTML email to send
-****************************************************************/
-function wpbb_generate_email_content( $wpbb_full_post_content ) {
-	
-	$wpbb_email_top = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Latest Newsletter</title><style type="text/css">.alignleft {float: left;}.alignright {float: right;}.aligncenter {display: block;margin-left: auto;margin-right: auto;}img {max-width: 100%;}</style></head><body style="font-family: Arial, Helvetica, Verdana, sans-serif;"><table><tr><td style="max-width: 650px; width:650px; padding: 15px 20px 15px 20px; border: 1px solid #363636; margin-left: auto; margin-right: auto; font-family: Arial, Helvetica, Verdana, sans-serif; font-size:12px;">';
-	
-	$wpbb_email_bottom = '</tr></td</table></body></html>';
-	
-	$wpbb_complete_email = $wpbb_email_top . $wpbb_full_post_content . $wpbb_email_bottom;
-	
-	return $wpbb_complete_email;
-	
-}
-
-
 /***************************************************************
 * Function wpbb_application_form_shortcode()
 * Creates the shortcode for adding the job application form.
@@ -77,13 +52,13 @@ function wpbb_application_form_shortcode() {
 					$wpbb_job_contact_email = get_post_meta( get_the_ID(), 'wpbb_job_contact_email', true );
 					
 					/* get the bb job application email */
-					$wpbb_job_application_email = get_post_meta( get_the_ID(), 'wpbb_job_application_email', true );
+					$wpbb_job_broadbean_application_email = get_post_meta( get_the_ID(), '_wpbb_job_application_email', true );
 									
 					/* get the url/permalink of the job */
 					$wpbb_permalink = get_permalink();
 					
 					/* add this reference to the array */
-					$wpbb_references[] = get_post_meta( get_the_ID(), 'wpbb_job_reference', true );
+					$wpbb_references[] = get_post_meta( get_the_ID(), '_wpbb_job_reference', true );
 				
 				/* end loop */
 				endwhile;
@@ -139,7 +114,7 @@ function wpbb_application_form_shortcode() {
 						
 						<label class="error" for="wpbb_email">Please enter your email address.</label>
 						
-						<p class="wpbb_description">Please enter a valid email address as this will be used to contact you on.</p>
+						<p class="wpbb_description">Please enter a valid email address as this will be used to contact you.</p>
 					
 					</div>
 					
@@ -165,7 +140,7 @@ function wpbb_application_form_shortcode() {
 					
 					<input class="wpbb_hidden" type="hidden" name="wpbb_contact_email" id="wpbb_contact_email" value="<?php echo $wpbb_job_contact_email; ?>" tabindex="6">
 					
-					<input class="wpbb_hidden" type="hidden" name="wpbb_application_email" id="wpbb_contact_email" value="<?php echo $wpbb_job_application_email; ?>" tabindex="6">
+					<input class="wpbb_hidden" type="hidden" name="wpbb_broadbean_application_email" id="wpbb_broadbean_application_email" value="<?php echo $wpbb_job_broadbean_application_email; ?>" tabindex="6">
 					
 					<input class="wpbb_hidden" type="hidden" name="wpbb_form_submitted" id="wpbb_form_submitted" value="1" tabindex="7">
 					
@@ -187,7 +162,10 @@ function wpbb_application_form_shortcode() {
 				
 			} // end check we have job reference query var */
 		
-		/* form has been submitted */
+		/***************************************************************
+		* form has been submitted
+		* start to process the information sent
+		***************************************************************/
 		} else {
 			
 			/* check that the wp_handle_upload function is loaded */		
@@ -203,23 +181,26 @@ function wpbb_application_form_shortcode() {
 			/* upload the file to wp uploads dir */
 			$pxjn_moved_file = wp_handle_upload( $pxjn_uploaded_file, $pxjn_upload_overrides );
 			
-			/* get file type */
+			/* get file type of the uploaded file */
 			$pxjn_filetype = wp_check_filetype( $pxjn_moved_file[ 'url' ], null );
 			
 			/* generate array of allowed mime types */
-			$pxjn_allowed_mime_types = array(
-				'application/msword',
-				'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-				'application/pdf',
-				'application/rtf',
-				'text/plain'
+			$pxjn_allowed_mime_types = apply_filters(
+				'wpbb_application_allowed_file_types',
+				array(
+					'application/msword',
+					'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+					'application/pdf',
+					'application/rtf',
+					'text/plain'
+				)
 			);
 			
 			/* check uploaded file is in allowed mime types array */
 			if( ! in_array( $pxjn_filetype[ 'type' ], $pxjn_allowed_mime_types) )
-				die( __( "Sorry, this file type is not alllowed. Please go back and try again." ) );
+				wp_die( __( 'Sorry, this file type is not allowed. Please go back and try again.' ) );
 			
-			/* wp upload directory */
+			/* get the wp upload directory */
 			$pxjn_wp_upload_dir = wp_upload_dir();
 			
 			/* setup the attachment data */
@@ -242,9 +223,9 @@ function wpbb_application_form_shortcode() {
 			$wpbb_posted_applicant_tel = $_POST[ 'wpbb_tel' ];
 			$wpbb_posted_job_url = $_POST[ 'wpbb_job_url' ];
 			$wpbb_posted_contact_email = $_POST[ 'wpbb_contact_email' ];
-			$wpbb_posted_application_email = $_POST[ 'wpbb_application_email' ];
+			$wpbb_posted_broadbean_application_email = $_POST[ 'wpbb_broadbean_application_email' ];
 			
-			/* setup the args to insert the job post */
+			/* setup the args to insert the application post */
 			$wpbb_job_post_args = array(
 				'post_type' => 'wpbb_application',
 				'post_title' => wp_strip_all_tags( $wpbb_posted_applicant_name ),
@@ -299,7 +280,7 @@ function wpbb_application_form_shortcode() {
 			
 			$wpbb_mail_content = wpbb_generate_email_content( $wpbb_email_content );
 			
-			$wpbb_mail_recipients = $wpbb_posted_application_email . ',' . $wpbb_posted_contact_email;
+			$wpbb_mail_recipients = $wpbb_posted_broadbean_application_email . ',' . $wpbb_posted_contact_email;
 			
 			/* send the mail */
 			$wpbb_send_email = wp_mail( $wpbb_mail_recipients, $wpbb_mail_subject, $wpbb_mail_content, $wpbb_email_headers );
@@ -318,7 +299,7 @@ function wpbb_application_form_shortcode() {
 			
 		}
 	
-	/* no jon id detected */	
+	/* no job id detected */	
 	} else {
 		
 		echo apply_filters( 'wpbb_no_job_reference_message', '<p class="message error">Oops! No job reference was detected.</p>' );

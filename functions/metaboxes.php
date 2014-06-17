@@ -29,8 +29,8 @@ function wpbb_metaboxes( $meta_boxes ) {
 				'cols' => 3
 			),
 			array(
-				'name' => 'Salary From',
-				'id'   => $wpbb_prefix . 'job_salary_from',
+				'name' => 'Salary To',
+				'id'   => $wpbb_prefix . 'job_salary_to',
 				'type' => 'text',
 				'cols' => 3
 			),
@@ -71,9 +71,9 @@ function wpbb_metaboxes( $meta_boxes ) {
 				'cols' => 6
 			),
 			array(
-				'name' => 'Application Email',
-				'desc' => 'Enter the Aplitrak email address for this job.',
-				'id'   => $wpbb_prefix . 'job_application_email',
+				'name' => 'Broadbean Application Email',
+				'desc' => 'Enter the Broadbean Aplitrak email address.',
+				'id'   => $wpbb_prefix . 'job_broadbean_application_email',
 				'type' => 'text',
 				'cols' => 6
 			),
@@ -85,11 +85,18 @@ function wpbb_metaboxes( $meta_boxes ) {
 				'cols' => 6
 			),
 			array(
+				'name' => 'Allow LinkedIn Applications?',
+				'id'   => $wpbb_prefix . 'allow_linkedin_applications',
+				'desc' => 'Tick to allow applications via LinkedIn.',
+				'type' => 'checkbox',
+				'cols' => 6
+			),
+			array(
 				'name' => 'Feature Job',
 				'id'   => $wpbb_prefix . 'featured_job',
 				'desc' => 'Tick to make this a featured job.',
 				'type' => 'checkbox',
-				'cols' => 12
+				'cols' => 6
 			),
         )
     );
