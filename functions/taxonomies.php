@@ -95,38 +95,6 @@ function wpbb_register_taxonomies() {
 		)
 	);
 	
-	/* register the job location tag taxonomy */
-	register_taxonomy( 'wpbb_job_location_tag', 'wpbb_job',
-		array(
-			'labels' => apply_filters( 'wpbb_job_location_tag_labels',
-				array(
-					'name' => _x( 'Location Tags', 'taxonomy general name' ),
-					'singular_name' => _x( 'Location Tag', 'taxonomy singular name' ),
-					'search_items' =>  __( 'Search Location Tags' ),
-					'all_items' => __( 'All Location Tags' ),
-					'parent_item' => __( 'Parent Location Tag' ),
-					'parent_item_colon' => __( 'Parent Location Tag:' ),
-					'edit_item' => __( 'Edit Location Tag' ), 
-					'update_item' => __( 'Update Location Tag' ),
-					'add_new_item' => __( 'Add New Location Tag' ),
-					'new_item_name' => __( 'New Location Tag Name' ),
-					'menu_name' => __( 'Location Tags' ),
-				)
-			),
-			'hierarchical' => false,
-			'sort' => true,
-			'args' => array(
-				'orderby' => 'term_order'
-			),
-			'rewrite' => array(
-				'slug' => 'job-location-tags'
-			),
-			'show_admin_column' => false,
-		)
-	);
-		
-}
-
 add_action( 'init', 'wpbb_register_taxonomies' );
 
 /***************************************************************

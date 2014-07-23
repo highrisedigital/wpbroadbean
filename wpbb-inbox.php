@@ -143,9 +143,6 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'add' ) {
 		/* set the job type post terms for the newly created job */
 		wp_set_post_terms( $wpbb_job_post_id, $wpbb_job_type_term_ids, 'wpbb_job_type' );
 		
-		/* set the location tag terms for then newly created job */
-		wp_set_post_terms( $wpbb_job_post_id, wp_strip_all_tags( $wpbb_params[ 'job_location_tags' ] ), 'wpbb_job_location_tag' );
-		
 		/* set the post meta data (custom fields) first for job reference */
 		add_post_meta( $wpbb_job_post_id, '_wpbb_job_reference', wp_strip_all_tags( $wpbb_params[ 'job_reference' ] ), true );
 		
