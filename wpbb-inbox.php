@@ -147,12 +147,9 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'add' ) {
 		add_post_meta( $wpbb_job_post_id, '_wpbb_job_reference', wp_strip_all_tags( $wpbb_params[ 'job_reference' ] ), true );
 		
 		/* only set the data if they are sent */
-		if( isset( $wpbb_params[ 'salary_from' ] ) )
-			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary_from', wp_strip_all_tags( $wpbb_params[ 'salary_from' ] ), true );
+		if( isset( $wpbb_params[ 'salary' ] ) )
+			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary', wp_strip_all_tags( $wpbb_params[ 'salary' ] ), true );
 		
-		if( isset( $wpbb_params[ 'salary_to' ] ) )
-			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary_to', wp_strip_all_tags( $wpbb_params[ 'salary_to' ] ), true );
-				
 		if( isset( $wpbb_params[ 'salary_per' ] ) )
 			add_post_meta( $wpbb_job_post_id, '_wpbb_job_salary_per', wp_strip_all_tags( $wpbb_params[ 'salary_per' ] ), true );
 		

@@ -23,16 +23,10 @@ function wpbb_metaboxes( $meta_boxes ) {
 				'cols' => 12
 			),
 			array(
-				'name' => 'Salary From',
-				'id'   => $wpbb_prefix . 'job_salary_from',
+				'name' => 'Salary',
+				'id'   => $wpbb_prefix . 'job_salary',
 				'type' => 'text',
-				'cols' => 3
-			),
-			array(
-				'name' => 'Salary To',
-				'id'   => $wpbb_prefix . 'job_salary_to',
-				'type' => 'text',
-				'cols' => 3
+				'cols' => 4
 			),
 			array(
 				'name' => 'Salary Per',
@@ -45,7 +39,7 @@ function wpbb_metaboxes( $meta_boxes ) {
 			        'month' => 'Month',
 			        'year' => 'Year',
 			    ),
-				'cols' => 3
+				'cols' => 4
 			),
 			array(
 				'name' => 'Salary Currency',
@@ -56,7 +50,7 @@ function wpbb_metaboxes( $meta_boxes ) {
 			        'gbp' => 'GBP',
 			        'eur' => 'Euro',
 			    ),
-				'cols' => 3
+				'cols' => 4
 			),
 			array(
 				'name' => 'Job Start Date',
