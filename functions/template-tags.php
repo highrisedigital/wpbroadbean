@@ -52,14 +52,15 @@ function wpbb_get_apply_url( $post_id = '' ) {
 		'wpbb_apply_query_args',
 		array(
 			'job_id' => get_post_meta( $post_id, '_wpbb_job_reference', true )
-		)
+		),
+		$post_id
 	);
 	
 	/* build apply link from url */
 	$wpbb_apply_link = add_query_arg( $wpbb_apply_query_args, get_permalink( $wpbb_apply_page_id ) );
 	
 	/* return the apply url */
-	return esc_url( apply_filters( 'wpbb_apply_url', $wpbb_apply_link ) );
+	return esc_url( apply_filters( 'wpbb_apply_url', $wpbb_apply_link, $post_id ) );
 	
 }
 
