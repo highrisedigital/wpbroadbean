@@ -94,6 +94,8 @@ function wpbb_register_taxonomies() {
 			'show_admin_column' => true,
 		)
 	);
+
+}
 	
 add_action( 'init', 'wpbb_register_taxonomies' );
 

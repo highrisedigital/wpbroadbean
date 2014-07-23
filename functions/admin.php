@@ -43,16 +43,7 @@ function wpbb_add_admin_menu() {
 		'edit_others_posts', // capability,
 		'edit-tags.php?taxonomy=wpbb_job_location' // menu_slug
 	);
-	
-	/* add the sub page for the wpbb_job_location_tag taxonomy */
-	add_submenu_page(
-		'wp_broadbean_home', // parent_slug,
-		'Job Location Tag', // page_title,
-		'Location Tags', // menu_title,
-		'edit_others_posts', // capability,
-		'edit-tags.php?taxonomy=wpbb_job_location_tag' // menu_slug
-	);
-	
+		
 	/* add the settings page sub menu item */
 	add_submenu_page(
 		'wp_broadbean_home',
@@ -79,7 +70,7 @@ function wpbb_tax_menu_correction( $parent_file ) {
 	$wpbb_taxonomy = $current_screen->taxonomy;
 	
 	/* if the current screen taxonomy is a SEN taxonomy */
-	if( $wpbb_taxonomy == 'wpbb_job_location_tag' || $wpbb_taxonomy == 'wpbb_job_location' || $wpbb_taxonomy == 'wpbb_job_category' || $wpbb_taxonomy == 'wpbb_job_type') {
+	if( $wpbb_taxonomy == 'wpbb_job_location' || $wpbb_taxonomy == 'wpbb_job_category' || $wpbb_taxonomy == 'wpbb_job_type') {
 		
 		/* set the parent file slug to the sen main page */
 		$parent_file = 'wp_broadbean_home';
@@ -148,13 +139,6 @@ function wpbb_setings_page_content() {
 			';
 			
 			echo apply_filters( 'wpbb_admin_paragraph', $wpbb_admin_paragraph );
-			
-			$testing = array(
-				'label' => 'Choose a Page',
-				'name' => 'apply_page',
-				'options' => wpbb_page_dropdown_array(),
-				'type' => 'select'
-			);
 			
 			/* setup an array of settings */
 			$wpbb_settings = apply_filters( 'wpbb_settings_output', array() );
