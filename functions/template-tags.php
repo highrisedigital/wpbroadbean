@@ -168,24 +168,12 @@ function wpbb_get_job_salary( $post_id = '' ) {
 		$post_id = $post->ID;
 	
 	/* get salary meta for this job */
-	$wpbb_salary_from = get_post_meta( $post_id, '_wpbb_job_salary_from', true );
-	$wpbb_salary_to = get_post_meta( $post_id, '_wpbb_job_salary_to', true );
+	$wpbb_salary = get_post_meta( $post_id, '_wpbb_job_salary', true );
 	$wpbb_salary_per = get_post_meta( $post_id, '_wpbb_job_salary_per', true );
-	
-	/* check whether the from a to salaries match */
-	if( $wpbb_salary_from == $wpbb_salary_to ) {
-		
-		/* set string to return for output */
-		$wpbb_salary_output = wpbb_job_salary_currency_symbol( $post_id ) . $wpbb_salary_to . '/' . $wpbb_salary_per;
-		
-	/* from and to salaries are different */
-	} else {
-		
-		/* set string to return for output */
-		$wpbb_salary_output = wpbb_job_salary_currency_symbol( $post_id ) . $wpbb_salary_from . ' - ' . wpbb_job_salary_currency_symbol( $post_id ) . $wpbb_salary_to . '/' . $wpbb_salary_per;
-		
-	}
-	
+
+	/* set string to return for output */
+	$wpbb_salary_output = wpbb_job_salary_currency_symbol( $post_id ) . number_format( $wpbb_salary ) . '/' . $wpbb_salary_per;
+			
 	return apply_filters( 'wpbb_job_salary_html', $wpbb_salary_output, $post_id );
 	
 }
