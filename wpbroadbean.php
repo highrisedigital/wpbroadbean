@@ -60,9 +60,19 @@ function wpbb_adcourier_inbox_load() {
     
     /* check that its value is equal to adcourier */
     if( $wpbb_bb == 'broadbean') {
-        
-        /* load the adcourier inbox file */
-		require_once( dirname( __FILE__ ) . '/wpbb-inbox.php' );
+    
+    	/* check for a dashboard content file in the theme folder */
+		if( file_exists( STYLESHEETPATH . 'wpbb/inbox.php' ) ) {
+
+			/* load the dashboard content file from the theme folder */
+			require_once STYLESHEETPATH . 'wpbb/inbox.php';
+
+		} else {
+
+			/* load the adcourier inbox file */
+			require_once( dirname( __FILE__ ) . '/wpbb-inbox.php' );
+
+		}
         
         /* stop wordpress loading any further */
         exit;
