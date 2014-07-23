@@ -279,10 +279,7 @@ add_filter( 'enter_title_here', 'wpbb_change_title_text' );
 * Pre-fills the post editor on jobs with instructional text.
 ***************************************************************/
 function wpbb_job_post_editor_content( $content ) {
-	
-	/* get current post type */
-	//$wpbb_current_post_type = wpbb_get_current_post_type();
-	
+		
 	/* check we are on the job post type */
 	if( 'wpbb_job' != wpbb_get_current_post_type() )
 		return;

@@ -11,7 +11,6 @@ License: GPLv2 or later
 
 /* load required files & functions */
 require_once( dirname( __FILE__ ) . '/functions/post-types.php' );
-//require_once( dirname( __FILE__ ) . '/functions/post-type-help.php' );
 require_once( dirname( __FILE__ ) . '/functions/taxonomies.php' );
 require_once( dirname( __FILE__ ) . '/functions/admin.php' );
 require_once( dirname( __FILE__ ) . '/functions/email-functions.php' );
