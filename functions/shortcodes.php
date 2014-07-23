@@ -49,10 +49,10 @@ function wpbb_application_form_shortcode() {
 					$wpbb_job_title = get_the_title();
 					
 					/* get the job contact email address */
-					$wpbb_job_contact_email = get_post_meta( get_the_ID(), 'wpbb_job_contact_email', true );
+					$wpbb_job_contact_email = get_post_meta( get_the_ID(), '_wpbb_job_contact_email', true );
 					
 					/* get the bb job application email */
-					$wpbb_job_broadbean_application_email = get_post_meta( get_the_ID(), '_wpbb_job_application_email', true );
+					$wpbb_job_broadbean_application_email = get_post_meta( get_the_ID(), '_wpbb_job_broadbean_application_email', true );
 									
 					/* get the url/permalink of the job */
 					$wpbb_permalink = get_permalink();
@@ -67,7 +67,10 @@ function wpbb_application_form_shortcode() {
 			
 			/* only show the form if we have a query var for the job reference which exists in the posts returned */
 			if( in_array( $_GET[ 'job_id' ], $wpbb_references ) ) {
-			
+				
+				/* do before application form action */
+				do_action( 'wpbb_before_application_form' );
+				
 				?>
 					
 				<form enctype="multipart/form-data" id="wpbb_application_form" method="post" action="">
@@ -138,6 +141,13 @@ function wpbb_application_form_shortcode() {
 					
 					</div>
 					
+					<?php
+					
+						/* do application form action - can be used for adding additional inputs */
+						do_action( 'wpbb_application_form' );
+					
+					?>
+					
 					<input class="wpbb_hidden" type="hidden" name="wpbb_contact_email" id="wpbb_contact_email" value="<?php echo $wpbb_job_contact_email; ?>" tabindex="6">
 					
 					<input class="wpbb_hidden" type="hidden" name="wpbb_broadbean_application_email" id="wpbb_broadbean_application_email" value="<?php echo $wpbb_job_broadbean_application_email; ?>" tabindex="6">
@@ -153,6 +163,9 @@ function wpbb_application_form_shortcode() {
 				</form>
 				
 				<?php
+				
+				/* do after application form action */
+				do_action( 'wpbb_after_application_form' );
 			
 			/* no job reference query var is present */
 			} else {
@@ -167,6 +180,9 @@ function wpbb_application_form_shortcode() {
 		* start to process the information sent
 		***************************************************************/
 		} else {
+		
+			/* do application form submitted action - can be used to process additional inputs added */
+			do_action( 'wpbb_application_form_dubmitted' );
 			
 			/* check that the wp_handle_upload function is loaded */		
 			if ( ! function_exists( 'wp_handle_upload' ) )
