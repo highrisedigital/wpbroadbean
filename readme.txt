@@ -4,7 +4,7 @@ Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
 Tested up to: 3.9.1
-Stable tag: 0.2
+Stable tag: 0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,15 @@ Yes they do. When you choose to include your own site in a multi job posting Bro
 1. The WP Broadbean screen, added to get you started.
 
 == Changelog ==
+
+= 0.3 =
+* Removed the admin stylesheet - use dashicons for the admin menu icon
+* Removed filterable post type labels, not needed as core provides this functionality
+* Add additional filters for post title and post editor content
+* General bug fixes and code comment updates
+
+= 0.2 =
+* Minor bug fixes
 
 = 0.1 =
 * Initial Beta Release
