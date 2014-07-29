@@ -14,7 +14,7 @@ $wpbb_password = get_option( 'wpbb_password' );
 * to run testing, you can change the part in the brackets
 * to a url that contains your testing xml
 *******************************************************/
-$wpbb_xml_content = file_get_contents( 'http://local.dev/jobtest.xml' ); // php://input
+$wpbb_xml_content = file_get_contents( 'php://input' );
 
 /* parse the retreived xml file */
 $wpbb_params = json_decode( json_encode( simplexml_load_string( $wpbb_xml_content ) ), 1 );
