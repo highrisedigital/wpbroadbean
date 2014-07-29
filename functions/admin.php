@@ -268,7 +268,7 @@ function wpbb_change_title_text( $title ){
 	}
 	
 	/* return our new text */
-	return $title;
+	return apply_filters( 'wpbb_post_title_text', $title, $wpbb_screen );
 	
 }
  
