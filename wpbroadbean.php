@@ -18,13 +18,9 @@ require_once( dirname( __FILE__ ) . '/functions/shortcodes.php' );
 require_once( dirname( __FILE__ ) . '/functions/template-tags.php' );
 require_once( dirname( __FILE__ ) . '/functions/settings.php' );
 
-/* check whether the metabox class already exists */
-if( ! class_exists( 'CMB_Meta_Box' ) ) {
-
-	/* load the metabox framework */
+/* check whether the metabox class already exists - and load it if not */
+if( ! class_exists( 'CMB_Meta_Box' ) )
 	require_once( dirname( __FILE__ ) . '/functions/metaboxes/custom-meta-boxes.php' );
-
-}
 
 /* load the metabox functions */
 require_once( dirname( __FILE__ ) . '/functions/metaboxes.php' );
@@ -51,7 +47,7 @@ add_filter( 'query_vars', 'wpbb_add_new_query_var' );
 * Loads the adcourier inbox template php file when the above
 * query var is called. When a user navigates their browser to
 * yoursite.com/?wpac=adcourier it loads page using the
-* wp-adcourier-inbox.php template form this plugin folder.
+* wpbb-inbox.php template form this plugin folder.
 ***************************************************************/
 function wpbb_adcourier_inbox_load() {
     
@@ -115,23 +111,6 @@ function wpbb_add_styles_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'wpbb_add_styles_scripts' );
-
-/***************************************************************
-* Function wpbb_admin_styles_scripts()
-* Registers and enqueus styles and scripts for the admin
-***************************************************************/
-function wpbb_admin_styles_scripts() {
-			
-	/* register the fancybox styles */
-	wp_register_style( 'wpbb_admin_styles', plugins_url( '/css/admin-style.css', __FILE__ ) );
-			
-	/* enqueue the fancybox css */
-	wp_enqueue_style( 'wpbb_admin_styles' );
-
-	
-}
-
-add_action( 'admin_enqueue_scripts', 'wpbb_admin_styles_scripts' );
 
 /***************************************************************
 * Function wpbb_apply_button()
