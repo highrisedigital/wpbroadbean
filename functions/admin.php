@@ -13,7 +13,7 @@ function wpbb_add_admin_menu() {
 		'edit_posts', // capability,
 		'wp_broadbean_home', // menu_slug,
 		'__return_false', // function,
-		'div', // icon url
+		'dashicons-businessman', // icon url
 		'90' // position
 	);
 	
