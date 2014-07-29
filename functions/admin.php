@@ -325,7 +325,7 @@ function wpbb_get_current_admin_post_type() {
 * Change html output of the excerpt box, removing the paragraph
 * of instruction text.
 ***************************************************************/
-function wpbb_job_short_description_meta_box($post) {
+function wpbb_job_short_description_meta_box( $post ) {
 	
 	?>
 	<label class="screen-reader-text" for="excerpt"><?php _e('Excerpt') ?></label>
