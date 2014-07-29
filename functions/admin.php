@@ -286,7 +286,7 @@ function wpbb_job_post_editor_content( $content ) {
 	
 	$content = "Replace this text with the long description of the job.";
 
-	return $content;
+	return apply_filters( 'wpbb_post_editor_text', $content );
 }
 
 add_filter( 'default_content', 'wpbb_job_post_editor_content' );
