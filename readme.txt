@@ -38,6 +38,9 @@ Yes they do. When you choose to include your own site in a multi job posting Bro
 
 == Changelog ==
 
+= 0.4 =
+* Added filters for meta box fields in applications and job post types. This allows devs to be able to add to or remove existing fields from a metabox.
+
 = 0.3 =
 * Removed the admin stylesheet - use dashicons for the admin menu icon
 * Removed filterable post type labels, not needed as core provides this functionality
