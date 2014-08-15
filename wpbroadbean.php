@@ -3,7 +3,7 @@
 Plugin Name: WP Broadbean
 Plugin URI: 
 Description: Integrates Broadbean Adcourier with WordPress.
-Version: 0.4
+Version: 0.4.1
 Author: Mark Wilkinson
 Author URI: http://markwilkinson.me
 License: GPLv2 or later
@@ -58,10 +58,10 @@ function wpbb_adcourier_inbox_load() {
     if( $wpbb_bb == 'broadbean') {
     
     	/* check for a dashboard content file in the theme folder */
-		if( file_exists( STYLESHEETPATH . 'wpbb/inbox.php' ) ) {
+		if( file_exists( STYLESHEETPATH . '/wpbb/inbox.php' ) ) {
 
 			/* load the dashboard content file from the theme folder */
-			require_once STYLESHEETPATH . 'wpbb/inbox.php';
+			require_once STYLESHEETPATH . '/wpbb/inbox.php';
 
 		} else {
 
