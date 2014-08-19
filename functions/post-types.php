@@ -24,10 +24,10 @@ function wpbb_register_post_types() {
 			),
 			'public' => true,
 			'menu_position' => 95,
-			'supports' => (
+			'supports' => array(
 				'title',
 				'editor',
-				'excerpt',
+				'excerpt'
 			),
 			'query_var' => true,
 			'rewrite' => array(
@@ -61,7 +61,7 @@ function wpbb_register_post_types() {
 			'exclude_from_search' => true,
 			'menu_position' => 99,
 			'supports' => array(
-				'title',
+				'title'
 			),
 			'query_var' => true,
 			'rewrite' => array(
