@@ -199,6 +199,24 @@ function wpbb_setings_page_content() {
 										        
 										        /* break out of the switch statement */
 										        break;
+										    
+										    /* if the setting is a wysiwyg input */
+										    case 'wysiwyg' :
+										    	
+										    	/* set some settings args for the editor */
+										    	$wpbb_editor_settings = array(
+										    		'textarea_rows' => $wpbb_setting[ 'textarea_rows' ],
+										    		'media_buttons' => $wpbb_setting[ 'media_buttons' ],
+										    	);
+
+										    	/* get current content for the wysiwyg */
+										    	$wpbb_wysiwyg_content = get_option( $wpbb_setting[ 'name' ] );
+												
+										    	/* display the wysiwyg editor */
+										    	wp_editor( $wpbb_wysiwyg_content, $wpbb_setting[ 'name' ], $wpbb_editor_settings );
+										    	
+										    	/* break out of the switch statement */
+										    	break;
 										        
 										    default :
 										       
