@@ -24,12 +24,10 @@ function wpbb_register_post_types() {
 			),
 			'public' => true,
 			'menu_position' => 95,
-			'supports' => apply_filters( 'wpb_job_post_type_supports',
-				array(
-					'title',
-					'editor',
-					'excerpt',
-				)
+			'supports' => (
+				'title',
+				'editor',
+				'excerpt',
 			),
 			'query_var' => true,
 			'rewrite' => array(
@@ -62,10 +60,8 @@ function wpbb_register_post_types() {
 			'show_ui' => true,
 			'exclude_from_search' => true,
 			'menu_position' => 99,
-			'supports' => apply_filters( 'wpb_application_post_type_supports',
-				array(
-					'title',
-				)
+			'supports' => array(
+				'title',
 			),
 			'query_var' => true,
 			'rewrite' => array(
@@ -79,4 +75,4 @@ function wpbb_register_post_types() {
 	
 }
 
-add_action( 'init', 'wpbb_register_post_types' );
+add_action( 'init', 'wpbb_register_post_types', 5 );

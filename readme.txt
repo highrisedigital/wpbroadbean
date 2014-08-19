@@ -38,6 +38,10 @@ Yes they do. When you choose to include your own site in a multi job posting Bro
 
 == Changelog ==
 
+= 0.6 =
+* Added the ability to use WYSIWYG when adding your own settings to the setting page
+* Removed the post type support filters as post type support can be added with add_post_type_support()
+
 = 0.5 =
 * Corrected issue where using an inbox.php file from the theme folder would not work.
 
