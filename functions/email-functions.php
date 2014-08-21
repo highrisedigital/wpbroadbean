@@ -35,7 +35,7 @@ if( ! function_exists( 'wpbb_generate_email_header' ) ) {
 				<body style="font-family: Arial, Helvetica, Verdana, sans-serif;">
 					<table>
 						<tr>
-							<td style="max-width: 650px; width:650px; padding: 15px 20px 15px 20px; border: 1px solid #363636; margin-left: auto; margin-right: auto; font-family: Arial, Helvetica, Verdana, sans-serif; font-size:12px;">';
+							<td style="max-width: 650px; width:650px; padding: 15px 20px 15px 20px; border: 1px solid #363636; margin-left: auto; margin-right: auto; font-family: Arial, Helvetica, Verdana, sans-serif; font-size:12px;">
 		
 		<?php
 		$wpbb_email_header = ob_get_clean();

@@ -4,7 +4,7 @@ Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
 Tested up to: 3.9.1
-Stable tag: 0.6
+Stable tag: 0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,9 @@ Yes they do. When you choose to include your own site in a multi job posting Bro
 1. The WP Broadbean screen, added to get you started.
 
 == Changelog ==
+
+= 0.7 =
+* Corrected a type in the email header function that resulted in a semi-colon appearing before the email content.
 
 = 0.6 =
 * Added the ability to use WYSIWYG when adding your own settings to the setting page
