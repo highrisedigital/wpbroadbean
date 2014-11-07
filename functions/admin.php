@@ -77,17 +77,20 @@ function wpbb_tax_menu_correction( $parent_file ) {
 	
 	/* get the taxonomy of the current screen */
 	$wpbb_taxonomy = $current_screen->taxonomy;
-	
-	/* if the current screen taxonomy is a SEN taxonomy */
-	if( $wpbb_taxonomy == 'wpbb_job_location' || $wpbb_taxonomy == 'wpbb_job_category' || $wpbb_taxonomy == 'wpbb_job_type') {
-		
-		/* set the parent file slug to the sen main page */
-		$parent_file = 'wp_broadbean_home';
-		
+
+	$taxonomies = wpbb_get_registered_taxonomies();
+
+	foreach ($taxonomies as $taxonomy) {
+		/* if the current screen taxonomy is a SEN taxonomy */
+		if( $wpbb_taxonomy == $taxonomy['taxonomy_name'] ) {
+			
+			/* set the parent file slug to the sen main page */
+			$parent_file = 'wp_broadbean_home';
+			
+		}
 	}
-	
-	/* return the new parent file */
-	
+		
+	/* return the new parent file */	
 	return $parent_file;
 	
 }
