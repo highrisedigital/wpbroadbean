@@ -1,103 +1,105 @@
 <?php
+
+
+/***************************************************************
+* Function wpbb_create_default_taxonomies()
+* Create the default taxonomies by filtering the settings that are
+* registered.
+***************************************************************/
+function wpbb_get_registered_taxonomies() {
+	
+	$taxonomies = array(
+		array(
+			'taxonomy_name' => 'wpbb_job_type',
+			'broadbean_field' => 'job_type',
+			'plural' => 'Job Types',
+			'singular' => 'Job Type',
+			'slug' => 'job-type'
+		),
+		array(
+			'taxonomy_name' => 'wpbb_job_location',
+			'broadbean_field' => 'job_location',
+			'plural' => 'Job Locations',
+			'singular' => 'Job Location',
+			'slug' => 'job-location'
+		),
+		array(
+			'taxonomy_name' => 'wpbb_job_industry',
+			'broadbean_field' => 'job_industry',
+			'plural' => 'Job Indsutries',
+			'singular' => 'Job Industry',
+			'slug' => 'job-industry'
+		),
+		array(
+			'taxonomy_name' => 'wpbb_job_category',
+			'broadbean_field' => 'job_category',
+			'plural' => 'Job Categories',
+			'singular' => 'Job Category',
+			'slug' => 'job-category'
+		),
+	);
+
+	// Allow developers to add additional custom taxonomies
+	apply_filters('wpbb_registered_taxonomies', $taxonomies);
+
+	return $taxonomies;
+}
+
+
+
+
+
 /***************************************************************
 * Function wpbb_register_taxonomies()
 * Register the necessary custom taxonomies for the plugin.
 ***************************************************************/
 function wpbb_register_taxonomies() {
+
+
+	$taxonomies = wpbb_get_registered_taxonomies();
+
+	// Register each taxonomy
+	foreach ($taxonomies as $taxonomy) {
+
+		register_taxonomy( $taxonomy['taxonomy_name'], 'wpbb_job',
+			array(
+				'labels' => apply_filters( $taxonomy['taxonomy_name'] . '_labels',
+					array(
+						'name' => _x( $taxonomy['plural'], 'taxonomy general name' ),
+						'singular_name' => _x( $taxonomy['singular'], 'taxonomy singular name' ),
+						'search_items' =>  __( 'Search ' . $taxonomy['plural'] ),
+						'all_items' => __( 'All ' . $taxonomy['plural'] ),
+						'parent_item' => __( 'Parent ' . $taxonomy['singular'] ),
+						'parent_item_colon' => __( 'Parent ' . $taxonomy['singular'] . ':' ),
+						'edit_item' => __( 'Edit ' . $taxonomy['singular'] ), 
+						'update_item' => __( 'Update ' . $taxonomy['singular'] ),
+						'add_new_item' => __( 'Add New ' . $taxonomy['singular'] ),
+						'new_item_name' => __( 'New ' . $taxonomy['singular'] . ' Name' ),
+						'menu_name' => __(  $taxonomy['plural'] ),
+					)
+				),
+				'hierarchical' => true,
+				'sort' => true,
+				'args' => array(
+					'orderby' => 'term_order'
+				),
+				'rewrite' => array(
+					'slug' => $taxonomy['slug']
+				),
+				'show_admin_column' => true,
+			)
+		);
+
+
+		
+	} // end foreach
 	
-	/* register the job type taxonomy */
-	register_taxonomy( 'wpbb_job_type', 'wpbb_job',
-		array(
-			'labels' => apply_filters( 'wpbb_job_type_labels',
-				array(
-					'name' => _x( 'Types', 'taxonomy general name' ),
-					'singular_name' => _x( 'Job Type', 'taxonomy singular name' ),
-					'search_items' =>  __( 'Search Job Types' ),
-					'all_items' => __( 'All Job Types' ),
-					'parent_item' => __( 'Parent Job Type' ),
-					'parent_item_colon' => __( 'Parent Job Type:' ),
-					'edit_item' => __( 'Edit Job Type' ), 
-					'update_item' => __( 'Update Job Type' ),
-					'add_new_item' => __( 'Add New Job Type' ),
-					'new_item_name' => __( 'New Job Type Name' ),
-					'menu_name' => __( 'Types' ),
-				)
-			),
-			'hierarchical' => true,
-			'sort' => true,
-			'args' => array(
-				'orderby' => 'term_order'
-			),
-			'rewrite' => array(
-				'slug' => 'job-type'
-			),
-			'show_admin_column' => true,
-		)
-	);
 	
-	/* register the job category taxonomy */
-	register_taxonomy( 'wpbb_job_category', 'wpbb_job',
-		array(
-			'labels' => apply_filters( 'wpbb_job_category_labels',
-				array(
-					'name' => _x( 'Categories', 'taxonomy general name' ),
-					'singular_name' => _x( 'Category', 'taxonomy singular name' ),
-					'search_items' =>  __( 'Search Categories' ),
-					'all_items' => __( 'All Categories' ),
-					'parent_item' => __( 'Parent Category' ),
-					'parent_item_colon' => __( 'Parent Category:' ),
-					'edit_item' => __( 'Edit Category' ), 
-					'update_item' => __( 'Update Category' ),
-					'add_new_item' => __( 'Add New Category' ),
-					'new_item_name' => __( 'New Category Name' ),
-					'menu_name' => __( 'Categories' ),
-				)
-			),
-			'hierarchical' => true,
-			'sort' => true,
-			'args' => array(
-				'orderby' => 'term_order'
-			),
-			'rewrite' => array(
-				'slug' => 'job-category'
-			),
-			'show_admin_column' => true,
-		)
-	);
 	
-	/* register the job location taxonomy */
-	register_taxonomy( 'wpbb_job_location', 'wpbb_job',
-		array(
-			'labels' => apply_filters( 'wpbb_job_location_labels',
-				array(
-					'name' => _x( 'Locations', 'taxonomy general name' ),
-					'singular_name' => _x( 'Location', 'taxonomy singular name' ),
-					'search_items' =>  __( 'Search Locations' ),
-					'all_items' => __( 'All Locations' ),
-					'parent_item' => __( 'Parent Location' ),
-					'parent_item_colon' => __( 'Parent Location:' ),
-					'edit_item' => __( 'Edit Location' ), 
-					'update_item' => __( 'Update Location' ),
-					'add_new_item' => __( 'Add New Location' ),
-					'new_item_name' => __( 'New Location Name' ),
-					'menu_name' => __( 'Locations' ),
-				)
-			),
-			'hierarchical' => true,
-			'sort' => true,
-			'args' => array(
-				'orderby' => 'term_order'
-			),
-			'rewrite' => array(
-				'slug' => 'job-location'
-			),
-			'show_admin_column' => true,
-		)
-	);
 
 }
 	
-add_action( 'init', 'wpbb_register_taxonomies' );
+add_action( 'init', 'wpbb_register_taxonomies', 0 );
 
 /***************************************************************
 * Function wpbb_insert_taxonomy_terms()

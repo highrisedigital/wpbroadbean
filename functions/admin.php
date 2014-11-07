@@ -43,6 +43,15 @@ function wpbb_add_admin_menu() {
 		'edit_others_posts', // capability,
 		'edit-tags.php?taxonomy=wpbb_job_location' // menu_slug
 	);
+
+	/* add the sub page for the wpbb_job_location taxonomy */
+	add_submenu_page(
+		'wp_broadbean_home', // parent_slug,
+		'Job Industry', // page_title,
+		'Industries', // menu_title,
+		'edit_others_posts', // capability,
+		'edit-tags.php?taxonomy=wpbb_job_industry' // menu_slug
+	);
 		
 	/* add the settings page sub menu item */
 	add_submenu_page(

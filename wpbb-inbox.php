@@ -14,7 +14,11 @@ $wpbb_password = get_option( 'wpbb_password' );
 * to run testing, you can change the part in the brackets
 * to a url that contains your testing xml
 *******************************************************/
-$wpbb_xml_content = file_get_contents( 'php://input' );
+if ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) {
+	$wpbb_xml_content = file_get_contents( './_test/job.xml' );
+} else {
+	$wpbb_xml_content = file_get_contents( 'php://input' );
+}
 
 /* parse the retreived xml file */
 $wpbb_params = json_decode( json_encode( simplexml_load_string( $wpbb_xml_content ) ), 1 );
@@ -56,63 +60,19 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'add' ) {
 		
 	}
 
-	/*****************************************************
-	* add all the location ids to an array
-	*****************************************************/
-		
-	/* turn terms into arrays */
-	$wpbb_location = wp_strip_all_tags( $wpbb_params[ 'job_location' ] );
-	$wpbb_location_terms = explode( ',', $wpbb_location );
-	
-	/* setup array to store the term ids in */
-	$wpbb_location_term_ids = array();
-	
-	/* loop through each term in array getting its id */
-	foreach( $wpbb_location_terms as $wpbb_location_term ) {
-		
-		/* check whether the term exists, and return its ID if it does, adding it to our array */
-		$wpbb_location_term_ids[] = term_exists( $wpbb_location_term );
-		
-	} // end loop through each term
-	
-	/*****************************************************
-	* add all the category ids to an array
-	*****************************************************/
-	
-	/* turn category terms into arrays */
-	$wpbb_category = wp_strip_all_tags( $wpbb_params[ 'job_category' ] );
-	$wpbb_category_terms = explode( ',', $wpbb_category );
-	
-	/* setup array to store the category term ids in */
-	$wpbb_category_term_ids = array();
-	
-	/* loop through each term in array getting its id */
-	foreach( $wpbb_category_terms as $wpbb_category_term ) {
-		
-		/* check whether the term exists, and return its ID if it does, adding it to our array */
-		$wpbb_category_term_ids[] = term_exists( $wpbb_category_term );
-		
-	} // end loop through each term
-	
-	/*****************************************************
-	* setup all the type terms into an array
-	*****************************************************/
-	
-	/* turn type terms into arrays */
-	$wpbb_job_type = wp_strip_all_tags( $wpbb_params[ 'job_type' ] );
-	$wpbb_job_type_terms = explode( ',', $wpbb_job_type );
-	
-	/* setup array to store the category term ids in */
-	$wpbb_job_type_term_ids = array();
-	
-	/* loop through each term in array getting its id */
-	foreach( $wpbb_job_type_terms as $wpbb_job_type_term ) {
-		
-		/* check whether the term exists, and return its ID if it does, adding it to our array */
-		$wpbb_job_type_term_ids[] = term_exists( $wpbb_job_type_term );
-		
-	} // end loop through each term
-	
+	// Fetch all the registered taxonomies and set up holding array
+	$wpbb_taxonomies = wpbb_get_registered_taxonomies();
+	$wpbb_taxonomies_term_ids  = array();
+
+	/******************************************************
+	/* add all the registered taxonomy term ids to an array
+	*******************************************************/
+	foreach ($wpbb_taxonomies as $taxonomy) {
+		$tax_bb_field = $taxonomy['broadbean_field'];
+		$wpbb_taxonomies_term_ids[ $tax_bb_field ] = wpbb_convert_cat_terms_to_ids($tax_bb_field, $wpbb_params, $taxonomy);
+	}
+
+
 	/*****************************************************
 	* setup the args to insert the job post
 	*****************************************************/
@@ -133,15 +93,13 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'add' ) {
 		
 	/* check the post has been added */
 	if( $wpbb_job_post_id != 0 ) {
-	
-		/* set the location post terms for the newly created job */
-		wp_set_post_terms( $wpbb_job_post_id, $wpbb_location_term_ids, 'wpbb_job_location' );
 		
-		/* set the category post terms for the newly created job */
-		wp_set_post_terms( $wpbb_job_post_id, $wpbb_category_term_ids, 'wpbb_job_category' );
+		/* set the post terms for the newly created job for each registered job taxonomy */
+		foreach ($wpbb_taxonomies as $taxonomy) {
+			wp_set_post_terms( $wpbb_job_post_id, $wpbb_taxonomies_term_ids[ $taxonomy['broadbean_field'] ], $taxonomy['taxonomy_name'] );
+			//wp_set_object_terms( $wpbb_job_post_id, $wpbb_taxonomies_term_ids[ $taxonomy['broadbean_field'] ], $taxonomy['taxonomy_name'] );
+		}
 		
-		/* set the job type post terms for the newly created job */
-		wp_set_post_terms( $wpbb_job_post_id, $wpbb_job_type_term_ids, 'wpbb_job_type' );
 		
 		/* set the post meta data (custom fields) first for job reference */
 		add_post_meta( $wpbb_job_post_id, '_wpbb_job_reference', wp_strip_all_tags( $wpbb_params[ 'job_reference' ] ), true );
