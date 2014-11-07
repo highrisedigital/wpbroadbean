@@ -17,42 +17,21 @@ function wpbb_add_admin_menu() {
 		'90' // position
 	);
 	
-	/* add the sub page for the wpbb_job_type taxonomy */
-	add_submenu_page(
-		'wp_broadbean_home', // parent_slug,
-		'Job Type', // page_title,
-		'Type', // menu_title,
-		'edit_others_posts', // capability,
-		'edit-tags.php?taxonomy=wpbb_job_type' // menu_slug
-	);
-	
-	/* add the sub page for the wpbb_job_category taxonomy */
-	add_submenu_page(
-		'wp_broadbean_home', // parent_slug,
-		'Job Category', // page_title,
-		'Categories', // menu_title,
-		'edit_others_posts', // capability,
-		'edit-tags.php?taxonomy=wpbb_job_category' // menu_slug
-	);
-	
-	/* add the sub page for the wpbb_job_location taxonomy */
-	add_submenu_page(
-		'wp_broadbean_home', // parent_slug,
-		'Job Location', // page_title,
-		'Locations', // menu_title,
-		'edit_others_posts', // capability,
-		'edit-tags.php?taxonomy=wpbb_job_location' // menu_slug
-	);
-
-	/* add the sub page for the wpbb_job_location taxonomy */
-	add_submenu_page(
-		'wp_broadbean_home', // parent_slug,
-		'Job Industry', // page_title,
-		'Industries', // menu_title,
-		'edit_others_posts', // capability,
-		'edit-tags.php?taxonomy=wpbb_job_industry' // menu_slug
-	);
-		
+	/**
+	 * Register Admin pages for all Taxonomies
+	 */
+	$taxonomies = wpbb_get_registered_taxonomies();
+	foreach ($taxonomies as $taxonomy) {
+		/* add the sub page for the wpbb_job_category taxonomy */
+		add_submenu_page(
+			'wp_broadbean_home', // parent_slug,
+			str_replace( 'Job ', '', $taxonomy['plural'] ), // page_title,
+			str_replace( 'Job ', '', $taxonomy['singular'] ), // menu_title,
+			'edit_others_posts', // capability,
+			'edit-tags.php?taxonomy=' . $taxonomy['taxonomy_name'] // menu_slug
+		);
+	}
+			
 	/* add the settings page sub menu item */
 	add_submenu_page(
 		'wp_broadbean_home',
