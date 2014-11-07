@@ -17,6 +17,8 @@ function wpbb_add_admin_menu() {
 		'90' // position
 	);
 	
+	do_action('wpbb_add_admin_menu_start');
+
 	/**
 	 * Register Admin pages for all Taxonomies
 	 */
@@ -42,6 +44,7 @@ function wpbb_add_admin_menu() {
 		'wpbb_setings_page_content'
 	);
 	
+	do_action('wpbb_add_admin_menu_end');
 }
 
 add_action( 'admin_menu', 'wpbb_add_admin_menu' );
