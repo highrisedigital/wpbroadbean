@@ -15,7 +15,7 @@ $wpbb_password = get_option( 'wpbb_password' );
 * to a url that contains your testing xml
 *******************************************************/
 if ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) {
-	$wpbb_xml_content = file_get_contents( './_test/job.xml' );
+	$wpbb_xml_content = file_get_contents( constant('WPBB_JOB_TEST_DATA_URL') );
 } else {
 	$wpbb_xml_content = file_get_contents( 'php://input' );
 }
