@@ -39,3 +39,13 @@ function wpbb_convert_cat_terms_to_ids($tax_broadbean_field, $wpbb_params, $taxo
 	return $wpbb_category_term_ids;
 }
 
+/**
+ * Calculate Job Expiry Date
+ * takes today's date and calculates a future date
+ * by adding the number of days that the Broadbean data
+ * has provided as the number of days to advertise
+ */
+function wpbb_calculate_job_expiry_date($days_to_advertise) {
+	$days_to_advertise = (int)$days_to_advertise;
+	return Date('y-m-d', strtotime("+{$days_to_advertise} days"));
+}

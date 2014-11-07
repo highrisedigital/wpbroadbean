@@ -60,13 +60,15 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'add' ) {
 		
 	}
 
+	/******************************************************
+	/* Handle Taxonomies setup
+	*******************************************************/
+	
 	// Fetch all the registered taxonomies and set up holding array
 	$wpbb_taxonomies = wpbb_get_registered_taxonomies();
 	$wpbb_taxonomies_term_ids  = array();
 
-	/******************************************************
-	/* add all the registered taxonomy term ids to an array
-	*******************************************************/
+	// add all the registered taxonomy term ids to an array
 	foreach ($wpbb_taxonomies as $taxonomy) {
 		$tax_bb_field = $taxonomy['broadbean_field'];
 		$wpbb_taxonomies_term_ids[ $tax_bb_field ] = wpbb_convert_cat_terms_to_ids($tax_bb_field, $wpbb_params, $taxonomy);
@@ -116,6 +118,12 @@ if( strtolower( wp_strip_all_tags( $wpbb_params[ 'command' ] ) ) == 'add' ) {
 		
 		if( isset( $wpbb_params[ 'job_startdate' ] ) )
 			add_post_meta( $wpbb_job_post_id, '_wpbb_job_start_date', wp_strip_all_tags( $wpbb_params[ 'job_startdate' ] ), true );
+
+		// Dynamically calculate an expiry date for the Job
+		if( isset( $wpbb_params[ 'days_to_advertise' ] ) )
+			$days_to_advertise = wp_strip_all_tags( $wpbb_params[ 'days_to_advertise' ] );
+			$expiry_date = wpbb_calculate_job_expiry_date( $days_to_advertise );
+			add_post_meta( $wpbb_job_post_id, '_wpbb_job_expiry_date', $expiry_date, true );
 		
 		if( isset( $wpbb_params[ 'job_duration' ] ) )
 			add_post_meta( $wpbb_job_post_id, '_wpbb_job_duration', wp_strip_all_tags( $wpbb_params[ 'job_duration' ] ), true );
