@@ -50,3 +50,4 @@ function wpbb_create_default_settings_output( $settings ) {
 }
 
 add_filter( 'wpbb_settings_output', 'wpbb_create_default_settings_output' );
+
