@@ -26,7 +26,7 @@ function wpbb_get_registered_taxonomies() {
 		array(
 			'taxonomy_name' => 'wpbb_job_industry',
 			'broadbean_field' => 'job_industry',
-			'plural' => 'Job Indsutries',
+			'plural' => 'Job Industries',
 			'singular' => 'Job Industry',
 			'slug' => 'job-industry'
 		),
