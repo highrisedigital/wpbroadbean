@@ -40,9 +40,8 @@ function wpbb_get_registered_taxonomies() {
 	);
 
 	// Allow developers to add additional custom taxonomies
-	apply_filters('wpbb_registered_taxonomies', $taxonomies);
+	return apply_filters('wpbb_registered_taxonomies', $taxonomies);
 
-	return $taxonomies;
 }
 
 
@@ -57,6 +56,7 @@ function wpbb_register_taxonomies() {
 
 
 	$taxonomies = wpbb_get_registered_taxonomies();
+
 
 	// Register each taxonomy
 	foreach ($taxonomies as $taxonomy) {
@@ -99,7 +99,7 @@ function wpbb_register_taxonomies() {
 
 }
 	
-add_action( 'init', 'wpbb_register_taxonomies', 0 );
+add_action( 'init', 'wpbb_register_taxonomies', 10 );
 
 /***************************************************************
 * Function wpbb_insert_taxonomy_terms()
