@@ -9,28 +9,28 @@
 function wpbb_get_registered_taxonomies() {
 	
 	$taxonomies = array(
-		array(
+		'job_type' => array(
 			'taxonomy_name' => 'wpbb_job_type',
 			'broadbean_field' => 'job_type',
 			'plural' => 'Job Types',
 			'singular' => 'Job Type',
 			'slug' => 'job-type'
 		),
-		array(
+		'job_location' => array(
 			'taxonomy_name' => 'wpbb_job_location',
 			'broadbean_field' => 'job_location',
 			'plural' => 'Job Locations',
 			'singular' => 'Job Location',
 			'slug' => 'job-location'
 		),
-		array(
+		'job_industry' => array(
 			'taxonomy_name' => 'wpbb_job_industry',
 			'broadbean_field' => 'job_industry',
 			'plural' => 'Job Industries',
 			'singular' => 'Job Industry',
 			'slug' => 'job-industry'
 		),
-		array(
+		'job_category' => array(
 			'taxonomy_name' => 'wpbb_job_category',
 			'broadbean_field' => 'job_category',
 			'plural' => 'Job Categories',
