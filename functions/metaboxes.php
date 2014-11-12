@@ -54,17 +54,41 @@ function wpbb_metaboxes( $meta_boxes ) {
 				    ),
 					'cols' => 4
 				),
+				'salary_from' => array(
+					'name' => 'Salary From',
+					'id'   => $wpbb_prefix . 'job_salary_from',
+					'type' => 'text',
+					'cols' => 4
+				),
+				'salary_to' => array(
+					'name' => 'Salary To',
+					'id'   => $wpbb_prefix . 'job_salary_to',
+					'type' => 'text',
+					'cols' => 4
+				),
+				'salary_benefits' => array(
+					'name' => 'Salary Benefits',
+					'id'   => $wpbb_prefix . 'job_salary_benefits',
+					'type' => 'text',
+					'cols' => 4
+				),
 				'start_date' => array(
 					'name' => 'Job Start Date',
 					'id'   => $wpbb_prefix . 'job_start_date',
 					'type' => 'text',
-					'cols' => 6
+					'cols' => 4
+				),
+				'expiry_date' => array(
+					'name' => 'Job Expiry Date',
+					'id'   => $wpbb_prefix . 'job_expiry_date',
+					'type' => 'text',
+					'cols' => 4
 				),
 				'duration' => array(
 					'name' => 'Job Duration',
 					'id'   => $wpbb_prefix . 'job_duration',
 					'type' => 'text',
-					'cols' => 6
+					'cols' => 4
 				),
 				'application_email' => array(
 					'name' => 'Broadbean Application Email',

@@ -17,33 +17,23 @@ function wpbb_add_admin_menu() {
 		'90' // position
 	);
 	
-	/* add the sub page for the wpbb_job_type taxonomy */
-	add_submenu_page(
-		'wp_broadbean_home', // parent_slug,
-		'Job Type', // page_title,
-		'Type', // menu_title,
-		'edit_others_posts', // capability,
-		'edit-tags.php?taxonomy=wpbb_job_type' // menu_slug
-	);
-	
-	/* add the sub page for the wpbb_job_category taxonomy */
-	add_submenu_page(
-		'wp_broadbean_home', // parent_slug,
-		'Job Category', // page_title,
-		'Categories', // menu_title,
-		'edit_others_posts', // capability,
-		'edit-tags.php?taxonomy=wpbb_job_category' // menu_slug
-	);
-	
-	/* add the sub page for the wpbb_job_location taxonomy */
-	add_submenu_page(
-		'wp_broadbean_home', // parent_slug,
-		'Job Location', // page_title,
-		'Locations', // menu_title,
-		'edit_others_posts', // capability,
-		'edit-tags.php?taxonomy=wpbb_job_location' // menu_slug
-	);
-		
+	do_action( 'wpbb_add_admin_menu_start' );
+
+	/**
+	 * Register Admin pages for all Taxonomies
+	 */
+	$taxonomies = wpbb_get_registered_taxonomies();
+	foreach ($taxonomies as $taxonomy) {
+		/* add the sub page for the wpbb_job_category taxonomy */
+		add_submenu_page(
+			'wp_broadbean_home', // parent_slug,
+			$taxonomy[ 'menu_label' ], // page_title,
+			$taxonomy[ 'menu_label' ], // menu_title,
+			'edit_others_posts', // capability,
+			'edit-tags.php?taxonomy=' . $taxonomy['taxonomy_name'] // menu_slug
+		);
+	}
+			
 	/* add the settings page sub menu item */
 	add_submenu_page(
 		'wp_broadbean_home',
@@ -54,6 +44,7 @@ function wpbb_add_admin_menu() {
 		'wpbb_setings_page_content'
 	);
 	
+	do_action( 'wpbb_add_admin_menu_end' );
 }
 
 add_action( 'admin_menu', 'wpbb_add_admin_menu' );
@@ -68,17 +59,20 @@ function wpbb_tax_menu_correction( $parent_file ) {
 	
 	/* get the taxonomy of the current screen */
 	$wpbb_taxonomy = $current_screen->taxonomy;
-	
-	/* if the current screen taxonomy is a SEN taxonomy */
-	if( $wpbb_taxonomy == 'wpbb_job_location' || $wpbb_taxonomy == 'wpbb_job_category' || $wpbb_taxonomy == 'wpbb_job_type') {
-		
-		/* set the parent file slug to the sen main page */
-		$parent_file = 'wp_broadbean_home';
-		
+
+	$taxonomies = wpbb_get_registered_taxonomies();
+
+	foreach ($taxonomies as $taxonomy) {
+		/* if the current screen taxonomy is a SEN taxonomy */
+		if( $wpbb_taxonomy == $taxonomy['taxonomy_name'] ) {
+			
+			/* set the parent file slug to the sen main page */
+			$parent_file = 'wp_broadbean_home';
+			
+		}
 	}
-	
-	/* return the new parent file */
-	
+		
+	/* return the new parent file */	
 	return $parent_file;
 	
 }

@@ -17,6 +17,7 @@ require_once( dirname( __FILE__ ) . '/functions/email-functions.php' );
 require_once( dirname( __FILE__ ) . '/functions/shortcodes.php' );
 require_once( dirname( __FILE__ ) . '/functions/template-tags.php' );
 require_once( dirname( __FILE__ ) . '/functions/settings.php' );
+require_once( dirname( __FILE__ ) . '/functions/utils.php' );
 
 /* check whether the metabox class already exists - and load it if not */
 if( ! class_exists( 'CMB_Meta_Box' ) )
