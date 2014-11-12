@@ -3,7 +3,7 @@
 Plugin Name: WP Broadbean
 Plugin URI: 
 Description: Integrates Broadbean Adcourier with WordPress.
-Version: 0.9
+Version: 1.0
 Author: Mark Wilkinson
 Author URI: http://markwilkinson.me
 License: GPLv2 or later

@@ -4,7 +4,7 @@ Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
 Tested up to: 3.9.1
-Stable tag: 0.9
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,7 +38,15 @@ Yes they do. When you choose to include your own site in a multi job posting Bro
 
 == Changelog ==
 
-= 0.8 +
+= 1.0 =
+* Thanks to @getdave for contributions to v1.0
+* Ensure taxonomies (and all assoc data and admin menus) are created dynamically rather than hard coded
+* Ability to add custom taxonomies via hooks/filters
+* Add new Broadbean default taxonomy "Industry"
+* Ensure new taxonomy terms are created if they don't exist. Ensures client can dynamically created new terms without having to manually create them in WP first
+* Ensure job days_to_advertise field is used to calculate an expiry date which is stored as post meta. Developers can then use this to ensure "expired" jobs are not included in search results
+
+= 0.8 =
 * Add the select2 js library for select input in the metaboxes
 
 = 0.7 =
