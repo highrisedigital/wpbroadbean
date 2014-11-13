@@ -4,7 +4,7 @@ Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
 Tested up to: 3.9.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,9 @@ Yes they do. When you choose to include your own site in a multi job posting Bro
 1. The WP Broadbean screen, added to get you started.
 
 == Changelog ==
+
+= 1.0.1 =
+* Correct name for the job locations taxonomy - showed an incorrect label in the taxonomy metabox
 
 = 1.0 =
 * Thanks to @getdave for contributions to v1.0

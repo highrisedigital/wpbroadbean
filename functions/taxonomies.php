@@ -22,7 +22,7 @@ function wpbb_get_registered_taxonomies() {
 		'job_location' => array(
 			'taxonomy_name' => 'wpbb_job_location',
 			'broadbean_field' => 'job_location',
-			'plural' => 'Job ',
+			'plural' => 'Job Locations',
 			'singular' => 'Job Location',
 			'slug' => 'job-location',
 			'menu_label' => 'Locations',
