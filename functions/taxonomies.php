@@ -56,7 +56,7 @@ function wpbb_get_registered_taxonomies() {
 			'singular' => 'Job Skill',
 			'slug' => 'job-skill',
 			'menu_label' => 'Skills',
-			'hierarchical' => false,
+			'hierarchical' => true,
 			'show_admin_column' => true
 		),
 		
