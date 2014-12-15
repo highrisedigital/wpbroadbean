@@ -11,7 +11,7 @@ function wpbb_metaboxes( $meta_boxes ) {
 	$meta_boxes[] = array(
         'title' => 'Job Information',
         'id' => 'wpbb_job_info',
-        'pages' => array( 'wpbb_job' ),
+        'pages' => array( wpbb_job_post_type_name() ),
         'context' => 'normal',
         'priority' => 'high',
         'fields' => apply_filters(

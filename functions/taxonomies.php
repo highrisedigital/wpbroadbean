@@ -80,7 +80,7 @@ function wpbb_register_taxonomies() {
 
 		register_taxonomy(
 			$taxonomy['taxonomy_name'], // taxonomy name
-			'wpbb_job', // post type for this taxonomy
+			wpbb_job_post_type_name(), // post type for this taxonomy
 			array(
 				'labels' => apply_filters( $taxonomy['taxonomy_name'] . '_labels',
 					array(

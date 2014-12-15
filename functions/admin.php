@@ -266,7 +266,7 @@ function wpbb_change_title_text( $title ){
 	$wpbb_screen = get_current_screen();
 
 	/* if the current screen is our job post type */
-	if( 'wpbb_job' == $wpbb_screen->post_type ) {
+	if( wpbb_job_post_type() == $wpbb_screen->post_type ) {
 		
 		/* set the new text for the title box */
 		$title = 'Job Title';
@@ -293,7 +293,7 @@ add_filter( 'enter_title_here', 'wpbb_change_title_text' );
 function wpbb_job_post_editor_content( $content ) {
 		
 	/* check we are on the job post type */
-	if( 'wpbb_job' != wpbb_get_current_post_type() )
+	if( wpbb_job_post_type() != wpbb_get_current_post_type() )
 		return;
 	
 	$content = "Replace this text with the long description of the job.";
@@ -353,14 +353,14 @@ function wpbb_job_short_description_meta_box( $post ) {
 function wpbb_excerpt_box_title() {
 	
 	/* check this is a job post */
-	if( 'wpbb_job' != wpbb_get_current_admin_post_type() )
+	if( wpbb_job_post_type() != wpbb_get_current_admin_post_type() )
 		return;
 		
 	/* remove the excerpt metabox */
-	remove_meta_box( 'postexcerpt', 'my_custom_post_type', 'side' );
+	remove_meta_box( 'postexcerpt', wpbb_job_post_type(), 'side' );
 	
 	/* add the metabox back with a different title */
-	add_meta_box( 'postexcerpt', __( 'Short Description' ), 'wpbb_job_short_description_meta_box', 'wpbb_job', 'normal', 'high' );
+	add_meta_box( 'postexcerpt', __( 'Short Description' ), 'wpbb_job_short_description_meta_box', wpbb_job_post_type(), 'normal', 'high' );
 	
 }
 

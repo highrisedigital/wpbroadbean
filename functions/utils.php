@@ -63,3 +63,15 @@ function wpbb_calculate_job_expiry_date( $days_to_advertise ) {
 	return Date( 'y-m-d', strtotime( "+{$days_to_advertise} days" ) );
 	
 }
+
+/**
+ * function wpbb_job_post_type_name()
+ * returns the name of the custom post type for jobs
+ * allows developers to use a different custom post type for jobs
+ * rather than the post type that comes with the theme
+ */
+function wpbb_job_post_type_name() {
+	
+	return apply_filters( 'wpbb_job_post_type', 'wpbb_job' );
+	
+}
