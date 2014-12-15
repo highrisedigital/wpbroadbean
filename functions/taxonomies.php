@@ -4,7 +4,7 @@
 * Create the default taxonomies by filtering the settings that are
 * registered.
 * broadbean_field is the name of the field for this taxonomy in the
-* broadbean XML feed
+* broadbean XML feed e.g. <job_type>
 ***************************************************************/
 function wpbb_get_registered_taxonomies() {
 	
@@ -72,10 +72,11 @@ function wpbb_get_registered_taxonomies() {
 * Register the necessary custom taxonomies for the plugin.
 ***************************************************************/
 function wpbb_register_taxonomies() {
-
+	
+	/* get the taxonomies that are registered with the plugin */
 	$taxonomies = wpbb_get_registered_taxonomies();
 
-	// Register each taxonomy
+	/* for each taxonomy returned, register it as a custom taxonomy */
 	foreach ($taxonomies as $taxonomy) {
 
 		register_taxonomy(

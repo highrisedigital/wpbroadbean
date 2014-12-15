@@ -15,9 +15,8 @@ require_once( dirname( __FILE__ ) . '/functions/taxonomies.php' );
 require_once( dirname( __FILE__ ) . '/functions/admin.php' );
 require_once( dirname( __FILE__ ) . '/functions/email-functions.php' );
 require_once( dirname( __FILE__ ) . '/functions/shortcodes.php' );
-require_once( dirname( __FILE__ ) . '/functions/template-tags.php' );
-require_once( dirname( __FILE__ ) . '/functions/settings.php' );
-require_once( dirname( __FILE__ ) . '/functions/utils.php' );
+require_once( dirname( __FILE__ ) . '/functions/wpbb-functions.php' );
+require_once( dirname( __FILE__ ) . '/functions/hooked-functions.php' );
 
 /* check whether the metabox class already exists - and load it if not */
 if( ! class_exists( 'CMB_Meta_Box' ) )
@@ -112,21 +111,3 @@ function wpbb_add_styles_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'wpbb_add_styles_scripts' );
-
-/***************************************************************
-* Function wpbb_apply_button()
-* Outputs the apply now button after the loop on job single posts
-***************************************************************/
-function wpbb_apply_button() {
-	
-	/* check this is a single job post */
-	if( ! is_singular( 'wpbb_job' ) )
-		return;
-	
-	?>
-    <p class="apply-button"><a href="<?php echo wpbb_get_apply_url( $post->ID ); ?>">Apply Now</a></p>
-    <?php
-	
-}
-
-add_filter( 'loop_end', 'wpbb_apply_button' );

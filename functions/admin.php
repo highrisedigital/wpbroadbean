@@ -1,9 +1,8 @@
 <?php
-/***************************************************************
-* Function wpbb_change_job_title_text()
-* Changes the wordpress 'Enter title here' text for the job post
-* type.
-***************************************************************/
+/**
+ * Function wpbb_add_admin_menu()
+ * adds the wpbroadbean admin menus under a parent menu
+ */
 function wpbb_add_admin_menu() {
 
 	/* add the main page for wpbroadbean info */
@@ -16,43 +15,54 @@ function wpbb_add_admin_menu() {
 		'dashicons-businessman', // icon url
 		'90' // position
 	);
-	
-	do_action( 'wpbb_add_admin_menu_start' );
 
-	/**
-	 * Register Admin pages for all Taxonomies
-	 */
-	$taxonomies = wpbb_get_registered_taxonomies();
-	foreach ($taxonomies as $taxonomy) {
-		/* add the sub page for the wpbb_job_category taxonomy */
-		add_submenu_page(
-			'wp_broadbean_home', // parent_slug,
-			$taxonomy[ 'menu_label' ], // page_title,
-			$taxonomy[ 'menu_label' ], // menu_title,
-			'edit_others_posts', // capability,
-			'edit-tags.php?taxonomy=' . $taxonomy['taxonomy_name'] // menu_slug
-		);
-	}
-			
-	/* add the settings page sub menu item */
-	add_submenu_page(
-		'wp_broadbean_home',
-		'Settings',
-		'Settings',
-		'manage_options',
-		'wp_broadbean_settings',
-		'wpbb_setings_page_content'
-	);
-	
-	do_action( 'wpbb_add_admin_menu_end' );
 }
 
 add_action( 'admin_menu', 'wpbb_add_admin_menu' );
 
-/*****************************************************************
-* function wpbb_tax_menu_correction()
-* Sets the correct parent item for the sen custom taxonomies
-*****************************************************************/
+/**
+ * function wpbb_add_admin_sub_menus()
+ * adds the plugins sub menus under the wpbroadbean main admin menu item
+ * filterable by devs using the wpbb_admin_sub_menus filter
+ */
+function wpbb_add_admin_sub_menus() {
+	
+	/* filterable array of menus to add */
+	$wpbb_admin_sub_menus = apply_filters(
+		'wpbb_admin_sub_menus',
+		array()
+	);
+	
+	/* check we have sub menus to add */
+	if( ! empty( $wpbb_admin_sub_menus ) ) {
+		
+		//wp_die( print_r( $wpbb_admin_sub_menus ) );
+
+		/* loop through each sub menu to add */
+		foreach( $wpbb_admin_sub_menus as $submenu ) {
+			
+			/* add the sub page for the wpbb_job_category taxonomy */
+			add_submenu_page(
+				'wp_broadbean_home', // parent_slug,
+				$submenu[ 'label' ], // page_title,
+				$submenu[ 'label' ], // menu_title,
+				$submenu[ 'cap' ], // capability,
+				$submenu[ 'slug' ], // menu slug,
+				$submenu[ 'callback' ] // callback function for the pages content
+			);
+			
+		} // end loop through menus to add
+		
+	} // end if have sub menus to add */
+		
+}
+
+add_action( 'admin_menu', 'wpbb_add_admin_sub_menus' );
+
+/**
+ * function wpbb_tax_menu_correction()
+ * Sets the correct parent item for the sen custom taxonomies
+ */
 function wpbb_tax_menu_correction( $parent_file ) {
 	
 	global $current_screen;
@@ -104,7 +114,7 @@ add_action( 'admin_init', 'wpbb_register_default_settings' );
 * Function wpbb_admin_page_content()
 * Builds the content for the admin settings page.
 ***************************************************************/
-function wpbb_setings_page_content() {
+function wpbb_settings_page_content() {
 
 	?>
 	
@@ -266,7 +276,7 @@ function wpbb_change_title_text( $title ){
 	$wpbb_screen = get_current_screen();
 
 	/* if the current screen is our job post type */
-	if( wpbb_job_post_type() == $wpbb_screen->post_type ) {
+	if( wpbb_job_post_type_name() == $wpbb_screen->post_type ) {
 		
 		/* set the new text for the title box */
 		$title = 'Job Title';
@@ -293,7 +303,7 @@ add_filter( 'enter_title_here', 'wpbb_change_title_text' );
 function wpbb_job_post_editor_content( $content ) {
 		
 	/* check we are on the job post type */
-	if( wpbb_job_post_type() != wpbb_get_current_post_type() )
+	if( wpbb_job_post_type_name() != wpbb_get_current_post_type() )
 		return;
 	
 	$content = "Replace this text with the long description of the job.";
@@ -353,14 +363,14 @@ function wpbb_job_short_description_meta_box( $post ) {
 function wpbb_excerpt_box_title() {
 	
 	/* check this is a job post */
-	if( wpbb_job_post_type() != wpbb_get_current_admin_post_type() )
+	if( wpbb_job_post_type_name() != wpbb_get_current_admin_post_type() )
 		return;
 		
 	/* remove the excerpt metabox */
-	remove_meta_box( 'postexcerpt', wpbb_job_post_type(), 'side' );
+	remove_meta_box( 'postexcerpt', wpbb_job_post_type_name(), 'side' );
 	
 	/* add the metabox back with a different title */
-	add_meta_box( 'postexcerpt', __( 'Short Description' ), 'wpbb_job_short_description_meta_box', wpbb_job_post_type(), 'normal', 'high' );
+	add_meta_box( 'postexcerpt', __( 'Short Description' ), 'wpbb_job_short_description_meta_box', wpbb_job_post_type_name(), 'normal', 'high' );
 	
 }
 
