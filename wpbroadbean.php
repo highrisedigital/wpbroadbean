@@ -67,7 +67,7 @@ function wpbb_adcourier_inbox_load() {
 		} else {
 
 			/* load the adcourier inbox file */
-			require_once( dirname( __FILE__ ) . '/wpbb-inbox.php' );
+			require_once( dirname( __FILE__ ) . '/inbox.php' );
 
 		}
         
