@@ -1,5 +1,21 @@
 <?php
 /**
+ * function wpbb_get_job_fields()
+ * gets all the fields that have been registered for jobs
+ * devs can add/remove fields using this filter - wpbb_job_fields
+ */
+function wpbb_get_job_fields() {
+
+	$fields = apply_filters(
+		'wpbb_job_fields',
+		array()
+	);
+	
+	return $fields;	
+	
+}
+
+/**
  * function wpbb_convert_cat_terms_to_ids()
  *
  * takes a category term name and converts it to its id
