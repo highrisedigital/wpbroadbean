@@ -88,11 +88,11 @@ function wpbb_tax_menu_correction( $parent_file ) {
 }
 add_action( 'parent_file', 'wpbb_tax_menu_correction' );
 
-/***************************************************************
-* Function wpbb_register_settings()
-* Register the settings for this plugin. Just a username and a
-* password for authenticating.
-***************************************************************/
+/**
+ * Function wpbb_register_settings()
+ * Register the settings for this plugin. Just a username and a
+ * password for authenticating.
+ */
 function wpbb_register_default_settings() {
 
 	/* build array of setttings to register */
@@ -110,10 +110,10 @@ function wpbb_register_default_settings() {
 
 add_action( 'admin_init', 'wpbb_register_default_settings' );
 
-/***************************************************************
-* Function wpbb_admin_page_content()
-* Builds the content for the admin settings page.
-***************************************************************/
+/**
+ * Function wpbb_admin_page_content()
+ * Builds the content for the admin settings page.
+ */
 function wpbb_settings_page_content() {
 
 	?>
@@ -265,11 +265,11 @@ function wpbb_settings_page_content() {
 	
 }
 
-/***************************************************************
-* Function wpbb_change_title_text()
-* Changes the wordpress 'Enter title here' text for the job post
-* type.
-***************************************************************/
+/**
+ * Function wpbb_change_title_text()
+ * Changes the wordpress 'Enter title here' text for the job post
+ * type.
+ */
 function wpbb_change_title_text( $title ){
      
 	/* get the current screen we are viewing in the admin */
@@ -296,10 +296,10 @@ function wpbb_change_title_text( $title ){
  
 add_filter( 'enter_title_here', 'wpbb_change_title_text' );
 
-/***************************************************************
-* Function wpbb_job_post_editor_content()
-* Pre-fills the post editor on jobs with instructional text.
-***************************************************************/
+/**
+ * Function wpbb_job_post_editor_content()
+ * Pre-fills the post editor on jobs with instructional text.
+ */
 function wpbb_job_post_editor_content( $content ) {
 		
 	/* check we are on the job post type */
@@ -313,10 +313,10 @@ function wpbb_job_post_editor_content( $content ) {
 
 add_filter( 'default_content', 'wpbb_job_post_editor_content' );
 
-/***************************************************************
-* Function wpbb_get_current_admin_post_type()
-* Returns the post type of a post in the admin.
-***************************************************************/
+/**
+ * Function wpbb_get_current_admin_post_type()
+ * Returns the post type of a post in the admin.
+ */
 function wpbb_get_current_admin_post_type() {
   
   global $post, $typenow, $current_screen;
@@ -342,11 +342,11 @@ function wpbb_get_current_admin_post_type() {
   
 }
 
-/***************************************************************
-* Function wpbb_job_short_description_meta_box()
-* Change html output of the excerpt box, removing the paragraph
-* of instruction text.
-***************************************************************/
+/**
+ * Function wpbb_job_short_description_meta_box()
+ * Change html output of the excerpt box, removing the paragraph
+ * of instruction text.
+ */
 function wpbb_job_short_description_meta_box( $post ) {
 	
 	?>
@@ -356,10 +356,10 @@ function wpbb_job_short_description_meta_box( $post ) {
 	
 }
 
-/***************************************************************
-* Function wpbb_excerpt_box_title()
-* Change title of the excerpt metabox to short description.
-***************************************************************/
+/**
+ * Function wpbb_excerpt_box_title()
+ * Change title of the excerpt metabox to short description.
+ */
 function wpbb_excerpt_box_title() {
 	
 	/* check this is a job post */
