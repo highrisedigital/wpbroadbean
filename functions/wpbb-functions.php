@@ -270,3 +270,32 @@ function wpbb_get_job_salary( $post_id = '' ) {
 	return apply_filters( 'wpbb_job_salary_html', $wpbb_salary_output, $post_id );
 	
 }
+
+/**
+ * function wpbb_get_field()
+ * gets the value of a meta box field for a wpbb post
+ * @param (string) $field is the name of the field to return
+ * @param (int) $post_id is the id of the post for which to look for the field in - defaults to current loop post
+ * return (string) $field the value of the field
+ */
+function wpbb_get_field( $field, $post_id = '' ) {
+	
+	global $post;
+	
+	/* if no post id is provided use the current post id in the loop */
+	if( empty( $post_id ) )
+		$post_id = $post->ID;
+	
+	/* if we have no field name passed go no further */
+	if( empty( $field ) )
+		return false;
+	
+	/* build the meta key to return the value for */
+	$key = '_wpbb_' . $field;
+	
+	/* gete the post meta value for this field name of meta key */
+	$field = get_post_meta( $post_id, $key, true );
+	
+	return apply_filters( 'wpbb_field_value', $field );
+	
+}
