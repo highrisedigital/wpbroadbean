@@ -298,8 +298,10 @@ function wpbb_application_form_shortcode() {
 			
 			$wpbb_mail_recipients = $wpbb_posted_broadbean_application_email . ',' . $wpbb_posted_contact_email;
 			
+			$wpbb_attachments = array(WP_CONTENT_DIR . '/uploads' . $pxjn_wp_upload_dir['subdir'] . '/' . $pxjn_uploaded_file['name']);
+			
 			/* send the mail */
-			$wpbb_send_email = wp_mail( $wpbb_mail_recipients, $wpbb_mail_subject, $wpbb_mail_content, $wpbb_email_headers );
+			$wpbb_send_email = wp_mail( $wpbb_mail_recipients, $wpbb_mail_subject, $wpbb_mail_content, $wpbb_email_headers, $wpbb_attachments);
 	
 			/* check whether message was sent OK */
 			if( $wpbb_send_email == 1 ) {
