@@ -25,14 +25,14 @@ function wpbb_get_job_fields() {
  *
  * @return
  */
-function wpbb_convert_cat_terms_to_ids( $tax_broadbean_field, $wpbb_params, $taxonomy ) {
+function wpbb_convert_cat_terms_to_ids( $tax_broadbean_field, $wpbb_xml_params, $taxonomy ) {
 
-	if ( empty( $wpbb_params[ $tax_broadbean_field ] ) ) {
+	if ( empty( $wpbb_xml_params->$tax_broadbean_field ) ) {
 		return;
 	}
 	
 	/* turn category terms into arrays */
-	$wpbb_category = wp_strip_all_tags( $wpbb_params[ $tax_broadbean_field ] );
+	$wpbb_category = wp_strip_all_tags( $wpbb_xml_params->$tax_broadbean_field );
 	$wpbb_category_terms = explode( ',', $wpbb_category );
 
 	/* setup array to store the category term ids in */
@@ -52,7 +52,7 @@ function wpbb_convert_cat_terms_to_ids( $tax_broadbean_field, $wpbb_params, $tax
 				$wpbb_category_term, // term to insert
 				$taxonomy['taxonomy_name'], // taxonomy to add the term to
 				array(
-					'slug' => sanitize_title($wpbb_category_term)
+					'slug' => sanitize_title( $wpbb_category_term )
 				)
 			);
 			$wpbb_category_term_ids[] = $new_term['term_id'];
@@ -313,5 +313,45 @@ function wpbb_get_field( $field, $post_id = '' ) {
 	$field = get_post_meta( $post_id, $key, true );
 	
 	return apply_filters( 'wpbb_field_value', $field );
+	
+}
+
+/**
+ * function wpbb_get_job_by_reference()
+ * gets the job post id for a job given its reference
+ * @param (string) $job_ref is the job refrerence to check by
+ * @return (int/false) $post_id returns the post of the job if a job exists with that reference or false
+ */
+function wpbb_get_job_by_reference( $job_ref ) {
+		
+	/* get posts according to args above */
+	$wpbb_jobs = new WP_Query(
+		array(
+			'post_type' => wpbb_job_post_type_name(),
+			'post_status'=> 'publish',
+			'meta_key' => '_wpbb_job_reference',
+			'meta_value' => $job_ref,
+			'relation' => 'AND'
+		)
+	);
+	
+	/* check there is a post with this job reference */
+	if( $wpbb_jobs->have_posts() ) {
+		
+		/* loop through each post returned */
+		while( $wpbb_jobs->have_posts() ) : $wpbb_jobs->the_post();
+		
+			/* return the post id */
+			return $post->ID;
+		
+		/* end the loop */
+		endwhile;
+		
+	}
+	
+	/* reset query */
+	wp_reset_query();
+	
+	return false;
 	
 }
