@@ -39,16 +39,6 @@ function wpbb_get_registered_taxonomies() {
 			'hierarchical' => true,
 			'show_admin_column' => true
 		),
-		'job_category' => array(
-			'taxonomy_name' => 'wpbb_job_category',
-			'broadbean_field' => 'job_category',
-			'plural' => 'Job Categories',
-			'singular' => 'Job Category',
-			'slug' => 'job-category',
-			'menu_label' => 'Categories',
-			'hierarchical' => true,
-			'show_admin_column' => true
-		),
 		'job_skill' => array(
 			'taxonomy_name' => 'wpbb_job_skill',
 			'broadbean_field' => 'job_skills',
