@@ -3,8 +3,8 @@ Contributors: wpmarkuk
 Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
-Tested up to: 3.9.1
-Stable tag: 1.0.2
+Tested up to: 4.1
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,13 @@ Yes they do. When you choose to include your own site in a multi job posting Bro
 1. The WP Broadbean screen, added to get you started.
 
 == Changelog ==
+
+= 2.0 =
+* Added a filter to allow developers to use a different custom post type for jobs
+* WP Broadbean sub menus are added using a filter so developers can add their own menus more easily
+* Created a template function to get the value of a job field from post meta
+* Fields are now added using a filter. This allows developers to easily add other fields and have the data processed in the feed as well as the WP backend.
+* The processing of the feed is now more dynamic to tie in with other registered taxonomies and fields.
 
 = 1.0.2 =
 * Set skills taxonomy to hierarchical
