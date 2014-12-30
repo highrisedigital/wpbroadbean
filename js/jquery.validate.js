@@ -1255,3 +1255,23 @@ $.format = $.validator.format;
 		}
 	});
 }(jQuery));
+
+/* 
+ * Uses jquery.validate to validate the page form
+ */
+jQuery(document).ready(function($) {
+// validate the comment form when it is submitted
+    $("#wpbb_application_form").validate({ 
+        rules: {
+            wpbb_name: {
+            	required:true
+            },
+            wpbb_email: {
+				required:true
+            },
+            wpbb_tel: {
+				required:true
+            }
+        }
+    });
+});
