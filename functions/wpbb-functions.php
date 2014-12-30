@@ -140,7 +140,11 @@ function wpbb_get_apply_url( $post_id = '' ) {
 	/* get the page id for the apply now page from settings */
 	$wpbb_apply_page_id = get_option( 'wpbb_apply_page_id' );
 		
-	/* set some filterable query args */
+	/**
+	 * set some filterable query args
+	 * devs can use this filter to add other query args to the application url
+	 * this could be used to pre-populate the form with content
+	 */
 	$wpbb_apply_query_args = apply_filters(
 		'wpbb_apply_query_args',
 		array(
@@ -152,7 +156,10 @@ function wpbb_get_apply_url( $post_id = '' ) {
 	/* build apply link from url */
 	$wpbb_apply_link = add_query_arg( $wpbb_apply_query_args, get_permalink( $wpbb_apply_page_id ) );
 	
-	/* return the apply url */
+	/**
+	 * return the apply url
+	 * devs can filter this to use different URL e.g. a gravity form page etc.
+	 */
 	return esc_url( apply_filters( 'wpbb_apply_url', $wpbb_apply_link, $post_id ) );
 	
 }
@@ -164,7 +171,7 @@ function wpbb_get_apply_url( $post_id = '' ) {
 function wpbb_apply_button( $content ) {
 	
 	/* check this is a single job post */
-	if( ! is_singular( 'wpbb_job' ) )
+	if( ! is_singular( wpbb_job_post_type_name() ) )
 		return $content;
 	
 	return $content . '<p class="apply-button"><a href="' . wpbb_get_apply_url( $post->ID ) . '">Apply Now</a></p>';
@@ -292,9 +299,10 @@ function wpbb_get_job_salary( $post_id = '' ) {
  * gets the value of a meta box field for a wpbb post
  * @param (string) $field is the name of the field to return
  * @param (int) $post_id is the id of the post for which to look for the field in - defaults to current loop post
+ * @param (string) $prefix is the prefix to use for the custom field key. Defaults to _wpbb_
  * return (string) $field the value of the field
  */
-function wpbb_get_field( $field, $post_id = '' ) {
+function wpbb_get_field( $field, $post_id = '', $prefix = '_wpbb_' ) {
 	
 	global $post;
 	
@@ -307,7 +315,7 @@ function wpbb_get_field( $field, $post_id = '' ) {
 		return false;
 	
 	/* build the meta key to return the value for */
-	$key = '_wpbb_' . $field;
+	$key = $prefix . $field;
 	
 	/* gete the post meta value for this field name of meta key */
 	$field = get_post_meta( $post_id, $key, true );
