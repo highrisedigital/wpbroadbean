@@ -84,7 +84,7 @@ function wpbb_calculate_job_expiry_date( $days_to_advertise ) {
  * function wpbb_job_post_type_name()
  * returns the name of the custom post type for jobs
  * allows developers to use a different custom post type for jobs
- * rather than the post type that comes with the theme
+ * rather than the post type that comes with the plugin
  */
 function wpbb_job_post_type_name() {
 	
@@ -134,7 +134,7 @@ function wpbb_get_apply_url( $post_id = '' ) {
 		$post_id = $post->ID;
 	
 	/* check current post is a job post */
-	if( 'wpbb_job' != get_post_type( $post_id ) )
+	if( wpbb_job_post_type_name() != get_post_type( $post_id ) )
 		return;
 	
 	/* get the page id for the apply now page from settings */

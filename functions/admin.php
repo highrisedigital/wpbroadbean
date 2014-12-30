@@ -145,7 +145,10 @@ function wpbb_settings_page_content() {
 			echo apply_filters( 'wpbb_admin_paragraph', $wpbb_admin_paragraph );
 			
 			/* setup an array of settings */
-			$wpbb_settings = apply_filters( 'wpbb_settings_output', array() );
+			$wpbb_settings = apply_filters(
+				'wpbb_settings_output', 
+				array()
+			);
 		
 		?>
 		
