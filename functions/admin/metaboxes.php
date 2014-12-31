@@ -28,35 +28,16 @@ function wpbb_metaboxes( $meta_boxes ) {
 	        	'reference' => array(
 					'name' => 'Job Reference/ID',
 					'desc' => 'This is the job reference or ID for the job applied for.',
-					'id' => $wpbb_prefix . 'job_reference',
-					'cols' => 4,
+					'id' => '_wpbb_job_reference',
+					'cols' => 6,
 					'type' => 'text'
 				),
 				'email' => array(
 					'name' => 'Email Address',
 					'desc' => 'This is the email address of the person applying for this job.',
-					'id' => $wpbb_prefix . 'applicant_email',
-					'cols' => 4,
+					'id' => '_wpbb_applicant_email',
+					'cols' => 6,
 					'type' => 'text'
-				),
-				'tel' => array(
-					'name' => 'Tel No.',
-					'desc' => 'This is the telephone number of the person applying for this job.',
-					'id' => $wpbb_prefix . 'applicant_telno',
-					'cols' => 4,
-					'type' => 'text'
-				),
-				'url' => array(
-					'name' => 'Job URL',
-					'desc' => 'This is the URL of the job applied for.',
-					'id' => $wpbb_prefix . 'job_url',
-					'type' => 'text'
-				),
-				'attachment' => array(
-					'name' => 'Application Attachment',
-					'desc' => 'Here are the files uploaded with this application.',
-					'id' => $wpbb_prefix . 'application_uploads',
-					'type' => 'file',
 				),
 			)
         )

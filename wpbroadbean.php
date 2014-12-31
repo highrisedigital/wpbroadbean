@@ -13,18 +13,19 @@ License: GPLv2 or later
 require_once( dirname( __FILE__ ) . '/functions/post-types.php' );
 require_once( dirname( __FILE__ ) . '/functions/taxonomies.php' );
 require_once( dirname( __FILE__ ) . '/functions/default-fields.php' );
-require_once( dirname( __FILE__ ) . '/functions/admin.php' );
 require_once( dirname( __FILE__ ) . '/functions/email-functions.php' );
-require_once( dirname( __FILE__ ) . '/functions/shortcodes.php' );
+require_once( dirname( __FILE__ ) . '/functions/application-form.php' );
 require_once( dirname( __FILE__ ) . '/functions/wpbb-functions.php' );
-require_once( dirname( __FILE__ ) . '/functions/hooked-functions.php' );
+require_once( dirname( __FILE__ ) . '/functions/admin/admin-menus.php' );
+require_once( dirname( __FILE__ ) . '/functions/admin/admin.php' );
+require_once( dirname( __FILE__ ) . '/functions/admin/default-settings.php' );
 
 /* check whether the metabox class already exists - and load it if not */
 if( ! class_exists( 'CMB_Meta_Box' ) )
 	require_once( dirname( __FILE__ ) . '/functions/metaboxes/custom-meta-boxes.php' );
 
 /* load the metabox functions */
-require_once( dirname( __FILE__ ) . '/functions/metaboxes.php' );
+require_once( dirname( __FILE__ ) . '/functions/admin/metaboxes.php' );
 
 /***************************************************************
 * Function wpbb_add_new_query_var()
@@ -88,22 +89,19 @@ add_action( 'template_redirect', 'wpbb_adcourier_inbox_load' );
 ***************************************************************/
 function wpbb_add_styles_scripts() {
 
-	global $post;
+	/* get the apply page from the settings */
+	$apply_pageid = get_option( 'wpbb_apply_page_id' );
 	
-	/* check the post variable is not empty */
-	if( !empty( $post ) ) {
+	/* check this is the apply page */
+	if( is_page( $apply_pageid ) ) {
 		
-		/* check if we find our shortcode in the post content */
-		if( stripos( $post->post_content, '[wpbb_applicationform]') !== FALSE ) {
-		
-			/* enqueue the jquery validate plugin */
-			wp_enqueue_script( 'jquery' );
-			wp_enqueue_script( 'wpbb_jquery_validate' , plugins_url( '/js/jquery.validate.js', __FILE__ ), 'jquery' );  
+		/* enqueue the jquery validate plugin */
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'wpbb_jquery_validate', plugins_url( '/js/jquery.validate.js', __FILE__ ), 'jquery' );
+		wp_enqueue_script( 'wpbb_validate', plugins_url( '/js/validate.js', __FILE__ ), 'wpbb_jquery_validate', array(), true ); 
 
-			/* enqueue the application form styles */
-			wp_enqueue_style( 'wpbb_form_styles', plugins_url( '/css/form-style.css', __FILE__ ) );
-		
-		} // if if shortcode detected
+		/* enqueue the application form styles */
+		wp_enqueue_style( 'wpbb_form_styles', plugins_url( '/css/form-style.css', __FILE__ ) );
 		
 	} // end if have post varibale
 				

@@ -130,18 +130,7 @@ function wpbb_settings_page_content() {
 		
 			/* build filterable opening text */
 			$wpbb_admin_paragraph = '<p>Welcome to the Broadbean (AdCourier) settings page. To find out more about this advert distribution tool please <a href="http://www.broadbean.com/multiposting.html">click here</a>.</p>';
-			
-			$wpbb_admin_paragraph .= '<h3>Steps to Get Started</h3>';
-			
-			$wpbb_admin_paragraph .= '
-				<ol>
-					<li>Setup your <a href="' . admin_url( 'edit-tags.php?taxonomy=wpbb_job_type' ) .'">job type terms here</a></li>
-					<li>Add your <a href="' . admin_url( 'edit-tags.php?taxonomy=wpbb_job_category' ) .'">job categories here</a></li>
-					<li>Input a list of your <a href="' . admin_url( 'edit-tags.php?taxonomy=wpbb_job_location' ) .'">job locations here</a></li>
-					<li>Set a username and password below, to use for the integration with Broadbean, making sure you save the changes.</li>
-				</ol>
-			';
-			
+						
 			echo apply_filters( 'wpbb_admin_paragraph', $wpbb_admin_paragraph );
 			
 			/* setup an array of settings */

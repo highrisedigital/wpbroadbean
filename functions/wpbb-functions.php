@@ -350,7 +350,7 @@ function wpbb_get_job_by_reference( $job_ref ) {
 		while( $wpbb_jobs->have_posts() ) : $wpbb_jobs->the_post();
 		
 			/* return the post id */
-			return $post->ID;
+			return get_the_ID();
 		
 		/* end the loop */
 		endwhile;
