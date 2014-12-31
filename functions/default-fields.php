@@ -151,7 +151,7 @@ function wpbb_add_default_fields( $fields ) {
 		'name'		=> 'Application URL',
 		'id'		=> '_wpbb_job_broadbean_application_url',
 		'bb_field'	=> 'application_url',
-		'desc'		=> 'This is the Adcourier application url, used to apply if not allows clients to apply on this site.',
+		'desc'		=> 'This is the Adcourier application url, used only if clients should not apply on this site.',
 		'type'		=> 'text',
 		'readonly'	=> true,
 		'cols'		=> 6
