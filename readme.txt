@@ -8,12 +8,13 @@ Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-** Beta Plugin - it works but is rusty! **
 WP Broadbean is a plugin allowing jobs added to Broadbean to show in your WordPress site.
 
 == Description ==
 
-WP Broadbean is a plugin designed to work alongside the Broadbean Adcourier job post system allowing jobs added to Broadbean to show in your WordPress site. The plugin adds custom post types and taxonomies to allow you to enter jobs into your WordPress site. More importantly it provides an end-point to accept feed data sent by Broadbean and add this as job posts to your site.
+[WP Broadbean](http://wpbroadbean.com/ "Broadbean posted jobs on your WordPress website") is a plugin designed to work alongside the Broadbean Adcourier job posting system allowing jobs added to Broadbean to show in your WordPress site. The plugin adds custom post types and taxonomies to allow you to add jobs. More importantly it provides an end-point to accept feed data sent by Broadbean and add this as job posts to your site.
+
+You can find out more about the WP Broadbean plugin on the [WP Broadbean website](http://wpbroadbean.com/ "Broadbean posted jobs on your WordPress website").
 
 == Installation ==
 
@@ -23,14 +24,16 @@ To install the plugin:
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Visit the settings page under WP Broadbean > Settings
 4. Enter a username and password as well as choosing a page to use for your application form.
-5. Add the application form short code to your apply page
-6. Complete your [Broadbean feed request here](http://api.adcourier.com/docs/index.cgi?page=jobboards_register)
 
 == Frequently Asked Questions ==
 
-Do Broadbean charge for this?
+**Do Broadbean charge for this?**
 
-Yes they do. When you choose to include your own site in a multi job posting Broadbean have the setup a "feed" to your site and they charge a one off fee for this.
+Yes they do. When you choose to include your own site in a multi job posting Broadbean have the setup a "feed" to your site and they charge a one off fee for this. You should contact Broadbean before installing this plugin. Indicate to them that you want to post Broadbean jobs to your WordPress site running the WP Broadbean Plugin from Mark Wilkinson.
+
+**What is the URL to which Broadbean should post the feed too?**
+
+The URL to post to, in order to add a job is http://domain.com/?wpbb=broadbean (of  course replacing domain.com with your actual domain). The end-point expects an XML feed using the standard Broadbean XML feed.
 
 == Screenshots ==
 
@@ -39,17 +42,21 @@ Yes they do. When you choose to include your own site in a multi job posting Bro
 == Changelog ==
 
 = 2.0 =
+* Removed the beta status!
 * Added a filter to allow developers to use a different custom post type for jobs
 * WP Broadbean sub menus are added using a filter so developers can add their own menus more easily
 * Created a template function to get the value of a job field from post meta
 * Fields are now added using a filter. This allows developers to easily add other fields and have the data processed in the feed as well as the WP backend.
 * The processing of the feed is now more dynamic to tie in with other registered taxonomies and fields.
+* Amended the way in which the application form is rendered (no shortcode) and processed. Also slimmed the number of fields on this form.
+* Documented most functions etc. in the plugin code itself as well as cleaning up the file structure a little.
+* Updated the readme.txt file.
 
 = 1.0.2 =
 * Set skills taxonomy to hierarchical
 
 = 1.0.1 =
-* Correct name for the job locations taxonomy - showed an incorrect label in the taxonomy metabox
+* Correct name for the job locations taxonomy - showed an incorrect label in the taxonomy meta box
 
 = 1.0 =
 * Thanks to @getdave for contributions to v1.0
