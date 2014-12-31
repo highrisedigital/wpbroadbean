@@ -125,7 +125,7 @@ function wpbb_add_default_fields( $fields ) {
 	);
 	
 	$fields[ 'contact_url' ] = array(
-		'name'		=> 'Contact URL.',
+		'name'		=> 'Contact URL',
 		'id'		=> '_wpbb_job_contact_url',
 		'bb_field'	=> 'contact_url',
 		'desc'		=> 'Add the URL fpr contact about this job.',
