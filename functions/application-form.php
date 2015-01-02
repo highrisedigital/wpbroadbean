@@ -213,13 +213,13 @@ function wpbb_application_processing( $job_post ) {
 		<p>' . $_POST[ 'wpbb_name' ] . ' has completed an application for ' . $job_post->the_title . ' which has the job reference of ' . $_POST[ 'wpbb_job_reference' ] . '. The applicants email address is ' . $_POST[ 'wpbb_email' ] . '. Below is a summary of their responses:</p>
 		
 		<ul>
-			<li>Applicant Name: ' . $_POST[ 'wpbb_name' ] . '</li>
-			<li>Applicant Email Address: ' . $_POST[ 'wpbb_email' ] . '</li>
-			<li>Job Title: ' . get_the_title( $job_post->ID ) . '</li>
-			<li>Job Reference: ' . $_POST[ 'wpbb_job_reference' ] . '</li>
-			<li>Job Permalink: <a href="' . get_permalink( $job_post->ID ) . '">' . get_permalink( $job_post->ID ) . '</a></li>
+			<li>Applicant Name: ' . esc_html( get_the_title( $wpbb_application_id ) ) . '</li>
+			<li>Applicant Email Address: ' . esc_html( get_post_meta( $wpbb_application_id, '_wpbb_applicant_email', true ) ) . '</li>
+			<li>Job Title: ' . esc_html( get_the_title( $job_post->ID ) ) . '</li>
+			<li>Job Reference: ' . esc_html( get_post_meta( $job_post->ID, '_wpbb_job_reference', true ) ) . '</li>
+			<li>Job Permalink: <a href="' . esc_url( get_permalink( $job_post->ID ) ) . '">' . esc_url( get_permalink( $job_post->ID ) ) . '</a></li>
 			<li><a href="' . get_edit_post_link( $wpbb_application_id ) . '">Application Edit Link</a></li>
-			<li><a href="' . $wpbb_moved_file[ 'url' ] . '">CV Attachment Link</a></li>
+			<li><a href="' . esc_url( $wpbb_moved_file[ 'url' ] ) . '">CV Attachment Link</a></li>
 		</ul>
 		
 		<p>Email sent by <a href="http://wpbroadbean.com">WP Broadbean WordPress plugin</a>.</p>
@@ -227,10 +227,16 @@ function wpbb_application_processing( $job_post ) {
 	';
 	
 	/* set up the mail variables */
-	$wpbb_mail_subject = 'New Job Application Submitted - ' . $_POST[ 'wpbb_name' ];
-	$wpbb_email_headers = 'From: ' . $_POST[ 'wpbb_name' ] . ' <' . $_POST[ 'wpbb_email' ] . '>';
+	$wpbb_mail_subject = 'New Job Application Submitted - ' . esc_html( get_the_title( $wpbb_application_id ) );
+	$wpbb_email_headers = 'From: ' . esc_html( get_the_title( $wpbb_application_id ) ) . ' <' . esc_html( get_the_title( $wpbb_application_id ) ) . '>';
 	
-	$wpbb_mail_content = wpbb_generate_email_content( $wpbb_email_content );
+	/**
+	 * set the content of the email as a variable
+	 * this is made filterable and is passed the job post object being applied for
+	 * along with the application post id
+	 * devs can use this filter to change the contents of the email sent
+	 */
+	$wpbb_mail_content = wpbb_generate_email_content( apply_filters( 'wpbb_application_email_content', $wpbb_email_content, $job_post, $wpbb_application_id ) );
 	
 	$wpbb_mail_recipients = get_post_meta( $job_post->ID, '_wpbb_job_contact_email', true ) . ',' . get_post_meta( $job_post->ID, '_wpbb_job_broadbean_application_email', true );
 	
@@ -238,7 +244,13 @@ function wpbb_application_processing( $job_post ) {
 	$wpbb_attachments = array( WP_CONTENT_DIR . '/uploads' . $wpbb_wp_upload_dir[ 'subdir' ] . '/' . $wpbb_uploaded_file[ 'name' ] );
 	
 	/* send the mail */
-	$wpbb_send_email = wp_mail( $wpbb_mail_recipients, $wpbb_mail_subject, $wpbb_mail_content, $wpbb_email_headers, $wpbb_attachments );
+	$wpbb_send_email = wp_mail(
+		$wpbb_mail_recipients,
+		$wpbb_mail_subject,
+		$wpbb_mail_content,
+		$wpbb_email_headers,
+		$wpbb_attachments
+	);
 	
 	/* remove filter below to allow / force mail to send as html */
 	remove_filter( 'wp_mail_content_type', create_function( '', 'return "text/html"; ' ) );
