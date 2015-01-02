@@ -20,17 +20,6 @@ $wpbb_password = get_option( 'wpbb_password' );
 $wpbb_logging = apply_filters( 'wpbb_logging', false );
 
 /**
- * if wpbb logging is set to true the plugin will log the incomming XML data
- * into a file nammed wpbb-log.txt in the root of your uploads folder
- * this log file location can be changed with the wpbb_log_file_location filter
- */
-if( $wpbb_logging == true ) {
-	
-	/* do something with error logging here */
-	
-} // end if we should be logging errors
-
-/**
  * get the contents of the feed provided by adcourier
  * if you want to test the feed, by pulling an XML feed from a specific url
  * you can use the wpbb_xml_feed_url filter
@@ -46,7 +35,6 @@ $wpbb_xml_params = simplexml_load_string( $wpbb_xml_content );
  * before we go any further - lets authenticate
  * check the username / password sent matches that stored
  */
-/* check username and password match the stored informaiton */
 if( wp_strip_all_tags( (string) $wpbb_xml_params->username ) != $wpbb_username || wp_strip_all_tags( (string) $wpbb_xml_params->username != $wpbb_password ) ) {
 	
 	/* username and/or password are not correct, show an error message and stop file loading any further */
@@ -117,6 +105,29 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 	 * checking for a job id present in the variable
 	 */
 	if( $wpbb_job_post_id != 0 ) {
+		
+		/**
+		 * if wpbb logging is set to true the plugin will save the raw incoming XML feed
+		 * as post meta for this job with the key being _wpbb_raw_bb_feed
+		 * it also add the date before the XML output.
+		 */
+		if( $wpbb_logging == true ) {
+			
+			$wpbb_debug_content = array();
+			
+			/* combine the XML with the current date stamp */
+			$wpbb_debug_content[ 'sent_date' ] = date( 'd:m:Y H:i:s' );
+			$wpbb_debug_content[ 'sent_xml' ] = $wpbb_xml_content;
+			
+			/* lets save the raw posted data in post meta for this job */
+			add_post_meta(
+				$wpbb_job_post_id, // this is id of the job we have just added
+				'_wpbb_raw_bb_feed', // this is the meta key to store the post meta in
+				$wpbb_debug_content, // this is value to store - sent from broadbean
+				true
+			);
+			
+		} // end if we should be logging errors
 		
 		/**
 		 * job was added successfully
