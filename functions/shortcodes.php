@@ -298,7 +298,7 @@ function wpbb_application_form_shortcode() {
 			
 			$wpbb_mail_recipients = $wpbb_posted_broadbean_application_email . ',' . $wpbb_posted_contact_email;
 			
-			$filenamenospace = str_replace(' ', '-', $pxjn_uploaded_file['name']);
+			$filenamenospace = sanitize_file_name($pxjn_uploaded_file['name']);
 			
 			$wpbb_attachments = array(WP_CONTENT_DIR . '/uploads' . $pxjn_wp_upload_dir['subdir'] . '/' . $filenamenospace);
 			
