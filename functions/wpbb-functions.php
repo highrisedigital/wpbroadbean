@@ -393,7 +393,6 @@ function wpbb_job_fields_output( $content ) {
 		
 		/**
 		 * we need to loop through each of these fields
-		 * using info stored in the array we need to add each field to the job
 		 * start a loop to loop through each field
 		 */
 		foreach( $wpbb_job_fields as $field ) {
@@ -440,3 +439,74 @@ function wpbb_job_fields_output( $content ) {
 }
 
 add_filter( 'the_content', 'wpbb_job_fields_output', 20 );
+
+/**
+ * function wpbb_job_terms_output()
+ * adds the job terms from registered wpbb taxonomies to the bottom of the job post content
+ * @param (string) @content is the current content of the job post
+ */
+function wpbb_job_terms_output( $content ) {
+	
+	global $post;
+	
+	/* get the registered wpbb taxonomies */
+	$taxonomies = wpbb_get_registered_taxonomies();
+	
+	/* check we have any taxonomies to deal with */
+	if( ! empty( $taxonomies ) ) {
+		
+		/* how many field have we got to output */
+		$tax_count = count( $taxonomies );
+		
+		/* lets setup some markup */
+		$output = '<div class="' . apply_filters( 'wpbb_job_tax_wrapper_class', 'wpbb-job-tax-wrapper' ) . '">';
+		
+		/* start a counter */
+		$counter = 1;
+		
+		/**
+		 * we need to loop through each of these taxonomies
+		 * start a loop to loop through each field
+		 */
+		foreach( $taxonomies as $tax ) {
+			
+			/* check whether this is front end output tax - if not move to the next taxonomy */
+			if( $tax[ 'show_on_frontend' ] == false )
+				continue;
+			
+			/* build a field class to use for this field */
+			$class = 'wpbb-job-tax wpbb-job-tax-' . $counter . ' ' . $tax[ 'bb_field' ];
+			
+			/* check if this is the last field */
+			if( $counter == $tax_count ) {
+				
+				/* add to our class */
+				$class .= ' last-tax';
+				
+			}
+			
+			$output .= get_the_term_list(
+				$post->ID,
+				$tax[ 'taxonomy_name' ],
+				'<div class="' . esc_attr( apply_filters( 'wpbb_job_tax_class', $class, $tax[ 'bb_field' ] ) ) . '" id="' . $tax[ 'bb_field' ] . '"><p><span class="wpbb-job-tax-label">' . esc_html( $tax[ 'singular' ] ) . ':</span> ',
+				', ',
+				'</span></p></div>'
+			);
+			
+			/* increment the counter */
+			$counter++;	
+			
+		}
+		
+		/* close out the markup */
+		$output .= '</div>';
+		
+		/* check we have markup to output */
+		if( ! empty( $output ) )
+			return $content . apply_filters( 'wpbb_job_taxonomies_output', $output, $post->ID );
+		
+	}
+
+}
+
+add_filter( 'the_content', 'wpbb_job_terms_output', 30 );
