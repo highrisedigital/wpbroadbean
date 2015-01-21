@@ -67,18 +67,20 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 	 * we are good to go in terms of adding the job to the system
 	 * lets start by handling the jobs taxonomies
 	 * get a list of all the wpbb registered taxonomies
-	 * once this has run all the terms to add to this job are stored in the array named $wpbb_taxonomies_term_ids
+	 * once this has run all the terms to add to this job are stored in the array named $wpbb_tax_terms
 	 */
 	$wpbb_taxonomies = wpbb_get_registered_taxonomies();
 	
 	/* set up holding array */
-	$wpbb_taxonomies_term_ids  = array();
+	$wpbb_tax_terms = array();
 	
-	/* add all the registered taxonomy term ids to an array */
+	/** 
+	 * loop through each of the taxonomies we have preparing it for adding to the post
+	 */
 	foreach( $wpbb_taxonomies as $taxonomy ) {
 		
-		$tax_bb_field = $taxonomy[ 'broadbean_field' ];
-		$wpbb_taxonomies_term_ids[ $tax_bb_field ] = wpbb_convert_cat_terms_to_ids( $tax_bb_field, $wpbb_xml_params, $taxonomy );
+		/* add the prepared terms to our terms array */
+		$wpbb_tax_terms[ $taxonomy[ 'bb_field' ] ] = wpbb_prepare_terms( $wpbb_xml_params->$taxonomy[ 'bb_field' ], $taxonomy );
 		
 	}
 	
@@ -136,7 +138,7 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 		foreach( $wpbb_taxonomies as $taxonomy ) {
 			wp_set_post_terms(
 				$wpbb_job_post_id,
-				$wpbb_taxonomies_term_ids[ $taxonomy[ 'broadbean_field' ] ],
+				$wpbb_tax_terms[ $taxonomy[ 'bb_field' ] ],
 				$taxonomy[ 'taxonomy_name' ]
 			);
 		} // end loop through terms
