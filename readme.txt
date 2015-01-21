@@ -50,6 +50,8 @@ The URL to post to, in order to add a job is http://domain.com/?wpbb=broadbean (
 * The processing of the feed is now more dynamic to tie in with other registered taxonomies and fields.
 * Amended the way in which the application form is rendered (no shortcode) and processed. Also slimmed the number of fields on this form.
 * Documented most functions etc. in the plugin code itself as well as cleaning up the file structure a little.
+* Allow both hierarchical and non hierarchical taxonomies to be registered for use with jobs
+* Output fields and taxonomies on the front end - using the_content filter. These get added below the post content. Control of which taxonomies and fields are shown on the front-end is controlled when they are registered.
 * Updated the readme.txt file.
 
 = 1.0.2 =
