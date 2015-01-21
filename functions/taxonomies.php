@@ -10,44 +10,48 @@ function wpbb_get_registered_taxonomies() {
 	
 	$taxonomies = array(
 		'job_type' => array(
-			'taxonomy_name' => 'wpbb_job_type',
-			'broadbean_field' => 'job_type',
-			'plural' => 'Job Types',
-			'singular' => 'Job Type',
-			'slug' => 'job-type',
-			'menu_label' => 'Types',
-			'hierarchical' => true,
-			'show_admin_column' => true
+			'taxonomy_name'		=> 'wpbb_job_type',
+			'broadbean_field'	=> 'job_type',
+			'plural'			=> 'Job Types',
+			'singular'			=> 'Job Type',
+			'slug'				=> 'job-type',
+			'menu_label'		=> 'Types',
+			'hierarchical'		=> true,
+			'show_admin_column' => true,
+			'show_on_frondend'	=> true
 		),
 		'job_location' => array(
-			'taxonomy_name' => 'wpbb_job_location',
-			'broadbean_field' => 'job_location',
-			'plural' => 'Job Locations',
-			'singular' => 'Job Location',
-			'slug' => 'job-location',
-			'menu_label' => 'Locations',
-			'hierarchical' => true,
-			'show_admin_column' => true
+			'taxonomy_name'		=> 'wpbb_job_location',
+			'broadbean_field'	=> 'job_location',
+			'plural'			=> 'Job Locations',
+			'singular'			=> 'Job Location',
+			'slug'				=> 'job-location',
+			'menu_label'		=> 'Locations',
+			'hierarchical'		=> true,
+			'show_admin_column' => true,
+			'show_on_frondend'	=> true
 		),
 		'job_industry' => array(
-			'taxonomy_name' => 'wpbb_job_industry',
-			'broadbean_field' => 'job_industry',
-			'plural' => 'Job Industries',
-			'singular' => 'Job Industry',
-			'slug' => 'job-industry',
-			'menu_label' => 'Industries',
-			'hierarchical' => true,
-			'show_admin_column' => true
+			'taxonomy_name'		=> 'wpbb_job_industry',
+			'broadbean_field'	=> 'job_industry',
+			'plural'			=> 'Job Industries',
+			'singular'			=> 'Job Industry',
+			'slug'				=> 'job-industry',
+			'menu_label'		=> 'Industries',
+			'hierarchical'		=> true,
+			'show_admin_column' => true,
+			'show_on_frondend'	=> true
 		),
 		'job_skill' => array(
-			'taxonomy_name' => 'wpbb_job_skill',
-			'broadbean_field' => 'job_skills',
-			'plural' => 'Job Skills',
-			'singular' => 'Job Skill',
-			'slug' => 'job-skill',
-			'menu_label' => 'Skills',
-			'hierarchical' => true,
-			'show_admin_column' => true
+			'taxonomy_name'		=> 'wpbb_job_skill',
+			'broadbean_field'	=> 'job_skills',
+			'plural'			=> 'Job Skills',
+			'singular'			=> 'Job Skill',
+			'slug'				=> 'job-skill',
+			'menu_label'		=> 'Skills',
+			'hierarchical'		=> true,
+			'show_admin_column'	=> true,
+			'show_on_frondend'	=> true
 		),
 		
 	);
