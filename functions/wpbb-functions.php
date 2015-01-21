@@ -363,3 +363,80 @@ function wpbb_get_job_by_reference( $job_ref ) {
 	return false;
 	
 }
+
+/**
+ * function wpbb_job_fields_output()
+ * adds the job fields to the bottom of the job post content
+ * @param (string) @content is the current content of the job post
+ */
+function wpbb_job_fields_output( $content ) {
+	
+	global $post;
+	
+	/**
+	 * now we need to handle the job fields that should be outputted for this job
+	 * lets start by getting all the job fields as an array
+	 */
+	$wpbb_job_fields = wpbb_get_job_fields();
+	
+	/* check we have any fields */
+	if( ! empty( $wpbb_job_fields ) ) {
+		
+		/* how many field have we got to output */
+		$field_count = count( $wpbb_job_fields );
+		
+		/* lets setup some markup */
+		$output = '<div class="' . apply_filters( 'wpbb_job_fields_wrapper_class', 'wpbb-job-fields-wrapper' ) . '">';
+		
+		/* start a counter */
+		$counter = 1;
+		
+		/**
+		 * we need to loop through each of these fields
+		 * using info stored in the array we need to add each field to the job
+		 * start a loop to loop through each field
+		 */
+		foreach( $wpbb_job_fields as $field ) {
+			
+			/* check whether this is front end output field - if not move to the next field */
+			if( $field[ 'show_on_frontend' ] == false )
+				continue;
+			
+			/* build a field class to use for this field */
+			$class = 'wpbb-job-field wpbb-job-field-' . $counter . ' ' . $field[ 'bb_field' ];
+			
+			/* check if this is the last field */
+			if( $counter == $field_count ) {
+				
+				/* add to our class */
+				$class .= ' last-field';
+				
+			}
+			
+			/* start the markup with a field wrapper div */
+			$output .= '<div class="' . esc_attr( apply_filters( 'wpbb_job_field_class', $class, $field[ 'bb_field' ] ) ) . '" id="' . $field[ 'bb_field' ] . '">';
+			
+				$output .= '<p><span class="wpbb-job-field-label">' . esc_html( $field[ 'name' ] ) . ':</span> <span class="wpbb-job-field-value">' . ucfirst( get_post_meta( $post->ID, $field[ 'id' ], true ) ) . '</span></p>';
+			
+			/* close out the field markup */
+			$output .= '</div>';
+			
+			/* increment the counter */
+			$counter++;
+		
+		}
+		
+		/* close out the markup */
+		$output .= '</div>';
+		
+		/* check we have markup to output */
+		if( ! empty( $output ) )
+			return $content . apply_filters( 'wpbb_job_fields_output', $output, $post->ID );
+		
+	}
+	
+	return $content;
+	
+}
+
+add_filter( 'the_content', 'wpbb_job_fields_output', 20 );
