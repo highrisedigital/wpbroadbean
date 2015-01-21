@@ -127,12 +127,7 @@ function wpbb_settings_page_content() {
 		
 			/* do before settings page action */
 			do_action( 'wpbb_before_settings_page' );
-		
-			/* build filterable opening text */
-			$wpbb_admin_paragraph = '<p>Welcome to the Broadbean (AdCourier) settings page. To find out more about this advert distribution tool please <a href="http://www.broadbean.com/multiposting.html">click here</a>.</p>';
-						
-			echo apply_filters( 'wpbb_admin_paragraph', $wpbb_admin_paragraph );
-			
+					
 			/* setup an array of settings */
 			$wpbb_settings = apply_filters(
 				'wpbb_settings_output', 
@@ -256,6 +251,27 @@ function wpbb_settings_page_content() {
 	do_action( 'wpbb_after_settings_page' );
 	
 }
+
+/**
+ * function wpbb_settings_page_cta()
+ * adds the call to action box on the settings page
+ */
+function wpbb_settings_page_cta() {
+	
+	?>
+	
+	<div class="wpbb-cta">
+		
+		<p>Need some help?</p>
+		<p>Why not let us take the hassle out of setup? <a href="http://wpbroadbean.com">Get in touch now for an integration quote.</a></p>
+		
+	</div>
+	
+	<?php
+	
+}
+
+add_action( 'wpbb_before_settings_page', 'wpbb_settings_page_cta', 10 );
 
 /**
  * Function wpbb_change_title_text()
