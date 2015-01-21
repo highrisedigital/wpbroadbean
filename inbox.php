@@ -158,7 +158,7 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 			foreach( $wpbb_job_fields as $field ) {
 				
 				/**
-				 * we cannot carry out if this field does not have a bb_field array element
+				 * we cannot carry on if this field does not have a bb_field array element
 				 * lets check it is present and if not move onto the next field
 				 */
 				if( empty( $field[ 'bb_field' ] ) )
