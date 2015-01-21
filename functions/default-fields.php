@@ -71,8 +71,8 @@ function wpbb_add_default_fields( $fields ) {
 		'type'		=> 'select',
 		'options'	=> array(
 			'zero'	=> 'Select',
-	        'gbp'	=> 'GBP',
-	        'eur'	=> 'Euro',
+	        'GBP'	=> 'GBP',
+	        'EUR'	=> 'Euro',
 	    ),
 		'cols' => 6
 	);
