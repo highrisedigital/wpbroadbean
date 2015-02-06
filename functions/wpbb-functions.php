@@ -406,6 +406,10 @@ function wpbb_get_job_by_reference( $job_ref ) {
  */
 function wpbb_job_fields_output( $content ) {
 	
+	/* only carry on if we are on a single job post view */
+	if( ! is_singular( wpbb_job_post_type_name() ) )
+		return $content;
+	
 	global $post;
 	
 	/**
@@ -483,6 +487,10 @@ add_filter( 'the_content', 'wpbb_job_fields_output', 20 );
 function wpbb_job_terms_output( $content ) {
 	
 	global $post;
+	
+	/* only carry on if we are on a single job post view */
+	if( ! is_singular( wpbb_job_post_type_name() ) )
+		return $content;
 	
 	/* get the registered wpbb taxonomies */
 	$taxonomies = wpbb_get_registered_taxonomies();
