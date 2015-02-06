@@ -16,6 +16,8 @@ WP Broadbean is a plugin allowing jobs added to Broadbean to show in your WordPr
 
 You can find out more about the WP Broadbean plugin on the [WP Broadbean website](http://wpbroadbean.com/ "Broadbean posted jobs on your WordPress website").
 
+We also offer a service to complete a Broadbean integration with WordPress for you. Find out more about our [WPBB Assist service here](http://wpbroadbean.com/assist/).
+
 == Installation ==
 
 To install the plugin:
@@ -24,20 +26,46 @@ To install the plugin:
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Visit the settings page under WP Broadbean > Settings
 4. Enter a username and password as well as choosing a page to use for your application form.
+5. View the how to get start question in the FAQs
 
 == Frequently Asked Questions ==
 
+**How do I get started?**
+
+Your first task is to contact Broadbean and let them know that you want to create a new feed from your Broadbean Adcourier account to your WordPress website. It is also important to tell them that your integration will be using the WP Broadbean Plugin by Mark Wilkinson. You will need to indicate that you require the standard feed to be setup for this plugin without any changes being made.
+
+**How do I submit my feed for development by Broadbean?**
+
+Once you have completed the above the Broadbean team will probably direct you to the following page:
+
+[http://api.adcourier.com/docs/index.cgi?page=jobboards_register](http://api.adcourier.com/docs/index.cgi?page=jobboards_register)
+
+Here you are supplied with a form to complete. Follow the instructions here in order to complete this:
+
+[https://github.com/wpmark/wpbroadbean/wiki/Job-Board-Registration](https://github.com/wpmark/wpbroadbean/wiki/Job-Board-Registration)
+
 **Do Broadbean charge for this?**
 
-Yes they do. When you choose to include your own site in a multi job posting Broadbean have the setup a "feed" to your site and they charge a one off fee for this. You should contact Broadbean before installing this plugin. Indicate to them that you want to post Broadbean jobs to your WordPress site running the WP Broadbean Plugin from Mark Wilkinson.
+Probably yes but maybe no!! If your feed is an exact copy of the default feed they use with this plugin then they may not charge you to set this up, however there may be a fee if alterations occur due to circumstances that cause the feed to change. Their standard fee for setting up a feed to any site is around £800.
 
 **What is the URL to which Broadbean should post the feed too?**
 
-The URL to post to, in order to add a job is http://domain.com/?wpbb=broadbean (of  course replacing domain.com with your actual domain). The end-point expects an XML feed using the standard Broadbean XML feed.
+The URL to post to, in order to add a job is http://domain.com/?wpbb=broadbean (of course replacing domain.com with your actual domain). The end-point expects an XML feed using the standard Broadbean XML feed.
+
+**Can I customised the how the feed is added to WordPress?**
+
+Yes you can. The plugin is built with extensibility in mind and therefore you can make many changes and edits without altering the plugin code itself. This will protect you when the plugin is updated. The plugin handles the incoming feed in the `inbox.php` file in the plugin root folder. If you copy this file to your active theme and place it in a folder named `wpbb` this will be used instead of the plugins version. Therefore you can make amends and change how the jobs are added when posted from Broadbean.
+
+**What if I want different meta data and taxonomies that the standard ones, can the plugin handle that?**
+
+Broadbean can built you a completely bespoke feed to your site, with practically any date you want about each job you post. The WP Broadbean Plugin can handle this through its extensibility features. You can add fields and taxonomies as well as remove the default ones should you wish too. The plugin was built with extensibility in mind with a number of actions and filters available to developers.
+
+Take a look at the [Wiki on Github](https://github.com/wpmark/wpbroadbean/wiki/) in order to find some examples of the things you can do.
 
 == Screenshots ==
 
-1. The WP Broadbean screen, added to get you started.
+1. Job listings in the WordPress admin
+2. Single job edit post screen
 
 == Changelog ==
 
@@ -97,4 +125,4 @@ The URL to post to, in order to add a job is http://domain.com/?wpbb=broadbean (
 * Initial Beta Release
 
 == Upgrade Notice ==
-Update through the WordPress admin as notified.
+Update through the WordPress admin as notified always be sure to make a site backup before upgrading.
