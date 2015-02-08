@@ -39,6 +39,13 @@ function wpbb_metaboxes( $meta_boxes ) {
 					'cols' => 6,
 					'type' => 'text'
 				),
+				'attachments' => array(
+					'name' => 'Application Attachments',
+					'desc' => 'Attachments to this Application are listed below.',
+					'id' => '_wpbb_applicant_attachments',
+					'cols' => 12,
+					'type' => 'attachments'
+				),
 			)
         )
     );
@@ -47,3 +54,83 @@ function wpbb_metaboxes( $meta_boxes ) {
 }
 
 add_filter( 'cmb_meta_boxes', 'wpbb_metaboxes' );
+
+/**
+ * create our own custom meta box field for showing attachments
+ */
+class Attachments_Field extends CMB_Field {
+
+	public function html() {
+		
+		/* get the post ID from the url as we are editing a post */
+		$post_id = $_GET[ 'post' ];
+		
+		/* check we have a post id */
+		if( ! empty( $post_id ) ) {
+			
+			/* get the attachment posts for this post */
+			$attachments = new WP_Query(
+				array(
+					'post_type'			=> 'attachment',
+					'post_parent'		=> $post_id,
+					'post_status'		=> 'inherit',
+					'posts_per_page'	=> -1
+				)
+			);
+			
+			/* check we have attachments */
+			if( $attachments->have_posts() ) {
+				
+				?>
+				
+				<div class="attachments">
+					
+					<ul class="attachment-list">
+					
+					<?php
+						
+						/* loop through attachments */
+						while( $attachments->have_posts() ) : $attachments->the_post();
+						
+							/* get the attachment URL */
+							$url = wp_get_attachment_url( get_the_ID() );
+						
+							?>
+							
+							<li <?php post_class(); ?>><a href="<?php echo esc_url( $url ); ?>"><?php the_title(); ?></a></li>
+							
+							<?php
+						
+						/* end loop */
+						endwhile;	
+						
+					?>
+					
+					</ul>
+					
+				</div>
+				
+				<?php
+				
+			} // end if have attachments
+			
+			/* reset query */
+			wp_reset_query();
+			
+		}
+		
+	}
+
+}
+
+/* registers our field type with cmb */
+function wpbb_show_attachments( $cmb_field_types ) {
+	
+	/* add our new field type to the filed types array */
+	$cmb_field_types[ 'attachments' ] = 'Attachments_Field';
+	
+	return $cmb_field_types;
+	
+}
+
+add_filter( 'cmb_field_types', 'wpbb_show_attachments' );
