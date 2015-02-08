@@ -35,11 +35,13 @@ function wpbb_add_admin_sub_menus() {
 	
 	/* check we have sub menus to add */
 	if( ! empty( $wpbb_admin_sub_menus ) ) {
-		
-		//wp_die( print_r( $wpbb_admin_sub_menus ) );
 
 		/* loop through each sub menu to add */
 		foreach( $wpbb_admin_sub_menus as $submenu ) {
+			
+			/* check whether a callback is passed */
+			if( empty( $submenu[ 'callback' ] ) )
+				$submenu[ 'callback' ] = false;
 			
 			/* add the sub page for the wpbb_job_category taxonomy */
 			add_submenu_page(
