@@ -205,6 +205,8 @@ function wpbb_get_apply_url( $post_id = '' ) {
  */
 function wpbb_apply_button( $content ) {
 	
+	global $post;
+	
 	/* check this is a single job post */
 	if( ! is_singular( wpbb_job_post_type_name() ) )
 		return $content;
