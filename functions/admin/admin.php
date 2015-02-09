@@ -1,9 +1,8 @@
 <?php
-/***************************************************************
-* Function wpbb_change_job_title_text()
-* Changes the wordpress 'Enter title here' text for the job post
-* type.
-***************************************************************/
+/**
+ * Function wpbb_add_admin_menu()
+ * adds the wpbroadbean admin menus under a parent menu
+ */
 function wpbb_add_admin_menu() {
 
 	/* add the main page for wpbroadbean info */
@@ -16,43 +15,56 @@ function wpbb_add_admin_menu() {
 		'dashicons-businessman', // icon url
 		'90' // position
 	);
-	
-	do_action( 'wpbb_add_admin_menu_start' );
 
-	/**
-	 * Register Admin pages for all Taxonomies
-	 */
-	$taxonomies = wpbb_get_registered_taxonomies();
-	foreach ($taxonomies as $taxonomy) {
-		/* add the sub page for the wpbb_job_category taxonomy */
-		add_submenu_page(
-			'wp_broadbean_home', // parent_slug,
-			$taxonomy[ 'menu_label' ], // page_title,
-			$taxonomy[ 'menu_label' ], // menu_title,
-			'edit_others_posts', // capability,
-			'edit-tags.php?taxonomy=' . $taxonomy['taxonomy_name'] // menu_slug
-		);
-	}
-			
-	/* add the settings page sub menu item */
-	add_submenu_page(
-		'wp_broadbean_home',
-		'Settings',
-		'Settings',
-		'manage_options',
-		'wp_broadbean_settings',
-		'wpbb_setings_page_content'
-	);
-	
-	do_action( 'wpbb_add_admin_menu_end' );
 }
 
 add_action( 'admin_menu', 'wpbb_add_admin_menu' );
 
-/*****************************************************************
-* function wpbb_tax_menu_correction()
-* Sets the correct parent item for the sen custom taxonomies
-*****************************************************************/
+/**
+ * function wpbb_add_admin_sub_menus()
+ * adds the plugins sub menus under the wpbroadbean main admin menu item
+ * filterable by devs using the wpbb_admin_sub_menus filter
+ */
+function wpbb_add_admin_sub_menus() {
+	
+	/* filterable array of menus to add */
+	$wpbb_admin_sub_menus = apply_filters(
+		'wpbb_admin_sub_menus',
+		array()
+	);
+	
+	/* check we have sub menus to add */
+	if( ! empty( $wpbb_admin_sub_menus ) ) {
+
+		/* loop through each sub menu to add */
+		foreach( $wpbb_admin_sub_menus as $submenu ) {
+			
+			/* check whether a callback is passed */
+			if( empty( $submenu[ 'callback' ] ) )
+				$submenu[ 'callback' ] = false;
+			
+			/* add the sub page for the wpbb_job_category taxonomy */
+			add_submenu_page(
+				'wp_broadbean_home', // parent_slug,
+				$submenu[ 'label' ], // page_title,
+				$submenu[ 'label' ], // menu_title,
+				$submenu[ 'cap' ], // capability,
+				$submenu[ 'slug' ], // menu slug,
+				$submenu[ 'callback' ] // callback function for the pages content
+			);
+			
+		} // end loop through menus to add
+		
+	} // end if have sub menus to add */
+		
+}
+
+add_action( 'admin_menu', 'wpbb_add_admin_sub_menus' );
+
+/**
+ * function wpbb_tax_menu_correction()
+ * Sets the correct parent item for the sen custom taxonomies
+ */
 function wpbb_tax_menu_correction( $parent_file ) {
 	
 	global $current_screen;
@@ -78,11 +90,11 @@ function wpbb_tax_menu_correction( $parent_file ) {
 }
 add_action( 'parent_file', 'wpbb_tax_menu_correction' );
 
-/***************************************************************
-* Function wpbb_register_settings()
-* Register the settings for this plugin. Just a username and a
-* password for authenticating.
-***************************************************************/
+/**
+ * Function wpbb_register_settings()
+ * Register the settings for this plugin. Just a username and a
+ * password for authenticating.
+ */
 function wpbb_register_default_settings() {
 
 	/* build array of setttings to register */
@@ -100,11 +112,11 @@ function wpbb_register_default_settings() {
 
 add_action( 'admin_init', 'wpbb_register_default_settings' );
 
-/***************************************************************
-* Function wpbb_admin_page_content()
-* Builds the content for the admin settings page.
-***************************************************************/
-function wpbb_setings_page_content() {
+/**
+ * Function wpbb_admin_page_content()
+ * Builds the content for the admin settings page.
+ */
+function wpbb_settings_page_content() {
 
 	?>
 	
@@ -117,25 +129,12 @@ function wpbb_setings_page_content() {
 		
 			/* do before settings page action */
 			do_action( 'wpbb_before_settings_page' );
-		
-			/* build filterable opening text */
-			$wpbb_admin_paragraph = '<p>Welcome to the Broadbean (AdCourier) settings page. To find out more about this advert distribution tool please <a href="http://www.broadbean.com/multiposting.html">click here</a>.</p>';
-			
-			$wpbb_admin_paragraph .= '<h3>Steps to Get Started</h3>';
-			
-			$wpbb_admin_paragraph .= '
-				<ol>
-					<li>Setup your <a href="' . admin_url( 'edit-tags.php?taxonomy=wpbb_job_type' ) .'">job type terms here</a></li>
-					<li>Add your <a href="' . admin_url( 'edit-tags.php?taxonomy=wpbb_job_category' ) .'">job categories here</a></li>
-					<li>Input a list of your <a href="' . admin_url( 'edit-tags.php?taxonomy=wpbb_job_location' ) .'">job locations here</a></li>
-					<li>Set a username and password below, to use for the integration with Broadbean, making sure you save the changes.</li>
-				</ol>
-			';
-			
-			echo apply_filters( 'wpbb_admin_paragraph', $wpbb_admin_paragraph );
-			
+					
 			/* setup an array of settings */
-			$wpbb_settings = apply_filters( 'wpbb_settings_output', array() );
+			$wpbb_settings = apply_filters(
+				'wpbb_settings_output', 
+				array()
+			);
 		
 		?>
 		
@@ -255,18 +254,39 @@ function wpbb_setings_page_content() {
 	
 }
 
-/***************************************************************
-* Function wpbb_change_title_text()
-* Changes the wordpress 'Enter title here' text for the job post
-* type.
-***************************************************************/
+/**
+ * function wpbb_settings_page_cta()
+ * adds the call to action box on the settings page
+ */
+function wpbb_settings_page_cta() {
+	
+	?>
+	
+	<div class="wpbb-cta">
+		
+		<p>Need some help?</p>
+		<p>Why not let us take the hassle out of setup? <a href="http://wpbroadbean.com">Get in touch now for an integration quote.</a></p>
+		
+	</div>
+	
+	<?php
+	
+}
+
+add_action( 'wpbb_before_settings_page', 'wpbb_settings_page_cta', 10 );
+
+/**
+ * Function wpbb_change_title_text()
+ * Changes the wordpress 'Enter title here' text for the job post
+ * type.
+ */
 function wpbb_change_title_text( $title ){
      
 	/* get the current screen we are viewing in the admin */
 	$wpbb_screen = get_current_screen();
 
 	/* if the current screen is our job post type */
-	if( 'wpbb_job' == $wpbb_screen->post_type ) {
+	if( wpbb_job_post_type_name() == $wpbb_screen->post_type ) {
 		
 		/* set the new text for the title box */
 		$title = 'Job Title';
@@ -286,14 +306,14 @@ function wpbb_change_title_text( $title ){
  
 add_filter( 'enter_title_here', 'wpbb_change_title_text' );
 
-/***************************************************************
-* Function wpbb_job_post_editor_content()
-* Pre-fills the post editor on jobs with instructional text.
-***************************************************************/
+/**
+ * Function wpbb_job_post_editor_content()
+ * Pre-fills the post editor on jobs with instructional text.
+ */
 function wpbb_job_post_editor_content( $content ) {
 		
 	/* check we are on the job post type */
-	if( 'wpbb_job' != wpbb_get_current_post_type() )
+	if( wpbb_job_post_type_name() != wpbb_get_current_post_type() )
 		return;
 	
 	$content = "Replace this text with the long description of the job.";
@@ -303,10 +323,10 @@ function wpbb_job_post_editor_content( $content ) {
 
 add_filter( 'default_content', 'wpbb_job_post_editor_content' );
 
-/***************************************************************
-* Function wpbb_get_current_admin_post_type()
-* Returns the post type of a post in the admin.
-***************************************************************/
+/**
+ * Function wpbb_get_current_admin_post_type()
+ * Returns the post type of a post in the admin.
+ */
 function wpbb_get_current_admin_post_type() {
   
   global $post, $typenow, $current_screen;
@@ -332,11 +352,11 @@ function wpbb_get_current_admin_post_type() {
   
 }
 
-/***************************************************************
-* Function wpbb_job_short_description_meta_box()
-* Change html output of the excerpt box, removing the paragraph
-* of instruction text.
-***************************************************************/
+/**
+ * Function wpbb_job_short_description_meta_box()
+ * Change html output of the excerpt box, removing the paragraph
+ * of instruction text.
+ */
 function wpbb_job_short_description_meta_box( $post ) {
 	
 	?>
@@ -346,21 +366,21 @@ function wpbb_job_short_description_meta_box( $post ) {
 	
 }
 
-/***************************************************************
-* Function wpbb_excerpt_box_title()
-* Change title of the excerpt metabox to short description.
-***************************************************************/
+/**
+ * Function wpbb_excerpt_box_title()
+ * Change title of the excerpt metabox to short description.
+ */
 function wpbb_excerpt_box_title() {
 	
 	/* check this is a job post */
-	if( 'wpbb_job' != wpbb_get_current_admin_post_type() )
+	if( wpbb_job_post_type_name() != wpbb_get_current_admin_post_type() )
 		return;
 		
 	/* remove the excerpt metabox */
-	remove_meta_box( 'postexcerpt', 'my_custom_post_type', 'side' );
+	remove_meta_box( 'postexcerpt', wpbb_job_post_type_name(), 'side' );
 	
 	/* add the metabox back with a different title */
-	add_meta_box( 'postexcerpt', __( 'Short Description' ), 'wpbb_job_short_description_meta_box', 'wpbb_job', 'normal', 'high' );
+	add_meta_box( 'postexcerpt', __( 'Short Description' ), 'wpbb_job_short_description_meta_box', wpbb_job_post_type_name(), 'normal', 'high' );
 	
 }
 

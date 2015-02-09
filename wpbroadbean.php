@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: WP Broadbean
-Plugin URI: 
-Description: Integrates Broadbean Adcourier with WordPress.
-Version: 1.0.2
+Plugin URI: http://wpbroadbean.com
+Description: Integrates Broadbean Adcourier with WordPress. This plugin allows jobs posted through Broadbean's Adcourier system to be sent to your WordPress website.
+Version: 2.0
 Author: Mark Wilkinson
 Author URI: http://markwilkinson.me
 License: GPLv2 or later
@@ -12,19 +12,20 @@ License: GPLv2 or later
 /* load required files & functions */
 require_once( dirname( __FILE__ ) . '/functions/post-types.php' );
 require_once( dirname( __FILE__ ) . '/functions/taxonomies.php' );
-require_once( dirname( __FILE__ ) . '/functions/admin.php' );
+require_once( dirname( __FILE__ ) . '/functions/default-fields.php' );
 require_once( dirname( __FILE__ ) . '/functions/email-functions.php' );
-require_once( dirname( __FILE__ ) . '/functions/shortcodes.php' );
-require_once( dirname( __FILE__ ) . '/functions/template-tags.php' );
-require_once( dirname( __FILE__ ) . '/functions/settings.php' );
-require_once( dirname( __FILE__ ) . '/functions/utils.php' );
+require_once( dirname( __FILE__ ) . '/functions/application-form.php' );
+require_once( dirname( __FILE__ ) . '/functions/wpbb-functions.php' );
+require_once( dirname( __FILE__ ) . '/functions/admin/admin-menus.php' );
+require_once( dirname( __FILE__ ) . '/functions/admin/admin.php' );
+require_once( dirname( __FILE__ ) . '/functions/admin/default-settings.php' );
 
 /* check whether the metabox class already exists - and load it if not */
 if( ! class_exists( 'CMB_Meta_Box' ) )
 	require_once( dirname( __FILE__ ) . '/functions/metaboxes/custom-meta-boxes.php' );
 
 /* load the metabox functions */
-require_once( dirname( __FILE__ ) . '/functions/metaboxes.php' );
+require_once( dirname( __FILE__ ) . '/functions/admin/metaboxes.php' );
 
 /***************************************************************
 * Function wpbb_add_new_query_var()
@@ -67,7 +68,7 @@ function wpbb_adcourier_inbox_load() {
 		} else {
 
 			/* load the adcourier inbox file */
-			require_once( dirname( __FILE__ ) . '/wpbb-inbox.php' );
+			require_once( dirname( __FILE__ ) . '/inbox.php' );
 
 		}
         
@@ -88,45 +89,22 @@ add_action( 'template_redirect', 'wpbb_adcourier_inbox_load' );
 ***************************************************************/
 function wpbb_add_styles_scripts() {
 
-	global $post;
+	/* get the apply page from the settings */
+	$apply_pageid = get_option( 'wpbb_apply_page_id' );
 	
-	/* check the post variable is not empty */
-	if( !empty( $post ) ) {
+	/* check this is the apply page */
+	if( is_page( $apply_pageid ) ) {
 		
-		/* check if we find our shortcode in the post content */
-		if( stripos( $post->post_content, '[wpbb_applicationform]') !== FALSE ) {
-		
-		/* register and enqueue the jquery validate plugin */
+		/* enqueue the jquery validate plugin */
 		wp_enqueue_script( 'jquery' );
-		wp_register_script( 'wpbb_jquery_validate' , plugins_url( '/scripts/jquery.validate.js', __FILE__ ), 'jquery' );  
-		wp_register_script( 'wpbb_validate', plugins_url( '/scripts/wpbb_validate.js', __FILE__ ), 'wpbb_jquery_validate' );
-		wp_enqueue_script( 'wpbb_jquery_validate' );
-		wp_enqueue_script( 'wpbb_validate' );
-		wp_register_style( 'wpbb_form_styles', plugins_url( '/css/form-style.css', __FILE__ ) );
-		wp_enqueue_style( 'wpbb_form_styles' );
-		
-		} // if if shortcode detected
+		wp_enqueue_script( 'wpbb_jquery_validate', plugins_url( '/js/jquery.validate.js', __FILE__ ), 'jquery' );
+		wp_enqueue_script( 'wpbb_validate', plugins_url( '/js/validate.js', __FILE__ ), 'wpbb_jquery_validate', array(), true ); 
+
+		/* enqueue the application form styles */
+		wp_enqueue_style( 'wpbb_form_styles', plugins_url( '/css/form-style.css', __FILE__ ) );
 		
 	} // end if have post varibale
 				
 }
 
 add_action( 'wp_enqueue_scripts', 'wpbb_add_styles_scripts' );
-
-/***************************************************************
-* Function wpbb_apply_button()
-* Outputs the apply now button after the loop on job single posts
-***************************************************************/
-function wpbb_apply_button() {
-	
-	/* check this is a single job post */
-	if( ! is_singular( 'wpbb_job' ) )
-		return;
-	
-	?>
-    <p class="apply-button"><a href="<?php echo wpbb_get_apply_url( $post->ID ); ?>">Apply Now</a></p>
-    <?php
-	
-}
-
-add_filter( 'loop_end', 'wpbb_apply_button' );

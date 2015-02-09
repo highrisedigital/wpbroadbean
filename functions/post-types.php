@@ -7,7 +7,7 @@ function wpbb_register_post_types() {
 	
 	/* register the jobs post type */
 	register_post_type(
-		'wpbb_job',array(
+		'wpbb_job', array(
 			'labels' => array(
 				'name' => _x( 'Jobs', 'post type general name' ),
 				'singular_name' => _x( 'Job', 'post type singular name' ),

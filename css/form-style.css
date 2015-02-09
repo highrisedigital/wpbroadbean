@@ -1,26 +1,22 @@
 .message {
-	text-align: center;
-	background-color: #ffffe0;
-	border-color: #e6db55;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	border-width: 1px;
-	border-style: solid;
+	text-align: left;
+	background-color: #fbfbfb;
+	border-left: 3px solid #7ad03a;
 	padding: 2%;
 }
 .error {
-	background-color: #ffebe8;
 	border-color: #C00;
+	color: #C00;
 }
-#wpbb_application_form .wpbb_input {
+#wpbb-application-form .wpbb-input {
 	clear: both;
 	margin-bottom: 2%;
 }
-#wpbb_application_form .wpbb_input label {
+#wpbb-application-form .wpbb-input label {
 	display: block;
 	margin-bottom: 1%;
 }
-#wpbb_application_form .wpbb_input .wpbb_text_input {
+#wpbb-application-form .wpbb-input .wpbb-text-input {
 	padding: 1%;
 	border: 0;
 	border: 1px solid #dddddd;
@@ -32,7 +28,7 @@ p.wpbb_description {
 	font-style: italic;
 }
 
-#wpbb_application_form label.error {
+#wpbb-application-form label.error {
 	display: none;
 }
 label.require:after {

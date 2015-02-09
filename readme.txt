@@ -3,17 +3,20 @@ Contributors: wpmarkuk
 Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
-Tested up to: 3.9.1
-Stable tag: 1.0.2
+Tested up to: 4.1
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-** Beta Plugin - it works but is rusty! **
 WP Broadbean is a plugin allowing jobs added to Broadbean to show in your WordPress site.
 
 == Description ==
 
-WP Broadbean is a plugin designed to work alongside the Broadbean Adcourier job post system allowing jobs added to Broadbean to show in your WordPress site. The plugin adds custom post types and taxonomies to allow you to enter jobs into your WordPress site. More importantly it provides an end-point to accept feed data sent by Broadbean and add this as job posts to your site.
+[WP Broadbean](http://wpbroadbean.com/ "Broadbean posted jobs on your WordPress website") is a plugin designed to work alongside the Broadbean Adcourier job posting system allowing jobs added to Broadbean to show in your WordPress site. The plugin adds custom post types and taxonomies to allow you to add jobs. More importantly it provides an end-point to accept feed data sent by Broadbean and add this as job posts to your site.
+
+You can find out more about the WP Broadbean plugin on the [WP Broadbean website](http://wpbroadbean.com/ "Broadbean posted jobs on your WordPress website").
+
+We also offer a service to complete a Broadbean integration with WordPress for you. Find out more about our [WPBB Assist service here](http://wpbroadbean.com/assist/).
 
 [youtube http://www.youtube.com/watch?v=CAkV09vl6UI]
 
@@ -25,26 +28,67 @@ To install the plugin:
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Visit the settings page under WP Broadbean > Settings
 4. Enter a username and password as well as choosing a page to use for your application form.
-5. Add the application form short code to your apply page
-6. Complete your [Broadbean feed request here](http://api.adcourier.com/docs/index.cgi?page=jobboards_register)
+5. View the how to get start question in the FAQs
 
 == Frequently Asked Questions ==
 
-Do Broadbean charge for this?
+**How do I get started?**
 
-Yes they do. When you choose to include your own site in a multi job posting Broadbean have the setup a "feed" to your site and they charge a one off fee for this.
+Your first task is to contact Broadbean and let them know that you want to create a new feed from your Broadbean Adcourier account to your WordPress website. It is also important to tell them that your integration will be using the WP Broadbean Plugin by Mark Wilkinson. You will need to indicate that you require the standard feed to be setup for this plugin without any changes being made.
+
+**How do I submit my feed for development by Broadbean?**
+
+Once you have completed the above the Broadbean team will probably direct you to the following page:
+
+[http://api.adcourier.com/docs/index.cgi?page=jobboards_register](http://api.adcourier.com/docs/index.cgi?page=jobboards_register)
+
+Here you are supplied with a form to complete. Follow the instructions here in order to complete this:
+
+[https://github.com/wpmark/wpbroadbean/wiki/Job-Board-Registration](https://github.com/wpmark/wpbroadbean/wiki/Job-Board-Registration)
+
+**Do Broadbean charge for this?**
+
+Probably yes but maybe no!! If your feed is an exact copy of the default feed they use with this plugin then they may not charge you to set this up, however there may be a fee if alterations occur due to circumstances that cause the feed to change. Their standard fee for setting up a feed to any site is around £800.
+
+**What is the URL to which Broadbean should post the feed too?**
+
+The URL to post to, in order to add a job is http://domain.com/?wpbb=broadbean (of course replacing domain.com with your actual domain). The end-point expects an XML feed using the standard Broadbean XML feed.
+
+**Can I customised the how the feed is added to WordPress?**
+
+Yes you can. The plugin is built with extensibility in mind and therefore you can make many changes and edits without altering the plugin code itself. This will protect you when the plugin is updated. The plugin handles the incoming feed in the `inbox.php` file in the plugin root folder. If you copy this file to your active theme and place it in a folder named `wpbb` this will be used instead of the plugins version. Therefore you can make amends and change how the jobs are added when posted from Broadbean.
+
+**What if I want different meta data and taxonomies that the standard ones, can the plugin handle that?**
+
+Broadbean can built you a completely bespoke feed to your site, with practically any date you want about each job you post. The WP Broadbean Plugin can handle this through its extensibility features. You can add fields and taxonomies as well as remove the default ones should you wish too. The plugin was built with extensibility in mind with a number of actions and filters available to developers.
+
+Take a look at the [Wiki on Github](https://github.com/wpmark/wpbroadbean/wiki/) in order to find some examples of the things you can do.
 
 == Screenshots ==
 
-1. The WP Broadbean screen, added to get you started.
+1. Job listings in the WordPress admin
+2. Single job edit post screen
 
 == Changelog ==
+
+= 2.0 =
+* Removed the beta status!
+* Added a filter to allow developers to use a different custom post type for jobs
+* WP Broadbean sub menus are added using a filter so developers can add their own menus more easily
+* Created a template function to get the value of a job field from post meta
+* Fields are now added using a filter. This allows developers to easily add other fields and have the data processed in the feed as well as the WP backend.
+* The processing of the feed is now more dynamic to tie in with other registered taxonomies and fields.
+* Amended the way in which the application form is rendered (no shortcode) and processed. Also slimmed the number of fields on this form.
+* Documented most functions etc. in the plugin code itself as well as cleaning up the file structure a little.
+* Allow both hierarchical and non hierarchical taxonomies to be registered for use with jobs
+* Output fields and taxonomies on the front end - using the_content filter. These get added below the post content. Control of which taxonomies and fields are shown on the front-end is controlled when they are registered.
+* Updated the readme.txt file.
 
 = 1.0.2 =
 * Set skills taxonomy to hierarchical
 
 = 1.0.1 =
-* Correct name for the job locations taxonomy - showed an incorrect label in the taxonomy metabox
+* Correct name for the job locations taxonomy - showed an incorrect label in the taxonomy meta box
 
 = 1.0 =
 * Thanks to @getdave for contributions to v1.0
@@ -83,4 +127,4 @@ Yes they do. When you choose to include your own site in a multi job posting Bro
 * Initial Beta Release
 
 == Upgrade Notice ==
-Update through the WordPress admin as notified.
+Update through the WordPress admin as notified always be sure to make a site backup before upgrading.
