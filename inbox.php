@@ -170,7 +170,7 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 				 * check that the XML tag containing the bb_field is actually set to something
 				 * i.e. do we have data sent to actually store
 				 */
-				if( ! empty( (string) $wpbb_xml_params->$field[ 'bb_field' ] ) ) {
+				if( ! empty( $wpbb_xml_params->$field[ 'bb_field' ] ) ) {
 					
 					/* lets add the sent data as post meta for this job */
 					add_post_meta(
