@@ -221,12 +221,12 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 		
 		/* setup string of deleted posts */
 		$wpbb_deleted_posts = '<p>Post or posts deleted. The following post or posts were deleted: ';
-			
+		
 		/* delete the post */
-		wp_delete_post( $wpbb_post->ID );
-			
+		$deleted = wp_delete_post( $job_post );
+		
 		/* add to delete posts string */
-		$wpbb_deleted_posts .= $wpbb_post->ID . ' | Job Reference: ' . $wpbb_job_reference;
+		$wpbb_deleted_posts .= $job_post . ' | Job Reference: ' . $wpbb_xml_params->job_reference;
 	
 		/* output confirmation message */
 		echo $wpbb_deleted_posts . '</p>';
