@@ -35,7 +35,7 @@ $wpbb_xml_params = simplexml_load_string( $wpbb_xml_content );
  * before we go any further - lets authenticate
  * check the username / password sent matches that stored
  */
-if( wp_strip_all_tags( (string) $wpbb_xml_params->username ) != $wpbb_username || wp_strip_all_tags( (string) $wpbb_xml_params->username != $wpbb_password ) ) {
+if( wp_strip_all_tags( (string) $wpbb_xml_params->username ) != $wpbb_username || wp_strip_all_tags( (string) $wpbb_xml_params->password != $wpbb_password ) ) {
 	
 	/* username and/or password are not correct, show an error message and stop file loading any further */
 	wp_die( __( 'Error: Sorry username and/or password are not valid.' ) );
