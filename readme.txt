@@ -73,6 +73,9 @@ Take a look at the [Wiki on Github](https://github.com/wpmark/wpbroadbean/wiki/)
 
 == Changelog ==
 
+= 2.0.2 =
+* Corrected an issue where jobs could not be deleted via broadbean
+
 = 2.0.1 =
 * Corrected an issue where username and password failed to authenticate
 
