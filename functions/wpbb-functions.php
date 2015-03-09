@@ -46,13 +46,13 @@ function wpbb_prepare_terms( $sent_terms, $taxonomy ) {
 			either way add it to our array 
 		*/
 		/* check whether the term exists */
-		if ( $term_id = term_exists( $wpbb_taxonomy_term ) ) {
+		if ( $term_id = term_exists( $wpbb_taxonomy_term, $taxonomy[ 'taxonomy_name' ] ) ) {
 			
 			/* check if the taxonomy is hierarchical */
 			if( $taxonomy[ 'hierarchical' ] == true ) {
 				
 				/* add to term id to our terms array */
-				$wpbb_tax_terms[] = $term_id;
+				$wpbb_tax_terms[] = $term_id[ 'term_id' ];
 				
 			} else {
 			

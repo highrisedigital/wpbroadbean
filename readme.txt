@@ -4,7 +4,7 @@ Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,9 @@ Take a look at the [Wiki on Github](https://github.com/wpmark/wpbroadbean/wiki/)
 2. Single job edit post screen
 
 == Changelog ==
+
+= 2.0.3 =
+* Correct an issue where an incorrect taxonomy term could be added to a job. This was because the term could have belonged to another taxonomy. This fix force it to look for only wpbb taxonomies when adding terms to jobs posted through Broadbean.
 
 = 2.0.2 =
 * Corrected an issue where jobs could not be deleted via broadbean
