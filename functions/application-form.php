@@ -234,7 +234,7 @@ function wpbb_application_processing() {
 		
 		/* set up the mail variables */
 		$wpbb_mail_subject = 'New Job Application Submitted - ' . esc_html( get_the_title( $wpbb_application_id ) );
-		$wpbb_email_headers = 'From: ' . esc_html( get_the_title( $wpbb_application_id ) ) . ' <' . esc_html( get_the_title( $wpbb_application_id ) ) . '>';
+		$wpbb_email_headers = 'From: ' . $_POST[ 'wpbb_name' ] . ' <' . $_POST[ 'wpbb_email' ] . '>';
 		
 		/**
 		 * set the content of the email as a variable
