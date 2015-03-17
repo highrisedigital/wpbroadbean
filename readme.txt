@@ -50,7 +50,7 @@ Here you are supplied with a form to complete. Follow the instructions here in o
 
 **Do Broadbean charge for this?**
 
-Probably yes but maybe no!! If your feed is an exact copy of the default feed they use with this plugin then they may not charge you to set this up, however there may be a fee if alterations occur due to circumstances that cause the feed to change. Their standard fee for setting up a feed to any site is around £800.
+Probably yes! Contact your Broadbean account manager in order to get a price for developing a feed to your WordPress website.
 
 **What is the URL to which Broadbean should post the feed too?**
 
