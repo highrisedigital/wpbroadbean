@@ -76,6 +76,8 @@ Take a look at the [Wiki on Github](https://github.com/wpmark/wpbroadbean/wiki/)
 = 2.0.4 =
 * Add columns on the settings screen with call to action boxes for WP Broadbean Assist
 * Redirect to the settings screen on plugin activation
+* Change the way application forms are saved to prevent conflicts with other plugins
+* Add actions which fire after job terms and meta are added to a job when sent from Broadbean
 
 = 2.0.3 =
 * Correct an issue where an incorrect taxonomy term could be added to a job. This was because the term could have belonged to another taxonomy. This fix force it to look for only wpbb taxonomies when adding terms to jobs posted through Broadbean.

@@ -136,11 +136,22 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 		 * start by looping through the tax terms ids to add to this job
 		 */
 		foreach( $wpbb_taxonomies as $taxonomy ) {
+			
 			wp_set_post_terms(
 				$wpbb_job_post_id,
 				$wpbb_tax_terms[ $taxonomy[ 'bb_field' ] ],
 				$taxonomy[ 'taxonomy_name' ]
 			);
+			
+			/**
+			 * @hook wpbb_job_term_added
+			 * fires after the term has been added
+			 * @param (int) $wpbb_job_post_id is the post id for the added job
+			 * @param (string) $wpbb_tax_term term to be added
+			 * @param (array) $taxonomy taxonomy of the term
+			 */
+			do_action( 'wpbb_job_term_added', $wpbb_job_post_id, $wpbb_tax_terms[ $taxonomy[ 'bb_field' ] ], $taxonomy[ 'taxonomy_name' ] );
+			
 		} // end loop through terms
 		
 		/**
@@ -179,6 +190,15 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 						wp_strip_all_tags( (string) $wpbb_xml_params->$field[ 'bb_field' ] ), // this is value to store - sent from broadbean
 						true
 					);
+					
+					/**
+					 * @hook wpbb_job_field_added
+					 * fires after the field/meta has been added
+					 * @param (int) $wpbb_job_post_id is the post id for the added job
+					 * @param (string) $field[ 'id' ] is the post meta key for this field
+					 * @param (string) $wpbb_xml_params->$field[ 'bb_field' ] the value of the meta key
+					 */
+					do_action( 'wpbb_job_field_added', $wpbb_job_post_id, $field[ 'id' ], $wpbb_xml_params->$field[ 'bb_field' ] );
 					
 				} // end if have field data sent to add
 				
