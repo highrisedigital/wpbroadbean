@@ -3,11 +3,14 @@
 Plugin Name: WP Broadbean
 Plugin URI: http://wpbroadbean.com
 Description: Integrates Broadbean Adcourier with WordPress. This plugin allows jobs posted through Broadbean's Adcourier system to be sent to your WordPress website.
-Version: 2.0.3
+Version: 2.0.4
 Author: Mark Wilkinson
 Author URI: http://markwilkinson.me
 License: GPLv2 or later
 */
+
+/* define variable for path to this plugin file. */
+define( WPBB_LOCATION, dirname( __FILE__ ) );
 
 /* load required files & functions */
 require_once( dirname( __FILE__ ) . '/functions/post-types.php' );
@@ -81,6 +84,43 @@ function wpbb_adcourier_inbox_load() {
 
 /* redirect the user to our adcourier inbox file when correct query var and value are inputted */
 add_action( 'template_redirect', 'wpbb_adcourier_inbox_load' );
+
+/**
+ * Function wpbb_on_activation()
+ * On plugin activation makes current user a wpbasis user and
+ * sets an option to redirect the user to another page.
+ */
+function wpbb_on_activation() {
+	
+	/* set option to initialise the redirect */
+	add_option( 'wpbb_activation_redirect', true );
+	
+}
+
+register_activation_hook( __FILE__, 'wpbb_on_activation' );
+
+/**
+ * Function wpbb_activation_redirect()
+ * Redirects user to the settings page for wp basis on plugin
+ * activation.
+ */
+function wpbb_activation_redirect() {
+	
+	/* check whether we should redirect the user or not based on the option set on activation */
+	if( true == get_option( 'wpbb_activation_redirect' ) ) {
+		
+		/* delete the redirect option */
+		delete_option( 'wpbb_activation_redirect' );
+		
+		/* redirect the user to the wp basis settings page */
+		wp_redirect( admin_url( 'admin.php?page=wpbb_broadbean_settings' ) );
+		exit;
+		
+	}
+	
+}
+
+add_action( 'admin_init', 'wpbb_activation_redirect' );
 
 /***************************************************************
 * Function wpbb_add_styles_scripts()

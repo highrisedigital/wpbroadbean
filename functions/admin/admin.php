@@ -1,5 +1,21 @@
 <?php
 /**
+ * function wpbb_admin_styles()
+ * outputs css for the admin pages
+ */
+function wpbb_admin_styles() {
+	?>
+	<style>
+		.wpbb-postbox-inner { padding: 6px 10px 16px; }
+		.wpbb-postbox-title { border-bottom:1px solid #eee }
+		.plugin-info { line-height: 2; }
+	</style>
+	<?php
+}
+
+add_action( 'admin_head', 'wpbb_admin_styles' );
+
+/**
  * Function wpbb_add_admin_menu()
  * adds the wpbroadbean admin menus under a parent menu
  */
@@ -125,123 +141,155 @@ function wpbb_settings_page_content() {
 		<?php screen_icon( 'options-general' ); ?>
 		<h2>WP Broadbean Settings</h2>
 		
-		<?php
-		
-			/* do before settings page action */
-			do_action( 'wpbb_before_settings_page' );
-					
-			/* setup an array of settings */
-			$wpbb_settings = apply_filters(
-				'wpbb_settings_output', 
-				array()
-			);
-		
-		?>
-		
 		<form method="post" action="options.php">
-		
-			<?php settings_fields( 'wpbb_settings' ); ?>
 			
-			<table class="form-table">
-			
-				<tbody>
+			<div id="poststuff">
 				
-					<?php
+				<div id="post-body" class="metabox-holder columns-2">
 					
-						/* loop through the settings array */
-						foreach( $wpbb_settings as $wpbb_setting ) {
+					<div class="right-column postbox-container" id="postbox-container-1">
+						
+						<div class="column-inner">
+							
+							<?php
+							
+								/* do before settings page action */
+								do_action( 'wpbb_settings_page_right_column' );
 							
 							?>
 							
-							<tr valign="top">
-								<th scope="row">
-									<label for="wpbb_username"><?php echo $wpbb_setting[ 'label' ]; ?></label>
-								</th>
-								<td>
-									<?php
-										switch( $wpbb_setting[ 'type' ] ) {
-										    										    
-										    /* if the setting is a select input */
-										    case 'select' :
-										        
-										        ?>
-										    	<select name="<?php echo $wpbb_setting[ 'name' ]; ?>" id="<?php echo $wpbb_setting[ 'name' ]; ?>">
-										    	
-										    	<?php
-
-										    	/* get the setting options */
-										    	$wpbb_setting_options = $wpbb_setting[ 'options' ];
-
-										        /* loop through each option */
-										        foreach( $wpbb_setting_options as $wpbb_setting_option ) {
-
-											        ?>
-											        <option value="<?php echo esc_attr( $wpbb_setting_option[ 'value' ] ); ?>" <?php selected( get_option( $wpbb_setting[ 'name' ] ), $wpbb_setting_option[ 'value' ] ); ?>><?php echo $wpbb_setting_option[ 'name' ]; ?></option>
-													<?php
-
-										        }
-
-										        ?>
-										    	</select>
-										        <?php
-										        if( $wpbb_setting[ 'description' ] != '' ) {
-													?>
-													<p class="description"><?php echo $wpbb_setting[ 'description' ]; ?></p>
-													<?php
-												}
-										        
-										        /* break out of the switch statement */
-										        break;
-										    
-										    /* if the setting is a wysiwyg input */
-										    case 'wysiwyg' :
-										    	
-										    	/* set some settings args for the editor */
-										    	$wpbb_editor_settings = array(
-										    		'textarea_rows' => $wpbb_setting[ 'textarea_rows' ],
-										    		'media_buttons' => $wpbb_setting[ 'media_buttons' ],
-										    	);
-
-										    	/* get current content for the wysiwyg */
-										    	$wpbb_wysiwyg_content = get_option( $wpbb_setting[ 'name' ] );
-												
-										    	/* display the wysiwyg editor */
-										    	wp_editor( $wpbb_wysiwyg_content, $wpbb_setting[ 'name' ], $wpbb_editor_settings );
-										    	
-										    	/* break out of the switch statement */
-										    	break;
-										        
-										    default :
-										       
-										       ?>
-												<input type="text" name="<?php echo $wpbb_setting[ 'name' ]; ?>" id="<?php echo $wpbb_setting[ 'name' ]; ?>" class="regular-text" value="<?php echo get_option( $wpbb_setting[ 'name' ] ) ?>" />
-												<?php
-												if( $wpbb_setting[ 'description' ] != '' ) {
-													?>
-													<p class="description"><?php echo $wpbb_setting[ 'description' ]; ?></p>
-													<?php
-												}
-												
-										} // end switch statement
-										
-									?>
-									
-								</td>
-
-							</tr>
+						</div><!-- // column-inner -->
+						
+					</div><!-- // postbox-contaniner -->
+					
+					<div class="left-column postbox-container" id="postbox-container-2">
+						
+						<div class="column-inner">
 							
 							<?php
-						}
-					
-					?>
-					
-				</tbody>
-				
-			</table>
+								
+								/* output settings field nonce action fields etc. */
+								settings_fields( 'wpbb_settings' );
+		
+								/* do before settings page action */
+								do_action( 'wpbb_before_settings_page' );
+										
+								/* setup an array of settings */
+								$wpbb_settings = apply_filters(
+									'wpbb_settings_output', 
+									array()
+								);
+							
+							?>
 			
-			<p class="submit">
-				<input type="submit" name="submit" id="submit" class="button-primary" value="Save Changes">
-			</p>
+							<table class="form-table">
+							
+								<tbody>
+								
+									<?php
+									
+										/* loop through the settings array */
+										foreach( $wpbb_settings as $wpbb_setting ) {
+											
+											?>
+											
+											<tr valign="top">
+												<th scope="row">
+													<label for="wpbb_username"><?php echo $wpbb_setting[ 'label' ]; ?></label>
+												</th>
+												<td>
+													<?php
+														switch( $wpbb_setting[ 'type' ] ) {
+														    										    
+														    /* if the setting is a select input */
+														    case 'select' :
+														        
+														        ?>
+														    	<select name="<?php echo $wpbb_setting[ 'name' ]; ?>" id="<?php echo $wpbb_setting[ 'name' ]; ?>">
+														    	
+														    	<?php
+				
+														    	/* get the setting options */
+														    	$wpbb_setting_options = $wpbb_setting[ 'options' ];
+				
+														        /* loop through each option */
+														        foreach( $wpbb_setting_options as $wpbb_setting_option ) {
+				
+															        ?>
+															        <option value="<?php echo esc_attr( $wpbb_setting_option[ 'value' ] ); ?>" <?php selected( get_option( $wpbb_setting[ 'name' ] ), $wpbb_setting_option[ 'value' ] ); ?>><?php echo $wpbb_setting_option[ 'name' ]; ?></option>
+																	<?php
+				
+														        }
+				
+														        ?>
+														    	</select>
+														        <?php
+														        if( $wpbb_setting[ 'description' ] != '' ) {
+																	?>
+																	<p class="description"><?php echo $wpbb_setting[ 'description' ]; ?></p>
+																	<?php
+																}
+														        
+														        /* break out of the switch statement */
+														        break;
+														    
+														    /* if the setting is a wysiwyg input */
+														    case 'wysiwyg' :
+														    	
+														    	/* set some settings args for the editor */
+														    	$wpbb_editor_settings = array(
+														    		'textarea_rows' => $wpbb_setting[ 'textarea_rows' ],
+														    		'media_buttons' => $wpbb_setting[ 'media_buttons' ],
+														    	);
+				
+														    	/* get current content for the wysiwyg */
+														    	$wpbb_wysiwyg_content = get_option( $wpbb_setting[ 'name' ] );
+																
+														    	/* display the wysiwyg editor */
+														    	wp_editor( $wpbb_wysiwyg_content, $wpbb_setting[ 'name' ], $wpbb_editor_settings );
+														    	
+														    	/* break out of the switch statement */
+														    	break;
+														        
+														    default :
+														       
+														       ?>
+																<input type="text" name="<?php echo $wpbb_setting[ 'name' ]; ?>" id="<?php echo $wpbb_setting[ 'name' ]; ?>" class="regular-text" value="<?php echo get_option( $wpbb_setting[ 'name' ] ) ?>" />
+																<?php
+																if( $wpbb_setting[ 'description' ] != '' ) {
+																	?>
+																	<p class="description"><?php echo $wpbb_setting[ 'description' ]; ?></p>
+																	<?php
+																}
+																
+														} // end switch statement
+														
+													?>
+													
+												</td>
+				
+											</tr>
+											
+											<?php
+										}
+									
+									?>
+									
+								</tbody>
+								
+							</table>
+							
+							<p class="submit">
+								<input type="submit" name="submit" id="submit" class="button-primary" value="Save Changes">
+							</p>
+							
+						</div><!-- // column-inner -->
+						
+					</div><!-- // postbox-container -->
+					
+				</div><!-- // post-body -->
+				
+			</div><!-- // poststuff -->
 			
 		</form>
 		
@@ -256,7 +304,7 @@ function wpbb_settings_page_content() {
 
 /**
  * function wpbb_settings_page_cta()
- * adds the call to action box on the settings page
+ * adds intro text on the settings page
  */
 function wpbb_settings_page_cta() {
 	
@@ -264,8 +312,7 @@ function wpbb_settings_page_cta() {
 	
 	<div class="wpbb-cta">
 		
-		<p>Need some help?</p>
-		<p>Why not let us take the hassle out of setup? <a href="http://wpbroadbean.com">Get in touch now for an integration quote.</a></p>
+		<p>Edit the WP Broadbean plugin settings below:</p>
 		
 	</div>
 	
@@ -274,6 +321,55 @@ function wpbb_settings_page_cta() {
 }
 
 add_action( 'wpbb_before_settings_page', 'wpbb_settings_page_cta', 10 );
+
+/**
+ *
+ */
+function wpbb_settings_page_ctas() {
+	
+	/* get this plugins data - such as version, author etc. */
+	$data = get_plugin_data(
+		WPBB_LOCATION . '/wpbroadbean.php',
+		false // no markup in return
+	);
+
+	?>
+	
+	<div class="postbox">
+		
+		<h3 class="wpbb-postbox-title"><?php echo esc_html( $data[ 'Name' ] ); ?></h3>
+		
+		<div class="wpbb-postbox-inner">
+			<p class="plugin-info">
+				Version: <?php echo esc_html( $data[ 'Version' ] ); ?><br />
+				Written by: <a href="<?php echo esc_url( $data[ 'AuthorURI' ] ); ?>"><?php echo esc_html( $data[ 'AuthorName' ] ); ?></a><br />
+				Website: <a href="http://wpbroadbean.com">WP Broadbean Plugin</a>
+			</p>
+			<p>
+				If you find WP Broadbean useful then please <a href="https://wordpress.org/support/view/plugin-reviews/wpbroadbean">rate it on the plugin repository</a>.
+			</p>
+		</div>
+		
+	</div>
+	
+	<div class="postbox">
+		
+		<h3 class="wpbb-postbox-title">WP Broadbean Assist</h3>
+		
+		<div class="wpbb-postbox-inner">
+			
+			<p>WP Broadbean Assist provides you with a fully managed Broadbean integration with your WordPress site for just &pound;599.</p>
+			<a class="button button-primary button-large" href="http://wpbroadbean.com/assist/">Integrate Broadbean Now</a>
+			
+		</div>
+		
+	</div>
+	
+	<?php
+		
+}
+
+add_action( 'wpbb_settings_page_right_column', 'wpbb_settings_page_ctas' );
 
 /**
  * Function wpbb_change_title_text()
