@@ -555,3 +555,29 @@ function wpbb_job_terms_output( $content ) {
 }
 
 add_filter( 'the_content', 'wpbb_job_terms_output', 30 );
+
+/**
+ * function wpbb_get_setting()
+ *
+ * gets a named plugin settings returning its value
+ * @param	mixed	key name to retrieve - this is the key of the stored option
+ * @return	mixed	the value of the key
+ */
+function wpbb_get_setting( $name = '' ) {
+	
+	/* if no name is passed */
+	if( empty( $name ) ) {
+		return false;
+	}
+	
+	/* get the option */
+	$setting = get_option( 'wpbb_' . $name );
+	
+	/* check we have a value returned */
+	if( empty( $setting ) ) {
+		return false;
+	}
+	
+	return apply_filters( 'wpbb_get_setting', $setting );
+	
+}

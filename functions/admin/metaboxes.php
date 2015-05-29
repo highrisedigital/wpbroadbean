@@ -63,7 +63,9 @@ class Attachments_Field extends CMB_Field {
 	public function html() {
 		
 		/* get the post ID from the url as we are editing a post */
-		$post_id = $_GET[ 'post' ];
+		if( isset( $_GET[ 'post' ] ) ) {
+			$post_id = $_GET[ 'post' ];
+		}
 		
 		/* check we have a post id */
 		if( ! empty( $post_id ) ) {

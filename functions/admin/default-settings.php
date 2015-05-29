@@ -27,14 +27,14 @@ function wpbb_create_default_settings_output( $settings ) {
 		'label' => 'Feed Username',
 		'name' => 'wpbb_username',
 		'type' => 'text',
-		'description' => 'Choose a username for your Broadbean feed. Please note once you have set this, it should not be edited here or your feed may break.'
+		'description' => 'Choose a username for your feed. Please note once you have set this, it should not be edited here or your feed may break.'
 	);
 	
 	$settings[ 'wpbb_password' ] = array(
 		'label' => 'Feed Password',
 		'name' => 'wpbb_password',
 		'type' => 'text',
-		'description' => 'Choose a password for your Broadbean feed. Please note once you have set this, it should not be edited here or your feed may break.'
+		'description' => 'Choose a password for your feed. Please note once you have set this, it should not be edited here or your feed may break.'
 	);
 	
 	$settings[ 'wpbb_apply_page_id' ] = array(

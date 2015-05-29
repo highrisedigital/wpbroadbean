@@ -75,6 +75,10 @@ Take a look at the [Wiki on Github](https://github.com/wpmark/wpbroadbean/wiki/)
 
 = 2.0.5 =
 * Correct declaration of constant to remove debug warnings.
+* Add additional filters to allow developers to changes the names of the admin menus added by the plugin.
+* Additional filters added which allows developers to change the page titles in the admin area.
+* Functions for retrieving the password and username
+* Some simple functions docs updates
 
 = 2.0.4 =
 * Add columns on the settings screen with call to action boxes for WP Broadbean Assist

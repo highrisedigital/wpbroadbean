@@ -23,8 +23,8 @@ function wpbb_add_admin_menu() {
 
 	/* add the main page for wpbroadbean info */
 	add_menu_page(
-		'WP Broadbean', // page_title,
-		'WP Broadbean', // menu_title,
+		apply_filters( 'wpbb_admin_page_title', 'WP Broadbean' ), // page_title,
+		apply_filters( 'wpbb_admin_page_title', 'WP Broadbean' ), // menu_title,
 		'edit_posts', // capability,
 		'wp_broadbean_home', // menu_slug,
 		'__return_false', // function,
@@ -139,7 +139,7 @@ function wpbb_settings_page_content() {
 	<div class="wrap">
 		
 		<?php screen_icon( 'options-general' ); ?>
-		<h2>WP Broadbean Settings</h2>
+		<h2><?php echo apply_filters( 'wpbb_admin_settings_page_title', 'WP Broadbean Settings' ); ?></h2>
 		
 		<form method="post" action="options.php">
 			
@@ -425,26 +425,26 @@ add_filter( 'default_content', 'wpbb_job_post_editor_content' );
  */
 function wpbb_get_current_admin_post_type() {
   
-  global $post, $typenow, $current_screen;
+	global $post, $typenow, $current_screen;
 	
-  /* we have a post so we can just get the post type from that */
-  if ( $post && $post->post_type )
-    return $post->post_type;
-    
-  /* check the global $typenow - set in admin.php */
-  elseif( $typenow )
-    return $typenow;
-    
-  /* check the global $current_screen object - set in sceen.php */
-  elseif( $current_screen && $current_screen->post_type )
-    return $current_screen->post_type;
-  
-  /* lastly check the post_type querystring */
-  elseif( isset( $_REQUEST[ 'post_type' ] ) )
-    return sanitize_key( $_REQUEST[ 'post_type' ] );
+	/* we have a post so we can just get the post type from that */
+	if ( $post && $post->post_type )
+		return $post->post_type;
 	
-  /* we do not know the post type! */
-  return null;
+	/* check the global $typenow - set in admin.php */
+	elseif( $typenow )
+		return $typenow;
+	
+	/* check the global $current_screen object - set in sceen.php */
+	elseif( $current_screen && $current_screen->post_type )
+		return $current_screen->post_type;
+	
+	/* lastly check the post_type querystring */
+	elseif( isset( $_REQUEST[ 'post_type' ] ) )
+		return sanitize_key( $_REQUEST[ 'post_type' ] );
+	
+	/* we do not know the post type! */
+	return null;
   
 }
 

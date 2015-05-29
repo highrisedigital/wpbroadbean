@@ -13,8 +13,8 @@
 /**
  * start by getting the stored user name and password used to the feed
  */
-$wpbb_username = get_option( 'wpbb_username' );
-$wpbb_password = get_option( 'wpbb_password' );
+$wpbb_username = wpbb_get_setting( 'username' );
+$wpbb_password = wpbb_get_setting( 'password' );
 
 /* set logging to false - filterable */
 $wpbb_logging = apply_filters( 'wpbb_logging', false );
@@ -27,7 +27,7 @@ $wpbb_logging = apply_filters( 'wpbb_logging', false );
 $wpbb_xml_content = file_get_contents( apply_filters( 'wpbb_xml_feed_url', 'php://input' ) );
 
 /**
- * we have the contents of the XML sent so we now need to parse this file
+ * turn the raw posted data into a more usable object
  */
 $wpbb_xml_params = simplexml_load_string( $wpbb_xml_content );
 
