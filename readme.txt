@@ -4,7 +4,7 @@ Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
 Tested up to: 4.1
-Stable tag: 2.0.5
+Stable tag: 2.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,9 @@ Take a look at the [Wiki on Github](https://github.com/wpmark/wpbroadbean/wiki/)
 2. Single job edit post screen
 
 == Changelog ==
+
+= 2.0.6 =
+* Applications where CV uploads had spaces in their names where failing to attach to the Broadbean email and the link in the admin led to a 404 error. This has now been corrected and all should be fixed!
 
 = 2.0.5 =
 * Correct declaration of constant to remove debug warnings.
