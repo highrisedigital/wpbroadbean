@@ -171,7 +171,7 @@ function wpbb_application_processing() {
 		     'post_mime_type' => $wpbb_filetype[ 'type' ],
 		     'post_title' => preg_replace('/\.[^.]+$/', '', $wpbb_uploaded_file[ 'name' ]),
 		     'post_content' => '',
-		     'guid' => $wpbb_wp_upload_dir[ 'url' ] . '/' . $wpbb_uploaded_file[ 'name' ],
+		     'guid' => $wpbb_wp_upload_dir[ 'url' ] . '/' . basename( $wpbb_moved_file[ 'file' ] ),
 		     'post_status' => 'inherit'
 		);
 		
