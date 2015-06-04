@@ -247,7 +247,7 @@ function wpbb_application_processing() {
 		$wpbb_mail_recipients = get_post_meta( $job_post->ID, '_wpbb_job_contact_email', true ) . ',' . get_post_meta( $job_post->ID, '_wpbb_job_broadbean_application_email', true );
 		
 		/* set attachments - the cv */
-		$wpbb_attachments = array( WP_CONTENT_DIR . '/uploads' . $wpbb_wp_upload_dir[ 'subdir' ] . '/' . $wpbb_uploaded_file[ 'name' ] );
+		$wpbb_attachments = array( WP_CONTENT_DIR . '/uploads' . $wpbb_wp_upload_dir[ 'subdir' ] . '/' . basename( $wpbb_moved_file[ 'file' ] ) );
 		
 		/* send the mail */
 		$wpbb_send_email = wp_mail(
