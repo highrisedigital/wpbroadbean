@@ -61,7 +61,8 @@ function wpbb_register_post_types() {
 			'exclude_from_search' => true,
 			'menu_position' => 99,
 			'supports' => array(
-				'title'
+				'title',
+				'editor'
 			),
 			'query_var' => true,
 			'rewrite' => array(
