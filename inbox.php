@@ -205,6 +205,12 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 			} // end loop through all fields to add
 			
 			/**
+			 * job has been added now
+			 * @hook - wpbb_job_added
+			 */
+			do_action( 'wpbb_job_added', $wpbb_job_post_id );
+			
+			/**
 			 * everything appears to have worked
 			 * therefore lets output a success message
 			 */

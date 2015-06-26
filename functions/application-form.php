@@ -13,9 +13,16 @@ function wpbb_application_form( $content ) {
 	/* check this is the apply page */
 	if( ! is_page( $apply_pageid ) )
 		return $content;
-		
+	
+	/* get the job id */
+	if( isset( $_GET[ 'job_id' ] ) ) {
+		$job_id = $_GET[ 'job_id' ];
+	} else {
+		$job_id = '';
+	}
+	
 	/* check we have a job id passed */
-	if( ! empty( $_GET[ 'job_id' ] ) ) {
+	if( $job_id != '' ) {
 		
 		/* get the post for this job reference */
 		$job_post = wpbb_get_job_by_reference( $_GET[ 'job_id' ] );
@@ -48,6 +55,8 @@ function wpbb_application_form( $content ) {
 			
 			$form .= '<div class="wpbb-input"><label for="wpbb_email" class="require">Email</label><input class="wpbb-input" type="email" name="wpbb_email" id="wpbb-email" value="" tabindex="4" required><p class="wpbb_description">Please enter a valid email address as this will be used to contact you.</p></div>';
 			
+			$form .= '<div class="wpbb-input"><label for="wpbb-message" class="require">Message</label><textarea class="wpbb-input wpbb-input-textarea" name="wpbb_message" id="wpbb-message" value="" tabindex="5"></textarea><p class="wpbb_description">Add an optional message.</p></div>';
+			
 			/* add the upload input field for the cv */
 			$form .= '<div class="wpbb-input"><label for="wpbb_file">Attach a CV</label><input type="file" name="wpbb_upload" /><p class="wpbb_description">Please attach your CV in PDF format.</p></div>';
 			
@@ -60,10 +69,6 @@ function wpbb_application_form( $content ) {
 		/* form has been posted */	
 		} else {
 			
-			/**
-			 * TODO get the message from the form processing function as to whether the processing went through or not
-			 */
-			
 			/* set a string to store all messages in */
 			$wpbb_message_string = '';
 			
@@ -72,6 +77,9 @@ function wpbb_application_form( $content ) {
 			foreach( $wpbb_messages as $message ) {
 				$wpbb_message_string .= $message . '<br />';
 			}
+			
+			/* prevent undefined variable */
+			$form = '';
 			
 		}
 	
@@ -83,11 +91,16 @@ function wpbb_application_form( $content ) {
 		
 	}
 	
+	/* have we any message */
+	if( ! isset( $wpbb_message_string) ) {
+		$wpbb_message_string = '';
+	}
+	
 	/* make the form markup filterable */
 	$form = apply_filters(
 		'wpbb_application_form_html',
 		$form,
-		$_GET[ 'job_id' ]
+		$job_id
 	);
 	
 	/* add message to the form content */
@@ -149,7 +162,13 @@ function wpbb_application_processing() {
 			$wpbb_allowed_mime_types = apply_filters(
 				'wpbb_application_allowed_file_types',
 				array(
-					'application/pdf',
+					'pdf'		=> 'application/pdf',
+					'word'		=> 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+					'word_old'	=> 'application/msword',
+					'pages'		=> 'application/vnd.apple.pages',
+					'open_text'	=> 'application/vnd.oasis.opendocument.text',
+					'rich_text'	=> 'application/rtf',
+					'text'		=> 'text/plain'
 				)
 			);
 			
@@ -178,9 +197,10 @@ function wpbb_application_processing() {
 		/* insert the application post */
 		$wpbb_application_id = wp_insert_post(
 			array(
-				'post_type' => 'wpbb_application',
-				'post_title' => wp_strip_all_tags( $_POST[ 'wpbb_name' ] ),
-				'post_status' => 'publish'
+				'post_type'		=> 'wpbb_application',
+				'post_title'	=> wp_strip_all_tags( $_POST[ 'wpbb_name' ] ),
+				'post_status'	=> 'publish',
+				'post_content'	=> wp_kses_post( $_POST[ 'wpbb_message' ] )
 			)
 		);
 		
@@ -195,9 +215,9 @@ function wpbb_application_processing() {
 			if( $wpbb_uploaded_file[ 'name' ] != '' ) {
 			
 				/* add the attachment from the uploaded file */
-				$wpbb_attach_id = wp_insert_attachment( $wpbb_attachment, $wpbb_filetype[ 'file' ], $wpbb_application_id );
+				$wpbb_attach_id = wp_insert_attachment( $wpbb_attachment, $wpbb_moved_file[ 'file' ], $wpbb_application_id );
 				require_once( ABSPATH . 'wp-admin/includes/image.php' );
-				$wpbb_attach_data = wp_generate_attachment_metadata( $wpbb_attach_id, $wpbb_filetype[ 'file' ] );
+				$wpbb_attach_data = wp_generate_attachment_metadata( $wpbb_attach_id, $wpbb_moved_file[ 'file' ] );
 				wp_update_attachment_metadata( $wpbb_attach_id, $wpbb_attach_data );
 			
 			}
@@ -244,7 +264,24 @@ function wpbb_application_processing() {
 		 */
 		$wpbb_mail_content = wpbb_generate_email_content( apply_filters( 'wpbb_application_email_content', $wpbb_email_content, $job_post, $wpbb_application_id ) );
 		
-		$wpbb_mail_recipients = get_post_meta( $job_post->ID, '_wpbb_job_contact_email', true ) . ',' . get_post_meta( $job_post->ID, '_wpbb_job_broadbean_application_email', true );
+		/* setup an array for recipients */
+		$wpbb_mail_recipients = array();
+		
+		/* get the contact email */
+		$wpbb_contact_email = get_post_meta( $job_post->ID, '_wpbb_job_contact_email', true );
+		
+		/* if we have a contact email add it to the recipients array */
+		if( $wpbb_contact_email != '' ) {
+			$wpbb_mail_recipients[] = $wpbb_contact_email;
+		}
+		
+		/* get the tracking email */
+		$wpbb_tracking_email = get_post_meta( $job_post->ID, '_wpbb_job_broadbean_application_email', true );
+		
+		/* if we have a tracking email add it to the recipients array */
+		if( $wpbb_tracking_email != '' ) {
+			$wpbb_mail_recipients[] = $wpbb_tracking_email;
+		}
 		
 		/* set attachments - the cv */
 		$wpbb_attachments = array( WP_CONTENT_DIR . '/uploads' . $wpbb_wp_upload_dir[ 'subdir' ] . '/' . basename( $wpbb_moved_file[ 'file' ] ) );
