@@ -13,9 +13,16 @@ function wpbb_application_form( $content ) {
 	/* check this is the apply page */
 	if( ! is_page( $apply_pageid ) )
 		return $content;
-		
+	
+	/* get the job id */
+	if( isset( $_GET[ 'job_id' ] ) ) {
+		$job_id = $_GET[ 'job_id' ];
+	} else {
+		$job_id = '';
+	}
+	
 	/* check we have a job id passed */
-	if( ! empty( $_GET[ 'job_id' ] ) ) {
+	if( $job_id != '' ) {
 		
 		/* get the post for this job reference */
 		$job_post = wpbb_get_job_by_reference( $_GET[ 'job_id' ] );
@@ -73,6 +80,9 @@ function wpbb_application_form( $content ) {
 				$wpbb_message_string .= $message . '<br />';
 			}
 			
+			/* prevent undefined variable */
+			$form = '';
+			
 		}
 	
 	/* no job ref was passed in the query string */	
@@ -83,11 +93,16 @@ function wpbb_application_form( $content ) {
 		
 	}
 	
+	/* have we any message */
+	if( ! isset( $wpbb_message_string) ) {
+		$wpbb_message_string = '';
+	}
+	
 	/* make the form markup filterable */
 	$form = apply_filters(
 		'wpbb_application_form_html',
 		$form,
-		$_GET[ 'job_id' ]
+		$job_id
 	);
 	
 	/* add message to the form content */
@@ -149,7 +164,13 @@ function wpbb_application_processing() {
 			$wpbb_allowed_mime_types = apply_filters(
 				'wpbb_application_allowed_file_types',
 				array(
-					'application/pdf',
+					'pdf'		=> 'application/pdf',
+					'word'		=> 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+					'word_old'	=> 'application/msword',
+					'pages'		=> 'application/vnd.apple.pages',
+					'open_text'	=> 'application/vnd.oasis.opendocument.text',
+					'rich_text'	=> 'application/rtf',
+					'text'		=> 'text/plain'
 				)
 			);
 			
@@ -195,9 +216,9 @@ function wpbb_application_processing() {
 			if( $wpbb_uploaded_file[ 'name' ] != '' ) {
 			
 				/* add the attachment from the uploaded file */
-				$wpbb_attach_id = wp_insert_attachment( $wpbb_attachment, $wpbb_filetype[ 'file' ], $wpbb_application_id );
+				$wpbb_attach_id = wp_insert_attachment( $wpbb_attachment, $wpbb_moved_file[ 'file' ], $wpbb_application_id );
 				require_once( ABSPATH . 'wp-admin/includes/image.php' );
-				$wpbb_attach_data = wp_generate_attachment_metadata( $wpbb_attach_id, $wpbb_filetype[ 'file' ] );
+				$wpbb_attach_data = wp_generate_attachment_metadata( $wpbb_attach_id, $wpbb_moved_file[ 'file' ] );
 				wp_update_attachment_metadata( $wpbb_attach_id, $wpbb_attach_data );
 			
 			}
