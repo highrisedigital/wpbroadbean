@@ -75,6 +75,7 @@ Take a look at the [Wiki on Github](https://github.com/wpmark/wpbroadbean/wiki/)
 
 = 2.0.7 =
 * Addition of a action hook with fires after a job has been added by the plugin. This allows for developer to trigger actions once a job is added such as clearing search cache in searching plugins.
+* Only send the application for the contact email and tracking email if they have an email applied.
 
 = 2.0.6 =
 * Applications where CV uploads had spaces in their names where failing to attach to the Broadbean email and the link in the admin led to a 404 error. This has now been corrected and all should be fixed!

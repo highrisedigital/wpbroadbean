@@ -244,7 +244,24 @@ function wpbb_application_processing() {
 		 */
 		$wpbb_mail_content = wpbb_generate_email_content( apply_filters( 'wpbb_application_email_content', $wpbb_email_content, $job_post, $wpbb_application_id ) );
 		
-		$wpbb_mail_recipients = get_post_meta( $job_post->ID, '_wpbb_job_contact_email', true ) . ',' . get_post_meta( $job_post->ID, '_wpbb_job_broadbean_application_email', true );
+		/* setup an array for recipients */
+		$wpbb_mail_recipients = array();
+		
+		/* get the contact email */
+		$wpbb_contact_email = get_post_meta( $job_post->ID, '_wpbb_job_contact_email', true );
+		
+		/* if we have a contact email add it to the recipients array */
+		if( $wpbb_contact_email != '' ) {
+			$wpbb_mail_recipients[] = $wpbb_contact_email;
+		}
+		
+		/* get the tracking email */
+		$wpbb_tracking_email = get_post_meta( $job_post->ID, '_wpbb_job_broadbean_application_email', true );
+		
+		/* if we have a tracking email add it to the recipients array */
+		if( $wpbb_tracking_email != '' ) {
+			$wpbb_mail_recipients[] = $wpbb_tracking_email;
+		}
 		
 		/* set attachments - the cv */
 		$wpbb_attachments = array( WP_CONTENT_DIR . '/uploads' . $wpbb_wp_upload_dir[ 'subdir' ] . '/' . basename( $wpbb_moved_file[ 'file' ] ) );
