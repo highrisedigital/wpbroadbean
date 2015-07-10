@@ -79,6 +79,11 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 	 */
 	foreach( $wpbb_taxonomies as $taxonomy ) {
 		
+		/* if no tax terms sent - continue */
+		if( $wpbb_xml_params->$taxonomy[ 'bb_field' ] == '' ) {
+			continue;
+		}
+		
 		/* add the prepared terms to our terms array */
 		$wpbb_tax_terms[ $taxonomy[ 'bb_field' ] ] = wpbb_prepare_terms( $wpbb_xml_params->$taxonomy[ 'bb_field' ], $taxonomy );
 		
@@ -136,6 +141,11 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 		 * start by looping through the tax terms ids to add to this job
 		 */
 		foreach( $wpbb_taxonomies as $taxonomy ) {
+			
+			/* if no tax terms sent - continue */
+			if( $wpbb_xml_params->$taxonomy[ 'bb_field' ] == '' ) {
+				continue;
+			}
 			
 			wp_set_post_terms(
 				$wpbb_job_post_id,
