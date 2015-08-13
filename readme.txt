@@ -44,15 +44,13 @@ Probably yes! Contact your Broadbean account manager in order to get a price for
 
 The URL to post to, in order to add a job is http://domain.com/?wpbb=broadbean (of course replacing domain.com with your actual domain). The end-point expects an XML feed using the standard Broadbean XML feed.
 
-**Can I customised the how the feed is added to WordPress?**
+**Can I customise the how the feed is added to WordPress?**
 
 Yes you can. The plugin is built with extensibility in mind and therefore you can make many changes and edits without altering the plugin code itself. This will protect you when the plugin is updated. The plugin handles the incoming feed in the `inbox.php` file in the plugin root folder. If you copy this file to your active theme and place it in a folder named `wpbb` this will be used instead of the plugins version. Therefore you can make amends and change how the jobs are added when posted from Broadbean.
 
-**What if I want different meta data and taxonomies that the standard ones, can the plugin handle that?**
+**What if I want different meta data and taxonomies than the standard ones, can the plugin handle that?**
 
-Broadbean can built you a completely bespoke feed to your site, with practically any date you want about each job you post. The WP Broadbean Plugin can handle this through its extensibility features. You can add fields and taxonomies as well as remove the default ones should you wish too. The plugin was built with extensibility in mind with a number of actions and filters available to developers.
-
-Take a look at the [Wiki on Github](https://github.com/wpmark/wpbroadbean/wiki/) in order to find some examples of the things you can do.
+Broadbean can build you a completely bespoke feed to your site, with practically any date you want about each job you post. The WP Broadbean Plugin can handle this through its extensibility features. You can add fields and taxonomies as well as remove the default ones should you wish too. The plugin was built with extensibility in mind with a number of actions and filters available to developers. Take a look at the source code for `do_action` and `apply_filters`.
 
 == Screenshots ==
 
