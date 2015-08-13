@@ -36,16 +36,6 @@ To install the plugin:
 
 Your first task is to contact Broadbean and let them know that you want to create a new feed from your Broadbean Adcourier account to your WordPress website. It is also important to tell them that your integration will be using the WP Broadbean Plugin by Mark Wilkinson. You will need to indicate that you require the standard feed to be setup for this plugin without any changes being made.
 
-**How do I submit my feed for development by Broadbean?**
-
-Once you have completed the above the Broadbean team will probably direct you to the following page:
-
-[http://api.adcourier.com/docs/index.cgi?page=jobboards_register](http://api.adcourier.com/docs/index.cgi?page=jobboards_register)
-
-Here you are supplied with a form to complete. Follow the instructions here in order to complete this:
-
-[https://github.com/wpmark/wpbroadbean/wiki/Job-Board-Registration](https://github.com/wpmark/wpbroadbean/wiki/Job-Board-Registration)
-
 **Do Broadbean charge for this?**
 
 Probably yes! Contact your Broadbean account manager in order to get a price for developing a feed to your WordPress website.
