@@ -61,6 +61,8 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 
 = 2.0.9 =
 * Prevent an error when trying to add a term with an empty string as the term name. It essentially allows you to have blank terms when sent. Thanks to Susie Black for input on this issue.
+* Force XML value in added fields to be a string
+* Correct typo on the job post edit screen in meta boxes
 
 = 2.0.8 =
 * Application form php warnings with WP_DEBUG on are not removed on the application form page
