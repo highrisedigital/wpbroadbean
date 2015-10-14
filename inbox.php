@@ -208,7 +208,7 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 					 * @param (string) $field[ 'id' ] is the post meta key for this field
 					 * @param (string) $wpbb_xml_params->$field[ 'bb_field' ] the value of the meta key
 					 */
-					do_action( 'wpbb_job_field_added', $wpbb_job_post_id, $field[ 'id' ], $wpbb_xml_params->$field[ 'bb_field' ] );
+					do_action( 'wpbb_job_field_added', $wpbb_job_post_id, $field[ 'id' ], (string) $wpbb_xml_params->$field[ 'bb_field' ] );
 					
 				} // end if have field data sent to add
 				
