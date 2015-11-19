@@ -1,14 +1,14 @@
 # Plugin Name
-Contributors: wpmarkuk
-Donate link: http://markwilkinson.me/saythanks
-Tags: jobs, recruitment
-Requires at least: 3.9
-Tested up to: 4.2.2
-Stable tag: 2.0.9
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 WP Broadbean is a plugin allowing jobs added to Broadbean to show in your WordPress site.
+
+###### Contributors: [wpmarkuk](https://github.com/wpmark)
+###### Donate link: http://markwilkinson.me/saythanks
+###### Tags: jobs, recruitment
+###### Requires at least: 3.9
+###### Tested up to: 4.2.2
+###### Stable tag: 2.0.9
+###### License: [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)
 
 ## Description
 
