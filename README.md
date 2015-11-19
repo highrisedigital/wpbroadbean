@@ -1,4 +1,4 @@
-=== Plugin Name ===
+# Plugin Name
 Contributors: wpmarkuk
 Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
@@ -10,7 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 WP Broadbean is a plugin allowing jobs added to Broadbean to show in your WordPress site.
 
-== Description ==
+## Description ==
 
 >If you are running a version of WP Broadbean less than version 2.0 please DO NOT UPDATE.
 
@@ -20,7 +20,7 @@ You can find out more about the WP Broadbean plugin on the [WP Broadbean website
 
 We also offer a service to complete a Broadbean integration with WordPress for you. Find out more about our [WPBB Assist service here](http://wpbroadbean.com/assist/).
 
-== Installation ==
+## Installation ==
 
 To install the plugin:
 
@@ -30,7 +30,7 @@ To install the plugin:
 4. Enter a username and password as well as choosing a page to use for your application form.
 5. View the how to get start question in the FAQs
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions ==
 
 **How do I get started?**
 
@@ -52,12 +52,12 @@ Yes you can. The plugin is built with extensibility in mind and therefore you ca
 
 Broadbean can build you a completely bespoke feed to your site, with practically any date you want about each job you post. The WP Broadbean Plugin can handle this through its extensibility features. You can add fields and taxonomies as well as remove the default ones should you wish too. The plugin was built with extensibility in mind with a number of actions and filters available to developers. Take a look at the source code for `do_action` and `apply_filters`.
 
-== Screenshots ==
+## Screenshots ==
 
 1. Job listings in the WordPress admin
 2. Single job edit post screen
 
-== Changelog ==
+## Changelog ==
 
 = 2.0.9 =
 * Prevent an error when trying to add a term with an empty string as the term name. It essentially allows you to have blank terms when sent. Thanks to Susie Black for input on this issue.
