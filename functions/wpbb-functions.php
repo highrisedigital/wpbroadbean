@@ -60,35 +60,40 @@ function wpbb_prepare_terms( $sent_terms, $taxonomy ) {
 				$wpbb_tax_terms[] = $wpbb_taxonomy_term;
 				
 			}
-			
+
 		} else {
-			
-			$new_term = wp_insert_term(
-				$wpbb_taxonomy_term, // term to insert
-				$taxonomy[ 'taxonomy_name' ], // taxonomy to add the term to
-				array(
-					'slug' => sanitize_title( $wpbb_taxonomy_term )
-				)
-			);
-			
-			/* check if the taxonomy is hierarchical */
-			if( $taxonomy[ 'hierarchical' ] == true ) {
-				
-				/* add to term id to our terms array */
-				$wpbb_tax_terms[] = $new_term['term_id'];
-				
-			} else {
-				
-				/* get the term name from its id */
-				$new_term_obj = get_term_by(
-					'id',
-					$new_term['term_id'],
-					$taxonomy[ 'taxonomy_name' ]
+
+			/* check term we are adding is not an empty string */
+			if( $wpbb_taxonomy_term != '' ) {
+
+				$new_term = wp_insert_term(
+					$wpbb_taxonomy_term, // term to insert
+					$taxonomy[ 'taxonomy_name' ], // taxonomy to add the term to
+					array(
+						'slug' => sanitize_title( $wpbb_taxonomy_term )
+					)
 				);
-			
-				/* add the term name to our terms array */
-				$wpbb_tax_terms[] = $new_term_obj->name;
 				
+				/* check if the taxonomy is hierarchical */
+				if( $taxonomy[ 'hierarchical' ] == true ) {
+					
+					/* add to term id to our terms array */
+					$wpbb_tax_terms[] = $new_term['term_id'];
+					
+				} else {
+					
+					/* get the term name from its id */
+					$new_term_obj = get_term_by(
+						'id',
+						$new_term['term_id'],
+						$taxonomy[ 'taxonomy_name' ]
+					);
+				
+					/* add the term name to our terms array */
+					$wpbb_tax_terms[] = $new_term_obj->name;
+					
+				}
+
 			}
 		
 		}

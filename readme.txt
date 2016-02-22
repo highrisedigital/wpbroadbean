@@ -3,8 +3,8 @@ Contributors: wpmarkuk
 Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
-Tested up to: 4.2.2
-Stable tag: 2.0.9
+Tested up to: 4.4.2
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,9 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 2. Single job edit post screen
 
 == Changelog ==
+
+= 2.1 =
+* In strange circumstances if a job was added where there was a taxonomy term which was an empty string it caused an WP_Error and the job was not posted correctly. This has now be fixed but checking for an empty string before creating a new term. Thanks to Julian Taylor for assisting with this bug.
 
 = 2.0.9 =
 * Prevent an error when trying to add a term with an empty string as the term name. It essentially allows you to have blank terms when sent. Thanks to Susie Black for input on this issue.
