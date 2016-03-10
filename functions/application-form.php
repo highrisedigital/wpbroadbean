@@ -247,6 +247,7 @@ function wpbb_application_processing() {
 				<li><a href="' . get_edit_post_link( $wpbb_application_id ) . '">Application Edit Link</a></li>
 				<li><a href="' . esc_url( $wpbb_moved_file[ 'url' ] ) . '">CV Attachment Link</a></li>
 			</ul>
+			<br />' . wpautop( wp_kses_post( $_POST[ 'wpbb_message' ] ) ) . '<br />
 			
 			<p>Email sent by <a href="http://wpbroadbean.com">WP Broadbean WordPress plugin</a>.</p>
 			
