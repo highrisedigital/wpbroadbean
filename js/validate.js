@@ -14,13 +14,17 @@ jQuery(document).ready(
 	            wpbb_email: {
 					required:true
 	            },
+	            wpbb_message: {
+	            	required:true
+	            },
 	            wpbb_file: {
 					required:true
 	            }
 	        },
 	        messages: {
 		    	 wpbb_name: "Please add your name - this is a required field",
-		    	 wpbb_email: "Please enter a valid email address." 
+		    	 wpbb_email: "Please enter a valid email address.",
+		    	 wpbb_message: "Please enter a message to go with your application."
 		    }
 	    });
    

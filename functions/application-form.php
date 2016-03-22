@@ -55,10 +55,10 @@ function wpbb_application_form( $content ) {
 			
 			$form .= '<div class="wpbb-input"><label for="wpbb_email" class="require">Email</label><input class="wpbb-input" type="email" name="wpbb_email" id="wpbb-email" value="" tabindex="4" required><p class="wpbb_description">Please enter a valid email address as this will be used to contact you.</p></div>';
 			
-			$form .= '<div class="wpbb-input"><label for="wpbb-message" class="require">Message</label><textarea class="wpbb-input wpbb-input-textarea" name="wpbb_message" id="wpbb-message" value="" tabindex="5"></textarea><p class="wpbb_description">Add an optional message.</p></div>';
+			$form .= '<div class="wpbb-input"><label for="wpbb_message" class="require">Message</label><textarea class="wpbb-input wpbb-input-textarea" name="wpbb_message" id="wpbb-message" value="" tabindex="5"></textarea><p class="wpbb_description">Add an optional message.</p></div>';
 			
 			/* add the upload input field for the cv */
-			$form .= '<div class="wpbb-input"><label for="wpbb_file">Attach a CV</label><input type="file" name="wpbb_upload" /><p class="wpbb_description">Please attach your CV in PDF format.</p></div>';
+			$form .= '<div class="wpbb-input"><label for="wpbb_file">Attach a CV</label><input type="file" name="wpbb_file" /><p class="wpbb_description">Please attach your CV in PDF format.</p></div>';
 			
 			/* add the submit button */
 			$form .= '<div class="wpbb_submit"><input type="submit" value="Submit" name="wpbb_submit"></div>';
