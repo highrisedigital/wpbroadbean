@@ -55,10 +55,10 @@ function wpbb_application_form( $content ) {
 			
 			$form .= '<div class="wpbb-input"><label for="wpbb_email" class="require">Email</label><input class="wpbb-input" type="email" name="wpbb_email" id="wpbb-email" value="" tabindex="4" required><p class="wpbb_description">Please enter a valid email address as this will be used to contact you.</p></div>';
 			
-			$form .= '<div class="wpbb-input"><label for="wpbb-message" class="require">Message</label><textarea class="wpbb-input wpbb-input-textarea" name="wpbb_message" id="wpbb-message" value="" tabindex="5"></textarea><p class="wpbb_description">Add an optional message.</p></div>';
+			$form .= '<div class="wpbb-input"><label for="wpbb_message" class="require">Message</label><textarea class="wpbb-input wpbb-input-textarea" name="wpbb_message" id="wpbb-message" value="" tabindex="5"></textarea><p class="wpbb_description">Add an optional message.</p></div>';
 			
 			/* add the upload input field for the cv */
-			$form .= '<div class="wpbb-input"><label for="wpbb_file">Attach a CV</label><input type="file" name="wpbb_upload" /><p class="wpbb_description">Please attach your CV in PDF format.</p></div>';
+			$form .= '<div class="wpbb-input"><label for="wpbb_file">Attach a CV</label><input type="file" name="wpbb_file" /><p class="wpbb_description">Please attach your CV in PDF format.</p></div>';
 			
 			/* add the submit button */
 			$form .= '<div class="wpbb_submit"><input type="submit" value="Submit" name="wpbb_submit"></div>';
@@ -131,9 +131,15 @@ function wpbb_application_processing() {
 	
 	/* check whether the form has already been posted */
 	if( isset( $_POST[ 'wpbb_submit' ] ) ) {
+
+		/* lets sanitize the posted data */
+		$applicant_name = sanitize_text_field( $_POST[ 'wpbb_name' ] );
+		$applicant_message = wp_kses_post( $_POST[ 'wpbb_message' ] );
+		$application_job_ref = sanitize_text_field( $_POST[ 'wpbb_job_reference' ] );
+		$applicant_email = sanitize_text_field( $_POST[ 'wpbb_email' ] );
 		
 		/* get the post for this job reference */
-		$job_post = wpbb_get_job_by_reference( $_GET[ 'job_id' ] );
+		$job_post = wpbb_get_job_by_reference( sanitize_text_field( $_GET[ 'job_id' ] ) );
 	
 		/* store message on success/failure in this array */
 		global $wpbb_messages;
@@ -144,10 +150,24 @@ function wpbb_application_processing() {
 			require_once( ABSPATH . 'wp-admin/includes/file.php' );
 		
 		/* get the uploaded file information */
-		$wpbb_uploaded_file = $_FILES[ 'wpbb_upload' ];
-		
+		$wpbb_uploaded_file = $_FILES[ 'wpbb_file' ];
+
+		/* check that the $_FILES var is an array */
+		if( ! is_array( $wpbb_uploaded_file ) ) {
+
+			/* add an error message and bail */
+			$wpbb_messages[] = '<p class="message error">File attachment failed.</p>';
+
+			/* go no further as file type not allowed */
+			return;
+
+		}
+
+		/* sanitize the uploaded file name */
+		$wpbb_uploaded_file_name = sanitize_text_field( $wpbb_uploaded_file[ 'name' ] );
+
 		/* check we have a file to upload */
-		if( $wpbb_uploaded_file[ 'name' ] != '' ) {
+		if( $wpbb_uploaded_file_name != '' ) {
 			
 			/* set overides to make it work */
 			$wpbb_upload_overrides = array( 'test_form' => false );
@@ -177,7 +197,10 @@ function wpbb_application_processing() {
 				
 				/* upload file not allowed - add to messages */
 				$wpbb_messages[] = '<p class="message error">Error: CV is not an allowed file type.</p>';
-				
+
+				/* go no further as file type not allowed */
+				return;
+
 			}
 		
 		}		
@@ -188,7 +211,7 @@ function wpbb_application_processing() {
 		/* setup the attachment data */
 		$wpbb_attachment = array(
 		     'post_mime_type' => $wpbb_filetype[ 'type' ],
-		     'post_title' => preg_replace('/\.[^.]+$/', '', $wpbb_uploaded_file[ 'name' ]),
+		     'post_title' => preg_replace('/\.[^.]+$/', '', $wpbb_uploaded_file_name ),
 		     'post_content' => '',
 		     'guid' => $wpbb_wp_upload_dir[ 'url' ] . '/' . basename( $wpbb_moved_file[ 'file' ] ),
 		     'post_status' => 'inherit'
@@ -198,9 +221,9 @@ function wpbb_application_processing() {
 		$wpbb_application_id = wp_insert_post(
 			array(
 				'post_type'		=> 'wpbb_application',
-				'post_title'	=> wp_strip_all_tags( $_POST[ 'wpbb_name' ] ),
+				'post_title'	=> esc_html( $applicant_name ),
 				'post_status'	=> 'publish',
-				'post_content'	=> wp_kses_post( $_POST[ 'wpbb_message' ] )
+				'post_content'	=> $applicant_message
 			)
 		);
 		
@@ -208,11 +231,11 @@ function wpbb_application_processing() {
 		if( $wpbb_application_id != 0 ) {
 			
 			/* set the post meta data (custom fields) */
-			add_post_meta( $wpbb_application_id, '_wpbb_job_reference', wp_strip_all_tags( $_POST[ 'wpbb_job_reference' ] ), true );
-			add_post_meta( $wpbb_application_id, '_wpbb_applicant_email', wp_strip_all_tags( $_POST[ 'wpbb_email' ] ), true );
+			add_post_meta( $wpbb_application_id, '_wpbb_job_reference', $application_job_ref, true );
+			add_post_meta( $wpbb_application_id, '_wpbb_applicant_email', $applicant_email, true );
 			
 			/* check we have a file to attach */
-			if( $wpbb_uploaded_file[ 'name' ] != '' ) {
+			if( $wpbb_uploaded_file_name != '' ) {
 			
 				/* add the attachment from the uploaded file */
 				$wpbb_attach_id = wp_insert_attachment( $wpbb_attachment, $wpbb_moved_file[ 'file' ], $wpbb_application_id );
@@ -236,7 +259,7 @@ function wpbb_application_processing() {
 		/* build the content of the email */
 		$wpbb_email_content = '
 		
-			<p>' . $_POST[ 'wpbb_name' ] . ' has completed an application for ' . $job_post->the_title . ' which has the job reference of ' . $_POST[ 'wpbb_job_reference' ] . '. The applicants email address is ' . $_POST[ 'wpbb_email' ] . '. Below is a summary of their responses:</p>
+			<p>' . $applicant_name . ' has completed an application for ' . $job_post->the_title . ' which has the job reference of ' . $application_job_ref . '. The applicants email address is ' . $applicant_email. '. Below is a summary of their responses:</p>
 			
 			<ul>
 				<li>Applicant Name: ' . esc_html( get_the_title( $wpbb_application_id ) ) . '</li>
@@ -247,7 +270,7 @@ function wpbb_application_processing() {
 				<li><a href="' . get_edit_post_link( $wpbb_application_id ) . '">Application Edit Link</a></li>
 				<li><a href="' . esc_url( $wpbb_moved_file[ 'url' ] ) . '">CV Attachment Link</a></li>
 			</ul>
-			<br />' . wpautop( wp_kses_post( $_POST[ 'wpbb_message' ] ) ) . '<br />
+			<br />' . wpautop( $applicant_message ) . '<br />
 			
 			<p>Email sent by <a href="http://wpbroadbean.com">WP Broadbean WordPress plugin</a>.</p>
 			
@@ -255,7 +278,7 @@ function wpbb_application_processing() {
 		
 		/* set up the mail variables */
 		$wpbb_mail_subject = 'New Job Application Submitted - ' . esc_html( get_the_title( $wpbb_application_id ) );
-		$wpbb_email_headers = 'From: ' . $_POST[ 'wpbb_name' ] . ' <' . $_POST[ 'wpbb_email' ] . '>';
+		$wpbb_email_headers = "From: $applicant_name &lt;$applicant_email&gt; \r\n";
 		
 		/**
 		 * set the content of the email as a variable
@@ -298,6 +321,13 @@ function wpbb_application_processing() {
 		
 		/* remove filter below to allow / force mail to send as html */
 		remove_filter( 'wp_mail_content_type', create_function( '', 'return "text/html"; ' ) );
+
+		/**
+		 * @hook wpbb_after_application_form_processing
+		 * @param int $wpbb_application_id 	the application post id of the application submitted
+		 * @param obj $job_post the post object for the job being applied for
+		 */
+		do_action( 'wpbb_after_application_form_processing', $wpbb_application_id, $job_post );
 	
 	} // end if form posted
 	

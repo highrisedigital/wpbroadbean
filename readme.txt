@@ -4,7 +4,7 @@ Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
 Tested up to: 4.4.2
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,13 +12,13 @@ WP Broadbean is a plugin allowing jobs added to Broadbean to show in your WordPr
 
 == Description ==
 
->If you are running a version of WP Broadbean less than version 2.0 please DO NOT UPDATE.
-
 [WP Broadbean](http://wpbroadbean.com/ "Broadbean posted jobs on your WordPress website") is a plugin designed to work alongside the Broadbean Adcourier job posting system allowing jobs added to Broadbean to show in your WordPress site. The plugin adds custom post types and taxonomies to allow you to add jobs. More importantly it provides an end-point to accept feed data sent by Broadbean and add this as job posts to your site.
 
 You can find out more about the WP Broadbean plugin on the [WP Broadbean website](http://wpbroadbean.com/ "Broadbean posted jobs on your WordPress website").
 
 We also offer a service to complete a Broadbean integration with WordPress for you. Find out more about our [WPBB Assist service here](http://wpbroadbean.com/assist/).
+
+>If you are running a version of WP Broadbean less than version 2.0 please DO NOT UPDATE.
 
 == Installation ==
 
@@ -58,6 +58,12 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 2. Single job edit post screen
 
 == Changelog ==
+
+= 2.1.2 =
+* Sanitize all posted data from the application form.
+* Add in a hook (wpbb_after_application_form_processing) which fires after the application form has been processed. This could be used for example to redirect users to a different page on the site, like a thank you page.
+* Prevent an application from being saved and processed if the CV file type does not match those allowed.
+* Make all the fields in the application form mandatory or required. The JS validate will prevent form submission unless all fields are completed.
 
 = 2.1.1 =
 * Include the application message in the email sent back to the application tracking email.
