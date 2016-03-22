@@ -177,6 +177,9 @@ function wpbb_application_processing() {
 				
 				/* upload file not allowed - add to messages */
 				$wpbb_messages[] = '<p class="message error">Error: CV is not an allowed file type.</p>';
+
+				/* go no further as file type not allowed */
+				return;
 				
 			}
 		
