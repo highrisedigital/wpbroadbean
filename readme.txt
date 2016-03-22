@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: wpmarkuk
+Contributors: wpmarkuk, highrisedigital
 Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
