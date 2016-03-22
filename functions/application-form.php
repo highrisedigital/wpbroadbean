@@ -318,8 +318,6 @@ function wpbb_application_processing() {
 			$wpbb_email_headers,
 			$wpbb_attachments
 		);
-
-		wp_die( wp_var_dump( $wpbb_email_headers ) );
 		
 		/* remove filter below to allow / force mail to send as html */
 		remove_filter( 'wp_mail_content_type', create_function( '', 'return "text/html"; ' ) );
