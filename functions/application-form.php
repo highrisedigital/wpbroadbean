@@ -144,7 +144,7 @@ function wpbb_application_processing() {
 			require_once( ABSPATH . 'wp-admin/includes/file.php' );
 		
 		/* get the uploaded file information */
-		$wpbb_uploaded_file = $_FILES[ 'wpbb_upload' ];
+		$wpbb_uploaded_file = $_FILES[ 'wpbb_file' ];
 		
 		/* check we have a file to upload */
 		if( $wpbb_uploaded_file[ 'name' ] != '' ) {
