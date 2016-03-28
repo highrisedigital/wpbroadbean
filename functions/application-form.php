@@ -293,7 +293,7 @@ function wpbb_application_processing() {
 		$wpbb_mail_recipients = array();
 		
 		/* get the contact email */
-		$wpbb_contact_email = get_post_meta( $job_post->ID, '_wpbb_job_contact_email', true );
+		$wpbb_contact_email = sanitize_email( get_post_meta( $job_post->ID, '_wpbb_job_contact_email', true ) );
 		
 		/* if we have a contact email add it to the recipients array */
 		if( $wpbb_contact_email != '' ) {
@@ -313,13 +313,12 @@ function wpbb_application_processing() {
 		
 		/* send the mail */
 		$wpbb_send_email = wp_mail(
-			$wpbb_mail_recipients,
-			$wpbb_mail_subject,
-			$wpbb_mail_content,
-			$wpbb_email_headers,
-			$wpbb_attachments
+			apply_filters( 'wpbb_application_email_recipients', $wpbb_mail_recipients, $wpbb_application_id, $job_post ),
+			apply_filters( 'wpbb_application_email_subject', $wpbb_mail_subject, $wpbb_application_id, $job_post ),
+			apply_filters( 'wpbb_application_email_content', $wpbb_mail_content, $wpbb_application_id, $job_post ),
+			apply_filters( 'wpbb_application_email_headers', $wpbb_email_headers, $wpbb_application_id, $job_post ),
+			apply_filters( 'wpbb_application_email_content', $wpbb_attachments, $wpbb_application_id, $job_post ),
 		);
-		wp_var_dump( $wpbb_send_email );
 		
 		/* remove filter below to allow / force mail to send as html */
 		remove_filter( 'wp_mail_content_type', create_function( '', 'return "text/html"; ' ) );
