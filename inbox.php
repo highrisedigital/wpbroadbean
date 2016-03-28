@@ -88,24 +88,24 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 		$wpbb_tax_terms[ $taxonomy[ 'bb_field' ] ] = wpbb_prepare_terms( $wpbb_xml_params->$taxonomy[ 'bb_field' ], $taxonomy );
 		
 	}
-	
-	/**
-	 * taxonomy terms are now ready and therefore we are ready to add the post
-	 * first lets setup some args for adding the post - the basiscs
-	 */
-	$wpbb_job_post_args = array(
-		'post_type' => wpbb_job_post_type_name(),
-		'post_title' => wp_strip_all_tags( (string) $wpbb_xml_params->job_title ),
-		'post_content' => wp_kses( $wpbb_xml_params->job_description, wp_kses_allowed_html( 'post' ) ),
-		'post_status' => 'publish'
-	);
-	
+		
 	/**
 	 * lets now insert the actual post into wordpress
 	 * uses the wp_insert_post function to do this
 	 * if this works it will return the post id of the job added
 	 */
-	$wpbb_job_post_id = wp_insert_post( $wpbb_job_post_args );
+	$wpbb_job_post_id = wp_insert_post(
+		apply_filters(
+			'wpbb_insert_job_post_args',
+			array(
+				'post_type' => wpbb_job_post_type_name(),
+				'post_title' => wp_strip_all_tags( (string) $wpbb_xml_params->job_title ),
+				'post_content' => wp_kses( $wpbb_xml_params->job_description, wp_kses_allowed_html( 'post' ) ),
+				'post_status' => 'publish'
+			),
+			$wpbb_xml_params
+		)
+	);
 	
 	/**
 	 * lets check that the job was added
