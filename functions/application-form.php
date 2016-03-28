@@ -16,7 +16,7 @@ function wpbb_application_form( $content ) {
 	
 	/* get the job id */
 	if( isset( $_GET[ 'job_id' ] ) ) {
-		$job_id = $_GET[ 'job_id' ];
+		$job_id = sanitize_text_field( $_GET[ 'job_id' ] );
 	} else {
 		$job_id = '';
 	}
@@ -25,7 +25,7 @@ function wpbb_application_form( $content ) {
 	if( $job_id != '' ) {
 		
 		/* get the post for this job reference */
-		$job_post = wpbb_get_job_by_reference( $_GET[ 'job_id' ] );
+		$job_post = wpbb_get_job_by_reference( $job_id );
 
 		/* check if we have a job post for this reference */
 		if( $job_post == false ) {
@@ -46,7 +46,7 @@ function wpbb_application_form( $content ) {
 			$form = '<div class="wpbb-form-wrapper"><form enctype="multipart/form-data" id="wpbb-application-form" method="post" action="">';
 			
 			/* add a hidden input field for the job ref, contact email and broadbean email */
-			$form .= '<input class="wpbb-input" type="hidden" name="wpbb_job_reference" id="wpbb-job-reference" value="' . esc_attr( $_GET[ 'job_id' ] ) . '" />';
+			$form .= '<input class="wpbb-input" type="hidden" name="wpbb_job_reference" id="wpbb-job-reference" value="' . esc_attr( $job_id ) . '" />';
 			
 			$form .= '<input class="wpbb-input" type="hidden" name="wpbb_contact_email" id="wpbb-contact-email" value="' . esc_attr( $contact_email ) . '" /><input class="wpbb-input" type="hidden" name="wpbb_broadbean_application_email" id="wpbb-broadbean-application-email" value="' . esc_attr( $bb_email ) . '" />';
 			
@@ -317,7 +317,7 @@ function wpbb_application_processing() {
 			apply_filters( 'wpbb_application_email_subject', $wpbb_mail_subject, $wpbb_application_id, $job_post ),
 			apply_filters( 'wpbb_application_email_content', $wpbb_mail_content, $wpbb_application_id, $job_post ),
 			apply_filters( 'wpbb_application_email_headers', $wpbb_email_headers, $wpbb_application_id, $job_post ),
-			apply_filters( 'wpbb_application_email_content', $wpbb_attachments, $wpbb_application_id, $job_post ),
+			apply_filters( 'wpbb_application_email_content', $wpbb_attachments, $wpbb_application_id, $job_post )
 		);
 		
 		/* remove filter below to allow / force mail to send as html */
