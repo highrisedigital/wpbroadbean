@@ -136,7 +136,7 @@ function wpbb_application_processing() {
 		$applicant_name = sanitize_text_field( $_POST[ 'wpbb_name' ] );
 		$applicant_message = wp_kses_post( $_POST[ 'wpbb_message' ] );
 		$application_job_ref = sanitize_text_field( $_POST[ 'wpbb_job_reference' ] );
-		$applicant_email = sanitize_text_field( $_POST[ 'wpbb_email' ] );
+		$applicant_email = sanitize_email( $_POST[ 'wpbb_email' ] );
 		
 		/* get the post for this job reference */
 		$job_post = wpbb_get_job_by_reference( sanitize_text_field( $_GET[ 'job_id' ] ) );
@@ -278,7 +278,8 @@ function wpbb_application_processing() {
 		
 		/* set up the mail variables */
 		$wpbb_mail_subject = 'New Job Application Submitted - ' . esc_html( get_the_title( $wpbb_application_id ) );
-		$wpbb_email_headers = "From: $applicant_name &lt;$applicant_email&gt; \r\n";
+		$wpbb_email_headers = array();
+		$wpbb_email_headers[] = 'From: ' . esc_html( $applicant_name ) . ' <' . $applicant_email . '>';
 		
 		/**
 		 * set the content of the email as a variable
@@ -318,6 +319,7 @@ function wpbb_application_processing() {
 			$wpbb_email_headers,
 			$wpbb_attachments
 		);
+		wp_var_dump( $wpbb_send_email );
 		
 		/* remove filter below to allow / force mail to send as html */
 		remove_filter( 'wp_mail_content_type', create_function( '', 'return "text/html"; ' ) );
