@@ -4,7 +4,7 @@ Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
 Tested up to: 4.4.2
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,13 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 2. Single job edit post screen
 
 == Changelog ==
+
+= 2.1.3 =
+* Correct a bug introduced in 2.1.2 which prevented application emails from sending.
+* Add filters to allowing developers to filter the application email headers, subject etc.
+* Sanitize the $_GET requests in the application form
+* Use function for setting the email content type.
+* Add a filter to allow the insert job post argumnets pasted to wp_insert_post to be filterable.
 
 = 2.1.2 =
 * Sanitize all posted data from the application form.
