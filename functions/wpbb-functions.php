@@ -586,3 +586,10 @@ function wpbb_get_setting( $name = '' ) {
 	return apply_filters( 'wpbb_get_setting', $setting );
 	
 }
+
+/**
+ * returns string for use when setting wp_mail content type
+ */
+function wpbb_text_html_email_type() {
+	return 'text/html';
+}

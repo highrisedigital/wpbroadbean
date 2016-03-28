@@ -251,7 +251,7 @@ function wpbb_application_processing() {
 		} // end check application post added
 				
 		/* add filter below to allow / force mail to send as html */
-		add_filter( 'wp_mail_content_type', create_function( '', 'return "text/html"; ' ) );
+		add_filter( 'wp_mail_content_type', 'wpbb_text_html_email_type' );
 		
 		/* get the post object for the job being applied for */
 		$job_post = get_post( $job_post );
@@ -293,11 +293,11 @@ function wpbb_application_processing() {
 		$wpbb_mail_recipients = array();
 		
 		/* get the contact email */
-		$wpbb_contact_email = sanitize_email( get_post_meta( $job_post->ID, '_wpbb_job_contact_email', true ) );
+		$wpbb_contact_email = get_post_meta( $job_post->ID, '_wpbb_job_contact_email', true );
 		
 		/* if we have a contact email add it to the recipients array */
 		if( $wpbb_contact_email != '' ) {
-			$wpbb_mail_recipients[] = $wpbb_contact_email;
+			$wpbb_mail_recipients[] = sanitize_email( $wpbb_contact_email );
 		}
 		
 		/* get the tracking email */
@@ -305,7 +305,7 @@ function wpbb_application_processing() {
 		
 		/* if we have a tracking email add it to the recipients array */
 		if( $wpbb_tracking_email != '' ) {
-			$wpbb_mail_recipients[] = $wpbb_tracking_email;
+			$wpbb_mail_recipients[] = sanitize_email( $wpbb_tracking_email );
 		}
 		
 		/* set attachments - the cv */
@@ -321,7 +321,7 @@ function wpbb_application_processing() {
 		);
 		
 		/* remove filter below to allow / force mail to send as html */
-		remove_filter( 'wp_mail_content_type', create_function( '', 'return "text/html"; ' ) );
+		remove_filter( 'wp_mail_content_type', 'wpbb_text_html_email_type' );
 
 		/**
 		 * @hook wpbb_after_application_form_processing
