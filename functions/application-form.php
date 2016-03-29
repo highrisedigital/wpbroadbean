@@ -246,7 +246,7 @@ function wpbb_application_processing() {
 			}
 			
 			/* set an output message */
-			$wpbb_messages[] = '<p class="message success">Thank you. You application has been received.</p>';
+			$wpbb_messages[] = '<p class="message success">Thank you. Your application has been received.</p>';
 			
 		} // end check application post added
 				
