@@ -4,7 +4,7 @@
 	border-left: 3px solid #7ad03a;
 	padding: 2%;
 }
-.error {
+#error, .error {
 	border-color: #C00;
 	color: #C00;
 }
