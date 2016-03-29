@@ -4,7 +4,7 @@ Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
 Tested up to: 4.4.2
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,10 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 2. Single job edit post screen
 
 == Changelog ==
+
+= 2.1.4 =
+* Make the messages output by the application form filterable by developers using the filter 'wpbb_application_form_messages'.
+* Correct a typo in the application form success message.
 
 = 2.1.3 =
 * Correct a bug introduced in 2.1.2 which prevented application emails from sending.
