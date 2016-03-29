@@ -70,14 +70,28 @@ function wpbb_application_form( $content ) {
 		} else {
 			
 			/* set a string to store all messages in */
-			$wpbb_message_string = '';
+			$wpbb_message_output = array();
 			
-			/* loop through each message adding to string */
+			/* get any messages */
 			global $wpbb_messages;
-			foreach( $wpbb_messages as $message ) {
-				$wpbb_message_string .= $message . '<br />';
+
+			/* run messages through a filter so devs can alter them */
+			$wpbb_messages = apply_filters(
+				'wpbb_application_form_messages',
+				$wpbb_messages
+			);
+
+			/* if we have some messages to loop through */
+			if( ! empty( $wpbb_messages ) ) {
+
+				/* loop through each message adding to string */
+				foreach( $wpbb_messages as $key => $message ) {
+
+					$wpbb_message_output[] = '<p class="message" id="' . esc_attr( $message[ 'type' ] ) . '">' . esc_html( $message[ 'message' ] ) . '</p>';
+				}
+
 			}
-			
+
 			/* prevent undefined variable */
 			$form = '';
 			
@@ -92,8 +106,26 @@ function wpbb_application_form( $content ) {
 	}
 	
 	/* have we any message */
-	if( ! isset( $wpbb_message_string) ) {
+	if( ! empty( $wpbb_message_output ) ) {
+
+		$wpbb_message_string = '<div class="wpbb-messages">';
+
+		/* loop through each message */
+		foreach( $wpbb_message_output as $message_output ) {
+
+			/* add message to our string */
+			$wpbb_message_string .= $message_output;
+
+		}
+
+		$wpbb_message_string .= '</div>';
+
+	/* no messages */
+	} else {
+
+		/* set an empty string for messages */
 		$wpbb_message_string = '';
+
 	}
 	
 	/* make the form markup filterable */
@@ -155,8 +187,11 @@ function wpbb_application_processing() {
 		/* check that the $_FILES var is an array */
 		if( ! is_array( $wpbb_uploaded_file ) ) {
 
-			/* add an error message and bail */
-			$wpbb_messages[] = '<p class="message error">File attachment failed.</p>';
+			/* add an error message */
+			$wpbb_messages[ 'attachment_failed' ] = array(
+				'type'		=> 'error',
+				'message'	=> 'Error: File attachment failed.'
+			);
 
 			/* go no further as file type not allowed */
 			return;
@@ -195,8 +230,11 @@ function wpbb_application_processing() {
 			/* check uploaded file is in allowed mime types array */
 			if( ! in_array( $wpbb_filetype[ 'type' ], $wpbb_allowed_mime_types) ) {
 				
-				/* upload file not allowed - add to messages */
-				$wpbb_messages[] = '<p class="message error">Error: CV is not an allowed file type.</p>';
+				/* add an error message */
+				$wpbb_messages[ 'cv_type_failed' ] = array(
+					'type'		=> 'error',
+					'message'	=> 'Error: CV is not an allowed file type.'
+				);
 
 				/* go no further as file type not allowed */
 				return;
@@ -244,9 +282,12 @@ function wpbb_application_processing() {
 				wp_update_attachment_metadata( $wpbb_attach_id, $wpbb_attach_data );
 			
 			}
-			
-			/* set an output message */
-			$wpbb_messages[] = '<p class="message success">Thank you. Your application has been received.</p>';
+
+			/* add an error message */
+			$wpbb_messages[ 'application_success' ] = array(
+				'type'		=> 'success',
+				'message'	=> 'Thank you. Your application has been received.'
+			);
 			
 		} // end check application post added
 				
