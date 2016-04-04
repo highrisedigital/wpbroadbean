@@ -218,7 +218,7 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 			 * job has been added now
 			 * @hook - wpbb_job_added
 			 */
-			do_action( 'wpbb_job_added', $wpbb_job_post_id );
+			do_action( 'wpbb_job_added', $wpbb_job_post_id, $wpbb_xml_params );
 			
 			/**
 			 * everything appears to have worked
