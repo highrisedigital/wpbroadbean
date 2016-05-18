@@ -214,19 +214,19 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 				
 			} // end loop through all fields to add
 			
-			/**
-			 * job has been added now
-			 * @hook - wpbb_job_added
-			 */
-			do_action( 'wpbb_job_added', $wpbb_job_post_id );
-			
-			/**
-			 * everything appears to have worked
-			 * therefore lets output a success message
-			 */
-			echo apply_filters( 'wpbb_job_added_success_message', 'Success: This Job has been added and has a post ID of ' . $wpbb_job_post_id . '. The permalink to this job is: ' . get_permalink( $wpbb_job_post_id ) );
-			
 		} // end if have job fields
+
+		/**
+		 * job has been added now
+		 * @hook - wpbb_job_added
+		 */
+		do_action( 'wpbb_job_added', $wpbb_job_post_id, $wpbb_xml_params );
+		
+		/**
+		 * everything appears to have worked
+		 * therefore lets output a success message
+		 */
+		echo apply_filters( 'wpbb_job_added_success_message', 'Success: This Job has been added and has a post ID of ' . $wpbb_job_post_id . '. The permalink to this job is: ' . get_permalink( $wpbb_job_post_id ) );
 			
 	/**
 	 * wp_insert_post returned zero

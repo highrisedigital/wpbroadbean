@@ -9,6 +9,11 @@ function wpbb_application_form( $content ) {
 	
 	/* get the apply page from the settings */
 	$apply_pageid = get_option( 'wpbb_apply_page_id' );
+
+	/* check a page id is returned */
+	if( $apply_pageid == false && $apply_pageid == 'zero' ) {
+		return $content;
+	}
 	
 	/* check this is the apply page */
 	if( ! is_page( $apply_pageid ) )
@@ -358,7 +363,7 @@ function wpbb_application_processing() {
 			apply_filters( 'wpbb_application_email_subject', $wpbb_mail_subject, $wpbb_application_id, $job_post ),
 			apply_filters( 'wpbb_application_email_content', $wpbb_mail_content, $wpbb_application_id, $job_post ),
 			apply_filters( 'wpbb_application_email_headers', $wpbb_email_headers, $wpbb_application_id, $job_post ),
-			apply_filters( 'wpbb_application_email_content', $wpbb_attachments, $wpbb_application_id, $job_post )
+			apply_filters( 'wpbb_application_email_attachments', $wpbb_attachments, $wpbb_application_id, $job_post )
 		);
 		
 		/* remove filter below to allow / force mail to send as html */
