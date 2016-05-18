@@ -358,7 +358,7 @@ function wpbb_settings_page_ctas() {
 		
 		<div class="wpbb-postbox-inner">
 			
-			<p>WP Broadbean Assist provides you with a fully managed Broadbean integration with your WordPress site for just &pound;599.</p>
+			<p>WP Broadbean Assist provides you with a fully managed Broadbean integration with WordPress starting from &pound;750.</p>
 			<a class="button button-primary button-large" href="http://wpbroadbean.com/assist/">Integrate Broadbean Now</a>
 			
 		</div>
