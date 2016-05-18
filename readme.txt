@@ -4,7 +4,7 @@ Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
 Tested up to: 4.4.2
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,12 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 2. Single job edit post screen
 
 == Changelog ==
+
+= 2.1.5 =
+* Correct an wrong filter name to filter the application email attachments
+* Moved the job added action hook outside of the job fields loop in the inbox. This was wrongly being fired after each field was added.
+* Sanitize a call to the post ID using $_GET within the Applications posts when listing the CV attachment
+* When outputting the application form, check whether an application form has been set in the settings screen before filtering the content. Thanks for [@jonnyauk](https://profiles.wordpress.org/jonnyauk) for spotting this issue!
 
 = 2.1.4 =
 * Make the messages output by the application form filterable by developers using the filter 'wpbb_application_form_messages'.
