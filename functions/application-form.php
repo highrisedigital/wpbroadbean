@@ -9,6 +9,11 @@ function wpbb_application_form( $content ) {
 	
 	/* get the apply page from the settings */
 	$apply_pageid = get_option( 'wpbb_apply_page_id' );
+
+	/* check a page id is returned */
+	if( $apply_pageid == false && $apply_pageid == 'zero' ) {
+		return $content;
+	}
 	
 	/* check this is the apply page */
 	if( ! is_page( $apply_pageid ) )
