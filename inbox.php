@@ -191,13 +191,13 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 				 * check that the XML tag containing the bb_field is actually set to something
 				 * i.e. do we have data sent to actually store
 				 */
-				if( ! empty( $wpbb_xml_params->$field[ 'bb_field' ] ) ) {
+				if( ! empty( $wpbb_xml_params->{ $field[ 'bb_field' ] } ) ) {
 					
 					/* lets add the sent data as post meta for this job */
 					add_post_meta(
 						$wpbb_job_post_id, // this is id of the job we have just added
 						$field[ 'id' ], // this is the meta key to store the post meta in
-						wp_strip_all_tags( (string) $wpbb_xml_params->$field[ 'bb_field' ] ), // this is value to store - sent from broadbean
+						wp_strip_all_tags( (string) $wpbb_xml_params->{ $field[ 'bb_field' ] } ), // this is value to store - sent from broadbean
 						true
 					);
 					
@@ -206,9 +206,9 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 					 * fires after the field/meta has been added
 					 * @param (int) $wpbb_job_post_id is the post id for the added job
 					 * @param (string) $field[ 'id' ] is the post meta key for this field
-					 * @param (string) $wpbb_xml_params->$field[ 'bb_field' ] the value of the meta key
+					 * @param (string) $wpbb_xml_params->{ $field[ 'bb_field' ] } the value of the meta key
 					 */
-					do_action( 'wpbb_job_field_added', $wpbb_job_post_id, $field[ 'id' ], (string) $wpbb_xml_params->$field[ 'bb_field' ] );
+					do_action( 'wpbb_job_field_added', $wpbb_job_post_id, $field[ 'id' ], (string) $wpbb_xml_params->{ $field[ 'bb_field' ] } );
 					
 				} // end if have field data sent to add
 				
