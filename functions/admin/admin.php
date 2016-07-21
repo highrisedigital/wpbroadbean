@@ -293,7 +293,7 @@ function wpbb_settings_page_content() {
 			
 		</form>
 		
-	</div><!- // wrap -->
+	</div><!-- // wrap -->
 	
 	<?php
 	
