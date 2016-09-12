@@ -376,8 +376,13 @@ function wpbb_application_processing() {
 		 */
 		do_action( 'wpbb_after_application_form_processing', $wpbb_application_id, $job_post );
 
-		// lets remove the file that was just uploaded
-		wp_delete_attachment( $wpbb_attach_id, true );
+		// should we remove the application cv just uploaded
+		if( apply_filters( 'wpbb_remove_application_attachments_after_send', true ) == true ) {
+			
+			// lets remove the file that was just uploaded
+			wp_delete_attachment( $wpbb_attach_id, true );
+			
+		}
 	
 	} // end if form posted
 	
