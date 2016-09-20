@@ -3,9 +3,9 @@
 Plugin Name: WP Broadbean
 Plugin URI: http://wpbroadbean.com
 Description: Integrates Broadbean Adcourier with WordPress. This plugin allows jobs posted through Broadbean's Adcourier system to be sent to your WordPress website.
-Version: 2.1.6
+Version: 2.1.7
 Author: Mark Wilkinson
-Author URI: https://markwilkinson.me
+Author URI: https://highrise.digital
 License: GPLv2 or later
 */
 
