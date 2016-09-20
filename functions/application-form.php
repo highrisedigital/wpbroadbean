@@ -355,7 +355,7 @@ function wpbb_application_processing() {
 		}
 		
 		/* set attachments - the cv */
-		$wpbb_attachments = array( WP_CONTENT_DIR . '/uploads' . $wpbb_wp_upload_dir[ 'subdir' ] . '/' . basename( $wpbb_moved_file[ 'file' ] ) );
+		$wpbb_attachments = array( $wpbb_wp_upload_dir[ 'path' ] . '/' . basename( $wpbb_moved_file[ 'file' ] ) );
 		
 		/* send the mail */
 		$wpbb_send_email = wp_mail(
