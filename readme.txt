@@ -3,7 +3,7 @@ Contributors: wpmarkuk, highrisedigital
 Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
-Tested up to: 4.4.2
+Tested up to: 4.6.1
 Stable tag: 2.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
