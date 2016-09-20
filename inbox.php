@@ -98,10 +98,11 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 		apply_filters(
 			'wpbb_insert_job_post_args',
 			array(
-				'post_type' => wpbb_job_post_type_name(),
-				'post_title' => wp_strip_all_tags( (string) $wpbb_xml_params->job_title ),
-				'post_content' => wp_kses( $wpbb_xml_params->job_description, wp_kses_allowed_html( 'post' ) ),
-				'post_status' => 'publish'
+				'post_type'		=> wpbb_job_post_type_name(),
+				'post_title'	=> wp_strip_all_tags( (string) $wpbb_xml_params->job_title ),
+				'post_content'	=> wp_kses( $wpbb_xml_params->job_description, wp_kses_allowed_html( 'post' ) ),
+				'post_excerpt'	=> wp_kses_post( $wpbb_xml_params->short_description ),
+				'post_status'	=> 'publish'
 			),
 			$wpbb_xml_params
 		)
