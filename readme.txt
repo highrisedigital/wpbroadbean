@@ -4,7 +4,7 @@ Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
 Tested up to: 4.4.2
-Stable tag: 2.1.6
+Stable tag: 2.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,10 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 2. Single job edit post screen
 
 == Changelog ==
+
+= 2.1.7 =
+* Allow application uploads to work on multisite - thanks to @sijones-uk for contribution here
+* Add support for the job short description saved as the post excerpt
 
 = 2.1.6 =
 * Delete attachments from application form once emailed to broadbean. This is an important update for clients who do not want to store CVs on there website.
