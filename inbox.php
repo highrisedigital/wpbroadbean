@@ -202,6 +202,19 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 						true
 					);
 					
+					/* Use Expiry function and add new postmeta */
+					
+					if ($field[ 'id' ] == '_wpbb_job_days_to_advertise') {
+						
+						add_post_meta(
+							$wpbb_job_post_id, // this is id of the job we have just added
+							'_wpbb_job_expiry', // this is the meta key to store the post meta in
+							wpbb_calculate_job_expiry_date( $wpbb_xml_params->$field[ 'bb_field' ] ),
+							true
+						);
+						
+					}
+					
 					/**
 					 * @hook wpbb_job_field_added
 					 * fires after the field/meta has been added
