@@ -4,7 +4,7 @@ Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
 Tested up to: 4.6.1
-Stable tag: 2.1.7
+Stable tag: 2.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,9 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 2. Single job edit post screen
 
 == Changelog ==
+
+= 2.1.8 =
+* Add support for PHP7 so that taxonomies are added correctly when WordPress is running on PHP7. Thanks for @bencorke and @pixelanddot for assisting in this fix.
 
 = 2.1.7 =
 * Allow application uploads to work on multisite - thanks to @sijones-uk for contribution here
