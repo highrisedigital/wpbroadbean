@@ -48,7 +48,7 @@ function wpbb_application_form( $content ) {
 		if( ! isset( $_POST[ 'wpbb_submit' ] ) ) {
 			
 			/* start the form */
-			$form = '<div class="wpbb-form-wrapper"><form enctype="multipart/form-data" id="wpbb-application-form" method="post" action="">';
+			$form = '<div class="wpbb-form-wrapper"><p class="applying-for">' . __( 'You are applying for: ', 'wpbroadbean' ) . '<a href="' . esc_url( get_permalink( $job_post ) ) . '">' . get_the_title( $job_post ) . '</a></p><form enctype="multipart/form-data" id="wpbb-application-form" method="post" action="">';
 			
 			/* add a hidden input field for the job ref, contact email and broadbean email */
 			$form .= '<input class="wpbb-input" type="hidden" name="wpbb_job_reference" id="wpbb-job-reference" value="' . esc_attr( $job_id ) . '" />';
