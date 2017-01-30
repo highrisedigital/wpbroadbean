@@ -48,7 +48,7 @@ function wpbb_application_form( $content ) {
 		if( ! isset( $_POST[ 'wpbb_submit' ] ) ) {
 			
 			/* start the form */
-			$form = '<div class="wpbb-form-wrapper"><form enctype="multipart/form-data" id="wpbb-application-form" method="post" action="">';
+			$form = '<div class="wpbb-form-wrapper"><p class="applying-for">' . __( 'You are applying for: ', 'wpbroadbean' ) . '<a href="' . esc_url( get_permalink( $job_post ) ) . '">' . get_the_title( $job_post ) . '</a></p><form enctype="multipart/form-data" id="wpbb-application-form" method="post" action="">';
 			
 			/* add a hidden input field for the job ref, contact email and broadbean email */
 			$form .= '<input class="wpbb-input" type="hidden" name="wpbb_job_reference" id="wpbb-job-reference" value="' . esc_attr( $job_id ) . '" />';
@@ -56,17 +56,17 @@ function wpbb_application_form( $content ) {
 			$form .= '<input class="wpbb-input" type="hidden" name="wpbb_contact_email" id="wpbb-contact-email" value="' . esc_attr( $contact_email ) . '" /><input class="wpbb-input" type="hidden" name="wpbb_broadbean_application_email" id="wpbb-broadbean-application-email" value="' . esc_attr( $bb_email ) . '" />';
 			
 			/* add inputs for name and email address */
-			$form .= '<div class="wpbb-input"><label for="wpbb_name" class="require">Name</label><input class="wpbb-input" type="text" name="wpbb_name" id="wpbb-name" value="" tabindex="3" required><label class="error" for="wpbb_name">Please enter your name.</label></div>';
+			$form .= '<div class="wpbb-input"><label for="wpbb_name" class="require">' . __( 'Name', 'wpbroadbean' ) . '</label><input class="wpbb-input" type="text" name="wpbb_name" id="wpbb-name" value="" tabindex="3" required><label class="error" for="wpbb_name">Please enter your name.</label></div>';
 			
-			$form .= '<div class="wpbb-input"><label for="wpbb_email" class="require">Email</label><input class="wpbb-input" type="email" name="wpbb_email" id="wpbb-email" value="" tabindex="4" required><p class="wpbb_description">Please enter a valid email address as this will be used to contact you.</p></div>';
+			$form .= '<div class="wpbb-input"><label for="wpbb_email" class="require">' . __( 'Email', 'wpbroadbean' ) . '</label><input class="wpbb-input" type="email" name="wpbb_email" id="wpbb-email" value="" tabindex="4" required><p class="wpbb_description">' . __( 'Please enter a valid email address as this will be used to contact you.', 'wpbroadbean' ) . '</p></div>';
 			
-			$form .= '<div class="wpbb-input"><label for="wpbb_message" class="require">Message</label><textarea class="wpbb-input wpbb-input-textarea" name="wpbb_message" id="wpbb-message" value="" tabindex="5"></textarea><p class="wpbb_description">Add an optional message.</p></div>';
+			$form .= '<div class="wpbb-input"><label for="wpbb_message" class="require">' . __( 'Message', 'wpbroadbean' ) . '</label><textarea class="wpbb-input wpbb-input-textarea" name="wpbb_message" id="wpbb-message" value="" tabindex="5"></textarea><p class="wpbb_description">Add an optional message.</p></div>';
 			
 			/* add the upload input field for the cv */
-			$form .= '<div class="wpbb-input"><label for="wpbb_file">Attach a CV</label><input type="file" name="wpbb_file" /><p class="wpbb_description">Please attach your CV in PDF format.</p></div>';
+			$form .= '<div class="wpbb-input"><label for="wpbb_file">' . __( 'Attach a CV', 'wpbroadbean' ) . '</label><input type="file" name="wpbb_file" /><p class="wpbb_description">' . __( 'Please attach your CV.', 'wpbroadbean' ) . '</p></div>';
 			
 			/* add the submit button */
-			$form .= '<div class="wpbb_submit"><input type="submit" value="Submit" name="wpbb_submit"></div>';
+			$form .= '<div class="wpbb_submit"><input type="submit" value="' . __( 'Submit', 'wpbroadbean' ) . '" name="wpbb_submit"></div>';
 			
 			/* end the form */
 			$form .= '</form></div>';
@@ -314,7 +314,6 @@ function wpbb_application_processing() {
 				<li>Job Reference: ' . esc_html( get_post_meta( $job_post->ID, '_wpbb_job_reference', true ) ) . '</li>
 				<li>Job Permalink: <a href="' . esc_url( get_permalink( $job_post->ID ) ) . '">' . esc_url( get_permalink( $job_post->ID ) ) . '</a></li>
 				<li><a href="' . get_edit_post_link( $wpbb_application_id ) . '">Application Edit Link</a></li>
-				<li><a href="' . esc_url( $wpbb_moved_file[ 'url' ] ) . '">CV Attachment Link</a></li>
 			</ul>
 			<br />' . wpautop( $applicant_message ) . '<br />
 			
@@ -377,7 +376,7 @@ function wpbb_application_processing() {
 		do_action( 'wpbb_after_application_form_processing', $wpbb_application_id, $job_post );
 
 		// should we remove the application cv just uploaded
-		if( apply_filters( 'wpbb_remove_application_attachments_after_send', true ) == true ) {
+		if( true === wpbb_maybe_remove_application_attachments() ) {
 			
 			// lets remove the file that was just uploaded
 			wp_delete_attachment( $wpbb_attach_id, true );
