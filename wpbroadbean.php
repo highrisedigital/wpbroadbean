@@ -7,6 +7,7 @@ Version: 2.1.8
 Author: Mark Wilkinson
 Author URI: https://highrise.digital
 License: GPLv2 or later
+Text Domain: wpbroadbean
 */
 
 /* exist if directly accessed */
