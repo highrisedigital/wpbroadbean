@@ -56,17 +56,17 @@ function wpbb_application_form( $content ) {
 			$form .= '<input class="wpbb-input" type="hidden" name="wpbb_contact_email" id="wpbb-contact-email" value="' . esc_attr( $contact_email ) . '" /><input class="wpbb-input" type="hidden" name="wpbb_broadbean_application_email" id="wpbb-broadbean-application-email" value="' . esc_attr( $bb_email ) . '" />';
 			
 			/* add inputs for name and email address */
-			$form .= '<div class="wpbb-input"><label for="wpbb_name" class="require">Name</label><input class="wpbb-input" type="text" name="wpbb_name" id="wpbb-name" value="" tabindex="3" required><label class="error" for="wpbb_name">Please enter your name.</label></div>';
+			$form .= '<div class="wpbb-input"><label for="wpbb_name" class="require">' . __( 'Name', 'wpbroadbean' ) . '</label><input class="wpbb-input" type="text" name="wpbb_name" id="wpbb-name" value="" tabindex="3" required><label class="error" for="wpbb_name">Please enter your name.</label></div>';
 			
-			$form .= '<div class="wpbb-input"><label for="wpbb_email" class="require">Email</label><input class="wpbb-input" type="email" name="wpbb_email" id="wpbb-email" value="" tabindex="4" required><p class="wpbb_description">Please enter a valid email address as this will be used to contact you.</p></div>';
+			$form .= '<div class="wpbb-input"><label for="wpbb_email" class="require">' . __( 'Email', 'wpbroadbean' ) . '</label><input class="wpbb-input" type="email" name="wpbb_email" id="wpbb-email" value="" tabindex="4" required><p class="wpbb_description">' . __( 'Please enter a valid email address as this will be used to contact you.', 'wpbroadbean' ) . '</p></div>';
 			
-			$form .= '<div class="wpbb-input"><label for="wpbb_message" class="require">Message</label><textarea class="wpbb-input wpbb-input-textarea" name="wpbb_message" id="wpbb-message" value="" tabindex="5"></textarea><p class="wpbb_description">Add an optional message.</p></div>';
+			$form .= '<div class="wpbb-input"><label for="wpbb_message" class="require">' . __( 'Message', 'wpbroadbean' ) . '</label><textarea class="wpbb-input wpbb-input-textarea" name="wpbb_message" id="wpbb-message" value="" tabindex="5"></textarea><p class="wpbb_description">Add an optional message.</p></div>';
 			
 			/* add the upload input field for the cv */
-			$form .= '<div class="wpbb-input"><label for="wpbb_file">Attach a CV</label><input type="file" name="wpbb_file" /><p class="wpbb_description">Please attach your CV in PDF format.</p></div>';
+			$form .= '<div class="wpbb-input"><label for="wpbb_file">' . __( 'Attach a CV', 'wpbroadbean' ) . '</label><input type="file" name="wpbb_file" /><p class="wpbb_description">' . __( 'Please attach your CV.', 'wpbroadbean' ) . '</p></div>';
 			
 			/* add the submit button */
-			$form .= '<div class="wpbb_submit"><input type="submit" value="Submit" name="wpbb_submit"></div>';
+			$form .= '<div class="wpbb_submit"><input type="submit" value="' . __( 'Submit', 'wpbroadbean' ) . '" name="wpbb_submit"></div>';
 			
 			/* end the form */
 			$form .= '</form></div>';
