@@ -373,36 +373,29 @@ function wpbb_get_field( $field, $post_id = '', $prefix = '_wpbb_' ) {
  * @return (int/false) $post_id returns the post of the job if a job exists with that reference or false
  */
 function wpbb_get_job_by_reference( $job_ref ) {
-		
+
 	/* get posts according to args above */
 	$wpbb_jobs = new WP_Query(
-		array(
-			'post_type' => wpbb_job_post_type_name(),
-			'post_status'=> 'publish',
-			'meta_key' => '_wpbb_job_reference',
-			'meta_value' => $job_ref,
-			'relation' => 'AND'
+		apply_filters(
+			'wpbb_get_job_by_reference_args',
+			array(
+				'post_type'		=> wpbb_job_post_type_name(),
+				'post_status'	=> 'publish',
+				'meta_key'		=> '_wpbb_job_reference',
+				'meta_value'	=> $job_ref,
+				'fields'		=> 'ids'
+			)
 		)
 	);
-	
-	/* check there is a post with this job reference */
-	if( $wpbb_jobs->have_posts() ) {
-		
-		/* loop through each post returned */
-		while( $wpbb_jobs->have_posts() ) : $wpbb_jobs->the_post();
-		
-			/* return the post id */
-			return get_the_ID();
-		
-		/* end the loop */
-		endwhile;
-		
-	}
-	
-	/* reset query */
+
+	// get the post ids into an array
+	$wpbb_jobs = $wpbb_jobs->posts;
+
+	// reset the query
 	wp_reset_query();
-	
-	return false;
+
+	// return the post id of the found job
+	return apply_filters( 'wpbb_get_job_by_reference', array_shift( $wpbb_jobs ), $job_ref );
 	
 }
 
