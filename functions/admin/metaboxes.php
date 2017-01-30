@@ -5,7 +5,7 @@
 ***************************************************************/
 function wpbb_metaboxes( $meta_boxes ) {
 	
-	$meta_boxes[] = array(
+	$meta_boxes[ 'job_information' ] = array(
         'title' => 'Job Information',
         'id' => 'wpbb_job_info',
         'pages' => array(
@@ -16,7 +16,7 @@ function wpbb_metaboxes( $meta_boxes ) {
         'fields' => wpbb_get_job_fields()
     );
     
-    $meta_boxes[] = array(
+    $meta_boxes[ 'application_information' ] = array(
         'title' => 'Application Information',
         'id' => 'wpbb_application_info',
         'pages' => array( 'wpbb_application' ),
@@ -39,13 +39,6 @@ function wpbb_metaboxes( $meta_boxes ) {
 					'cols' => 6,
 					'type' => 'text'
 				),
-				'attachments' => array(
-					'name' => 'Application Attachments',
-					'desc' => 'Attachments to this Application are listed below.',
-					'id' => '_wpbb_applicant_attachments',
-					'cols' => 12,
-					'type' => 'attachments'
-				),
 			)
         )
     );
@@ -54,6 +47,31 @@ function wpbb_metaboxes( $meta_boxes ) {
 }
 
 add_filter( 'cmb_meta_boxes', 'wpbb_metaboxes' );
+
+/**
+ * 
+ */
+function wpbb_maybe_add_application_attachments( $fields ) {
+
+	// if we are not removing application attachments
+	if( false === wpbb_maybe_remove_application_attachments() ) {
+
+		// add application attachments field
+		$fields[ 'attachments' ] = array(
+			'name' => 'Application Attachments',
+			'desc' => 'Attachments to this Application are listed below.',
+			'id' => '_wpbb_applicant_attachments',
+			'cols' => 12,
+			'type' => 'attachments'
+		);
+
+	}
+
+	return $fields;
+
+}
+
+add_filter( 'wpbb_application_metabox_fields', 'wpbb_maybe_add_application_attachments' );
 
 /**
  * create our own custom meta box field for showing attachments

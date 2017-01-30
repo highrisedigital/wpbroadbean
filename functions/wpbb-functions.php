@@ -586,3 +586,10 @@ function wpbb_get_setting( $name = '' ) {
 function wpbb_text_html_email_type() {
 	return 'text/html';
 }
+
+/**
+ * 
+ */
+function wpbb_maybe_remove_application_attachments() {
+	return apply_filters( 'wpbb_remove_application_attachments_after_send', true );
+}
