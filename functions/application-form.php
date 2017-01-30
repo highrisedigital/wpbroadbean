@@ -314,7 +314,6 @@ function wpbb_application_processing() {
 				<li>Job Reference: ' . esc_html( get_post_meta( $job_post->ID, '_wpbb_job_reference', true ) ) . '</li>
 				<li>Job Permalink: <a href="' . esc_url( get_permalink( $job_post->ID ) ) . '">' . esc_url( get_permalink( $job_post->ID ) ) . '</a></li>
 				<li><a href="' . get_edit_post_link( $wpbb_application_id ) . '">Application Edit Link</a></li>
-				<li><a href="' . esc_url( $wpbb_moved_file[ 'url' ] ) . '">CV Attachment Link</a></li>
 			</ul>
 			<br />' . wpautop( $applicant_message ) . '<br />
 			
@@ -377,7 +376,7 @@ function wpbb_application_processing() {
 		do_action( 'wpbb_after_application_form_processing', $wpbb_application_id, $job_post );
 
 		// should we remove the application cv just uploaded
-		if( apply_filters( 'wpbb_remove_application_attachments_after_send', true ) == true ) {
+		if( true === wpbb_maybe_remove_application_attachments() ) {
 			
 			// lets remove the file that was just uploaded
 			wp_delete_attachment( $wpbb_attach_id, true );
