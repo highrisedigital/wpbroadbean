@@ -3,8 +3,8 @@ Contributors: wpmarkuk, highrisedigital
 Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
-Tested up to: 4.7.2
-Stable tag: 2.1.9
+Tested up to: 4.7.5
+Stable tag: 2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,9 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 2. Single job edit post screen
 
 == Changelog ==
+
+= 2.2 =
+* Fix Duplicate Terms Showing. After WP 4.7.5 was released the `args` param in the `register_taxonomy` was causing the terms to be outputted twice. This was because of a change in the `wp_get_object_terms` function released with WP 4.7.5. Removing this param that is not needed fixes the problem.
 
 = 2.1.9 =
 * Remove attachment link from the application email - dead link since 2.1.6
