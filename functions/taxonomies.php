@@ -94,9 +94,6 @@ function wpbb_register_taxonomies() {
 				),
 				'hierarchical' => $taxonomy['hierarchical'],
 				'sort' => true,
-				'args' => array(
-					'orderby' => 'term_order'
-				),
 				'rewrite' => array(
 					'slug' => $taxonomy['slug']
 				),
