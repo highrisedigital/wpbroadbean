@@ -50,18 +50,9 @@ if( wp_strip_all_tags( (string) $wpbb_xml_params->username ) != $wpbb_username |
 if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'add' ) {
 	
 	/**
-	 * we are adding a job
-	 * first check no other job already in the system has this job reference
+	 * get the job id if this job is already in the system
 	 */
-	if( wpbb_get_job_by_reference( (string) $wpbb_xml_params->job_reference ) != false ) {
-		
-		/**
-		 * there is already a job in the system with this job reference
-		 * fail and tell the user why
-		 */
-		wp_die( __( 'Error: Oops, this job was not added, as a job with this jobs job reference already exists.' ) );
-		
-	}
+	$job_id = wpbb_get_job_by_reference( (string) $wpbb_xml_params->job_reference );
 	
 	/**
 	 * we are good to go in terms of adding the job to the system
@@ -98,6 +89,7 @@ if( strtolower( wp_strip_all_tags( (string) $wpbb_xml_params->command ) ) == 'ad
 		apply_filters(
 			'wpbb_insert_job_post_args',
 			array(
+				'ID'			=> $job_id,
 				'post_type'		=> wpbb_job_post_type_name(),
 				'post_title'	=> wp_strip_all_tags( (string) $wpbb_xml_params->job_title ),
 				'post_content'	=> wp_kses( $wpbb_xml_params->job_description, wp_kses_allowed_html( 'post' ) ),
