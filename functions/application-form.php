@@ -34,9 +34,9 @@ function wpbb_application_form( $content ) {
 
 		/* check if we have a job post for this reference */
 		if( $job_post == false ) {
-			
+
 			/* create an error message as no job has this reference */
-			return '<p class="message error">Error: No job exists with this job reference.</p>' . $content;
+			return '<p class="message error">' . esc_html__( 'Error: No job exists with this job reference.', 'wpbroadbean' ) . '</p>' . $content;
 			
 		}
 		
@@ -238,7 +238,7 @@ function wpbb_application_processing() {
 				/* add an error message */
 				$wpbb_messages[ 'cv_type_failed' ] = array(
 					'type'		=> 'error',
-					'message'	=> 'Error: CV is not an allowed file type.'
+					'message'	=> esc_html__( 'Error: CV is not an allowed file type.', 'wpbroadbean' ),
 				);
 
 				/* go no further as file type not allowed */
@@ -291,7 +291,7 @@ function wpbb_application_processing() {
 			/* add an error message */
 			$wpbb_messages[ 'application_success' ] = array(
 				'type'		=> 'success',
-				'message'	=> 'Thank you. Your application has been received.'
+				'message'	=> esc_html__( 'Thank you. Your application has been received.', 'wpbroadbean' ),
 			);
 			
 		} // end check application post added

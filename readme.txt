@@ -4,7 +4,7 @@ Donate link: http://markwilkinson.me/saythanks
 Tags: jobs, recruitment
 Requires at least: 3.9
 Tested up to: 4.7.5
-Stable tag: 2.2
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,10 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 2. Single job edit post screen
 
 == Changelog ==
+
+= 2.2.1 =
+* Allow jobs to be edited once they are sent through from Broadbean. If a job is sent with the same reference as an existing job in WordPress, the job will be updated rather than a new job being created. If you don't not want this functionality you can add the `add_filter( 'wpbb_allow_job_updates', '__return_false' );` to either your themes `functions.php` file or a plugin / mu-plugin.
+* More strings are now translatable, particularly in the applications form and associated messages.
 
 = 2.2 =
 * Fix Duplicate Terms Showing. After WP 4.7.5 was released the `args` param in the `register_taxonomy` was causing the terms to be outputted twice. This was because of a change in the `wp_get_object_terms` function released with WP 4.7.5. Removing this param that is not needed fixes the problem.
