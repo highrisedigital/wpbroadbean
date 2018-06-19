@@ -69,7 +69,7 @@ function wpbb_register_post_types() {
 				'slug' => 'applications',
 				'with_front' => false
 			),
-			'has_archive' => true,
+			'has_archive' => false,
 			'show_in_menu' => 'wp_broadbean_home' // shows the post type below wp broadbean home
 		)
 	);
