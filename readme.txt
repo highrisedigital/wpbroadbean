@@ -59,6 +59,11 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 
 == Changelog ==
 
+= 2.2.2 =
+* Set applications post type to not have an archive. Even though the post type is set to not public (`'public' => false`) it would appear that in some setups the applications had a front-end page.
+* Set the applications to draft post status by default
+* Create a new filter named `wpbb_insert_application_args` to allow devs to change the args used when creating the application post.
+
 = 2.2.1 =
 * Allow jobs to be edited once they are sent through from Broadbean. If a job is sent with the same reference as an existing job in WordPress, the job will be updated rather than a new job being created. If you don't not want this functionality you can add the `add_filter( 'wpbb_allow_job_updates', '__return_false' );` to either your themes `functions.php` file or a plugin / mu-plugin.
 * More strings are now translatable, particularly in the applications form and associated messages.
