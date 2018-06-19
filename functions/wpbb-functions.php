@@ -588,7 +588,7 @@ function wpbb_text_html_email_type() {
 }
 
 /**
- * 
+ * Default to removing application attachments once the application is processed.
  */
 function wpbb_maybe_remove_application_attachments() {
 	return apply_filters( 'wpbb_remove_application_attachments_after_send', true );
