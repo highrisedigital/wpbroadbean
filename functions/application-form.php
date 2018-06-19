@@ -262,11 +262,14 @@ function wpbb_application_processing() {
 		
 		/* insert the application post */
 		$wpbb_application_id = wp_insert_post(
-			array(
-				'post_type'		=> 'wpbb_application',
-				'post_title'	=> esc_html( $applicant_name ),
-				'post_status'	=> 'publish',
-				'post_content'	=> $applicant_message
+			apply_filters(
+				'wpbb_insert_application_args',
+				array(
+					'post_type'		=> 'wpbb_application',
+					'post_title'	=> esc_html( $applicant_name ),
+					'post_status'	=> 'draft',
+					'post_content'	=> $applicant_message
+				)
 			)
 		);
 		
@@ -379,7 +382,7 @@ function wpbb_application_processing() {
 		if( true === wpbb_maybe_remove_application_attachments() ) {
 			
 			// lets remove the file that was just uploaded
-			wp_delete_attachment( $wpbb_attach_id, true );
+			$attachment_deleted = wp_delete_attachment( $wpbb_attach_id, true );
 			
 		}
 	
