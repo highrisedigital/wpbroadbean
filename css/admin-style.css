@@ -1,0 +1,8 @@
+h2.wpbb-title-settings:before {
+	font: normal 39px/29px 'dashicons';
+	content: '\f108';
+	display: inline-block;
+	margin-right: 0.25em;
+	vertical-align: middle;
+	-webkit-font-smoothing: antialiased;
+}

@@ -138,8 +138,7 @@ function wpbb_settings_page_content() {
 	
 	<div class="wrap">
 		
-		<?php screen_icon( 'options-general' ); ?>
-		<h2><?php echo apply_filters( 'wpbb_admin_settings_page_title', 'WP Broadbean Settings' ); ?></h2>
+		<h2 class="wpbb-title-settings"><?php echo apply_filters( 'wpbb_admin_settings_page_title', 'WP Broadbean Settings' ); ?></h2>
 		
 		<form method="post" action="options.php">
 			

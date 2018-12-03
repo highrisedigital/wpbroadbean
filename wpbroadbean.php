@@ -16,6 +16,10 @@ if( ! defined( 'ABSPATH' ) ) exit;
 /* define variable for path to this plugin file. */
 define( 'WPBB_LOCATION', dirname( __FILE__ ) );
 
+/* Define plugin version. Could be a hardcoded string rather than 
+use get_plugin_data (but woulkd need to be updated manually */
+define( 'WPBB_PLUGIN_VERSION', get_plugin_data( __FILE__ )['Version'] );
+
 /* load required files & functions */
 require_once( dirname( __FILE__ ) . '/functions/post-types.php' );
 require_once( dirname( __FILE__ ) . '/functions/taxonomies.php' );
@@ -155,3 +159,27 @@ function wpbb_add_styles_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'wpbb_add_styles_scripts' );
+
+/***************************************************************
+* Function wpbb_add_admin_styles_scripts()
+* Enqueues the scripts for the admin area
+* options page for this plugin.
+***************************************************************/
+function wpbb_add_admin_styles( $hook ) {
+
+	// Could be extended to other options pages if required
+	if( $hook == 'wp-broadbean_page_wpbb_broadbean_settings' ) {
+
+        wp_enqueue_style(
+        	'wpbb-admin-options-css',
+        	plugins_url( '/css/admin-style.css', __FILE__ ),
+        	array(),
+        	WPBB_PLUGIN_VERSION
+        );
+
+    } else {
+    	// Silence is golden
+    }
+
+}
+add_action( 'admin_enqueue_scripts', 'wpbb_add_admin_styles' );
