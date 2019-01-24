@@ -9,6 +9,9 @@ function wpbb_create_default_settings( $settings ) {
 	$settings[] = 'wpbb_username';
 	$settings[] = 'wpbb_password';
 	$settings[] = 'wpbb_apply_page_id';
+	$settings[] = 'wpbb_remove_application_attachments';
+	$settings[] = 'wpbb_remove_application_posts';
+	$settings[] = 'wpbb_hide_job_data';
 	
 	return $settings;
 	
@@ -44,9 +47,60 @@ function wpbb_create_default_settings_output( $settings ) {
 		'description' => 'Choose which page to use for your application form. An application form is added after the pages content once the page is chosen here.',
 		'options' => wpbb_page_dropdown_array()
 	);
-	
+
+	$settings['wpbb_remove_application_attachments'] = array(
+		'label' => 'Remove application attachments',
+		'name' => 'wpbb_remove_application_attachments',
+		'type' => 'select',
+		'description' => '<strong>Highly recommended to be set to yes</strong> as it prevents application attachments being stored on this server. Once processed and sent to Broadbean they are then deleted.',
+		'options' => array(
+			array(
+				'name' => 'No',
+				'value' => false,
+			),
+			array(
+				'name' => 'Yes',
+				'value' => true,
+			),
+		),
+	);
+
+	$settings['wpbb_remove_application_posts'] = array(
+		'label' => 'Remove applications',
+		'name' => 'wpbb_remove_application_posts',
+		'type' => 'select',
+		'description' => '<strong>Highly recommended to be set to yes</strong> as it prevent application data being stored on this server. Once processed and sent to Broadbean they are then deleted.',
+		'options' => array(
+			array(
+				'name' => 'No',
+				'value' => false,
+			),
+			array(
+				'name' => 'Yes',
+				'value' => true,
+			),
+		),
+	);
+
+	$settings['wpbb_hide_job_data_on_single_job'] = array(
+		'label' => 'Hide Job Data',
+		'name' => 'wpbb_hide_job_data',
+		'type' => 'select',
+		'description' => 'Chosing yes means the plugin will not output the job data on each job page.',
+		'options' => array(
+			array(
+				'name' => 'No',
+				'value' => false,
+			),
+			array(
+				'name' => 'Yes',
+				'value' => true,
+			),
+		),
+	);
+
 	return $settings;
-	
+
 }
 
 add_filter( 'wpbb_settings_output', 'wpbb_create_default_settings_output' );

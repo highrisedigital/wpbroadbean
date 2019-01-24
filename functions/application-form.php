@@ -104,9 +104,11 @@ function wpbb_application_form( $content ) {
 	
 	/* no job ref was passed in the query string */	
 	} else {
-		
-		/* set an output message rather than the form */
-		$form = '<p class="message error">Error: No job reference detected!</p>';
+
+		$form = apply_filters(
+			'wpbb_application_form_no_form_error',
+			'<p class="message error">Error: No job reference detected!</p>'
+		);
 		
 	}
 	
@@ -257,9 +259,9 @@ function wpbb_application_processing() {
 		     'post_title' => preg_replace('/\.[^.]+$/', '', $wpbb_uploaded_file_name ),
 		     'post_content' => '',
 		     'guid' => $wpbb_wp_upload_dir[ 'url' ] . '/' . basename( $wpbb_moved_file[ 'file' ] ),
-		     'post_status' => 'inherit'
+		     'post_status' => 'private'
 		);
-		
+
 		/* insert the application post */
 		$wpbb_application_id = wp_insert_post(
 			apply_filters(
@@ -350,15 +352,15 @@ function wpbb_application_processing() {
 		
 		/* get the tracking email */
 		$wpbb_tracking_email = get_post_meta( $job_post->ID, '_wpbb_job_broadbean_application_email', true );
-		
+
 		/* if we have a tracking email add it to the recipients array */
-		if( $wpbb_tracking_email != '' ) {
+		if ( $wpbb_tracking_email != '' ) {
 			$wpbb_mail_recipients[] = sanitize_email( $wpbb_tracking_email );
 		}
-		
+
 		/* set attachments - the cv */
 		$wpbb_attachments = array( $wpbb_wp_upload_dir[ 'path' ] . '/' . basename( $wpbb_moved_file[ 'file' ] ) );
-		
+
 		/* send the mail */
 		$wpbb_send_email = wp_mail(
 			apply_filters( 'wpbb_application_email_recipients', $wpbb_mail_recipients, $wpbb_application_id, $job_post ),
@@ -367,7 +369,7 @@ function wpbb_application_processing() {
 			apply_filters( 'wpbb_application_email_headers', $wpbb_email_headers, $wpbb_application_id, $job_post ),
 			apply_filters( 'wpbb_application_email_attachments', $wpbb_attachments, $wpbb_application_id, $job_post )
 		);
-		
+
 		/* remove filter below to allow / force mail to send as html */
 		remove_filter( 'wp_mail_content_type', 'wpbb_text_html_email_type' );
 
@@ -376,18 +378,38 @@ function wpbb_application_processing() {
 		 * @param int $wpbb_application_id 	the application post id of the application submitted
 		 * @param obj $job_post the post object for the job being applied for
 		 */
-		do_action( 'wpbb_after_application_form_processing', $wpbb_application_id, $job_post );
+		do_action( 'wpbb_after_application_form_processing', $wpbb_application_id, $job_post, $wpbb_attach_id );
 
-		// should we remove the application cv just uploaded
-		if( true === wpbb_maybe_remove_application_attachments() ) {
-			
-			// lets remove the file that was just uploaded
-			$attachment_deleted = wp_delete_attachment( $wpbb_attach_id, true );
-			
-		}
-	
 	} // end if form posted
-	
+
 }
 
 add_action( 'wp', 'wpbb_application_processing', 10 );
+
+/**
+ * Removes application attachments and applications posts once sent to broadbean.
+ *
+ * @param  integer $application_post_id The post ID of the application created.
+ * @param  WP_Post $job_post            The post object for the job applied for.
+ * @param  integer $attachment_id       The post ID of the attachment post created, for the application attachment.
+ */
+function wpbb_remove_application_post( $application_post_id, $job_post, $attachment_id ) {
+
+	// should we remove the application cv just uploaded
+	if ( true === wpbb_maybe_remove_application_attachments() ) {
+
+		// lets remove the file that was just uploaded
+		$attachment_deleted = wp_delete_attachment( $attachment_id, true );
+
+	}
+
+	// should we remove the application post just created
+	if ( true === wpbb_maybe_remove_application_post() ) {
+
+		// lets remove the file that was just uploaded
+		$application_deleted = wp_delete_post( $application_post_id, true );
+
+	}
+
+}
+add_action( 'wpbb_after_application_form_processing', 'wpbb_remove_application_post', 10, 3 );

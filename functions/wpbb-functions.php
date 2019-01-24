@@ -405,6 +405,14 @@ function wpbb_get_job_by_reference( $job_ref ) {
  * @param (string) @content is the current content of the job post
  */
 function wpbb_job_fields_output( $content ) {
+
+	// are we hiding job data.
+	$show_job_data = wpbb_hide_job_data();
+
+	// if we are not outputing job data - bail early.
+	if ( false !== $show_job_data ) {
+		return $content;
+	}
 	
 	/* only carry on if we are on a single job post view */
 	if( ! is_singular( wpbb_job_post_type_name() ) )
@@ -485,6 +493,14 @@ add_filter( 'the_content', 'wpbb_job_fields_output', 20 );
  * @param (string) @content is the current content of the job post
  */
 function wpbb_job_terms_output( $content ) {
+
+	// are we hiding job data.
+	$show_job_data = wpbb_hide_job_data();
+
+	// if we are not outputing job data - bail early.
+	if ( false !== $show_job_data ) {
+		return $content;
+	}
 	
 	global $post;
 	
@@ -588,8 +604,22 @@ function wpbb_text_html_email_type() {
 }
 
 /**
- * Default to removing application attachments once the application is processed.
+ * Get status of storing the application attachments.
  */
 function wpbb_maybe_remove_application_attachments() {
-	return apply_filters( 'wpbb_remove_application_attachments_after_send', true );
+	return apply_filters( 'wpbb_remove_application_attachments_after_send', boolval( get_option( 'wpbb_remove_application_attachments' ) ) );
+}
+
+/**
+ * Get status of storing the application posts.
+ */
+function wpbb_maybe_remove_application_post() {
+	return apply_filters( 'wpbb_remove_application_post_after_send', boolval( get_option( 'wpbb_remove_application_posts' ) ) );
+}
+
+/**
+ * Get status of whether we should be hiding the job data on a job post template.
+ */
+function wpbb_hide_job_data() {
+	return apply_filters( 'wpbb_hide_job_data', boolval( get_option( 'wpbb_hide_job_data' ) ) );
 }

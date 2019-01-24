@@ -3,11 +3,47 @@
 Plugin Name: WP Broadbean
 Plugin URI: http://wpbroadbean.com
 Description: Integrates Broadbean Adcourier with WordPress. This plugin allows jobs posted through Broadbean's Adcourier system to be sent to your WordPress website.
-Version: 2.2.2
+Version: 2.2.3
 Author: Mark Wilkinson
 Author URI: https://highrise.digital
 License: GPLv2 or later
 Text Domain: wpbroadbean
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+****************        ****************
+****************        ****************
+****************        ****************
+*****    *******        *******    *****
+*****    *******        *******    *****
+*****    *******        *******    *****
+*****    **********************    *****
+*****    **********************    *****
+*****    **********************    *****
+*****    **********************    *****
+*****    *******        *******    *****
+*****    *******        *******    *****
+*****    *******        *******    *****
+*****    *******        *******    *****
+*****    *******        *******    *****
+*****    *******        *******    *****
+*****      *****        *****      *****
+******        **        **        ******
+**********                    **********
+**************            **************
+    **************    **************    
+        ************************        
+            ****************            
+                ******** 
+
 */
 
 /* exist if directly accessed */
@@ -15,6 +51,9 @@ if( ! defined( 'ABSPATH' ) ) exit;
 
 /* define variable for path to this plugin file. */
 define( 'WPBB_LOCATION', dirname( __FILE__ ) );
+
+// Define plugin version constant.
+define( 'WPBB_PLUGIN_VERSION', '2.2.3' );
 
 /* load required files & functions */
 require_once( dirname( __FILE__ ) . '/functions/post-types.php' );

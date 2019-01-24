@@ -2,7 +2,7 @@
 Contributors: wpmarkuk, highrisedigital
 Tags: jobs, recruitment
 Requires at least: 3.9
-Tested up to: 4.9.6
+Tested up to: 4.9.9
 Stable tag: 2.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -11,11 +11,9 @@ WP Broadbean is a plugin allowing jobs added to Broadbean to show in your WordPr
 
 == Description ==
 
-[WP Broadbean](http://wpbroadbean.com/ "Broadbean posted jobs on your WordPress website") is a plugin designed to work alongside the Broadbean Adcourier job posting system allowing jobs added to Broadbean to show in your WordPress site. The plugin adds custom post types and taxonomies to allow you to add jobs. More importantly it provides an end-point to accept feed data sent by Broadbean and add this as job posts to your site.
+[WP Broadbean](http://wpbroadbean.com/ "Broadbean posted jobs on your WordPress website") is a plugin designed to work alongside the Broadbean Adcourier job posting and distribution system allowing jobs added to Broadbean to show in your WordPress site. The plugin adds custom post types and taxonomies to allow you to add jobs. More importantly it provides an end-point to accept feed data sent by Broadbean and add this as job posts to your site.
 
-You can find out more about the WP Broadbean plugin on the [WP Broadbean website](http://wpbroadbean.com/ "Broadbean posted jobs on your WordPress website").
-
-We also offer a service to complete a Broadbean integration with WordPress for you. Find out more about our [WPBB Assist service here](http://wpbroadbean.com/assist/).
+We also offer a service to complete a Broadbean integration with WordPress for you. Find out more about our this on our [WordPress agency](https://highrise.digital) site.
 
 >If you are running a version of WP Broadbean less than version 2.0 please DO NOT UPDATE.
 
@@ -57,6 +55,13 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 2. Single job edit post screen
 
 == Changelog ==
+
+= 2.2.3 =
+* Removal of the deprecated call to the settings page screen option.
+* Introduces new settings to allow users to prevent applications and their associated attachments being stored in WordPress. If set to remove they are removed once sent across to Broadbean.
+* Make sure the `wpbb_after_application_form_processing` hook is the last thing to fire in the processing function. This prevent code after it from not running if a function was running on this hook that died or exited. An example is a function which redirected users on application form completion.
+* Adds a new filter for filtering the error message on the application form when no job reference is detected - `wpbb_application_form_messages`.
+* Adds a new setting to allow a user to switch of the output of job data on a job post - meta and taxonomy output.
 
 = 2.2.2 =
 * Set applications post type to not have an archive. Even though the post type is set to not public (`'public' => false`) it would appear that in some setups the applications had a front-end page.
