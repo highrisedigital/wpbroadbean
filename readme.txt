@@ -57,6 +57,7 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 == Changelog ==
 
 = 2.2.3 =
+* IMPORTANT NOTE: to avoid any confusion with users understand whether applicant data is stored within WordPress, please visit the plugin settings page up update and review the settings.
 * Removal of the deprecated call to the settings page screen option.
 * Introduces new settings to allow users to prevent applications and their associated attachments being stored in WordPress. If set to remove they are removed once sent across to Broadbean.
 * Make sure the `wpbb_after_application_form_processing` hook is the last thing to fire in the processing function. This prevent code after it from not running if a function was running on this hook that died or exited. An example is a function which redirected users on application form completion.
