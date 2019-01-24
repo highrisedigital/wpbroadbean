@@ -104,9 +104,11 @@ function wpbb_application_form( $content ) {
 	
 	/* no job ref was passed in the query string */	
 	} else {
-		
-		/* set an output message rather than the form */
-		$form = '<p class="message error">Error: No job reference detected!</p>';
+
+		$form = apply_filters(
+			'wpbb_application_form_no_form_error',
+			'<p class="message error">Error: No job reference detected!</p>'
+		);
 		
 	}
 	

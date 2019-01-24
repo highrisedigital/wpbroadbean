@@ -353,12 +353,12 @@ function wpbb_settings_page_ctas() {
 	
 	<div class="postbox">
 		
-		<h3 class="wpbb-postbox-title">WP Broadbean Assist</h3>
+		<h3 class="wpbb-postbox-title">Highrise Digital Managed Integrations</h3>
 		
 		<div class="wpbb-postbox-inner">
 			
-			<p>WP Broadbean Assist provides you with a fully managed Broadbean integration with WordPress starting from &pound;750.</p>
-			<a class="button button-primary button-large" href="http://wpbroadbean.com/assist/">Integrate Broadbean Now</a>
+			<p>At Highrise Digital we have integrated a number of WordPress sites with Broadbean and as a result we can provide a fully managed integration, handling everything for you.</p>
+			<a class="button button-primary button-large" href="https://highrise.digital/contact/">Integrate Broadbean Now</a>
 			
 		</div>
 		
