@@ -52,7 +52,7 @@ function wpbb_create_default_settings_output( $settings ) {
 		'label' => 'Remove application attachments',
 		'name' => 'wpbb_remove_application_attachments',
 		'type' => 'select',
-		'description' => '<strong>Highly recommended to be set to yes</strong> as it prevents application attachments being stored on this server. Once processed and sent to Broadbean they are then deleted.',
+		'description' => __( '<strong>Highly recommended to be set to yes</strong> as it prevents application attachments being stored on this server. Once processed and sent to Broadbean they are then deleted.', 'wpbroadbean' ),
 		'options' => array(
 			array(
 				'name' => 'No',
@@ -69,7 +69,7 @@ function wpbb_create_default_settings_output( $settings ) {
 		'label' => 'Remove applications',
 		'name' => 'wpbb_remove_application_posts',
 		'type' => 'select',
-		'description' => '<strong>Highly recommended to be set to yes</strong> as it prevent application data being stored on this server. Once processed and sent to Broadbean they are then deleted.',
+		'description' => __( '<strong>Highly recommended to be set to yes</strong> as it prevents application data being stored on this server. Once processed and sent to Broadbean they are then deleted. Both this setting and the one above should be set to yes to keep application data out of WordPress.', 'wpbroadbean' ),
 		'options' => array(
 			array(
 				'name' => 'No',
@@ -86,7 +86,7 @@ function wpbb_create_default_settings_output( $settings ) {
 		'label' => 'Hide Job Data',
 		'name' => 'wpbb_hide_job_data',
 		'type' => 'select',
-		'description' => 'Chosing yes means the plugin will not output the job data on each job page.',
+		'description' => __( 'Choosing yes means the plugin will not output the job data on each job page.', 'wpbroadbeab' ),
 		'options' => array(
 			array(
 				'name' => 'No',
