@@ -493,6 +493,14 @@ add_filter( 'the_content', 'wpbb_job_fields_output', 20 );
  * @param (string) @content is the current content of the job post
  */
 function wpbb_job_terms_output( $content ) {
+
+	// are we hiding job data.
+	$show_job_data = wpbb_hide_job_data();
+
+	// if we are not outputing job data - bail early.
+	if ( false !== $show_job_data ) {
+		return $content;
+	}
 	
 	global $post;
 	
