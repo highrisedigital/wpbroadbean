@@ -371,13 +371,6 @@ function wpbb_application_processing() {
 		/* remove filter below to allow / force mail to send as html */
 		remove_filter( 'wp_mail_content_type', 'wpbb_text_html_email_type' );
 
-		/**
-		 * @hook wpbb_after_application_form_processing
-		 * @param int $wpbb_application_id 	the application post id of the application submitted
-		 * @param obj $job_post the post object for the job being applied for
-		 */
-		do_action( 'wpbb_after_application_form_processing', $wpbb_application_id, $job_post );
-
 		// should we remove the application cv just uploaded
 		if( true === wpbb_maybe_remove_application_attachments() ) {
 			
@@ -385,6 +378,13 @@ function wpbb_application_processing() {
 			$attachment_deleted = wp_delete_attachment( $wpbb_attach_id, true );
 			
 		}
+
+		/**
+		 * @hook wpbb_after_application_form_processing
+		 * @param int $wpbb_application_id 	the application post id of the application submitted
+		 * @param obj $job_post the post object for the job being applied for
+		 */
+		do_action( 'wpbb_after_application_form_processing', $wpbb_application_id, $job_post );
 	
 	} // end if form posted
 	
