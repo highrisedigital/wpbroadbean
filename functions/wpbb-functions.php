@@ -607,7 +607,7 @@ function wpbb_text_html_email_type() {
  * Get status of storing the application attachments.
  */
 function wpbb_maybe_remove_application_attachments() {
-	return apply_filters( 'wpbb_remove_application_attachments_after_send', boolval( get_option( 'wpbb_remove_application_attachments' ) ) );
+	return apply_filters( 'wpbb_remove_application_attachments_after_send', boolval( get_option( 'wpbb_remove_application_attachments', true ) ) );
 }
 
 /**
