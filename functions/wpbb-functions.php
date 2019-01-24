@@ -591,12 +591,12 @@ function wpbb_text_html_email_type() {
  * Default to removing application attachments once the application is processed.
  */
 function wpbb_maybe_remove_application_attachments() {
-	return apply_filters( 'wpbb_remove_application_attachments_after_send', true );
+	return apply_filters( 'wpbb_remove_application_attachments_after_send', boolval( get_option( 'wpbb_remove_application_attachments' ) ) );
 }
 
 /**
  * Default to removing application posts once the application is processed.
  */
 function wpbb_maybe_remove_application_post() {
-	return apply_filters( 'wpbb_remove_application_post_after_send', true );
+	return apply_filters( 'wpbb_remove_application_post_after_send', boolval( get_option( 'wpbb_remove_application_posts' ) ) );
 }

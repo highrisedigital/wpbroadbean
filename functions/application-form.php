@@ -257,9 +257,9 @@ function wpbb_application_processing() {
 		     'post_title' => preg_replace('/\.[^.]+$/', '', $wpbb_uploaded_file_name ),
 		     'post_content' => '',
 		     'guid' => $wpbb_wp_upload_dir[ 'url' ] . '/' . basename( $wpbb_moved_file[ 'file' ] ),
-		     'post_status' => 'inherit'
+		     'post_status' => 'private'
 		);
-		
+
 		/* insert the application post */
 		$wpbb_application_id = wp_insert_post(
 			apply_filters(
