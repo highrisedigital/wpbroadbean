@@ -593,3 +593,10 @@ function wpbb_text_html_email_type() {
 function wpbb_maybe_remove_application_attachments() {
 	return apply_filters( 'wpbb_remove_application_attachments_after_send', true );
 }
+
+/**
+ * Default to removing application posts once the application is processed.
+ */
+function wpbb_maybe_remove_application_post() {
+	return apply_filters( 'wpbb_remove_application_post_after_send', true );
+}
