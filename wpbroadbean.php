@@ -194,3 +194,55 @@ function wpbb_add_styles_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'wpbb_add_styles_scripts' );
+
+/**
+ * Show the version 3 update warning if the user has not dissmissed the message.
+ */
+function wpbb_coming_soon_admin_notice() {
+
+	// get the meta data to determin whether this notice should display or not.
+	$hide_notice = get_user_meta( get_current_user_id(), 'hide_wpbb_version_three_notice', true );
+
+	// if we are hiding the notice,
+	if ( 1 === absint( $hide_notice ) ) {
+		return;
+	}
+
+	// if the current user can administer the site.
+	if ( current_user_can( 'manage_options' ) ) {
+
+		// create the nonce url.
+		$complete_url = wp_nonce_url( admin_url( '?wpbb_notice=dismissed' ), 'wpbb_version3_dismiss_' . get_current_user_id(), 'wpbb_v3_dismiss_nonce' );
+
+		?>
+		<div class="notice notice-warning wpbb-v3-notice">
+			<h3>WP Broadbean Plugin Important Notice</h3>
+			<p>Soon the <a href="https://wordpress.org/plugins/wpbroadbean">WP Broadbean plugin</a> will update to version 3.0, a major new release. It has breaking changes and therefore it is probably best to not update this on a live site. Read more about this, including help with what to do, in our <a href="https://highrise.digital/blog/wpbroadbean-version-3">blog post here</a>.</p>
+			<p>You can hide this notice by <a href="<?php echo esc_url( $complete_url ); ?>">clicking here</a></p>
+		</div>
+		<?php
+
+	}
+
+}
+
+add_action( 'admin_notices', 'wpbb_coming_soon_admin_notice' );
+
+/**
+ * Checks to see if the version notice has been dismissed and saves user meta to prevent it showing again.
+ */
+function wpbb_dismiss_coming_soon_notice() {
+
+	// if we have dismissed the notice.
+	if ( 'dismissed' === sanitize_text_field( $_GET['wpbb_notice'] ) ) {
+
+		check_admin_referer( 'wpbb_version3_dismiss_' . get_current_user_id(), 'wpbb_v3_dismiss_nonce' );
+
+		// save user meta to not show the notice again.
+		update_user_meta( get_current_user_id(), 'hide_wpbb_version_three_notice', true );
+
+	}
+
+}
+
+add_action( 'admin_init', 'wpbb_dismiss_coming_soon_notice' );

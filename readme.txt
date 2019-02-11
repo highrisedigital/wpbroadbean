@@ -3,7 +3,7 @@ Contributors: wpmarkuk, highrisedigital
 Tags: jobs, recruitment
 Requires at least: 3.9
 Tested up to: 5.0.3
-Stable tag: 2.2.3
+Stable tag: 2.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,9 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 2. Single job edit post screen
 
 == Changelog ==
+
+= 2.2.4 =
+* Prep for the release of version 3.0 coming soon.
 
 = 2.2.3 =
 * IMPORTANT NOTE: to avoid any confusion with users understand whether applicant data is stored within WordPress, please visit the plugin settings page up update and review the settings.
