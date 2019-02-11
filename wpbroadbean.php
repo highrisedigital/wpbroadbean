@@ -217,7 +217,7 @@ function wpbb_coming_soon_admin_notice() {
 		?>
 		<div class="notice notice-warning wpbb-v3-notice">
 			<h3>WP Broadbean Plugin Important Notice</h3>
-			<p>Soon the <a href="https://wordpress.org/plugins/wpbroadbean">WP Broadbean plugin</a> will update to version 3.0, a major new release. It has breaking changes and therefore it is probably best to not update this on a live site. Read more about this, including help with what to do, in our <a href="https://highrise.digital/blog/wpbroadbean-version-3">blog post here</a>.</p>
+			<p>Soon the <a href="https://wordpress.org/plugins/wpbroadbean">WP Broadbean plugin</a> will update to version 3.0, a major new release. It has breaking changes and therefore it is probably best to not update this on a live site. Read more about this, including help with what to do, in our <a href="https://highrise.digital/blog/introducing-wpbroadbean-version-3">blog post here</a>.</p>
 			<p>You can hide this notice by <a href="<?php echo esc_url( $complete_url ); ?>">clicking here</a></p>
 		</div>
 		<?php
