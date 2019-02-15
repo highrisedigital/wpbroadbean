@@ -68,3 +68,5 @@ To view the changelog for older versions of the plugin, please visit [the Github
 
 == Upgrade Notice ==
 Update through the WordPress admin as notified but always be sure to make a site backup before upgrading and better still, test on a staging or test site first.
+
+Also please note that versions 2 and 3 are breaking change versions, and therefore updating from version 0 to 2 or 2 to 3 will cause the plugin to break without additional work being carried out.
