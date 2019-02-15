@@ -11,6 +11,8 @@ WP Broadbean is a plugin allowing jobs added to Broadbean to show in your WordPr
 
 == Description ==
 
+> Soon, we are releasing version 3.0 of this plugin. It is a complete rewrite of the plugin to enhance it, make it more secure and provide a better experience. Version 3.0 is NOT backwards compatible and therefore users on version 2.2.4 or below should not update to version 3.0 without testing first.
+
 [WP Broadbean](http://wpbroadbean.com/ "Broadbean posted jobs on your WordPress website") is a plugin designed to work alongside the Broadbean Adcourier job posting and distribution system allowing jobs added to Broadbean to show in your WordPress site. The plugin adds custom post types and taxonomies to allow you to add jobs. More importantly it provides an end-point to accept feed data sent by Broadbean and add this as job posts to your site.
 
 We also offer a service to complete a Broadbean integration with WordPress for you. Find out more about our this on our [WordPress agency](https://highrise.digital) site.
