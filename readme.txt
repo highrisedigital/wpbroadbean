@@ -28,7 +28,7 @@ Coming soon we have some add-ons for the plugin available for purchase. These wi
 
 For the sake of clarity, the WP Broadbean plugin is not affiliated in any way with Broadbean Technology Limited.
 
-`IMPORTANT NOTICE BEFORE UPDATING: WP Broadbean version 3.0 is a complete rewrite of the plugin to make it more stable, secure and extensible. If you are running a version of the plugin prior to version 3.0, you should NOT update as the upgrade will likely break your Broadbean integration.`
+> IMPORTANT NOTICE BEFORE UPDATING: WP Broadbean version 3.0 is a complete rewrite of the plugin to make it more stable, secure and extensible. If you are running a version of the plugin prior to version 3.0, you should NOT update as the upgrade will likely break your Broadbean integration.
 
 == Installation ==
 
