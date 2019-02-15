@@ -164,7 +164,7 @@ function wpbb_send_application_email_notification( $application_id, $attachment_
 
 }
 
-add_action( 'hdji_application_processing_complete', 'wpbb_send_application_email_notification', 10, 2 );
+add_action( 'wpbb_application_processing_complete', 'wpbb_send_application_email_notification', 10, 2 );
 
 /**
  * Sets the array of data to be included in the application email.
@@ -234,4 +234,4 @@ function wpbb_remove_application( $application_id, $attachment_ids ) {
 
 }
 
-add_action( 'hdji_application_processing_complete', 'wpbb_remove_application', 99, 2 );
+add_action( 'wpbb_application_processing_complete', 'wpbb_remove_application', 99, 2 );

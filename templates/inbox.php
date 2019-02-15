@@ -10,9 +10,9 @@
 /**
  * Get the contents of the feed provided by logicmelon
  * if you want to test the feed, by pulling an XML feed from a specific url
- * you can use the hdji_xml_feed_url filter
+ * you can use the wpbb_xml_feed_url filter
  */
-$xml_posted = file_get_contents( apply_filters( 'hdji_xml_feed_url', 'php://input' ) );
+$xml_posted = file_get_contents( apply_filters( 'wpbb_xml_feed_url', 'php://input' ) );
 
 // check the data sent has content.
 if ( false === $xml_posted ) {
@@ -187,7 +187,7 @@ if ( 'add' === $command ) {
 					 * Fires after the term has been added.
 					 *
 					 * @param (int)    $job_id is the post id for the added job
-					 * @param (string) $hdji_term term to be added
+					 * @param (string) $wpbb_term term to be added
 					 * @param (string) $taxonomy taxonomy of the term
 					 */
 					do_action( 'wpbb_inbox_job_term_added', $job_id, $job_tax_terms[ $taxonomy['xml_field'] ], $taxonomy['name'], $xml );

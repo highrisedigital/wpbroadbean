@@ -144,7 +144,7 @@ function wpbb_process_application_form() {
 	 * @hooked wpbb_send_application_email_notification - 10.
 	 * @hooked wpbb_remove_application - 99.
 	 */
-	do_action( 'hdji_application_processing_complete', $application_post_id, $attachment_ids );
+	do_action( 'wpbb_application_processing_complete', $application_post_id, $attachment_ids );
 
 }
 
