@@ -1,23 +1,34 @@
-=== Plugin Name ===
-Contributors: wpmarkuk, highrisedigital
+=== WP Broadbean ===
+Contributors: highrisedigital, wpmarkuk
 Tags: jobs, recruitment
 Requires at least: 3.9
+Requires PHP: 5.6
 Tested up to: 5.0.3
-Stable tag: 2.2.4
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Stable tag: 3.0
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 WP Broadbean is a plugin allowing jobs added to Broadbean to show in your WordPress site.
 
 == Description ==
 
-> Soon, we are releasing version 3.0 of this plugin. It is a complete rewrite of the plugin to enhance it, make it more secure and provide a better experience. Version 3.0 is NOT backwards compatible and therefore users on version 2.2.4 or below should not update to version 3.0 without testing first.
+[WP Broadbean](https://highrise.digital/products/wpbroadbean) is a plugin designed to work alongside the [Broadbean job posting and distribution](https://www.broadbean.com/uk/products/features/job-posting-distribution/) system allowing jobs written in Broadbean to show in your WordPress site. The plugin adds custom post types and taxonomies to allow you to add jobs. More importantly it provides an end-point to accept feed data sent by Broadbean to create jobs on your site.
 
-[WP Broadbean](http://wpbroadbean.com/ "Broadbean posted jobs on your WordPress website") is a plugin designed to work alongside the Broadbean Adcourier job posting and distribution system allowing jobs added to Broadbean to show in your WordPress site. The plugin adds custom post types and taxonomies to allow you to add jobs. More importantly it provides an end-point to accept feed data sent by Broadbean and add this as job posts to your site.
+The plugin requires some collaboration with the Broadbean integrations team. This is because they need to add your WordPress site as a posting destination, and to build a "feed" to your WordPress sites endpoint, provided by this plugin, in the form of XML data.
 
-We also offer a service to complete a Broadbean integration with WordPress for you. Find out more about our this on our [WordPress agency](https://highrise.digital) site.
+If you are struggling with any aspects of a site integration, we offer a complete integration service which you can take advantage of. Find out more about our this on our [WP Broadbean information page](https://highrise.digital/products/wpbroadbean).
 
->If you are running a version of WP Broadbean less than version 2.0 please DO NOT UPDATE.
+Coming soon we have some add-ons for the plugin available for purchase. These will include:
+
+* Job search
+* Expiry of jobs according to the number of "days to advertise"
+* Schema markup output for jobs, allowing services such as Google jobs to index and display jobs on your site
+* Gutenberg blocks
+* Shortcodes
+
+For the sake of clarity, the WP Broadbean plugin is not affiliated in any way with Broadbean Technology Limited.
+
+`IMPORTANT NOTICE BEFORE UPDATING: WP Broadbean version 3.0 is a complete rewrite of the plugin to make it more stable, secure and extensible. If you are running a version of the plugin prior to version 3.0, you should NOT update as the upgrade will likely break your Broadbean integration.`
 
 == Installation ==
 
@@ -27,36 +38,31 @@ To install the plugin:
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Visit the settings page under WP Broadbean > Settings
 4. Enter a username and password as well as choosing a page to use for your application form.
-5. View the how to get start question in the FAQs
+5. Request your integration with Broadbean, instructing them how to send the data to your site.
 
 == Frequently Asked Questions ==
 
-**How do I get started?**
-
-Your first task is to contact Broadbean and let them know that you want to create a new feed from your Broadbean Adcourier account to your WordPress website. It is also important to tell them that your integration will be using the WP Broadbean Plugin by Mark Wilkinson. You will need to indicate that you require the standard feed to be setup for this plugin without any changes being made.
-
-**Do Broadbean charge for this?**
-
-Probably yes! Contact your Broadbean account manager in order to get a price for developing a feed to your WordPress website.
-
-**What is the URL to which Broadbean should post the feed too?**
-
-The URL to post to, in order to add a job is http://domain.com/?wpbb=broadbean (of course replacing domain.com with your actual domain). The end-point expects an XML feed using the standard Broadbean XML feed.
-
-**Can I customise the how the feed is added to WordPress?**
-
-Yes you can. The plugin is built with extensibility in mind and therefore you can make many changes and edits without altering the plugin code itself. This will protect you when the plugin is updated. The plugin handles the incoming feed in the `inbox.php` file in the plugin root folder. If you copy this file to your active theme and place it in a folder named `wpbb` this will be used instead of the plugins version. Therefore you can make amends and change how the jobs are added when posted from Broadbean.
-
-**What if I want different meta data and taxonomies than the standard ones, can the plugin handle that?**
-
-Broadbean can build you a completely bespoke feed to your site, with practically any date you want about each job you post. The WP Broadbean Plugin can handle this through its extensibility features. You can add fields and taxonomies as well as remove the default ones should you wish too. The plugin was built with extensibility in mind with a number of actions and filters available to developers. Take a look at the source code for `do_action` and `apply_filters`.
+It is a new version, therefore we don't have any FAQs just yet. Feel free to [submit an issue](https://github.com/highrisedigital/wpbroadbean/issues) over on the Gitehub repository. We can then turn the popular questions into FAQs on the Wiki.
 
 == Screenshots ==
 
-1. Job listings in the WordPress admin
-2. Single job edit post screen
+1. The plugin settings screen
 
 == Changelog ==
+
+= 3.0 =
+* IMPORTANT NOTICE BEOFRE UPDATING: WP Broadbean version 3.0 is a major overhaul of the plugin from earlier versions. With this in mind, this version is NOT backward compatible to earlier versions. This means if you are running a version earlier than version 3.0 already, it is crucial that you test the update on a staging or test site before updating to the latest version.
+* Deprecated the theme inbox file version located at `wpbb/inbox.php` in the active theme and replaced with `wpbroadbean.php` in the root of the active theme.
+* Deprecated the double settings arrays. Settings should now be registered against the `wpbb_plugin_settings` filter.
+* Adds options footer credit with a link back to plugin authors.
+* No longer use the CMB Meta Box framework to provide the job fields on the job edit screen. This framework is no longer supported and therefore this has been removed and replaced with a native meta box solution.
+* Newly configured way of storing applications, temporarily whilst notifications are sent and then removed for privacy and security reasons.
+* Extensible application form where developers can now make changes to application fields.
+* New endpoint URL which no longer uses a query string name and value, but an actual URL. The endpoint for jobs to be posted to is now `/wpbb/jobfeed/`.
+* Application forms are now shown on job single page views rather than having a seperate page.
+* Added a check for SSL. If you site is not running over SSL (https) a warning message is shown on the settings page.
+* Allow users to display a credit to Highrise Digital below each single job post, should they wish the give something back to us!
+* Allow the jobs post type to show in the REST API. This means that partial block editor (aka Gutenberg) support is provided. The edit screens now use the new block editor.
 
 = 2.2.4 =
 * Prep for the release of version 3.0 coming soon.
@@ -65,9 +71,9 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 * IMPORTANT NOTE: to avoid any confusion with users understand whether applicant data is stored within WordPress, please visit the plugin settings page up update and review the settings.
 * Removal of the deprecated call to the settings page screen option.
 * Introduces new settings to allow users to prevent applications and their associated attachments being stored in WordPress. If set to remove they are removed once sent across to Broadbean.
-* Make sure the `wpbb_after_application_form_processing` hook is the last thing to fire in the processing function. This prevent code after it from not running if a function was running on this hook that died or exited. An example is a function which redirected users on application form completion.
+* Make sure the `wpbb_after_application_form_processing` hook is the last thing to fire in the processing function. This could have prevented code after it from running if a function was running on this hook that died or exited. An example is a function which redirected users on application form completion.
 * Adds a new filter for filtering the error message on the application form when no job reference is detected - `wpbb_application_form_messages`.
-* Adds a new setting to allow a user to switch of the output of job data on a job post - meta and taxonomy output.
+* Adds a new setting to allow a user to switch off the output of job data on a job post - meta and taxonomy output.
 
 = 2.2.2 =
 * Set applications post type to not have an archive. Even though the post type is set to not public (`'public' => false`) it would appear that in some setups the applications had a front-end page.
@@ -221,4 +227,4 @@ Broadbean can build you a completely bespoke feed to your site, with practically
 * Initial Beta Release
 
 == Upgrade Notice ==
-Update through the WordPress admin as notified always be sure to make a site backup before upgrading.
+Update through the WordPress admin as notified but always be sure to make a site backup before upgrading and better still, test on a staging or test site first.

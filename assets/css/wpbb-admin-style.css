@@ -1,0 +1,116 @@
+.wpbb-fields [class*="wpbb-col-"] { 
+	float: left; 
+	padding-left: 5px;
+	padding-right: 5px;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.wpbb-col-1 { width: 8.333333333%; }
+.wpbb-col-2 { width: 16.666666667%; }
+.wpbb-col-3 { width: 25%; }
+.wpbb-col-4 { width: 33.333333333%; }
+.wpbb-col-5 { width: 41.666666667%; }
+.wpbb-col-6 { width: 50%; }
+.wpbb-col-7 { width: 58.333333333%; }
+.wpbb-col-8 { width: 66.666666667%; }
+.wpbb-col-9 { width: 75%; }
+.wpbb-col-10 { width: 83.333333333%; }
+.wpbb-col-11 { width: 91.666666667%; }
+.wpbb-col-12 { width: 100%; }
+
+.wpbb-fields__field {
+	margin-bottom: 16px;
+	border-bottom: 1px solid #EEEEEE;
+	padding-bottom: 16px;
+}
+.wpbb-fields input[type=text],
+.wpbb-fields select,
+.wpbb-fields textarea,
+.wpbb-fields input[type=email],
+.wpbb-fields input[type=number] {
+	width: 100%;
+}
+.wpbb-fields textarea {
+	min-height: 100px;
+}
+.wpbb-fields label {
+    margin-bottom: 16px;
+    display: block;
+    margin-top: 0;
+    font-weight: 700;
+}
+.wpbb-field-checkbox label {
+	display: inline;
+	margin-right: 8px;
+	vertical-align: baseline;
+}
+.wpbb-field__description {
+	margin-top: 2px;
+	font-style: italic;
+	color: #AAAAAA;
+}
+.wpbb-clearfix {
+	display: block;
+	clear: both;
+}
+
+.wpbb-settings-col,
+.wpbb-cta-col {
+	float: left;
+}
+.wpbb-settings-col {
+	width: 55%;
+	margin-right: 3%;
+}
+.wpbb-cta-col {
+	width: 40% !important;
+	min-width: 40% !important;
+}
+.wpbb-cta-box__title {
+	border-bottom: 1px solid #eee;
+	font-size: 14px;
+    padding: 8px 12px;
+    margin: 0;
+    line-height: 1.4;
+}
+.wpbb-cta-box__content {
+	padding: 6px 10px 16px;
+}
+
+
+img.hd-logo {
+	margin-top: 16px;
+}
+.wpbb-getting-started li {
+	line-height: 1.4;
+}
+.wpbb-getting-started ul {
+	margin-top: 8px;
+}
+
+.wpbb-plugin-info code {
+	word-break: break-word;
+}
+.mc-field-group label {
+	display: block;
+	font-weight: 700;
+	margin-bottom: 8px;
+}
+.mc-field-group .email {
+	width: 98%;
+}
+
+
+@media all and ( max-width: 950px ) {
+	.wpbb-fields [class*="wpbb-col-"] {
+		width: 100%;
+	}
+	.wpbb-settings-col,
+	.wpbb-cta-col {
+		float: none;
+		width: 96% !important;
+		min-width: 96% !important;
+		margin-right: 0;
+	}
+}
