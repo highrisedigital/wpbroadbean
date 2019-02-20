@@ -53,7 +53,7 @@
 				<li><?php esc_html_e( 'Shortcodes', 'wpbroadbean' ); ?></li>
 			</ul>
 
-			<a class="button-primary" href="https://highrise.digital/contact/"><?php esc_html_e( 'Find our more', 'wpbroadbean' ); ?></a>
+			<a class="button-primary" href="https://highrise.digital/contact/"><?php esc_html_e( 'Find out more', 'wpbroadbean' ); ?></a>
 
 		</div>
 
