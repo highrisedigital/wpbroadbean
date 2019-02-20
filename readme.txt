@@ -12,11 +12,11 @@ WP Broadbean is a plugin allowing jobs added to Broadbean to show in your WordPr
 
 == Description ==
 
-[WP Broadbean](https://highrise.digital/products/wpbroadbean) is a plugin designed to work alongside the [Broadbean job posting and distribution](https://www.broadbean.com/uk/products/features/job-posting-distribution/) system allowing jobs written in Broadbean to show in your WordPress site. The plugin adds custom post types and taxonomies to allow you to add jobs. More importantly it provides an end-point to accept feed data sent by Broadbean to create jobs on your site.
+[WP Broadbean](https://highrise.digital/products/wpbroadbean-wordpress-plugin/) is a plugin designed to work alongside the [Broadbean job posting and distribution](https://www.broadbean.com/uk/products/features/job-posting-distribution/) system allowing jobs written in Broadbean to show in your WordPress site. The plugin adds custom post types and taxonomies to allow you to add jobs. More importantly it provides an end-point to accept feed data sent by Broadbean to create jobs on your site.
 
 The plugin requires some collaboration with the Broadbean integrations team. This is because they need to add your WordPress site as a posting destination, and to build a "feed" to your WordPress sites endpoint, provided by this plugin, in the form of XML data.
 
-If you are struggling with any aspects of a site integration, we offer a complete integration service which you can take advantage of. Find out more about our this on our [WP Broadbean information page](https://highrise.digital/products/wpbroadbean).
+If you are struggling with any aspects of a site integration, we offer a complete integration service which you can take advantage of. Find out more about our this on our [WP Broadbean information page](https://highrise.digital/products/wpbroadbean-wordpress-plugin/).
 
 Coming soon we have some add-ons for the plugin available for purchase. These will include:
 
@@ -25,6 +25,8 @@ Coming soon we have some add-ons for the plugin available for purchase. These wi
 * Schema markup output for jobs, allowing services such as Google jobs to index and display jobs on your site
 * Gutenberg blocks
 * Shortcodes
+
+Highrise Digital also offer a number of [WordPress Broadbean integration services](https://highrise.digital/broadbean-wordpress-integrations/) as well as services to [integrate LogicMelon with your WordPress](https://highrise.digital/services/integrate-logicmelon-wordpress/) site.
 
 For the sake of clarity, the WP Broadbean plugin is not affiliated in any way with Broadbean Technology Limited.
 
