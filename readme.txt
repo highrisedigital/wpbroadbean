@@ -1,5 +1,5 @@
 === WP Broadbean ===
-Contributors: highrisedigital, wpmarkuk
+Contributors: wpmarkuk, keithdevon, highrisedigital
 Tags: jobs, recruitment
 Requires at least: 3.9
 Requires PHP: 5.6
