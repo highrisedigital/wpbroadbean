@@ -6,7 +6,7 @@ Description: A plugin which integrates <a href="https://www.broadbean.com/uk/pro
 Version: 3.0
 Author: Highrise Digital
 Author URI: https://highrise.digital
-License: GPLv2 or later
+License: GPLv3 or later
 Text Domain: wpbroadbean
 Domain Path: /langauges
 
