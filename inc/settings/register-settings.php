@@ -25,11 +25,11 @@ function wpbb_register_settings() {
 				'option_name'       => '',
 				'input_type'        => 'text',
 				'type'              => 'string',
-				'group'             => 'wpbb_settings',
+				'settings_group'    => 'wpbb_settings',
 				'description'       => '',
 				'sanitize_callback' => null,
 				'show_in_rest'      => false,
-				'options_page'      => 'settings',
+				'settings_page'     => 'settings',
 				'order'             => 10,
 			);
 
@@ -46,11 +46,11 @@ function wpbb_register_settings() {
 
 			// register this setting.
 			register_setting(
-				'wpbb_settings', // setting group name.
+				$args['settings_group'], // setting group name.
 				$args['option_name'], // setting name - the option key.
 				array(
 					'type'              => $args['type'],
-					'group'             => $args['group'],
+					'group'             => $args['settings_group'],
 					'description'       => $args['description'],
 					'sanitize_callback' => $args['sanitize_callback'],
 					'show_in_rest'      => $args['show_in_rest'],

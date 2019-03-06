@@ -103,3 +103,33 @@ function wpbb_setting_input_type_checkbox( $setting, $value ) {
 }
 
 add_action( 'wpbb_setting_type_checkbox', 'wpbb_setting_input_type_checkbox', 10, 2 );
+
+/**
+ * Controls the output of license input setting.
+ *
+ * @param  array $setting an array of the current setting.
+ * @param  mixed $value   the current value of this setting saved in the database.
+ */
+function wpbb_setting_input_type_license_key( $setting, $value ) {
+
+	// default inline styles.
+	$styles = 'border-color: green;';
+
+	// get the license key status.
+	$license_status = get_option( $setting['option_name'] . '_status', '' );
+
+	// if the license status is not active.
+	if ( 'active' !== $license_status ) {
+
+		// set some styles.
+		$styles = 'border-color: red;';
+
+	}
+
+	?>
+	<input style="<?php echo esc_attr( $styles ); ?>" id="setting-<?php echo esc_attr( $setting['option_name'] ); ?>" class="regular-text" type="text" name="<?php echo esc_attr( $setting['option_name'] ); ?>" value="<?php echo esc_attr( $value ); ?>" />
+	<?php
+
+}
+
+add_action( 'wpbb_setting_type_license_key', 'wpbb_setting_input_type_license_key', 10, 2 );

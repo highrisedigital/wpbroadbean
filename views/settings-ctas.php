@@ -12,7 +12,6 @@
 	<div class="wpbb-plugin-info postbox">
 	
 		<h2 class="hndle ui-sortable-handle wpbb-postbox-title"><?php esc_html_e( 'WP Broadbean information', 'wpbroadbean' ); ?></h3>
-		
 		<div class="inside">
 			<p class="plugin-info">
 				Version: <?php echo esc_html( get_option( 'wpbroadbean_version' ) ); ?>, written by <a href="https://highrise.digital"><?php esc_html_e( 'Highrise Digital', 'wpbroadbean' ); ?></a><br />
@@ -21,42 +20,6 @@
 			<p><?php printf( esc_html__( 'Sample XML files can be found in the %s folder in the plugin root.', 'wpbroadbean' ), '<code>sample-xml</code>' ); ?></p>
 		</div>
 		
-	</div>
-
-	<div class="wpbb-cta-help postbox">
-
-		<h2 class="hndle ui-sortable-handle wpbb-postbox-title"><?php esc_html_e( 'Need some help?', 'wpbroadbean' ); ?></h2>
-
-		<div class="inside">
-
-			<p><?php esc_html_e( 'If you are finding things a little tricky to setup, fear not. We are experienced at integrating WordPress sites with Broadbean and provide a fully managed integration service.', 'wpbroadbean' ); ?></p>
-
-			<a class="button-primary" href="https://highrise.digital/contact/"><?php esc_html_e( 'Get in touch', 'wpbroadbean' ); ?></a>
-
-		</div>
-
-	</div>
-
-	<div class="wpbb-cta-addons postbox">
-
-		<h2 class="hndle ui-sortable-handle wpbb-postbox-title"><?php esc_html_e( 'WP Broadbean add-ons', 'wpbroadbean' ); ?></h2>
-
-		<div class="inside">
-
-			<p><?php esc_html_e( 'We have a number of add-ons coming soon:', 'wpbroadbean' ); ?></p>
-
-			<ul>
-				<li><?php esc_html_e( 'Job search', 'wpbroadbean' ); ?></li>
-				<li><?php esc_html_e( 'Delete expired jobs', 'wpbroadbean' ); ?></li>
-				<li><?php esc_html_e( 'Schema markup output for jobs', 'wpbroadbean' ); ?></li>
-				<li><?php esc_html_e( 'Gutenberg blocks', 'wpbroadbean' ); ?></li>
-				<li><?php esc_html_e( 'Shortcodes', 'wpbroadbean' ); ?></li>
-			</ul>
-
-			<a class="button-primary" href="https://highrise.digital/contact/"><?php esc_html_e( 'Find out more', 'wpbroadbean' ); ?></a>
-
-		</div>
-
 	</div>
 
 	<div class="wpbb-cta-mailchimp postbox">
@@ -91,6 +54,25 @@
 				</form>
 			</div>
 			<!--End mc_embed_signup-->
+		</div>
+
+	</div>
+
+	<div class="wpbb-cta-help postbox">
+
+		<h2 class="hndle ui-sortable-handle wpbb-postbox-title"><?php esc_html_e( 'Need some help?', 'wpbroadbean' ); ?></h2>
+		<div class="inside">
+			<p><?php esc_html_e( 'If you are finding things a little tricky to setup, fear not. We are experienced at integrating WordPress sites with Broadbean and provide a fully managed integration service.', 'wpbroadbean' ); ?></p>
+			<a class="button-primary" href="https://highrise.digital/services/integrate-broadbean-wordpress/"><?php esc_html_e( 'Find out more', 'wpbroadbean' ); ?></a>
+		</div>
+
+	</div>
+
+	<div class="wpbb-cta-addons postbox">
+
+		<h2 class="hndle ui-sortable-handle wpbb-postbox-title"><?php esc_html_e( 'WP Broadbean add-ons', 'wpbroadbean' ); ?></h2>
+		<div class="inside">
+			<a class="button-primary" href="https://highrise.digital/products/wpbroadbean-wordpress-plugin/"><?php esc_html_e( 'Find out about our available add-ons', 'wpbroadbean' ); ?></a>
 		</div>
 
 	</div>

@@ -404,7 +404,7 @@ function wpbb_get_job_by_reference( $job_ref = 0 ) {
  * @param  array  $data an array of data that is available inside the view file via $data.
  * @return mixed        the content of the file.
  */
-function wpbb_load_view( $path = '', $data ) {
+function wpbb_load_view( $path = '', $data = array() ) {
 
 	// build a filterable path for the view.
 	$view_path = apply_filters( 'wpbb_load_view_path', WPBB_LOCATION . '/views/' . $path . '.php', $path, $data );
@@ -570,7 +570,7 @@ function wpbb_get_job_meta_data( $args = array() ) {
 		foreach ( $args['taxonomies'] as $tax ) {
 
 			// if we are not showing on the front end.
-			if ( false === $tax[''] ) {
+			if ( false === $tax['show_on_frontend'] ) {
 				continue;
 			}
 

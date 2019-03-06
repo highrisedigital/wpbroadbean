@@ -30,7 +30,7 @@ function wpbb_settings_page_output() {
 		 *
 		 * @hooked wpbb_add_settings_page_intro - 10
 		 */
-		do_action( 'wpbb_before_settings_page_form', $settings_group );
+		do_action( 'wpbb_before_settings_page_form', $plugin_page );
 
 		?>
 
@@ -39,16 +39,16 @@ function wpbb_settings_page_output() {
 			<?php
 
 			// output settings field nonce action fields etc.
-			settings_fields( 'wpbb_settings' );
+			settings_fields( $plugin_page );
 
 			// get the registered settings for this settings page.
-			$settings = wpbb_get_plugin_settings( $settings_group );
+			$settings = wpbb_get_plugin_settings( $plugin_page );
 
 			// check we have registered settings.
 			if ( ! empty( $settings ) ) {
 
 				// fores before the settings table output.
-				do_action( 'wpbb_before_settings_output' );
+				do_action( 'wpbb_before_settings_output', $plugin_page );
 
 				?>
 
@@ -62,7 +62,7 @@ function wpbb_settings_page_output() {
 					foreach ( $settings as $setting ) {
 
 						// get the current value of this setting.
-						$value = get_option( $setting['option_name'] );
+						$value = get_option( $setting['option_name'], '' );
 
 						?>
 
@@ -134,7 +134,7 @@ function wpbb_settings_page_output() {
 				<?php
 
 				// Fires after the settings output table is closed.
-				do_action( 'wpbb_after_settings_output' );
+				do_action( 'wpbb_after_settings_output', $plugin_page );
 
 			} // End if().
 
@@ -151,7 +151,7 @@ function wpbb_settings_page_output() {
 		/**
 		 * Fires after the closing form element of the settings page.
 		 */
-		do_action( 'wpbb_after_settings_page_form', $settings_group );
+		do_action( 'wpbb_after_settings_page_form', $plugin_page );
 
 		?>
 

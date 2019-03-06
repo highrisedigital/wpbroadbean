@@ -37,14 +37,17 @@ function wpbb_register_settings_submenu_pages() {
 		// loop through each settings page.
 		foreach ( $settings_groups as $settings_group ) {
 
+			// remove the preifx of the page for the setting page titles.
+			$settings_title = str_replace( 'wpbb_', '', $settings_group );
+
 			// add the sub menu page foe this settings group.
 			add_submenu_page(
 				'wp_broadbean_home', // parent_slug,
-				ucfirst( $settings_group ), // page_title,
-				ucfirst( $settings_group ), // menu_title,
-				apply_filters( 'wpbb_settings_page_cap', 'manage_options', $settings_group ), // capability,
-				'wpbb_' . esc_html( $settings_group ), // menu slug,
-				apply_filters( 'wpbb_settings_page_cap', 'wpbb_settings_page_output', $settings_group ) // callback function for the pages content
+				ucfirst( $settings_title ), // page_title,
+				ucfirst( $settings_title ), // menu_title,
+				apply_filters( 'wpbb_settings_group_cap', 'manage_options', $settings_group ), // capability,
+				esc_html( $settings_group ), // menu slug,
+				apply_filters( 'wpbb_settings_group_cap', 'wpbb_settings_page_output', $settings_group ) // callback function for the pages content
 			);
 
 		}

@@ -55,11 +55,11 @@
 	clear: both;
 }
 
-.wpbb-settings-col,
-.wpbb-cta-col {
+.wp-broadbean_page_wpbb_settings .wpbb-settings-col,
+.wp-broadbean_page_wpbb_settings .wpbb-cta-col {
 	float: left;
 }
-.wpbb-settings-col {
+.wp-broadbean_page_wpbb_settings .wpbb-settings-col {
 	width: 55%;
 	margin-right: 3%;
 }
@@ -76,6 +76,14 @@
 }
 .wpbb-cta-box__content {
 	padding: 6px 10px 16px;
+}
+.wpbb-settings-col .description {
+	max-width: 60%;
+}
+@media all and ( max-width: 1400px ) {
+	.wpbb-settings-col .description {
+		max-width: 80%;
+	}
 }
 
 
@@ -112,5 +120,8 @@ img.hd-logo {
 		width: 96% !important;
 		min-width: 96% !important;
 		margin-right: 0;
+	}
+	.wpbb-settings-col .description {
+		max-width: 100%;
 	}
 }

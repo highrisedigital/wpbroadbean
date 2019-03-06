@@ -59,7 +59,7 @@ function wpbb_show_ssl_warning() {
 
 		// output a warning to the user.
 		?>
-		<div class="message error">
+		<div style="margin-left: 0;" class="message error">
 			<p><?php esc_html_e( 'We have detected that your site is not being served using SSL (https). As the plugin allows candidates to submit personal data in the application form, we highly recommend your site uses SSL.', 'wpbroadbean' ); ?></p>
 		</div>
 		<?php
@@ -76,7 +76,7 @@ add_action( 'wpbb_before_settings_page_form', 'wpbb_show_ssl_warning' );
 function wpbb_add_settings_page_ctas( $settings_group ) {
 
 	// if this is not the settings setting group.
-	if ( 'settings' !== $settings_group ) {
+	if ( 'wpbb_settings' !== $settings_group ) {
 		return;
 	}
 

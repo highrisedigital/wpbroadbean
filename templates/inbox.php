@@ -134,6 +134,7 @@ if ( 'add' === $command ) {
 				 * @param int    $job_id     the id of the newly created job
 				 * @param string $meta_key   this is the meta key of the created field
 				 * @param string $meta_value this is the sent meta value in the xml
+				 * @param object $xml        The XML sent across as an object.
 				 */
 				do_action( 'wpbb_inbox_job_field_added', $job_id, $job_field['id'], $field_value, $xml );
 
@@ -190,7 +191,7 @@ if ( 'add' === $command ) {
 					 * @param (string) $wpbb_term term to be added
 					 * @param (string) $taxonomy taxonomy of the term
 					 */
-					do_action( 'wpbb_inbox_job_term_added', $job_id, $job_tax_terms[ $taxonomy['xml_field'] ], $taxonomy['name'], $xml );
+					do_action( 'wpbb_inbox_job_term_added', $job_id, $job_tax_terms[ $taxonomy['xml_field'] ], $taxonomy['taxonomy_name'], $xml );
 
 				}
 			} // End if().
