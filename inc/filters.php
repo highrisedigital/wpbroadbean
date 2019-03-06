@@ -34,7 +34,12 @@ add_action( 'wpbb_after_setting', 'wpbb_add_setting_description', 10, 2 );
 /**
  * Adds introductory text before the plugin settings page gets output.
  */
-function wpbb_add_settings_page_intro() {
+function wpbb_add_settings_page_intro( $settings_group ) {
+
+	// if this is not the settings setting group.
+	if ( 'settings' !== $settings_group ) {
+		return;
+	}
 
 	?>
 	<p><?php esc_html_e( 'This is the plugin settings screen. You should complete these settings first.', 'wpbroadbean' ); ?></p>
@@ -42,8 +47,11 @@ function wpbb_add_settings_page_intro() {
 
 }
 
-add_action( 'wpbb_before_settings_page_form', 'wpbb_add_settings_page_intro', 10 );
+add_action( 'wpbb_before_settings_page_form', 'wpbb_add_settings_page_intro', 10, 1 );
 
+/**
+ * Display a warning to the user in the WP admin if they are not running over SSL.
+ */
 function wpbb_show_ssl_warning() {
 
 	// if this page is not being served over ssl.
@@ -65,14 +73,19 @@ add_action( 'wpbb_before_settings_page_form', 'wpbb_show_ssl_warning' );
 /**
  * Adds the plugins calls to action on the settings page.
  */
-function wpbb_add_settings_page_ctas() {
+function wpbb_add_settings_page_ctas( $settings_group ) {
+
+	// if this is not the settings setting group.
+	if ( 'settings' !== $settings_group ) {
+		return;
+	}
 
 	// get the cta view file.
 	echo wpbb_load_view( 'settings-ctas' );
 
 }
 
-add_action( 'wpbb_after_settings_page_form', 'wpbb_add_settings_page_ctas', 10 );
+add_action( 'wpbb_after_settings_page_form', 'wpbb_add_settings_page_ctas', 10, 1 );
 
 /**
  * If the user has selected in the settings - add the footer credit link.

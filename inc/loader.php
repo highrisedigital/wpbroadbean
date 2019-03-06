@@ -55,6 +55,36 @@ if ( ! empty( $admins ) ) {
 	}
 }
 
+// load in all the required admin menu files.
+$admin_menus = glob( plugin_dir_path( __FILE__ ) . 'admin-menus/*.php' );
+
+// if we have any admin menu files.
+if ( ! empty( $admin_menus ) ) {
+
+	// loop through each file.
+	foreach ( $admin_menus as $admin_menu ) {
+
+		// require this file in the plugin.
+		require_once( $admin_menu );
+
+	}
+}
+
+// load in all the required settings files.
+$settings = glob( plugin_dir_path( __FILE__ ) . 'settings/*.php' );
+
+// if we have any settings files.
+if ( ! empty( $settings ) ) {
+
+	// loop through each file.
+	foreach ( $settings as $setting ) {
+
+		// require this file in the plugin.
+		require_once( $setting );
+
+	}
+}
+
 // load in all the required applications files.
 $applications = glob( plugin_dir_path( __FILE__ ) . 'applications/*.php' );
 

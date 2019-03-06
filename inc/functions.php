@@ -50,6 +50,84 @@ function wpbb_hide_job_data_output() {
 }
 
 /**
+ * Gets an array of the registered plugin settings.
+ *
+ * @return array Registered plugins settings.
+ */
+function wpbb_get_plugin_settings( $settings_group = 'all' ) {
+
+	// run the setting filter, where all the settings are added to.
+	$settings = apply_filters( 'wpbb_plugin_settings', array() );
+
+	// if we have settings.
+	if ( ! empty( $settings ) ) {
+
+		// if we are looking to return all settings.
+		if ( 'all' !== $settings_group ) {
+
+			// create an empty array to fill with the requested settings.
+			$page_settings = array();
+
+			// loop through each setting.
+			foreach ( $settings as $setting ) {
+
+				if ( $setting['settings_group'] === $settings_group ) {
+
+					// add this setting to the page settings array.
+					$page_settings[] = $setting;
+
+				}
+			}
+
+			// set the new page settings to the settings array.
+			$settings = $page_settings;
+
+		}
+	}
+
+	// sort the settings based on the order parameter.
+	uasort( $settings, 'wpbb_array_sort_by_order_key' );
+
+	// return the settings.
+	return $settings;
+
+}
+
+/**
+ * Gets all of the registered settings groups.
+ *
+ * @return array Either an empty array if there are no groups or an array of groups.
+ */
+function wpbb_get_settings_groups() {
+
+	// store the output as an array.
+	$output = array();
+
+	// get all the registered settings.
+	$registered_settings = wpbb_get_plugin_settings();
+
+	// if we have registered settings.
+	if ( ! empty( $registered_settings ) ) {
+
+		// loop through the registered settings.
+		foreach ( $registered_settings as $registered_setting ) {
+
+			// if this settings, setting group is not already in the output array.
+			if ( ! isset( $output[ $registered_setting['settings_group'] ] ) ) {
+
+				// add the setting group to the array.
+				$output[ $registered_setting['settings_group'] ] = $registered_setting['settings_group'];
+
+			}
+		}
+	}
+
+	// return the ouput, filtered.
+	return apply_filters( 'wpbb_settings_groups', $output );
+
+}
+
+/**
  * Get the tracking email address for a specified job.
  *
  * @param  integer $job_id the job post id to get the tracking email address from.
@@ -719,4 +797,39 @@ function wpbb_get_application_applicant_email( $application_id = 0 ) {
 		get_post_meta( $application_id, 'candidate_email', true ),
 		$application_id
 	);
+}
+
+/**
+ * Sorts array of 2 levels on the second level key of order.
+ *
+ * @param  mixed $a The first value to compare.
+ * @param  mixed $b The second value to compare.
+ * @return mixed    Either 0 if the values match or 1 or -1 if they are different.
+ */
+function wpbb_array_sort_by_order_key( $a, $b ) {
+
+	// if no order paramter is provided.
+	if ( ! isset( $a['order'] ) ) {
+
+		// set the order to 10.
+		$a['order'] = 10;
+
+	}
+
+	// if no order paramter is provided.
+	if ( ! isset( $b['order'] ) ) {
+
+		// set the order to 10.
+		$b['order'] = 10;
+
+	}
+
+	// if the first array element is the same as the next.
+	if ( $a['order'] === $b['order'] ) {
+		return 0;
+	}
+
+	// return -1 is the first array element is less than the second, otherwise return 1.
+	return ( $a['order'] < $b['order'] ) ? -1 : 1;
+
 }

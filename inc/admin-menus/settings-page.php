@@ -1,57 +1,27 @@
 <?php
 /**
- * Registers the plugins admin menus.
+ * Output for the settings page.
  *
  * @package WP_Broadbean
  */
-
-/**
- * Adds the wpbroadbean admin menus under a parent menu
- */
-function wpbb_add_admin_menu() {
-
-	// add the main page for wpbroadbean info.
-	add_menu_page(
-		esc_html__( 'WP Broadbean' ), // page_title,
-		esc_html__( 'WP Broadbean' ), // menu_title,
-		'edit_posts', // capability,
-		'wp_broadbean_home', // menu_slug,
-		'__return_false', // function,
-		'dashicons-businessman', // icon url
-		'90' // position
-	);
-
-}
-
-add_action( 'admin_menu', 'wpbb_add_admin_menu', 10 );
-
-/**
- * Registers the settings submenu page in the WordPress admin, below the main WP Broadbean settings page.
- */
-function wpbb_register_settings_admin_submenu_page() {
-
-	// add a submenu page item for settings.
-	add_submenu_page(
-		'wp_broadbean_home', // parent_slug,
-		__( 'WP Broadbean Settings', 'wpbroadbean' ), // page_title,
-		__( 'Settings', 'wpbroadbean' ), // menu_title,
-		apply_filters( 'wpbb_settings_page_cap', 'manage_options' ), // capability,
-		'wpbb_settings', // menu slug,
-		apply_filters( 'wpbb_settings_page_callback', 'wpbb_settings_page_output' ) // callback function for the pages content
-	);
-
-}
-
-add_action( 'admin_menu', 'wpbb_register_settings_admin_submenu_page', 99 );
 
 /**
  * Display the output markup for the WP Broadbean settings page.
  */
 function wpbb_settings_page_output() {
 
+	// get the slug of this plugin page.
+	global $plugin_page;
+
+	// strip the wpbb prefix.
+	$settings_group = str_replace( 'wpbb_', '', $plugin_page );
+
+	// allow the settings type to be filtered.
+	$settings_group = apply_filters( 'wpbb_settings_page_output_settings_group', $settings_group, $plugin_page );
+
 	?>
 
-	<h1><?php esc_html_e( 'WP Broadbean Settings', 'wpbroadbean' ); ?></h1>
+	<h1><?php printf( esc_html( 'WP Broadbean %s', 'wpbroadbean' ), esc_html( ucfirst( $settings_group ) ) ); ?></h1>
 
 	<?php
 
@@ -60,7 +30,7 @@ function wpbb_settings_page_output() {
 		 *
 		 * @hooked wpbb_add_settings_page_intro - 10
 		 */
-		do_action( 'wpbb_before_settings_page_form' );
+		do_action( 'wpbb_before_settings_page_form', $settings_group );
 
 		?>
 
@@ -71,8 +41,8 @@ function wpbb_settings_page_output() {
 			// output settings field nonce action fields etc.
 			settings_fields( 'wpbb_settings' );
 
-			// get the registered settings.
-			$settings = wpbb_get_plugin_settings();
+			// get the registered settings for this settings page.
+			$settings = wpbb_get_plugin_settings( $settings_group );
 
 			// check we have registered settings.
 			if ( ! empty( $settings ) ) {
@@ -181,7 +151,7 @@ function wpbb_settings_page_output() {
 		/**
 		 * Fires after the closing form element of the settings page.
 		 */
-		do_action( 'wpbb_after_settings_page_form' );
+		do_action( 'wpbb_after_settings_page_form', $settings_group );
 
 		?>
 
