@@ -97,6 +97,17 @@ if ( 'add' === $command ) {
 
 	}
 
+	// update the post slug to include the post id - makes sure all jobs have a unique url.
+	wp_update_post(
+		apply_filters(
+			'wpbb_update_job_post_args',
+			array(
+				'ID' => $job_id,
+				'post_name' => sanitize_title_with_dashes( trim( $xml->job_title ) ) . '-' . $job_id,
+			)
+		)
+	);
+
 	/**
 	 * Fire an action that runs directly after a successful job posting.
 	 */
