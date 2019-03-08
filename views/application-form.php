@@ -21,7 +21,7 @@
 
 	?>
 
-	<form action="" method="post" enctype="multipart/form-data" class="wpbb-application-form" id="wpbb-application-form">
+	<form action="#wpbb-application-messages-<?php echo esc_attr( $data['post_id'] ); ?>" method="post" enctype="multipart/form-data" class="wpbb-application-form" id="wpbb-application-form">
 
 		<?php
 

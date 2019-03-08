@@ -89,7 +89,8 @@ function wpbb_send_application_email_notification( $application_id, $attachment_
 		'wpbb_application_email_data',
 		array(),
 		$application_id,
-		$attachment_ids
+		$attachment_ids,
+		$job_id
 	);
 
 	// setup array for fill with data for the email.
@@ -174,7 +175,7 @@ add_action( 'wpbb_application_processing_complete', 'wpbb_send_application_email
  * @param  array   $attachment_ids An array of attachment IDs.
  * @return array                   The modifed array of data.
  */
-function wpbb_set_application_email_data( $data, $application_id, $attachment_ids ) {
+function wpbb_set_application_email_data( $data, $application_id, $attachment_ids, $job_id ) {
 
 	// get the application fields.
 	$application_fields = wpbb_get_application_fields();
@@ -202,6 +203,18 @@ function wpbb_set_application_email_data( $data, $application_id, $attachment_id
 		);
 
 	}
+
+	// add the job title applied for.
+	$data['job_post_title'] = array(
+		'label' => __( 'Job Applied for Title', 'wpbroadbean' ),
+		'value' => get_the_title( $job_id ),
+	);
+
+	// add the job post permalink for the job applied for.
+	$data['job_post_url'] = array(
+		'label' => __( 'Job Applied for URL', 'wpbroadbean' ),
+		'value' => get_permalink( $job_id ),
+	);
 
 	return $data;
 
@@ -234,4 +247,4 @@ function wpbb_remove_application( $application_id, $attachment_ids ) {
 
 }
 
-add_action( 'wpbb_application_processing_complete', 'wpbb_remove_application', 99, 2 );
+add_action( 'wpbb_application_processing_complete', 'wpbb_remove_application', 20, 2 );

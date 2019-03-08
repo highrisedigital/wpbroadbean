@@ -63,6 +63,9 @@ function wpbb_get_job_application_form( $job_id = 0 ) {
 			}
 		}
 
+		// add the post ID to the messages array.
+		$wpbb_message_output['post_id'] = $job_id;
+
 		$html = wpbb_load_view( 'messages', $wpbb_message_output );
 
 	} // End if().
