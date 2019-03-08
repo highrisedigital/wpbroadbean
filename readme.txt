@@ -60,6 +60,7 @@ It is a new version, therefore we don't have any FAQs just yet. Feel free to [su
 * Allow users to display a credit to Highrise Digital below each single job post, should they wish the give something back to us!
 * Allow the jobs post type to show in the REST API. This means that partial block editor (aka Gutenberg) support is provided. The edit screens now use the new block editor.
 * Prepared the plugin for add-ons being released, namely allow add-ons to add settings to different admin menu pages.
+* The job post ID is now appended to the jobs permalink slug. This prevents a job having the same URL as a deleted job in the future. 
 
 To view the changelog for older versions of the plugin, please visit [the Github releases page](https://github.com/highrisedigital/wpbroadbean/releases).
 
