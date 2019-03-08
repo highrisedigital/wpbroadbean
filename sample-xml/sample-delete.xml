@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+    <command>delete</command>
+    <username>user</username>
+    <password>pass</password>
+    <job_reference>abc123</job_reference>
+</job>

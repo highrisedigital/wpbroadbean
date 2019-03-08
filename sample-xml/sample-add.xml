@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+    <command>add</command>
+    <username>user</username>
+    <password>pass</password>
+    <job_title><![CDATA[WordPress Developer]]></job_title>
+    <job_description><![CDATA[This is the description of the job which can contain some <strong>HTML</strong> such as:<ul><li>A list item</li><li>Another list item</li></ul>]]></job_description>
+    <short_description><![CDATA[The job short description. This is the post excerpt.]]></short_description>
+    <job_type>Permanent</job_type><!-- one of either Contract or Permanent -->
+    <job_location>London</job_location><!-- standard Broadbean location list -->
+   	<job_industry>IT</job_industry>
+    <job_skills>PHP|HTML|Javascript</job_skills>
+    <application_email>bob.12345.123@smith.aplitrak.com</application_email>
+    <application_url>https://apply.url</application_url>
+    <job_reference>abc123</job_reference>
+    <salary_from>25000</salary_from>
+    <salary_to>30000</salary_to>
+    <salary_currency>GBP</salary_currency>
+	<salary>30000</salary>
+	<salary_display>Up to £30,000 with benefits.</salary_display>
+    <consultant_email>contact@domain.com</consultant_email>
+	<days_to_advertise>28</days_to_advertise>
+</job>
