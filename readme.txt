@@ -18,13 +18,7 @@ The plugin requires some collaboration with the Broadbean integrations team. Thi
 
 If you are struggling with any aspects of a site integration, we offer a complete integration service which you can take advantage of. Find out more about our this on our [WP Broadbean information page](https://highrise.digital/products/wpbroadbean-wordpress-plugin/).
 
-Coming soon we have some add-ons for the plugin available for purchase. These will include:
-
-* Job search
-* Expiry of jobs according to the number of "days to advertise"
-* Schema markup output for jobs, allowing services such as Google jobs to index and display jobs on your site
-* Gutenberg blocks
-* Shortcodes
+We also add-ons for this plugin which you can find out more about on the [WP Broadbean plugin page](https://highrise.digital/products/wpbroadbean-wordpress-plugin/).
 
 Highrise Digital also offer a number of [WordPress Broadbean integration services](https://highrise.digital/broadbean-wordpress-integrations/) as well as services to [integrate LogicMelon with your WordPress](https://highrise.digital/services/integrate-logicmelon-wordpress/) site.
 
@@ -62,9 +56,10 @@ It is a new version, therefore we don't have any FAQs just yet. Feel free to [su
 * Extensible application form where developers can now make changes to application fields.
 * New endpoint URL which no longer uses a query string name and value, but an actual URL. The endpoint for jobs to be posted to is now `/wpbb/jobfeed/`.
 * Application forms are now shown on job single page views rather than having a seperate page.
-* Added a check for SSL. If you site is not running over SSL (https) a warning message is shown on the settings page.
+* Added a check for SSL. If your site is not running over SSL (https) a warning message is shown on the settings page.
 * Allow users to display a credit to Highrise Digital below each single job post, should they wish the give something back to us!
 * Allow the jobs post type to show in the REST API. This means that partial block editor (aka Gutenberg) support is provided. The edit screens now use the new block editor.
+* Prepared the plugin for add-ons being released, namely allow add-ons to add settings to different admin menu pages.
 
 To view the changelog for older versions of the plugin, please visit [the Github releases page](https://github.com/highrisedigital/wpbroadbean/releases).
 
