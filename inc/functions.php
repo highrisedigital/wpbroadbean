@@ -413,7 +413,7 @@ function wpbb_load_view( $path = '', $data = array() ) {
 	ob_start();
 
 	/* grab the file asked for */
-	include_once( $view_path );
+	include( $view_path );
 
 	/* get the content of the buffer - the file asked for and clean up */
 	$content = ob_get_clean();
