@@ -15,7 +15,7 @@
     <job_reference>abc123</job_reference>
     <salary_from>25000</salary_from>
     <salary_to>30000</salary_to>
-    <salary_currency>GBP</salary_currency>
+    <currency>GBP</currency>
 	<salary>30000</salary>
 	<salary_display>Up to £30,000 with benefits.</salary_display>
     <consultant_email>contact@domain.com</consultant_email>
