@@ -93,6 +93,11 @@ function wpbb_job_application_form( $job_id = 0 ) {
  */
 function wpbb_job_application_form_output( $content ) {
 
+	// if the job application type is not a form.
+	if ( 'form' !== wpbb_get_job_application_type() ) {
+		return $content;
+	}
+
 	// if this is not a single job view.
 	if ( ! is_singular( wpbb_job_post_type_name() ) ) {
 		return $content;

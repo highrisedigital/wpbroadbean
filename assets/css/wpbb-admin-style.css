@@ -77,15 +77,6 @@
 .wpbb-cta-box__content {
 	padding: 6px 10px 16px;
 }
-.wpbb-settings-col .description {
-	max-width: 60%;
-}
-@media all and ( max-width: 1400px ) {
-	.wpbb-settings-col .description {
-		max-width: 80%;
-	}
-}
-
 
 img.hd-logo {
 	margin-top: 16px;
