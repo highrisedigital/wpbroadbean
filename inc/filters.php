@@ -21,7 +21,7 @@ function wpbb_add_setting_description( $setting, $value ) {
 
 			// output the description, below the input.
 			?>
-			<p class="description"><?php echo esc_html( $setting['description'] ); ?></p>
+			<p class="description"><?php echo wp_kses_post( $setting['description'] ); ?></p>
 			<?php
 
 		}
@@ -108,6 +108,35 @@ function wpbb_maybe_add_plugin_credit( $content ) {
 }
 
 add_filter( 'the_content', 'wpbb_maybe_add_plugin_credit', 99 );
+
+/**
+ * If application tracking by url is active, append an apply link to the job post content.
+ *
+ * @param  string $content The current job post content.
+ * @return string          The modified job post content.
+ */
+function wpbb_add_job_application_url( $content ) {
+
+	// if the job application type is not a form.
+	if ( 'url' !== wpbb_get_job_application_type() ) {
+		return $content;
+	}
+
+	// if this is not a single job view.
+	if ( ! is_singular( wpbb_job_post_type_name() ) ) {
+		return $content;
+	}
+
+	// get the job application url.
+	global $post;
+	$application_url = wpbb_get_job_applicant_tracking_url( $post->ID );
+
+	// return the content with application url appended.
+	return $content . '<a target="_blank" class="wpbb-application-url" href="' . esc_url( $application_url ) . '">' . esc_html__( 'Apply Now', 'wpbroadbean' ) . '</a>';
+
+}
+
+add_filter( 'the_content', 'wpbb_add_job_application_url', 20, 1 );
 
 /**
  * Adds the job field descriptions under the fields.

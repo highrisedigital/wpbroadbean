@@ -37,7 +37,7 @@ function wpbb_get_feed_password() {
  * @return bool True if the footer credit is to be shown and false otherwise.
  */
 function wpbb_show_plugin_credit() {
-	return apply_filters( 'wpbb_plugin_credit_status',  (bool) get_option( 'wpbb_plugin_credit', false ) );
+	return apply_filters( 'wpbb_plugin_credit_status', (bool) get_option( 'wpbb_plugin_credit', false ) );
 }
 
 /**
@@ -46,7 +46,16 @@ function wpbb_show_plugin_credit() {
  * @return bool True if the data should be hidden and false otherwise.
  */
 function wpbb_hide_job_data_output() {
-	return apply_filters( 'wpbb_hide_job_data_output',  (bool) get_option( 'wpbb_hide_job_data_output', false ) );
+	return apply_filters( 'wpbb_hide_job_data_output', (bool) get_option( 'wpbb_hide_job_data_output', false ) );
+}
+
+/**
+ * Gets the application type from settings - defauly to form.
+ *
+ * @return string the type of application to use.
+ */
+function wpbb_get_job_application_type() {
+	return apply_filters( 'wpbb_job_application_type', get_option( 'wpbb_job_application_type', 'form' ) );
 }
 
 /**
@@ -140,6 +149,24 @@ function wpbb_get_job_applicant_tracking_email( $job_id = 0 ) {
 	return apply_filters(
 		'wpbb_job_applicant_tracking_email',
 		get_post_meta( $job_id, '_wpbb_job_broadbean_application_email', true ),
+		$job_id
+	);
+
+}
+
+/**
+ * Get the tracking or application url for a specified job.
+ *
+ * @param  integer $job_id the job post id to get the tracking url from.
+ * @return mixed          if the job has a tracking url, returns a string of that address.
+ *                        if the job does not have a tracking url returns and empty string.
+ */
+function wpbb_get_job_applicant_tracking_url( $job_id = 0 ) {
+
+	// return the tracking url from post meta.
+	return apply_filters(
+		'wpbb_job_applicant_tracking_url',
+		get_post_meta( $job_id, '_wpbb_job_broadbean_application_url', true ),
 		$job_id
 	);
 
@@ -413,7 +440,7 @@ function wpbb_load_view( $path = '', $data = array() ) {
 	ob_start();
 
 	/* grab the file asked for */
-	include_once( $view_path );
+	include( $view_path );
 
 	/* get the content of the buffer - the file asked for and clean up */
 	$content = ob_get_clean();

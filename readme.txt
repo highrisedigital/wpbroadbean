@@ -4,7 +4,7 @@ Tags: jobs, recruitment
 Requires at least: 5.1
 Requires PHP: 5.6
 Tested up to: 5.1
-Stable tag: 3.0
+Stable tag: 3.0.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -45,6 +45,18 @@ It is a new version, therefore we don't have any FAQs just yet. Feel free to [su
 1. The job edit screen in WordPress
 
 == Changelog ==
+
+= 3.0.1 (24/04/2019) =
+* Adds support for application via either an application form on site, or an external application URL.
+* Improved some functions in terms of coding standards.
+* Added a setting for the application type - allows site admins to choose whether candidates should apply via a form or an external URL.
+* Escaped settings field description using `wp_kses_post` rather than 'esc_html' so they can include links.
+* Added new function `wpbb_get_job_application_type()` which returns the type of application chosen. Either `form` or `url`.
+* If applications are set to url, output a apply now button linking to the URL below the job content.
+* Correct an incorrect entry in the `sample-add.xml` file.
+* Adds plugin update routines.
+* Corrects an issue where the plugin version does not show correctly in the admin settings page.
+
 
 = 3.0 =
 * IMPORTANT NOTICE BEOFRE UPDATING: WP Broadbean version 3.0 is a major overhaul of the plugin from earlier versions. With this in mind, this version is NOT backward compatible to earlier versions. This means if you are running a version earlier than version 3.0 already, it is crucial that you test the update on a staging or test site before updating to the latest version.

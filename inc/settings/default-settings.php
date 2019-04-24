@@ -53,6 +53,20 @@ function wpbb_register_default_general_settings( $settings ) {
 		'order'          => 40,
 	);
 
+	// add the setting to hide the job data on a single job listing.
+	$settings['application_type'] = array(
+		'label'          => __( 'Application Type', 'wpbroadbean' ),
+		'option_name'    => 'wpbb_job_application_type',
+		'input_type'     => 'select',
+		'options'        => array(
+			'form' => __( 'Application Form', 'wpbroadbean' ),
+			'url'  => __( 'External URL', 'wpbroadbean' ),
+		),
+		'description'    => sprintf( __( 'Choose how candidates should apply for jobs, either using the Broadbean tracking URL (external URL) or the tracking email address (application form). Learn more about the two types %s.', 'wpbroadbean' ), '<a href="https://integrations.broadbean.com/hc/en-us/articles/213311449-What-is-Aplitrak-">here</a>' ),
+		'settings_group' => 'wpbb_settings',
+		'order'          => 40,
+	);
+
 	// return the modified settings array.
 	return $settings;
 

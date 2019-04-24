@@ -14,7 +14,7 @@
 		<h2 class="hndle ui-sortable-handle wpbb-postbox-title"><?php esc_html_e( 'WP Broadbean information', 'wpbroadbean' ); ?></h3>
 		<div class="inside">
 			<p class="plugin-info">
-				Version: <?php echo esc_html( get_option( 'wpbroadbean_version' ) ); ?>, written by <a href="https://highrise.digital"><?php esc_html_e( 'Highrise Digital', 'wpbroadbean' ); ?></a><br />
+				Version: <?php echo esc_html( WPBB_PLUGIN_VERSION ); ?>, written by <a href="https://highrise.digital"><?php esc_html_e( 'Highrise Digital', 'wpbroadbean' ); ?></a><br />
 			</p>
 			<p><?php printf( esc_html__( 'Your sites endpoint URL is: %s', 'wpbroadbean' ), '<code>' . esc_url( home_url( '/wpbb/jobfeed/' ) ) . '</code>' ); ?></p>
 			<p><?php printf( esc_html__( 'Sample XML files can be found in the %s folder in the plugin root.', 'wpbroadbean' ), '<code>sample-xml</code>' ); ?></p>

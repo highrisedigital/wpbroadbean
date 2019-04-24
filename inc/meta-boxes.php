@@ -15,7 +15,7 @@ function wpbb_register_job_information_meta_box() {
 		'wpbb-job-info',
 		__( 'Job Information', 'wpbroadbean' ),
 		'wpbb_job_meta_box_output',
-		'wpbb_job',
+		wpbb_job_post_type_name(),
 		'normal',
 		'default'
 	);
