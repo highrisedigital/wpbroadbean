@@ -100,6 +100,11 @@ img.hd-logo {
 	width: 98%;
 }
 
+.wpbb-job-field-checkbox .wpbb-field__description {
+	display: inline-block;
+	color: #32373c;
+}
+
 
 @media all and ( max-width: 950px ) {
 	.wpbb-fields [class*="wpbb-col-"] {
