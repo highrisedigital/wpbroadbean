@@ -220,7 +220,7 @@ function wpbb_set_application_email_data( $data, $application_id, $attachment_id
 
 }
 
-add_filter( 'wpbb_application_email_data', 'wpbb_set_application_email_data', 10, 3 );
+add_filter( 'wpbb_application_email_data', 'wpbb_set_application_email_data', 10, 4 );
 
 /**
  * Removes the application created and the attachments.

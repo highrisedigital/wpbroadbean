@@ -146,7 +146,7 @@ add_filter( 'the_content', 'wpbb_add_job_application_url', 20, 1 );
 function wpbb_add_job_field_descriptions( $field ) {
 
 	?>
-	<p class="hdji-field__description"><?php echo esc_html( $field['desc'] ); ?></p>
+	<p class="wpbb-field__description"><?php echo esc_html( $field['desc'] ); ?></p>
 	<?php
 
 }
