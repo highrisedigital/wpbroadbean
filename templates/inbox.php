@@ -227,8 +227,9 @@ if ( 'add' === $command ) {
 	// set some echo text.
 	$text = sprintf(
 		// translators: 1: job post id.
-		__( 'Success! Job added/updated with a post ID of %s.', 'wpbroadbean' ),
-		$job_id
+		__( 'Success! Job added/updated with a post ID of %1s. You can view the job here: %2s', 'wpbroadbean' ),
+		$job_id,
+		get_permalink( $job_id )
 	);
 
 	echo esc_html( $text );

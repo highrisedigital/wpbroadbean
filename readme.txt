@@ -4,7 +4,7 @@ Tags: jobs, recruitment
 Requires at least: 5.1
 Requires PHP: 5.6
 Tested up to: 5.1
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -45,6 +45,12 @@ It is a new version, therefore we don't have any FAQs just yet. Feel free to [su
 1. The job edit screen in WordPress
 
 == Changelog ==
+
+= 3.0.2 =
+* Correct the number of args referenced in the function `wpbb_set_application_email_data()`. Was set to reference 3 and now corrected to 4.
+* Includes the permalink of a newly created job in the success message when a new job is posted successfully.
+* Various minor bug fixes inlcuding typos.
+* Show a checkbox field description next to rather than beneath the field input.
 
 = 3.0.1 (24/04/2019) =
 * Adds support for application via either an application form on site, or an external application URL.
