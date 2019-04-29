@@ -36,7 +36,7 @@ function wpbb_input_type_text( $field, $post ) {
 		<?php
 
 		/**
-		 * Fires before the inout field label and input itself are outputted.
+		 * Fires before the input field label and input itself are outputted.
 		 *
 		 * @param array  $field      this is the field array
 		 * @param string $value      the current saved value for this field
@@ -54,7 +54,7 @@ function wpbb_input_type_text( $field, $post ) {
 		<?php
 
 		/**
-		 * Fires after the inout field label and input itself are outputted.
+		 * Fires after the input field label and input itself are outputted.
 		 *
 		 * @param array  $field      this is the field array
 		 * @param string $value      the current saved value for this field
@@ -95,7 +95,7 @@ function wpbb_input_type_textarea( $field, $post ) {
 		<?php
 
 		/**
-		 * Fires before the inout field label and input itself are outputted.
+		 * Fires before the input field label and input itself are outputted.
 		 *
 		 * @param array  $field      this is the field array
 		 * @param string $value      the current saved value for this field
@@ -113,7 +113,7 @@ function wpbb_input_type_textarea( $field, $post ) {
 		<?php
 
 		/**
-		 * Fires after the inout field label and input itself are outputted.
+		 * Fires after the input field label and input itself are outputted.
 		 *
 		 * @param array  $field      this is the field array
 		 * @param string $value      the current saved value for this field
@@ -154,7 +154,7 @@ function wpbb_input_type_number( $field, $post ) {
 		<?php
 
 		/**
-		 * Fires before the inout field label and input itself are outputted.
+		 * Fires before the input field label and input itself are outputted.
 		 *
 		 * @param array  $field      this is the field array
 		 * @param string $value      the current saved value for this field
@@ -172,7 +172,7 @@ function wpbb_input_type_number( $field, $post ) {
 		<?php
 
 		/**
-		 * Fires after the inout field label and input itself are outputted.
+		 * Fires after the input field label and input itself are outputted.
 		 *
 		 * @param array  $field      this is the field array
 		 * @param string $value      the current saved value for this field
@@ -213,7 +213,7 @@ function wpbb_input_type_email( $field, $post ) {
 		<?php
 
 		/**
-		 * Fires before the inout field label and input itself are outputted.
+		 * Fires before the input field label and input itself are outputted.
 		 *
 		 * @param array  $field      this is the field array
 		 * @param string $value      the current saved value for this field
@@ -231,7 +231,7 @@ function wpbb_input_type_email( $field, $post ) {
 		<?php
 
 		/**
-		 * Fires after the inout field label and input itself are outputted.
+		 * Fires after the input field label and input itself are outputted.
 		 *
 		 * @param array  $field      this is the field array
 		 * @param string $value      the current saved value for this field
@@ -272,7 +272,7 @@ function wpbb_input_type_select( $field, $post ) {
 		<?php
 
 		/**
-		 * Fires before the inout field label and input itself are outputted.
+		 * Fires before the input field label and input itself are outputted.
 		 *
 		 * @param array  $field      this is the field array
 		 * @param string $value      the current saved value for this field
@@ -309,7 +309,7 @@ function wpbb_input_type_select( $field, $post ) {
 		<?php
 
 		/**
-		 * Fires after the inout field label and input itself are outputted.
+		 * Fires after the input field label and input itself are outputted.
 		 *
 		 * @param array  $field      this is the field array
 		 * @param string $value      the current saved value for this field
@@ -350,7 +350,7 @@ function wpbb_input_type_checkbox( $field, $post ) {
 		<?php
 
 		/**
-		 * Fires before the inout field label and input itself are outputted.
+		 * Fires before the input field label and input itself are outputted.
 		 *
 		 * @param array  $field      this is the field array
 		 * @param string $value      the current saved value for this field
@@ -368,7 +368,7 @@ function wpbb_input_type_checkbox( $field, $post ) {
 		<?php
 
 		/**
-		 * Fires after the inout field label and input itself are outputted.
+		 * Fires after the input field label and input itself are outputted.
 		 *
 		 * @param array  $field      this is the field array
 		 * @param string $value      the current saved value for this field
