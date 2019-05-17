@@ -237,7 +237,7 @@ function wpbb_change_job_post_title_text( $title ) {
 	}
 
 	/* return our new text */
-	return apply_filters( 'wpbb_post_title_text', $title, $wpbb_screen );
+	return apply_filters( 'wpbb_post_title_text', $title, $screen );
 
 }
 
