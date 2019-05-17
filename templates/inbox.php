@@ -15,7 +15,7 @@
 $xml_posted = file_get_contents( apply_filters( 'wpbb_xml_feed_url', 'php://input' ) );
 
 // check the data sent has content.
-if ( false === $xml_posted ) {
+if ( false === $xml_posted || '' === $xml_posted ) {
 
 	/* echo an error */
 	header( 'HTTP/1.1 206 Partial Content' );

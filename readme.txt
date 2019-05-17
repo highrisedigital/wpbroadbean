@@ -3,8 +3,8 @@ Contributors: wpmarkuk, keithdevon, highrisedigital
 Tags: jobs, recruitment
 Requires at least: 5.1
 Requires PHP: 5.6
-Tested up to: 5.1
-Stable tag: 3.0.2
+Tested up to: 5.2
+Stable tag: 3.0.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -46,7 +46,12 @@ It is a new version, therefore we don't have any FAQs just yet. Feel free to [su
 
 == Changelog ==
 
-= 3.0.2 =
+= 3.0.3 =
+* Correct check for an empty value for the posted XML before proceeding with the inbox template. Prevents warnings when the posted data is incorrect and gives the appropriate error message.
+* Fix a call to and undefined function in the post title filter functions. Thanks to @bencorke for contributing this fix and finding the bug.
+* Add declaration that the plugin works with WP version 5.2.
+
+= 3.0.2 (29/04/2019) =
 * Correct the number of args referenced in the function `wpbb_set_application_email_data()`. Was set to reference 3 and now corrected to 4.
 * Includes the permalink of a newly created job in the success message when a new job is posted successfully.
 * Various minor bug fixes inlcuding typos.
