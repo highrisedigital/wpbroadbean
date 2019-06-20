@@ -74,6 +74,31 @@ if ( 'add' === $command ) {
 
 	}
 
+	// set a default author ID to zero.
+	$author = 0;
+
+	// do we have a consultant email in the feed.
+	if ( ! empty( $xml->consultant_email ) ) {
+
+		// check if consultant email is a valid email.
+		if ( is_email( $xml->consultant_email ) ) {
+
+			// check for a WordPress user with this email address.
+			$user = get_user_by( 'email', $xml->consultant_email );
+
+			// if we have a user returned.
+			if ( false !== $user ) {
+
+				// set the author as the users user id.
+				$author = $user->ID;
+
+			}
+		}
+	}
+
+	// add the author to the insert post args.
+	$insert_job_args['post_author'] = absint( $author );
+
 	/**
 	 * Lets now insert the post for this job.
 	 * Uses the standard wp_insert_post function.
