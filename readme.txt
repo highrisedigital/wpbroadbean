@@ -5,6 +5,7 @@ Requires at least: 5.1
 Requires PHP: 5.6
 Tested up to: 5.2
 Stable tag: 3.0.4
+Donate link: https://store.highrise.digital/downloads/wpbroadbean-support-docs/
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -12,15 +13,19 @@ WP Broadbean is a plugin which allows jobs added to Broadbean to show in your Wo
 
 == Description ==
 
-[WP Broadbean](https://highrise.digital/products/wpbroadbean-wordpress-plugin/) is a plugin designed to work alongside the [Broadbean job posting and distribution](https://www.broadbean.com/uk/products/features/job-posting-distribution/) system allowing jobs written in Broadbean to show in your WordPress site. The plugin adds custom post types and taxonomies to allow you to add jobs. More importantly it allows your site to accept feed data sent by Broadbean to create jobs on your site.
+[WP Broadbean](https://highrise.digital/products/wpbroadbean-wordpress-plugin/) is a WordPress plugin designed to work alongside the [Broadbean job posting and distribution](https://www.broadbean.com/uk/products/features/job-posting-distribution/) system allowing jobs written in Broadbean to show in your WordPress site.
 
-The plugin requires some collaboration with the Broadbean integrations team. This is because they need to add your WordPress site as a posting destination, and to build a "feed" to your WordPress sites endpoint, provided by this plugin, in the form of XML data.
+The plugin adds custom post types and taxonomies to allow you to add jobs. More importantly it allows your site to accept feed data sent by Broadbean to create jobs on your site.
 
-If you are struggling with any aspects of a site integration, we offer a complete integration service which you can take advantage of. Find out more about our this on our [WP Broadbean information page](https://highrise.digital/products/wpbroadbean-wordpress-plugin/).
+The plugin requires some collaboration with the Broadbean integrations team. This is because they need to add your WordPress site as a posting destination, and to build a "feed" to your WordPress sites endpoint, provided by this plugin, in the form of XML data. They are likely to charge you for this service.
+
+## Support and documentation
+
+This plugin is provided as is, and community support is available via the support forums here. If you are looking for expert help in getting your site setup to post jobs from Broadbean, Highrise Digital offer a couple of solutions. We can provide [bespoke consultancy](https://highrise.digital/contact/), support and development however we also have a [support add-on package](https://store.highrise.digital/downloads/wpbroadbean-support-docs/). This add-on package provides all the information Broadbean need to build your job feed, access to our extensive plugin documentation resource and limited email support from the team at Highrise Digital.
+
+## WP Broadbean add-ons
 
 We also have some add-ons for this plugin which you can find out more about on the [WP Broadbean plugin page](https://highrise.digital/products/wpbroadbean-wordpress-plugin/).
-
-Highrise Digital also offer a number of [WordPress Broadbean integration services](https://highrise.digital/broadbean-wordpress-integrations/) as well as services to [integrate LogicMelon with WordPress](https://highrise.digital/services/integrate-logicmelon-wordpress/).
 
 For the sake of clarity, the WP Broadbean plugin is not affiliated in any way with Broadbean Technology Limited.
 
@@ -38,7 +43,7 @@ To install the plugin:
 
 == Frequently Asked Questions ==
 
-It is a new version, therefore we don't have any FAQs just yet. Feel free to [submit an issue](https://github.com/highrisedigital/wpbroadbean/issues) over on the Github repository. We can then turn the popular questions into FAQs on the Wiki.
+Frequently asked questions are available [here](https://store.highrise.digital/docs/wp-broadbean/).
 
 == Screenshots ==
 
