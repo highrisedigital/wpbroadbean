@@ -38,7 +38,7 @@
 							<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span></label>
 							<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="<?php echo esc_attr( get_option( 'admin_email' ) ); ?>">
 						</div>
-						<p><a href="https://us17.campaign-archive.com/home/?u=8f84734f114d7816de2addb0d&id=eb5dafa0ef"><?php esc_html_e( 'View previous security emails sent to users', 'wpbroadbean' ); ?></a></p>
+						<p><a href="https://us17.campaign-archive.com/home/?u=8f84734f114d7816de2addb0d&id=eb5dafa0ef"><?php esc_html_e( 'View previous emails sent to users', 'wpbroadbean' ); ?></a></p>
 						<div id="mce-responses" class="clear">
 							<div class="response" id="mce-error-response" style="display:none"></div>
 							<div class="response" id="mce-success-response" style="display:none"></div>
