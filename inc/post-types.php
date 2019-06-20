@@ -34,6 +34,7 @@ function wpbb_register_job_post_type() {
 				'title',
 				'editor',
 				'excerpt',
+				'author',
 			),
 			'query_var'     => true,
 			'rewrite'       => array(

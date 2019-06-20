@@ -38,7 +38,7 @@
 							<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span></label>
 							<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="<?php echo esc_attr( get_option( 'admin_email' ) ); ?>">
 						</div>
-						<p><a href="https://us17.campaign-archive.com/home/?u=8f84734f114d7816de2addb0d&id=eb5dafa0ef"><?php esc_html_e( 'View previous security emails sent to users', 'wpbroadbean' ); ?></a></p>
+						<p><a href="https://us17.campaign-archive.com/home/?u=8f84734f114d7816de2addb0d&id=eb5dafa0ef"><?php esc_html_e( 'View previous emails sent to users', 'wpbroadbean' ); ?></a></p>
 						<div id="mce-responses" class="clear">
 							<div class="response" id="mce-error-response" style="display:none"></div>
 							<div class="response" id="mce-success-response" style="display:none"></div>
@@ -62,8 +62,9 @@
 
 		<h2 class="hndle ui-sortable-handle wpbb-postbox-title"><?php esc_html_e( 'Need some help?', 'wpbroadbean' ); ?></h2>
 		<div class="inside">
-			<p><?php esc_html_e( 'If you are finding things a little tricky to setup, fear not. We are experienced at integrating WordPress sites with Broadbean and provide a fully managed integration service.', 'wpbroadbean' ); ?></p>
-			<a class="button-primary" href="https://highrise.digital/services/integrate-broadbean-wordpress/"><?php esc_html_e( 'Find out more', 'wpbroadbean' ); ?></a>
+			<p><?php esc_html_e( 'If you are finding things a little tricky to setup, fear not. We are experienced at integrating WordPress sites with Broadbean and provide a fully managed integration service. Or you can purchase our support add-on plugin, which provides access to all support documentation and adds a readme to your site which Broadbean can use to help build your feed.', 'wpbroadbean' ); ?></p>
+			<a class="button-primary" href="https://highrise.digital/services/integrate-broadbean-wordpress/"><?php esc_html_e( 'Get custom support', 'wpbroadbean' ); ?></a>
+			<a class="button-primary" href="https://store.highrise.digital/downloads/wpbroadbean-support-docs/"><?php esc_html_e( 'Buy our support add-on', 'wpbroadbean' ); ?></a>
 		</div>
 
 	</div>
