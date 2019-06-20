@@ -55,6 +55,7 @@ Frequently asked questions are available [here](https://store.highrise.digital/d
 * Added job feed notes to the default job fields and taxonomies.
 * Added information to the settings page and the new support add-on.
 * Move the after settings hooks so it is actually after all the settings on the settings page.
+* Allows the job author to be set in WordPress based on the `consultant_email` field.
 
 = 3.0.3 =
 * Correct check for an empty value for the posted XML before proceeding with the inbox template. Prevents warnings when the posted data is incorrect and gives the appropriate error message.
