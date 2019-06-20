@@ -33,6 +33,13 @@ function wpbb_register_default_taxonomies( $taxonomies ) {
 		'hierarchical'      => true,
 		'show_admin_column' => true,
 		'show_on_frontend'  => true,
+		'jobfeed_notes'    => array(
+			'data_type'     => 'string',
+			'input_type'    => 'text',
+			'default_value' => '',
+			'example_value' => 'Accounting|Computing',
+			'notes'         => __( 'A pipe seperated string of job industries.', 'wpbroadbean' ),
+		),
 	);
 
 	// add the job location taxonomy.
@@ -46,6 +53,13 @@ function wpbb_register_default_taxonomies( $taxonomies ) {
 		'hierarchical'      => true,
 		'show_admin_column' => true,
 		'show_on_frontend'  => true,
+		'jobfeed_notes'    => array(
+			'data_type'     => 'string',
+			'input_type'    => 'text',
+			'default_value' => '',
+			'example_value' => 'London|Manchester',
+			'notes'         => __( 'A pipe seperated string of job locations. It is better if this plugin has a defined list of locations to support, rather than using the standard Broadbean locations.', 'wpbroadbean' ),
+		),
 	);
 
 	// add the job type taxonomy.
@@ -59,6 +73,13 @@ function wpbb_register_default_taxonomies( $taxonomies ) {
 		'hierarchical'      => true,
 		'show_admin_column' => true,
 		'show_on_frontend'  => true,
+		'jobfeed_notes'    => array(
+			'data_type'     => 'string',
+			'input_type'    => 'text',
+			'default_value' => '',
+			'example_value' => 'Permanent|Temporary|Contract',
+			'notes'         => __( 'A pipe seperated string of job types.', 'wpbroadbean' ),
+		),
 	);
 
 	// add the job skills taxonomy.
@@ -72,6 +93,13 @@ function wpbb_register_default_taxonomies( $taxonomies ) {
 		'hierarchical'      => false,
 		'show_admin_column' => true,
 		'show_on_frontend'  => true,
+		'jobfeed_notes'    => array(
+			'data_type'     => 'string',
+			'input_type'    => 'text',
+			'default_value' => '',
+			'example_value' => 'PHP|Javascript',
+			'notes'         => __( 'A pipe seperated string of job skills.', 'wpbroadbean' ),
+		),
 	);
 
 	// return the modified taxonomies.
