@@ -31,7 +31,7 @@ define( 'WPBB_LOCATION', dirname( __FILE__ ) );
 define( 'WPBB_LOCATION_URL', plugins_url( '', __FILE__ ) );
 
 // Define plugin version constant and db version constant.
-define( 'WPBB_PLUGIN_VERSION', '3.0.2' );
+define( 'WPBB_PLUGIN_VERSION', '3.0.3' );
 define( 'WPBB_PLUGIN_DB_VERSION', 2 );
 
 /**
