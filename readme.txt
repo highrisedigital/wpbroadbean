@@ -4,7 +4,7 @@ Tags: jobs, recruitment
 Requires at least: 5.1
 Requires PHP: 5.6
 Tested up to: 5.2
-Stable tag: 3.0.3
+Stable tag: 3.0.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -45,6 +45,11 @@ It is a new version, therefore we don't have any FAQs just yet. Feel free to [su
 1. The job edit screen in WordPress
 
 == Changelog ==
+
+= 3.0.4 =
+* Added job feed notes to the default job fields and taxonomies.
+* Added information to the settings page and the new support add-on.
+* Move the after settings hooks so it is actually after all the settings on the settings page.
 
 = 3.0.3 =
 * Correct check for an empty value for the posted XML before proceeding with the inbox template. Prevents warnings when the posted data is incorrect and gives the appropriate error message.
