@@ -133,9 +133,6 @@ function wpbb_settings_page_output() {
 
 				<?php
 
-				// Fires after the settings output table is closed.
-				do_action( 'wpbb_after_settings_output', $plugin_page );
-
 			} // End if().
 
 			?>
@@ -143,6 +140,13 @@ function wpbb_settings_page_output() {
 			<p class="submit">
 				<input type="submit" name="wpbb_settings_submit" id="submit" class="button-primary" value="<?php echo esc_attr( 'Save Changes', 'wpbroadbean' ); ?>" />
 			</p>
+
+			<?php
+
+			// Fires after the settings output table is closed.
+			do_action( 'wpbb_after_settings_output', $plugin_page );
+
+			?>
 
 		</form>
 
