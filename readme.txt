@@ -25,7 +25,25 @@ This plugin is provided as is, and community support is available via the suppor
 
 ## WP Broadbean add-ons
 
-We also have some add-ons for this plugin which you can find out more about on the [WP Broadbean plugin page](https://highrise.digital/products/wpbroadbean-wordpress-plugin/).
+We also have some add-ons for this plugin which you can find out more about on the [WP Broadbean plugin page](https://highrise.digital/products/wpbroadbean-wordpress-plugin/). Current available add-ons are:
+
+### [Support and documentation](https://store.highrise.digital/downloads/wpbroadbean-support-docs/)
+
+This add-on not only provides you with access to limited email support, but it gives you full access to all the plugins [documentation](https://store.highrise.digital/docs/wpbroadbean/). This includes articles on how to setup and install the plugin, submit your feed build to the Broadbean integrations team, but also includes a plugin to add to your site which analyses your install and provides a readme file which Broadbean can used to help gether the required information to build your sites job feed.
+
+### [Shortcodes](https://store.highrise.digital/downloads/wp-broadbean-shortcodes/)
+
+The shortcodes add-on provides a flexible shortcode to allow you to add a list of jobs anywhere you site supports shortcode output. This is great for showing latest jobs on any page, post or sidebar area. It also includes an ajax style load more option, give you the ability to include you full job listing page on any page of your website. The plugin also includes the ability to use different templates for your shortcodes, so the job output can be different in different places on your website.
+
+### [Auto-expire jobs](https://store.highrise.digital/downloads/wp-broadbean-auto-expire-jobs/)
+
+This add-on takes the number of days set for jobs to expire when they are posted and then calculates an expiry date. The plugin then deletes the job on that date. This works for any jobs added to your site after this add-in is installed.
+
+### Search (coming soon!)
+
+The ability to add a granular job search to your website either as a widget or in a template file using a shortcode.
+
+All the add-ons above are for WP Broadbean version 3.0 or higher, unless otherwise stated.
 
 For the sake of clarity, the WP Broadbean plugin is not affiliated in any way with Broadbean Technology Limited.
 
