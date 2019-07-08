@@ -3,7 +3,7 @@
 Plugin Name: WP Broadbean
 Plugin URI: https://highrise.digital/products/wpbroadbean-wordpress-plugin/
 Description: A plugin which integrates <a href="https://www.broadbean.com/uk/products/features/job-posting-distribution/">Broadbean job posting and distribution</a> with WordPress. It allows jobs written in Broadbean to be distributed to a WordPress site and have applications made to those jobs in WordPress delivered back to Broadbean.
-Version: 3.0.4
+Version: 3.0.5
 Author: Highrise Digital
 Author URI: https://highrise.digital
 License: GPLv3 or later
@@ -31,7 +31,7 @@ define( 'WPBB_LOCATION', dirname( __FILE__ ) );
 define( 'WPBB_LOCATION_URL', plugins_url( '', __FILE__ ) );
 
 // Define plugin version constant and db version constant.
-define( 'WPBB_PLUGIN_VERSION', '3.0.4' );
+define( 'WPBB_PLUGIN_VERSION', '3.0.5' );
 define( 'WPBB_PLUGIN_DB_VERSION', 2 );
 
 /**
