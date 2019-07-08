@@ -5,6 +5,9 @@
  * @package WP_Broadbean
  */
 
+// get the current user object.
+$current_user = wp_get_current_user();
+
 ?>
 
 <div class="wpbb-cta-col" id="poststuff">
@@ -36,9 +39,21 @@
 					<div id="mc_embed_signup_scroll">
 						<div class="mc-field-group">
 							<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span></label>
-							<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="<?php echo esc_attr( get_option( 'admin_email' ) ); ?>">
+							<input type="email" value="<?php echo esc_attr( $current_user->user_email ); ?>" name="EMAIL" class="required email" id="mce-EMAIL">
 						</div>
-						<p><a href="https://us17.campaign-archive.com/home/?u=8f84734f114d7816de2addb0d&id=eb5dafa0ef"><?php esc_html_e( 'View previous emails sent to users', 'wpbroadbean' ); ?></a></p>
+						<div class="mc-field-group input-group" style="display:none;">
+							<strong>WordPress Plugins </strong>
+							<ul>
+								<li>
+									<input type="checkbox" value="1" name="group[9531][1]" id="mce-group[9531]-9531-0" checked>
+									<label for="mce-group[9531]-9531-0">WP Broadbean</label>
+								</li>
+								<li>
+									<input type="checkbox" value="2" name="group[9531][2]" id="mce-group[9531]-9531-1">
+									<label for="mce-group[9531]-9531-1">WP LogicMelon</label>
+								</li>
+							</ul>
+						</div>
 						<div id="mce-responses" class="clear">
 							<div class="response" id="mce-error-response" style="display:none"></div>
 							<div class="response" id="mce-success-response" style="display:none"></div>
@@ -46,7 +61,7 @@
 						<div style="position: absolute; left: -5000px;" aria-hidden="true">
 							<input type="text" name="b_8f84734f114d7816de2addb0d_eb5dafa0ef" tabindex="-1" value="">
 						</div>
-						<p><small class="subscribe-terms"><?php esc_html_e( 'We only store the email address you enter below, will only use it to send you updates and news about this plugin. You can unsubscribe at any time simply by following the links in an email sent to you. Clicking subscribe will take you to our email marketing platform Mailchimp for conformation.', 'wpbroadbean' ); ?></small></p>
+						<p><small class="subscribe-terms"><?php esc_html_e( 'We store the email address you enter below in our mailing software and will only use it to send you updates and news about this plugin. You can unsubscribe at any time simply by following the links in an email sent to you.', 'wpbroadbean' ); ?></small></p>
 						<div class="clear">
 							<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button-primary">
 						</div>

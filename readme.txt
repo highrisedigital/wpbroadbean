@@ -4,7 +4,7 @@ Tags: jobs, recruitment
 Requires at least: 5.1
 Requires PHP: 5.6
 Tested up to: 5.2
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 Donate link: https://store.highrise.digital/downloads/wpbroadbean-support-docs/
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -68,6 +68,10 @@ Frequently asked questions are available [here](https://store.highrise.digital/d
 1. The job edit screen in WordPress
 
 == Changelog ==
+
+= 3.0.5 =
+* Minor tweaks to the plugin updates and news sign-up form on the settings screen.
+* Add the current logged in users email address to pre-populate the sign-up form on the settings screen.
 
 = 3.0.4 =
 * Added job feed notes to the default job fields and taxonomies.
