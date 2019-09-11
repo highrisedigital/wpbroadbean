@@ -4,7 +4,7 @@ Tags: jobs, recruitment
 Requires at least: 5.1
 Requires PHP: 5.6
 Tested up to: 5.2
-Stable tag: 3.0.5
+Stable tag: 3.0.6
 Donate link: https://store.highrise.digital/downloads/wpbroadbean-support-docs/
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -39,9 +39,9 @@ The shortcodes add-on provides a flexible shortcode to allow you to add a list o
 
 This add-on takes the number of days set for jobs to expire when they are posted and then calculates an expiry date. The plugin then deletes the job on that date. This works for any jobs added to your site after this add-in is installed.
 
-### Search (coming soon!)
+### [Job search form](https://store.highrise.digital/downloads/wp-broadbean-search/)
 
-The ability to add a granular job search to your website either as a widget or in a template file using a shortcode.
+The WP Broadbean search add-on allows you to add a job search form to your site, allowing candidates to search for jobs by location, type, industry and skill as well as allowing them to set a minimum salary and search via keywords.
 
 All the add-ons above are for WP Broadbean version 3.0 or higher, unless otherwise stated.
 
@@ -68,6 +68,10 @@ Frequently asked questions are available [here](https://store.highrise.digital/d
 1. The job edit screen in WordPress
 
 == Changelog ==
+
+= 3.0.6 =
+* Preparations for WP Broadbean search add-on which is now available.
+* Correct an error where the license key for add-ons reports as failed but is actually working.
 
 = 3.0.5 =
 * Minor tweaks to the plugin updates and news sign-up form on the settings screen.
