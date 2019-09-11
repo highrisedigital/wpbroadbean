@@ -119,7 +119,7 @@ function wpbb_setting_input_type_license_key( $setting, $value ) {
 	$license_status = get_option( $setting['option_name'] . '_status', '' );
 
 	// if the license status is not active.
-	if ( 'active' !== $license_status ) {
+	if ( 'valid' !== $license_status ) {
 
 		// set some styles.
 		$styles = 'border-color: red;';
