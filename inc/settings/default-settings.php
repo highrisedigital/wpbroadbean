@@ -13,6 +13,16 @@
  */
 function wpbb_register_default_general_settings( $settings ) {
 
+	// add general settings section.
+	$settings['wpbroadbean_section'] = array(
+		'option_name'    => 'wpbb_section',
+		'label'          => __( 'WP Broadbean Settings', 'wpbroadbean' ),
+		'description'    => __( 'These are the general settings for the WP Broadbean plugin.', 'wpbroadbean' ),
+		'input_type'     => 'section',
+		'settings_group' => 'wpbb_settings',
+		'order'          => 1,
+	);
+
 	// add the feed username.
 	$settings['username'] = array(
 		'option_name'    => 'wpbb_username',

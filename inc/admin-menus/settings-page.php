@@ -66,7 +66,7 @@ function wpbb_settings_page_output() {
 
 						?>
 
-						<tr valign="top">
+						<tr valign="top" class="setting-type--<?php echo esc_attr( $setting['input_type'] ); ?>">
 
 							<th scope="row">
 

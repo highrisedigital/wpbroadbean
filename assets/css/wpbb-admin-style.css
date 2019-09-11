@@ -104,6 +104,15 @@ img.hd-logo {
 	display: inline-block;
 	color: #32373c;
 }
+tr.setting-type--section {
+	border-top: 1px solid #c4c4c4;
+}
+tr.setting-type--section:first-of-type {
+	border-top: none;
+}
+tr.setting-type--section th label {
+	font-size: 18px;
+}
 
 
 @media all and ( max-width: 950px ) {

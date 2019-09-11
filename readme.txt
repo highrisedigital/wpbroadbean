@@ -39,9 +39,9 @@ The shortcodes add-on provides a flexible shortcode to allow you to add a list o
 
 This add-on takes the number of days set for jobs to expire when they are posted and then calculates an expiry date. The plugin then deletes the job on that date. This works for any jobs added to your site after this add-in is installed.
 
-### Search (coming soon!)
+### [Job search form](https://store.highrise.digital/downloads/wp-broadbean-search/)
 
-The ability to add a granular job search to your website either as a widget or in a template file using a shortcode.
+The WP Broadbean search add-on allows you to add a job search form to your site, allowing candidates to search for jobs by location, type, industry and skill as well as allowing them to set a minimum salary and search via keywords.
 
 All the add-ons above are for WP Broadbean version 3.0 or higher, unless otherwise stated.
 

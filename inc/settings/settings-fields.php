@@ -133,3 +133,25 @@ function wpbb_setting_input_type_license_key( $setting, $value ) {
 }
 
 add_action( 'wpbb_setting_type_license_key', 'wpbb_setting_input_type_license_key', 10, 2 );
+
+/**
+ * Controls the output of license input setting.
+ *
+ * @param  array $setting an array of the current setting.
+ * @param  mixed $value   the current value of this setting saved in the database.
+ */
+function wpbb_setting_input_type_section( $setting, $value ) {
+
+	// if we have any section text.
+	if ( ! empty( $setting['description'] ) ) {
+
+		// output the text.
+		?>
+		<p class="section-text"><?php echo esc_html( $setting['description'] ); ?></p>
+		<?php
+
+	}
+
+}
+
+add_action( 'wpbb_setting_type_license_section', 'wpbb_setting_input_type_section', 10, 2 );
