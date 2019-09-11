@@ -4,7 +4,7 @@ Tags: jobs, recruitment
 Requires at least: 5.1
 Requires PHP: 5.6
 Tested up to: 5.2
-Stable tag: 3.0.5
+Stable tag: 3.0.6
 Donate link: https://store.highrise.digital/downloads/wpbroadbean-support-docs/
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -68,6 +68,10 @@ Frequently asked questions are available [here](https://store.highrise.digital/d
 1. The job edit screen in WordPress
 
 == Changelog ==
+
+= 3.0.6 =
+* Preparations for WP Broadbean search add-on which is now available.
+* Correct an error where the license key for add-ons reports as failed but is actually working.
 
 = 3.0.5 =
 * Minor tweaks to the plugin updates and news sign-up form on the settings screen.
