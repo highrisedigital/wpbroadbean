@@ -12,7 +12,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Simple integration of Broadbean job posting & distribution with WordPress.
 
 == Description ==
-The WP Broadbean plugin provides **developers** with a scaffolding to integrate Broadbean with a WordPress website. The plugin is not a plug-and-play solution but offers he tools needed to get started integrating a WordPress website with Broadbean.
+The WP Broadbean plugin provides **developers** with a scaffolding to integrate Broadbean with a WordPress website. The plugin is not a plug-and-play solution but offers the tools needed to get started integrating a WordPress website with Broadbean.
 
 Once successfully integrated jobs written in Broadbean appear in WordPress and applications to jobs on WordPress are tracked back to Broadbean.
 
