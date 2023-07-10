@@ -134,8 +134,8 @@ function wpbb_send_application_email_notification( $application_id, $attachment_
 
 	// allow all the notification parts to be filtered.
 	$recipients = apply_filters( 'wpbb_default_notification_recipients', $recipients, $application_id, $attachment_ids, $job_id );
-	$headers = apply_filters( 'wpbb_default_notification_recipients', $headers, $application_id, $attachment_ids, $job_id );
-	$attachments = apply_filters( 'wpbb_default_notification_recipients', $attachments, $application_id, $attachment_ids, $job_id );
+	$headers = apply_filters( 'wpbb_default_notification_headers', $headers, $application_id, $attachment_ids, $job_id );
+	$attachments = apply_filters( 'wpbb_default_notification_attachments', $attachments, $application_id, $attachment_ids, $job_id );
 	$notification_content = apply_filters( 'wpbb_default_notification_content', $notification_content, $application_id, $attachment_ids, $job_id );
 
 	// set the email content type to html.
