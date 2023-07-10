@@ -4,7 +4,7 @@ Tags: jobs, recruitment
 Requires at least: 5.1
 Requires PHP: 5.6
 Tested up to: 5.5
-Stable tag: 3.0.6
+Stable tag: 3.0.7
 Donate link: https://store.highrise.digital/downloads/wpbroadbean-support-docs/
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -12,6 +12,9 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Simple integration of Broadbean job posting & distribution with WordPress.
 
 == Description ==
+
+*This plugin is no longer being developed or maintained. We recommend [JobRelay](https://jobrelay.io) for integrating WordPress with Broadbean.
+
 The WP Broadbean plugin provides **developers** with a scaffolding to integrate Broadbean with a WordPress website. The plugin is not a plug-and-play solution but offers the tools needed to get started integrating a WordPress website with Broadbean.
 
 Once successfully integrated jobs written in Broadbean appear in WordPress and applications to jobs on WordPress are tracked back to Broadbean.
