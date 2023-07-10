@@ -188,7 +188,7 @@ function wpbb_prepare_terms( $sent_terms, $taxonomy ) {
 	}
 
 	// turn category terms into arrays.
-	$wpbb_tax = wp_strip_all_tags( $sent_terms );
+	$wpbb_tax = wp_strip_all_tags( (string) $sent_terms );
 	$wpbb_taxonomy_terms = explode( '|', $wpbb_tax );
 
 	// setup array to store the category term ids in.
